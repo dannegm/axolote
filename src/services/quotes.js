@@ -71,16 +71,16 @@ const colorSchemes = [
 ];
 
 const quotes = [
-    'Perdón por ser tan cursi a veces.',
+    'Perdón por ser tan cursi a veces (casi siempre).',
     'Esta es la única forma que encontré de decirte casi todo lo que pienso.',
-    'Ojalá no fastidies de esto antes de que puedas leerlo todo.',
+    'Ojalá no te fastidies de esto antes de que puedas leerlo todo.',
     'Sólo disfruta de todo lo que te doy sin decirme ni deberme nada.',
     'Sé que probablemente ya estés fastidiada de tanta cursilería',
-    'Recordé que alguna vez me digiste que los tulipanes blancos eran tus favoritos',
+    'Recordé que alguna vez me digiste que los tulipanes blancos eran tus favoritos.',
     'Aún no descarto la posibilidad de algún día ir a Japón contigo 😔.',
     'Quisiera estar ahí para poder felicitarte con un abrazo.',
     'No te lo he había dicho pero cada que escucho "Die With a Smile" sólo puedo pensar en ti.',
-    'Me gustaría que el poder vernos se repita más seguido este nuevo año :)',
+    'Me gustaría que el poder vernos se repita más seguido este nuevo año :).',
     'No te preocupes, vendré a dejarte más pensamientos por aquí de vez en cuando.',
     'Ojalá pudiera estar cerca para poder celebrar contigo.',
     'Quizá sea el único celebrándote a ti y no el año nuevo.',
@@ -88,9 +88,18 @@ const quotes = [
     'A veces, la vida necesita un recordatorio de lo increíble que eres.',
     'A veces siento que no te digo lo suficiente lo importante que eres para mí.',
     'Lo único que quiero para ti es que disfrutes de la vida, que encuentres razones para sonreír todos los días.',
-    'Me gusta pensar que te hago sentir mejor, aunque sea solo por un momento, ojalá fuera siempre.',
+    'Me gusta pensar que te hago sentir mejor, aunque sea solo por un momento. Ojalá fuera siempre.',
     'Tienes tanto potencial, tanta luz dentro de ti, y solo quiero que encuentres la forma de brillar aún más.',
     'Me gustaría que pudieras ver lo increíble que eres, porque a veces no te das cuenta de lo mucho que vales.',
+    'Sabía que te mataba la curiosidad por saber qué era este sitio.',
+    'Algunsa frases fueron generadas por IA, es que no podía resumir en pocas palabras todo lo que quería decirte.',
+    'Espero esta sorpresa te haya sacado una sonrisa.',
+    'Cada que entres aquí, encontrarás algo nuevo :).',
+    'No preguntes, sólo gózalo 7u7.',
+    'Lo divertido de esto es que no tienes que leerlo todo de una vez, puedes leer sólo una frase al día.',
+    '¿Ya intentaste picar en «Another»?',
+    'Esta pequeña app es otra forma de tenerme cerca.',
+    'Si picas muchas veces el botón de like, será como si me invocaras.',
 ];
 
 export const getRandomQuote = () => {
