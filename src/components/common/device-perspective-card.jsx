@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from 'react';
 
 export default function DevicePerspectiveCard({ children, className = '' }) {
-    const boundingRef = useRef(null);
     const [permissionGranted, setPermissionGranted] = useState(false);
 
     const requestPermission = async () => {

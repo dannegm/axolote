@@ -55,7 +55,11 @@ export default function GiftCard({ quote, icon, border, scheme }) {
                 >
                     <p className='font-pacifico text-3xl text-center'>Krystel,</p>
 
-                    {Icon && <Icon size={64} className='text-current' />}
+                    {Icon && (
+                        <div className='block'>
+                            <Icon size={64} className='text-current' />
+                        </div>
+                    )}
 
                     <p className='font-delius text-center text-xl font-medium leading-relaxed'>
                         {quote}
