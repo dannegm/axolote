@@ -6,6 +6,12 @@ import GiftCard from '@/components/common/gift-card';
 import LikeButton from '@/components/common/like-button';
 import MousePerspectiveCard from '@/components/common/mouse-perspective-card';
 import DevicePerspectiveCard from '@/components/common/device-perspective-card';
+import withResponsive from '@/components/hoc/withResponsive';
+
+const PerspectiveCard = withResponsive({
+    mobile: DevicePerspectiveCard,
+    default: MousePerspectiveCard,
+});
 
 export default function Home() {
     const quote = getRandomQuote();
@@ -17,9 +23,9 @@ export default function Home() {
         >
             <div className='fade-out fixed inset-0 z-0 bg-gray-100' />
 
-            <DevicePerspectiveCard className='-mt-4'>
+            <PerspectiveCard className='-mt-4'>
                 <GiftCard {...quote} />
-            </DevicePerspectiveCard>
+            </PerspectiveCard>
 
             <div className='relative z-10 flex flex-row justify-center items-center m-4 gap-4'>
                 <a

@@ -1,5 +1,6 @@
 'use client';
 import { useRef } from 'react';
+import Sparkles from 'react-sparkle';
 
 export default function MousePerspectiveCard({ children, className = '' }) {
     const boundingRef = useRef(null);
@@ -37,6 +38,9 @@ export default function MousePerspectiveCard({ children, className = '' }) {
             onMouseMove={calculateRotationFromMouse}
         >
             {children}
+            <div className='absolute inset-0'>
+                <Sparkles color='teal' />
+            </div>
             <div className='flare pointer-events-none absolute inset-0 group-hover:bg-[radial-gradient(at_var(--x)_var(--y),rgba(255,255,255,0.3)_20%,transparent_80%)]' />
         </div>
     );

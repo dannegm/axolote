@@ -1,5 +1,6 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import Sparkles from 'react-sparkle';
 
 export default function DevicePerspectiveCard({ children, className = '' }) {
     const [permissionGranted, setPermissionGranted] = useState(false);
@@ -54,15 +55,23 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
             className={`wrapper relative transition-transform ease-out transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation)) ${className}`}
         >
             {children}
+            {permissionGranted && (
+                <div className='absolute inset-0'>
+                    <Sparkles color='teal' />
+                </div>
+            )}
 
             <div className='flare pointer-events-none absolute inset-0 bg-[radial-gradient(at_var(--x)_var(--y),rgba(255,255,255,0.3)_20%,transparent_80%)]' />
 
             {!permissionGranted && (
                 <button
                     onClick={requestPermission}
-                    className='absolute bottom-4 left-1/2 -translate-x-1/2 bg-cyan-300 text-cyan-800 text-sm py-2 px-4 font-delius rounded-full shadow-lg hover:shadow-xl active:shadow-md'
+                    className='group absolute bottom-4 left-1/2 -translate-x-1/2 '
                 >
-                    Activar resplandor
+                    <div className='relative block bg-cyan-300 text-cyan-800 text-sm py-2 px-4 font-delius rounded-full shadow-lg group-hover:shadow-xl group-active:shadow-md'>
+                        Activar resplandor
+                        <Sparkles color='teal' overflowPx={8} />
+                    </div>
                 </button>
             )}
         </div>
