@@ -42,8 +42,8 @@ export default async function Home({ searchParams }) {
                 </a>
 
                 <ShareButton
-                    title={'Krystel'}
-                    text={quote.quote}
+                    title={null}
+                    text={null}
                     url={`https://axolote.me/krystel?code=${quote.settings}`}
                 />
 
