@@ -14,7 +14,7 @@ export default function Home() {
     return (
         <main
             style={{ backgroundImage: quote.bg }}
-            className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center'
+            className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'
         >
             <div className='fade-out fixed inset-0 z-0 bg-gray-100' />
 

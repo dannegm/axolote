@@ -1,11 +1,12 @@
 'use client';
 
+import { useRef } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { confetti } from '@tsparticles/confetti';
 import { Heart } from 'lucide-react';
+import useSound from 'use-sound';
 
 import ntfy from '@/services/ntfy';
-import { useRef } from 'react';
 
 const buildBody = ({ scheme, quote, bg, border, icon }) => `
 > ${quote}
@@ -38,7 +39,7 @@ const heartExplosion = () => {
             '#E64A56', // Redder Pink
             '#F08080', // Light Coral
         ],
-        shapes: ["heart"],
+        shapes: ['heart'],
         zIndex: 2000,
         disableForReducedMotion: true,
     };
@@ -64,10 +65,12 @@ const heartExplosion = () => {
 
 export default function LikeButton({ scheme, quote, bg, border, icon }) {
     const $ref = useRef(null);
+    const [playPop] = useSound('./pop.mp3');
     const mutation = useMutation({
         mutationFn: data => ntfy.pushRich(data),
         onMutate: () => {
             heartExplosion($ref.current);
+            playPop();
         },
     });
 

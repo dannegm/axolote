@@ -19,7 +19,8 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-sparkle": "^2.0.0",
-    "tailwind-merge": "^2.6.0"
+    "tailwind-merge": "^2.6.0",
+    "use-sound": "^4.0.3"
   },
   "devDependencies": {
     "postcss": "^8",
