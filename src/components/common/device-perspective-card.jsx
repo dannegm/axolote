@@ -78,10 +78,10 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
                     '--x': `${deviceRotation.gamma}%`,
                     '--y': `${deviceRotation.beta}%`,
                 }}
-                className={`wrapper group relative transition-transform ease-out transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation)) ${className}`}
+                className={`wrapper relative transition-transform ease-out transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation)) ${className}`}
             >
                 {children}
-                <div className='flare pointer-events-none absolute inset-0 group:bg-[radial-gradient(at_var(--x)_var(--y),rgba(255,255,255,0.3)_20%,transparent_80%)]' />
+                <div className='flare pointer-events-none absolute inset-0 bg-[radial-gradient(at_var(--x)_var(--y),rgba(255,255,255,0.3)_20%,transparent_80%)]' />
             </div>
         </div>
     );
