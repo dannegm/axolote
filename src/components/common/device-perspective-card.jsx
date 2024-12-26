@@ -74,7 +74,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
                 onClick={() => requestPermission()}
                 style={{
                     '--x-rotation': `${deviceRotation.x}deg`,
-                    '--x-rotation': `${deviceRotation.x}deg`,
+                    '--y-rotation': `${deviceRotation.y}deg`,
                     '--x': `${deviceRotation.gamma}%`,
                     '--y': `${deviceRotation.beta}%`,
                 }}
