@@ -19,18 +19,14 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
     };
 
     const setRotationStyles = ({ xRotation, yRotation, xPercentage, yPercentage }) => {
-        if (!boundingRef.current) return;
-        boundingRef.current.style.setProperty('--x-rotation', `${xRotation}deg`);
-        boundingRef.current.style.setProperty('--y-rotation', `${yRotation}deg`);
-        boundingRef.current.style.setProperty('--x', `${xPercentage * 100}%`);
-        boundingRef.current.style.setProperty('--y', `${yPercentage * 100}%`);
+        document.body.style.setProperty('--x-rotation', `${xRotation}deg`);
+        document.body.style.setProperty('--y-rotation', `${yRotation}deg`);
+        document.body.style.setProperty('--x', `${xPercentage * 100}%`);
+        document.body.style.setProperty('--y', `${yPercentage * 100}%`);
     };
 
     useEffect(() => {
         const handleOrientation = event => {
-            if (!boundingRef.current) return;
-
-            const { width, height } = boundingRef.current;
             const gamma = event.gamma || 0; // Tilt left/right
             const beta = event.beta || 0; // Tilt front/back
 
@@ -56,9 +52,6 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
 
     return (
         <div
-            ref={el => {
-                if (el) boundingRef.current = el.getBoundingClientRect();
-            }}
             className={`wrapper relative transition-transform ease-out transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation)) ${className}`}
         >
             {children}
