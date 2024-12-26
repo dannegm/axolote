@@ -25,6 +25,8 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
         document.body.style.setProperty('--y', `${yPercentage * 100}%`);
     };
 
+    useEffect(() => requestPermission(), []);
+
     useEffect(() => {
         const handleOrientation = event => {
             const gamma = event.gamma || 0; // Tilt left/right
