@@ -2,9 +2,10 @@ import { RefreshCcw } from 'lucide-react';
 
 import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
 
+import PerspectiveCard from '@/components/common/perspective-card';
 import GiftCard from '@/components/common/gift-card';
 import LikeButton from '@/components/common/like-button';
-import PerspectiveCard from '@/components/common/perspective-card';
+import ShareButton from '@/components/common/share-button';
 
 export const dynamic = 'force-dynamic';
 
@@ -39,6 +40,12 @@ export default async function Home({ searchParams }) {
                     Another
                     <RefreshCcw size={20} />
                 </a>
+
+                <ShareButton
+                    title={'Krystel'}
+                    text={quote.quote}
+                    url={`https://axolote.me/krystel?code=${quote.settings}`}
+                />
 
                 <LikeButton {...quote} />
             </div>

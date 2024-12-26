@@ -2,7 +2,7 @@
 
 import MousePerspectiveCard from '@/components/common/mouse-perspective-card';
 import DevicePerspectiveCard from '@/components/common/device-perspective-card';
-import withResponsive from '@/components/hoc/withResponsive';
+import withResponsive from '@/components/hocs/withResponsive';
 
 const PerspectiveCard = withResponsive({
     mobile: DevicePerspectiveCard,
