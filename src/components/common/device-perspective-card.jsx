@@ -93,13 +93,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
                 <div className='debug-info mt-4 p-4 bg-gray-100 rounded'>
                     <h3 className='font-semibold'>Debug Info:</h3>
                     <pre>
-                        {`Beta (front-to-back tilt): ${orientationData.beta.toFixed(
-                            2,
-                        )}\nGamma (left-to-right tilt): ${orientationData.gamma.toFixed(
-                            2,
-                        )}\nX Rotation: ${deviceRotation.x.toFixed(
-                            2,
-                        )}\nY Rotation: ${deviceRotation.y.toFixed(2)}`}
+                        {JSON.stringify(orientationData, null, 2)}
                     </pre>
                 </div>
             )}
