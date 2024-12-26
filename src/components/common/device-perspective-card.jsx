@@ -4,85 +4,71 @@ import { useEffect, useRef, useState } from 'react';
 export default function DevicePerspectiveCard({ children, className = '' }) {
     const boundingRef = useRef(null);
     const [permissionGranted, setPermissionGranted] = useState(false);
-    const [deviceRotation, setDeviceRotation] = useState({ x: 0, y: 0, gamma: 0, beta: 0 });
 
-    const requestPermission = async () => {
-        // Solicitar permiso en dispositivos iOS
-        if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+    useEffect(() => {
+        const handleDeviceMotion = event => {
+            if (!boundingRef.current) return;
+
+            const { width, height } = boundingRef.current;
+            const xAcceleration = event.accelerationIncludingGravity?.x || 0;
+            const yAcceleration = event.accelerationIncludingGravity?.y || 0;
+
+            // Normalize values to percentage range
+            const xPercentage = (xAcceleration + 10) / 20; // Range approx -10 to 10
+            const yPercentage = (10 - yAcceleration) / 20;
+
+            // Calculate rotations
+            const xRotation = (xPercentage - 0.5) * 20;
+            const yRotation = (0.5 - yPercentage) * 20;
+
+            setRotationStyles(boundingRef.current, xRotation, yRotation, xPercentage, yPercentage);
+        };
+
+        if (permissionGranted) {
+            window.addEventListener('devicemotion', handleDeviceMotion);
+        }
+
+        return () => window.removeEventListener('devicemotion', handleDeviceMotion);
+    }, [permissionGranted]);
+
+    const setRotationStyles = (element, xRotation, yRotation, xPercentage, yPercentage) => {
+        element.style.setProperty('--x-rotation', `${xRotation}deg`);
+        element.style.setProperty('--y-rotation', `${yRotation}deg`);
+        element.style.setProperty('--x', `${xPercentage * 100}%`);
+        element.style.setProperty('--y', `${yPercentage * 100}%`);
+    };
+
+    const requestSensorPermission = async () => {
+        if (typeof DeviceMotionEvent.requestPermission === 'function') {
             try {
-                const permission = await DeviceOrientationEvent.requestPermission();
-                if (permission === 'granted') {
-                    setPermissionGranted(true);
-                }
-            } catch (error) {
-                console.error('Permission denied', error);
+                const response = await DeviceMotionEvent.requestPermission();
+                if (response === 'granted') setPermissionGranted(true);
+            } catch (err) {
+                console.error('Permission request denied:', err);
             }
         } else {
-            // Si el dispositivo no requiere permisos explícitos, habilitar el acceso
+            // Fallback for browsers that don't require explicit permission
             setPermissionGranted(true);
         }
     };
 
-    useEffect(() => {
-        const handleOrientation = event => {
-            const { beta, gamma } = event;
-
-            // `beta` is the tilt front-to-back (x-axis), and `gamma` is the tilt left-to-right (y-axis)
-            const xRotation = (gamma / 90) * 20; // Scale to desired range of rotation
-            const yRotation = (beta / 90) * 20;
-
-            setDeviceRotation({ x: xRotation, y: yRotation, gamma, beta });
-            setRotationStyles(boundingRef.current, xRotation, yRotation, gamma, beta);
-        };
-
-        // Si el permiso fue concedido, escuchamos los cambios en la orientación del dispositivo
-        if (permissionGranted) {
-            window.addEventListener('deviceorientation', handleOrientation);
-        }
-
-        // Cleanup the event listener on component unmount
-        return () => {
-            window.removeEventListener('deviceorientation', handleOrientation);
-        };
-    }, [permissionGranted]);
-
-    const setRotationStyles = (element, xRotation, yRotation, gamma, beta) => {
-        element.style.setProperty('--x-rotation', `${xRotation}deg`);
-        element.style.setProperty('--y-rotation', `${yRotation}deg`);
-        element.style.setProperty('--x', `${gamma}%`);
-        element.style.setProperty('--y', `${beta}%`);
-    };
-
     return (
-        <div>
-            <div>
-                {!permissionGranted && (
-                    <button
-                        onClick={() => requestPermission()}
-                        className='p-2 bg-blue-500 text-white rounded'
-                    >
-                        Request Permission
-                    </button>
-                )}
-            </div>
-            <div
-                ref={el => {
-                    if (el) {
-                        boundingRef.current = el;
-                    }
-                }}
-                onClick={() => requestPermission()}
-                style={{
-                    '--x-rotation': `${deviceRotation.x}deg`,
-                    '--y-rotation': `${deviceRotation.y}deg`,
-                    '--x': `${deviceRotation.gamma}%`,
-                    '--y': `${deviceRotation.beta}%`,
-                }}
-                className={`wrapper relative transition-transform ease-out transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation)) ${className}`}
-            >
-                {children}
-                <div className='flare pointer-events-none absolute inset-0 bg-[radial-gradient(at_var(--x)_var(--y),rgba(255,255,255,0.3)_20%,transparent_80%)]' />
-            </div>
+        <div
+            ref={el => {
+                if (el) boundingRef.current = el.getBoundingClientRect();
+            }}
+            className={`wrapper relative group transition-transform ease-out [transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation))_scale(1.1)] ${className}`}
+        >
+            {children}
+            <div className='flare pointer-events-none absolute inset-0 bg-[radial-gradient(at_var(--x)_var(--y),rgba(255,255,255,0.3)_20%,transparent_80%)]' />
+            {!permissionGranted && (
+                <button
+                    onClick={requestSensorPermission}
+                    className='absolute bottom-4 left-1/2 -translate-x-1/2 rounded bg-blue-500 px-4 py-2 text-white shadow-lg'
+                >
+                    Activar resplandor
+                </button>
+            )}
         </div>
     );
 }
