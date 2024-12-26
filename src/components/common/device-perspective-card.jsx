@@ -74,12 +74,14 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
                 onClick={() => requestPermission()}
                 style={{
                     '--x-rotation': `${deviceRotation.x}deg`,
-                    '--y-rotation': `${deviceRotation.y}deg`,
+                    '--x-rotation': `${deviceRotation.x}deg`,
+                    '--x': `${deviceRotation.gamma}%`,
+                    '--y': `${deviceRotation.beta}%`,
                 }}
                 className={`wrapper group relative transition-transform ease-out transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation)) ${className}`}
             >
                 {children}
-                <div className='flare pointer-events-none absolute inset-0' />
+                <div className='flare pointer-events-none absolute inset-0 group:bg-[radial-gradient(at_var(--x)_var(--y),rgba(255,255,255,0.3)_20%,transparent_80%)]' />
             </div>
         </div>
     );
