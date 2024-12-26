@@ -1,4 +1,4 @@
-import { randomPick } from '@/helpers/arrays';
+import { randomIndex, randomPick } from '@/helpers/arrays';
 
 export const icons = [
     'Candy',
@@ -75,7 +75,7 @@ const quotes = [
     'Esta es la única forma que encontré de decirte casi todo lo que pienso.',
     'Ojalá no te fastidies de esto antes de que puedas leerlo todo.',
     'Sólo disfruta de todo lo que te doy sin decirme ni deberme nada.',
-    'Sé que probablemente ya estés fastidiada de tanta cursilería',
+    'Sé que probablemente ya estés fastidiada de tanta cursilería.',
     'Recordé que alguna vez me digiste que los tulipanes blancos eran tus favoritos.',
     'Aún no descarto la posibilidad de algún día ir a Japón contigo 😔.',
     'Quisiera estar ahí para poder felicitarte con un abrazo.',
@@ -102,12 +102,31 @@ const quotes = [
     'Si picas muchas veces el botón de like, será como si me invocaras.',
 ];
 
-export const getRandomQuote = () => {
+//
+
+export const getRandomSettings = () => {
+    return [
+        /* quote */ randomIndex(quotes),
+        /* icon */ randomIndex(icons),
+        /* border */ randomIndex(borderPatterns),
+        /* bg */ randomIndex(bgPatterns),
+        /* scheme */ randomIndex(colorSchemes),
+    ].join('');
+};
+
+export const quoteFromSettings = settings => {
+    const decodedSettings = settings.split('');
     return {
-        quote: randomPick(quotes),
-        icon: randomPick(icons),
-        border: `url(${randomPick(borderPatterns)})`,
-        bg: `url(${randomPick(bgPatterns)})`,
-        scheme: randomPick(colorSchemes),
+        settings,
+        quote: quotes[decodedSettings[0]],
+        icon: icons[decodedSettings[1]],
+        border: `url(${borderPatterns[decodedSettings[2]]})`,
+        bg: `url(${bgPatterns[decodedSettings[3]]})`,
+        scheme: colorSchemes[decodedSettings[4]],
     };
+};
+
+export const getRandomQuote = () => {
+    const code = getRandomSettings();
+    return quoteFromSettings(code);
 };

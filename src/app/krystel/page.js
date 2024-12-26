@@ -1,6 +1,6 @@
 import { RefreshCcw } from 'lucide-react';
 
-import { getRandomQuote } from '@/services/quotes';
+import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
 
 import GiftCard from '@/components/common/gift-card';
 import LikeButton from '@/components/common/like-button';
@@ -8,8 +8,17 @@ import PerspectiveCard from '@/components/common/perspective-card';
 
 export const dynamic = 'force-dynamic';
 
-export default function Home() {
-    const quote = getRandomQuote();
+const getQuote = code => {
+    if (code) {
+        return quoteFromSettings(code);
+    }
+
+    return getRandomQuote();
+};
+
+export default async function Home({ searchParams }) {
+    const { code } = await searchParams;
+    const quote = getQuote(code);
 
     return (
         <main

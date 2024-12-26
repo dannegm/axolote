@@ -37,15 +37,15 @@ export const icons = {
 export default function GiftCard({ quote, icon, border, scheme }) {
     const Icon = icons[icon];
 
-    console.log(scheme);
-
     return (
         <div
-            className='fade-slide-up w-full max-w-sm aspect-[3/4] bg-white rounded-xl p-6 shadow-lg transition-all duration-300 ease-in-out'
+            className='fade-slide-up w-full max-w-sm aspect-[3/4] bg-white rounded-xl p-6 shadow-xl transition-all duration-300 ease-in-out'
             style={{ backgroundImage: border }}
         >
             <div
-                className={cn('w-full h-[calc(100%_-_1.5rem)] md:h-full', 'bg-white text-gray-800')}
+                className={cn(
+                    'w-full h-[calc(100%_-_1.5rem)] md:h-[calc(100%_-_3rem)] xl:h-full overflow-hidden bg-white text-gray-800',
+                )}
             >
                 <div
                     className={cn(

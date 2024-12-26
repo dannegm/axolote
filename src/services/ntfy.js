@@ -20,16 +20,23 @@ class Ntfy {
         }
     }
 
-    async pushRich({ title, message, tags }) {
+    async pushRich({ title, message, tags, click = undefined }) {
         console.info(`Sending rich: ${title}`);
+
+        const fallbackTitle = title || 'Axolote';
+        const payload = {
+            Title: fallbackTitle,
+            Tags: tags || 'white_circle',
+            Markdown: 'yes',
+        };
+
+        if (click) {
+            payload.Click = click;
+        }
+
         try {
-            const fallbackTitle = title || 'Axolote';
             await axios.post(this.ntfyUrl, message, {
-                headers: {
-                    Title: fallbackTitle,
-                    Tags: tags || 'white_circle',
-                    Markdown: 'yes',
-                },
+                headers: payload,
             });
             console.info(`Sent rinch: ${fallbackTitle} | ${message}`);
         } catch (err) {

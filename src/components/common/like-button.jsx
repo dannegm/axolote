@@ -7,15 +7,7 @@ import { Heart } from 'lucide-react';
 import useSound from 'use-sound';
 
 import ntfy from '@/services/ntfy';
-
-const buildBody = ({ scheme, quote, bg, border, icon }) => `
-> ${quote}
---
-**Icon**: ${icon}
-**Scheme**: ${scheme}
-**BG**: ${bg}
-**Border**: ${border}
-`;
+import useDebouncedCallback from '@/app/hooks/use-debounced-callback';
 
 const heartExplosion = () => {
     const defaults = {
@@ -63,24 +55,28 @@ const heartExplosion = () => {
     });
 };
 
-export default function LikeButton({ scheme, quote, bg, border, icon }) {
+export default function LikeButton({ quote, settings }) {
     const $ref = useRef(null);
     const [playPop] = useSound('./pop.mp3');
+
     const mutation = useMutation({
         mutationFn: data => ntfy.pushRich(data),
-        onMutate: () => {
-            heartExplosion($ref.current);
-            playPop();
-        },
     });
+
+    const pushNotification = useDebouncedCallback(() => {
+        mutation.mutate({
+            title: 'Krystel liked',
+            message: quote,
+            tags: 'heart',
+            click: `https://axolote.me/krystel?code=${settings}`,
+        });
+    }, 1000);
 
     const handleButtonClick = ev => {
         ev.preventDefault();
-        mutation.mutate({
-            title: 'Krystel liked',
-            message: buildBody({ scheme, quote, bg, border, icon }),
-            tags: 'heart',
-        });
+        pushNotification();
+        heartExplosion($ref.current);
+        playPop();
     };
 
     return (
