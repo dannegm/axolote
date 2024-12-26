@@ -111,11 +111,11 @@ export const getRandomSettings = () => {
         /* border */ randomIndex(borderPatterns),
         /* bg */ randomIndex(bgPatterns),
         /* scheme */ randomIndex(colorSchemes),
-    ].join('');
+    ].join(':');
 };
 
 export const quoteFromSettings = settings => {
-    const decodedSettings = settings.split('');
+    const decodedSettings = settings.split(':');
     return {
         settings,
         quote: quotes[decodedSettings[0]],
