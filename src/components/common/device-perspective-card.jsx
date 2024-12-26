@@ -30,7 +30,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
             const xRotation = (gamma / 90) * 20; // Scale to desired range of rotation
             const yRotation = (beta / 90) * 20;
 
-            setRotationStyles(el, xRotation, yRotation);
+            setRotationStyles(boundingRef.current, xRotation, yRotation, gamma, beta);
         };
 
         // Si el permiso fue concedido, escuchamos los cambios en la orientación del dispositivo
@@ -44,9 +44,11 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
         };
     }, [permissionGranted]);
 
-    const setRotationStyles = (element, xRotation, yRotation) => {
+    const setRotationStyles = (element, xRotation, yRotation, gamma, beta) => {
         element.style.setProperty('--x-rotation', `${xRotation}deg`);
         element.style.setProperty('--y-rotation', `${yRotation}deg`);
+        element.style.setProperty('--x', `${gamma}%`);
+        element.style.setProperty('--y', `${beta}%`);
     };
 
     return (
@@ -57,7 +59,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
                 }
             }}
             onClick={() => requestPermission()}
-            className={`wrapper group relative transition-transform ease-out ${className}`}
+            className={`wrapper group relative transition-transform ease-out transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation)) ${className}`}
         >
             {children}
             <div className='flare pointer-events-none absolute inset-0' />
