@@ -4,14 +4,9 @@ import { getRandomQuote } from '@/services/quotes';
 
 import GiftCard from '@/components/common/gift-card';
 import LikeButton from '@/components/common/like-button';
-import MousePerspectiveCard from '@/components/common/mouse-perspective-card';
-import DevicePerspectiveCard from '@/components/common/device-perspective-card';
-import withResponsive from '@/components/hoc/withResponsive';
+import PerspectiveCard from '@/components/common/perspective-card';
 
-const PerspectiveCard = withResponsive({
-    mobile: DevicePerspectiveCard,
-    default: MousePerspectiveCard,
-});
+export const dynamic = 'force-dynamic';
 
 export default function Home() {
     const quote = getRandomQuote();
