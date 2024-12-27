@@ -37,8 +37,8 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
             const yPercentage = 1 - ((90 - beta) / 180 + 0.5); // beta range: -90 to 90
 
             // Calculate rotations
-            const xRotation = (xPercentage - 0.5) * 20;
-            const yRotation = (0.5 - yPercentage) * 20;
+            const xRotation = (xPercentage - 0.5) * 20 * 15;
+            const yRotation = (0.5 - yPercentage) * 20 * 15;
 
             setRotationStyles({ xRotation, yRotation, xPercentage, yPercentage });
         };
@@ -56,7 +56,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
         <div
             className={`wrapper relative transition-transform ease-out ${className}`}
             style={{
-                transform: 'rotateX(var(--x-rotation)) rotateY(var(--y-rotation)) scale(1.1)',
+                transform: 'rotateX(var(--x-rotation)) rotateY(var(--y-rotation))',
             }}
         >
             {children}
