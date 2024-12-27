@@ -41,7 +41,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
 
             // Calculate rotations
             const xRotation = (xPercentage - 0.5) * 20;
-            const yRotation = (0.5 - yPercentage) * 20 - 5;
+            const yRotation = (0.5 - yPercentage) * 20 - 1;
 
             setRotationStyles({ xRotation, yRotation, xPercentage, yPercentage });
         };
@@ -57,7 +57,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
 
     return (
         <div
-            className={`wrapper relative transition-transform ease-out transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation)) ${className}`}
+            className={`wrapper relative transition-transform ease-out [transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation))] ${className}`}
         >
             {children}
             {permissionGranted && (
@@ -66,7 +66,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
                 </div>
             )}
 
-            <div className='bg-white text-black fixed bottom-0 left-0 p-6 shadow-xl transition-all duration-300 ease-in-out'>
+            <div className='z-max bg-white text-black fixed bottom-0 left-0 p-6 shadow-xl transition-all duration-300 ease-in-out'>
                 <pre>{JSON.stringify(a, null, 2)}</pre>
             </div>
 
