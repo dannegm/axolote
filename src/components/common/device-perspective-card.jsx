@@ -56,7 +56,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
         <div
             className={`wrapper relative transition-transform ease-out ${className}`}
             style={{
-                transform: 'rotateX(var(--x-rotation)) rotateY(var(--y-rotation))',
+                transform: 'rotateX(var(--x-rotation)) rotateY(var(--y-rotation)) scale(1.1)',
             }}
         >
             {children}
