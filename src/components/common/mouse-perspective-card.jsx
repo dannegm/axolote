@@ -5,8 +5,6 @@ import Sparkles from 'react-sparkle';
 export default function MousePerspectiveCard({ children, className = '' }) {
     const boundingRef = useRef(null);
 
-    const [a, setA] = useState({});
-
     const calculateRotationFromMouse = ev => {
         if (!boundingRef.current) return;
 
@@ -29,8 +27,6 @@ export default function MousePerspectiveCard({ children, className = '' }) {
         element.style.setProperty('--y-rotation', `${yRotation}deg`);
         element.style.setProperty('--x', `${xPercentage * 100}%`);
         element.style.setProperty('--y', `${yPercentage * 100}%`);
-
-        setA({ xRotation, yRotation, xPercentage, yPercentage });
     };
 
     return (
@@ -41,9 +37,6 @@ export default function MousePerspectiveCard({ children, className = '' }) {
             className={`wrapper group relative transition-transform ease-out hover:[transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation))_scale(1.1)] ${className}`}
             onMouseMove={calculateRotationFromMouse}
         >
-            <div className='bg-white text-black rounded-lg p-6 shadow-xl transition-all duration-300 ease-in-out'>
-                <pre>{JSON.stringify(a, null, 2)}</pre>
-            </div>
             {children}
             <div className='absolute inset-0'>
                 <Sparkles color='teal' />
