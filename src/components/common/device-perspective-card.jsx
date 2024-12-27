@@ -33,12 +33,12 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
             const beta = event.beta || 0; // Tilt front/back
 
             // Normalize values to percentage range
-            const xPercentage = (gamma + 90) / 180; // gamma range: -90 to 90
+            const xPercentage = 1 - (gamma + 90) / 180; // gamma range: -90 to 90
             const yPercentage = 1 - ((90 - beta) / 180 + 0.5); // beta range: -90 to 90
 
             // Calculate rotations
-            const xRotation = (xPercentage - 0.5) * 20 * 1.5;
-            const yRotation = (0.5 - yPercentage) * 20 * 1.5;
+            const xRotation = (xPercentage - 0.5) * 20 * 2.5;
+            const yRotation = (0.5 - yPercentage) * 20 * 3.5;
 
             setRotationStyles({ xRotation, yRotation, xPercentage, yPercentage });
         };
