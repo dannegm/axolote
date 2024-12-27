@@ -39,12 +39,12 @@ export default function GiftCard({ quote, icon, border, scheme }) {
 
     return (
         <div
-            className='fade-slide-up w-full max-w-sm aspect-[3/4] bg-white rounded-xl p-6 shadow-xl transition-all duration-300 ease-in-out'
+            className='fade-slide-up w-full max-w-sm aspect-[3/4] bg-white rounded-lg p-6 shadow-xl transition-all duration-300 ease-in-out'
             style={{ backgroundImage: border }}
         >
             <div
                 className={cn(
-                    'w-full h-[calc(100%_-_1.5rem)] md:h-[calc(100%_-_3rem)] xl:h-full overflow-hidden bg-white text-gray-800',
+                    'w-full h-[calc(100%_-_1.5rem)] md:h-[calc(100%_-_3rem)] xl:h-full rounded-sm overflow-hidden bg-white text-gray-800',
                 )}
             >
                 <div

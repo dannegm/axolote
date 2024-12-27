@@ -4,6 +4,7 @@ import Sparkles from 'react-sparkle';
 
 export default function DevicePerspectiveCard({ children, className = '' }) {
     const [permissionGranted, setPermissionGranted] = useState(false);
+    const [a, setA] = useState(0);
 
     const requestPermission = async () => {
         if (typeof DeviceOrientationEvent.requestPermission === 'function') {
@@ -23,6 +24,8 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
         document.body.style.setProperty('--y-rotation', `${yRotation}deg`);
         document.body.style.setProperty('--x', `${xPercentage * 100}%`);
         document.body.style.setProperty('--y', `${yPercentage * 100}%`);
+
+        setA({ xRotation, yRotation, xPercentage, yPercentage });
     };
 
     useEffect(() => requestPermission(), []);
@@ -62,6 +65,10 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
                     <Sparkles color='teal' />
                 </div>
             )}
+
+            <div className='bg-white text-black'>
+                <pre>{JSON.stringify(a, null, 2)}</pre>
+            </div>
 
             <div className='flare pointer-events-none absolute inset-0 bg-[radial-gradient(at_var(--x)_var(--y),rgba(255,255,255,0.3)_20%,transparent_80%)]' />
 

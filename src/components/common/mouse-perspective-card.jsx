@@ -1,5 +1,5 @@
 'use client';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Sparkles from 'react-sparkle';
 
 export default function MousePerspectiveCard({ children, className = '' }) {
