@@ -37,11 +37,11 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
 
             // Normalize values to percentage range
             const xPercentage = (gamma + 90) / 180; // gamma range: -90 to 90
-            const yPercentage = (90 - beta) / 180 + 0.5; // beta range: -90 to 90
+            const yPercentage = 1 - ((90 - beta) / 180 + 0.5); // beta range: -90 to 90
 
             // Calculate rotations
             const xRotation = (xPercentage - 0.5) * 20;
-            const yRotation = (0.5 - yPercentage) * 20 - 1;
+            const yRotation = 10 - ((0.5 - yPercentage) * 20 - 2);
 
             setRotationStyles({ xRotation, yRotation, xPercentage, yPercentage });
         };
@@ -57,7 +57,10 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
 
     return (
         <div
-            className={`wrapper relative transition-transform ease-out [transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation))] ${className}`}
+            className={`wrapper relative transition-transform ease-out ${className}`}
+            style={{
+                transform: 'rotateX(var(--x-rotation)) rotateY(var(--y-rotation))',
+            }}
         >
             {children}
             {permissionGranted && (
@@ -66,7 +69,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
                 </div>
             )}
 
-            <div className='z-max bg-white text-black fixed bottom-0 left-0 p-6 shadow-xl transition-all duration-300 ease-in-out'>
+            <div className='z-max bg-white text-black p-6 shadow-xl transition-all duration-300 ease-in-out'>
                 <pre>{JSON.stringify(a, null, 2)}</pre>
             </div>
 
