@@ -41,7 +41,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
 
             // Calculate rotations
             const xRotation = (xPercentage - 0.5) * 20;
-            const yRotation = 10 - ((0.5 - yPercentage) * 20 - 2);
+            const yRotation = (0.5 - yPercentage) * 20;
 
             setRotationStyles({ xRotation, yRotation, xPercentage, yPercentage });
         };
