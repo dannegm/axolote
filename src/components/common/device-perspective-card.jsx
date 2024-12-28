@@ -37,8 +37,8 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
             const yPercentage = 1 - ((90 - beta) / 180 + 0.5); // beta range: -90 to 90
 
             // Calculate rotations
-            const xRotation = (xPercentage - 0.5) * 20 * 2.5;
-            const yRotation = (0.5 - yPercentage) * 20 * 2.5;
+            const xRotation = (xPercentage - 0.5) * 20 * 1.5;
+            const yRotation = (0.5 - yPercentage) * 20 * 1.5;
 
             setRotationStyles({ xRotation, yRotation, xPercentage, yPercentage });
         };
