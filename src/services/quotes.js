@@ -121,7 +121,7 @@ const quotes = [
     'No te lo he había dicho pero cada que escucho "Die With a Smile" sólo puedo pensar en ti.',
     'Me gustaría que el poder vernos se repita más seguido este nuevo año :).',
     'No te preocupes, vendré a dejarte más pensamientos por aquí de vez en cuando.',
-    'Ojalá pudiera estar cerca para cos poder celebrar contigo.',
+    'Ojalá pudiera estar cerca para poder celebrar contigo.',
     'Quizá sea el único celebrándote a ti y no el año nuevo.',
     'Me encantaría que cada vez que sonríes, el mundo entero se detenga para admirarte.',
     'A veces, la vida necesita un recordatorio de lo increíble que eres.',
