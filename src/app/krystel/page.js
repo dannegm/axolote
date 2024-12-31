@@ -9,13 +9,45 @@ import ShareButton from '@/components/common/share-button';
 
 export const dynamic = 'force-dynamic';
 
+const randomQuote = getRandomQuote();
+
 const getQuote = code => {
     if (code) {
         return quoteFromSettings(code);
     }
 
-    return getRandomQuote();
+    return randomQuote;
 };
+
+export function generateMetadata({ searchParams }) {
+    const { code } = searchParams;
+    const quote = getQuote(code);
+
+    return {
+        title: 'Krystel',
+        description: quote.quote,
+        openGraph: {
+            title: 'Krystel',
+            description: quote.quote,
+            url: `https://axolote.me/krystel?code=${quote.settings}`,
+            type: 'website',
+            locale: 'en_US',
+        },
+        robots: {
+            index: false,
+            follow: false,
+            nocache: true,
+            googleBot: {
+                index: false,
+                follow: false,
+                noimageindex: true,
+                'max-video-preview': -1,
+                'max-image-preview': 'none',
+                'max-snippet': -1,
+            },
+        },
+    };
+}
 
 export default async function Home({ searchParams }) {
     const { code } = await searchParams;
