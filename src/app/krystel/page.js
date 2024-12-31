@@ -9,26 +9,26 @@ import ShareButton from '@/components/common/share-button';
 
 export const dynamic = 'force-dynamic';
 
-const randomQuote = getRandomQuote();
-
 const getQuote = code => {
     if (code) {
         return quoteFromSettings(code);
     }
 
-    return randomQuote;
+    return getRandomQuote();
 };
 
 export async function generateMetadata({ searchParams }) {
     const { code } = await searchParams;
     const quote = getQuote(code);
 
+    const description= code ? quote.quote : 'Entra aquí para encontrar un mensaje especial.',
+
     return {
         title: 'Krystel',
-        description: quote.quote,
+        description,
         openGraph: {
             title: 'Krystel',
-            description: quote.quote,
+            description,
             url: `https://axolote.me/krystel?code=${quote.settings}`,
             type: 'website',
             locale: 'en_US',
