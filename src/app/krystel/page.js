@@ -19,8 +19,8 @@ const getQuote = code => {
     return randomQuote;
 };
 
-export function generateMetadata({ searchParams }) {
-    const { code } = searchParams;
+export async function generateMetadata({ searchParams }) {
+    const { code } = await searchParams;
     const quote = getQuote(code);
 
     return {
