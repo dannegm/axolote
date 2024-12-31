@@ -121,7 +121,7 @@ const quotes = [
     'No te lo he había dicho pero cada que escucho "Die With a Smile" sólo puedo pensar en ti.',
     'Me gustaría que el poder vernos se repita más seguido este nuevo año :).',
     'No te preocupes, vendré a dejarte más pensamientos por aquí de vez en cuando.',
-    'Ojalá pudiera estar cerca para poder celebrar contigo.',
+    'Ojalá pudiera estar cerca para cos poder celebrar contigo.',
     'Quizá sea el único celebrándote a ti y no el año nuevo.',
     'Me encantaría que cada vez que sonríes, el mundo entero se detenga para admirarte.',
     'A veces, la vida necesita un recordatorio de lo increíble que eres.',
@@ -139,6 +139,19 @@ const quotes = [
     '¿Ya intentaste picar en «Another»?',
     'Esta pequeña app es otra forma de tenerme cerca.',
     'Si picas muchas veces el botón de like, será como si me invocaras.',
+    'Prometo que será la última vez en este año (2024) que hago cosas cursis por ti 🤭.',
+    'Feliz año, por cierto 🎉.',
+    'Mi plan era regalarte el brazalete para tu cumpleaños, pero me alegra habertelo dado antes y en persona.',
+    'Cuenta hasta 10 y pide un deseo :D.',
+    'Obvio pensé en felicitarte desde el primer minuto hoy, pero quería sorprenderte de esta forma.',
+    'Me hubiera gustado pasarla contigo el día de hoy.',
+    'Espero que este pequeño detalle te haya hecho sonreír.',
+    'Recuerda siempre lo especial e importante que eres para mí.',
+    'Espero que estos mensajes te alegre el día.',
+    'Sabes que aún hay un millón de cosas más que quisiera decirte.',
+    'Yo sé que has intentado spamear los corazones 🫢.',
+    'Lo mejor de mi 2024 fuiste tú y todas las veces que pude verte 😔.',
+    'No hay un sólo instante que no estés en mi cabeza.',
 ];
 
 //
