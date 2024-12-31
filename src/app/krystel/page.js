@@ -6,6 +6,7 @@ import PerspectiveCard from '@/components/common/perspective-card';
 import GiftCard from '@/components/common/gift-card';
 import LikeButton from '@/components/common/like-button';
 import ShareButton from '@/components/common/share-button';
+import { createSimpleMemoryHandler } from '@/helpers/handlers';
 
 export const dynamic = 'force-dynamic';
 
@@ -14,7 +15,8 @@ const getQuote = code => {
         return quoteFromSettings(code);
     }
 
-    return getRandomQuote();
+    const memoryHandler = createSimpleMemoryHandler();
+    return getRandomQuote(memoryHandler);
 };
 
 export default async function Home({ searchParams }) {

@@ -1,4 +1,4 @@
-import { randomIndex, randomPick } from '@/helpers/arrays';
+import { randomIndex, randomIndexWithMemory } from '@/helpers/arrays';
 
 export const icons = [
     'Candy',
@@ -152,13 +152,14 @@ const quotes = [
     'Yo sé que has intentado spamear los corazones 🫢.',
     'Lo mejor de mi 2024 fuiste tú y todas las veces que pude verte 😔.',
     'No hay un sólo instante que no estés en mi cabeza.',
+    'Ya estás más cerca de los 30 🫢.',
 ];
 
 //
 
-export const getRandomSettings = () => {
+export const getRandomSettings = memoryHandler => {
     return [
-        /* quote */ randomIndex(quotes),
+        /* quote */ randomIndexWithMemory(quotes, memoryHandler),
         /* icon */ randomIndex(icons),
         /* border */ randomIndex(borderPatterns),
         /* bg */ randomIndex(bgPatterns),
@@ -178,7 +179,7 @@ export const quoteFromSettings = settings => {
     };
 };
 
-export const getRandomQuote = () => {
-    const code = getRandomSettings();
+export const getRandomQuote = memoryHandler => {
+    const code = getRandomSettings(memoryHandler);
     return quoteFromSettings(code);
 };

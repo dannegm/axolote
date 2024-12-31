@@ -1,20 +1,24 @@
 'use client';
 
 import { Share } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 const ShareButton = ({ title, text, url }) => {
-    if (!navigator.canShare) {
-        return null;
-    }
+    const [canShare, setCanShare] = useState(false);
 
     const handleShare = async ev => {
         ev.preventDefault();
-        try {
-            await navigator.share({ title, text, url });
-        } catch (error) {
-            console.error('Error sharing content:', error);
-        }
+        if (!canShare) return;
+        await navigator.share({ title, text, url });
     };
+
+    useEffect(() => {
+        setCanShare(!!navigator?.share);
+    }, [navigator]);
+
+    if (!canShare) {
+        return null;
+    }
 
     return (
         <button
