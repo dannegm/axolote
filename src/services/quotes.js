@@ -1,4 +1,5 @@
 import { randomIndex, randomIndexWithMemory } from '@/helpers/arrays';
+import { createSimpleMemoryHandler } from '@/helpers/handlers';
 
 export const icons = [
     'Candy',
@@ -156,7 +157,7 @@ const quotes = [
 
 //
 
-export const getRandomSettings = memoryHandler => {
+export const getRandomSettings = (memoryHandler = createSimpleMemoryHandler()) => {
     return [
         /* quote */ randomIndexWithMemory(quotes, memoryHandler),
         /* icon */ randomIndex(icons),
