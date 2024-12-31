@@ -22,6 +22,9 @@ export async function generateMetadata({ searchParams }) {
     const quote = getQuote(code);
 
     const description = code ? quote.quote : 'Entra aquí para encontrar un mensaje especial.';
+    const url = code
+        ? `https://axolote.me/krystel?code=${quote.settings}`
+        : `https://axolote.me/krystel`;
 
     return {
         title: 'Krystel',
@@ -29,7 +32,7 @@ export async function generateMetadata({ searchParams }) {
         openGraph: {
             title: 'Krystel',
             description,
-            url: `https://axolote.me/krystel?code=${quote.settings}`,
+            url,
             type: 'website',
             locale: 'en_US',
         },
