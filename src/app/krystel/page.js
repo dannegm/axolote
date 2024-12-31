@@ -21,7 +21,7 @@ export async function generateMetadata({ searchParams }) {
     const { code } = await searchParams;
     const quote = getQuote(code);
 
-    const description= code ? quote.quote : 'Entra aquí para encontrar un mensaje especial.',
+    const description = code ? quote.quote : 'Entra aquí para encontrar un mensaje especial.';
 
     return {
         title: 'Krystel',
