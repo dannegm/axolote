@@ -157,9 +157,11 @@ const quotes = [
 
 //
 
+const repetitionProbability = 0.35;
+
 export const getRandomSettings = (memoryHandler = createSimpleMemoryHandler()) => {
     return [
-        /* quote */ randomIndexWithMemory(quotes, memoryHandler),
+        /* quote */ randomIndexWithMemory(quotes, memoryHandler, repetitionProbability),
         /* icon */ randomIndex(icons),
         /* border */ randomIndex(borderPatterns),
         /* bg */ randomIndex(bgPatterns),
