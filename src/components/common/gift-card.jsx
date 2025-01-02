@@ -53,7 +53,7 @@ export default function GiftCard({ quote, icon, border, scheme }) {
             >
                 <div
                     className={cn(
-                        'flex h-full flex-col items-center gap-6 md:gap-8 justify-center p-10',
+                        'flex h-full flex-col items-center gap-4 md:gap-8 justify-center p-10',
                         scheme,
                     )}
                 >
