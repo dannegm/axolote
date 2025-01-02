@@ -61,7 +61,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
         >
             {children}
             {permissionGranted && (
-                <div className='absolute inset-0'>
+                <div className='absolute inset-0 pointer-events-none'>
                     <Sparkles color='teal' />
                 </div>
             )}
