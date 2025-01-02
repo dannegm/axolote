@@ -169,6 +169,7 @@ const quotes = [
     'No existe nada más bello que el saber de tu felicidad.',
     'Nunca dejes de spamear los %%corazones%% 🥹, //me gusta recibir esa notificación tuya//.',
     '[[[movie_time]]] ¿Te gustaría que te recomendara películas?',
+    'Ahora puedes hacer doble tap para darle al %%like%% 🤭.',
 ];
 
 //
