@@ -1,4 +1,7 @@
+'use client';
 import { cn } from '@/helpers/utils';
+
+import RichText from './rich-text';
 
 import {
     Cake,
@@ -16,6 +19,7 @@ import {
     Origami,
     Sparkles,
 } from 'lucide-react';
+import { LikeHandler } from './like-button';
 
 export const icons = {
     Candy,
@@ -61,9 +65,11 @@ export default function GiftCard({ quote, icon, border, scheme }) {
                         </div>
                     )}
 
-                    <p className='font-delius text-center text-xl font-medium leading-relaxed'>
-                        {quote}
-                    </p>
+                    <div className='font-delius text-center text-xl font-medium leading-relaxed'>
+                        <center>
+                            <RichText>{quote}</RichText>
+                        </center>
+                    </div>
 
                     <p className='font-pacifico text-xl text-center'>Feliz cumple.</p>
                 </div>

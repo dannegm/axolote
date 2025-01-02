@@ -3,13 +3,17 @@ export const createCookieMemoryHandler = cookieStore => {
 
     return {
         getMemory: () => {
-            const memory = cookieStore.get(MEMORY_COOKIE_NAME)?.value;
+            console.log('Cookie Store:', cookieStore);
+            const memory = cookieStore.get(MEMORY_COOKIE_NAME);
+            console.log('Handler Memory:', memory);
             return memory ? JSON.parse(memory) : [];
         },
         updateMemory: newMemory => {
+            console.log('Update Memory:', newMemory);
             cookieStore.set(MEMORY_COOKIE_NAME, JSON.stringify(newMemory), {
-                maxAge: 2592000, // 30 days
+                maxAge: 60 * 60 * 24 * 30, // 30 days
                 httpOnly: false,
+                priority: 'high',
             });
         },
     };

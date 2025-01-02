@@ -1,9 +1,9 @@
-import { createCookieMemoryHandler } from '@/helpers/handlers';
-import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
 import { cookies } from 'next/headers';
+import { createSimpleMemoryHandler } from '@/helpers/handlers';
+import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
 
 const getQuote = (code, cookieStore) => {
-    const memoryHanderl = createCookieMemoryHandler(cookieStore);
+    const memoryHanderl = createSimpleMemoryHandler();
 
     if (code) {
         return quoteFromSettings(code);
@@ -12,9 +12,9 @@ const getQuote = (code, cookieStore) => {
     return getRandomQuote(memoryHanderl);
 };
 
-export const dynamic = 'force-dynamic';
-
 export const GET = async request => {
+    const ip = request.headers.get('x-forwarded-for');
+    console.log('IP: ', ip);
     const searchParams = new URLSearchParams(request.url.split('?')[1]);
 
     const cookieStore = await cookies();

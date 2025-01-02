@@ -6,7 +6,7 @@ import PerspectiveCard from '@/components/common/perspective-card';
 import GiftCard from '@/components/common/gift-card';
 import Button from '@/components/common/button';
 import ShareButton from '@/components/common/share-button';
-import LikeButton from '@/components/common/like-button';
+import LikeButton, { LikeHandler } from '@/components/common/like-button';
 
 import { SaveContainer, SaveButton } from '@/components/common/save-element';
 
@@ -58,7 +58,9 @@ export default async function Home({ searchParams }) {
                 quote={quote}
             >
                 <PerspectiveCard>
-                    <GiftCard {...quote} />
+                    <LikeHandler quote={quote.quote} settings={quote.settings} type='double'>
+                        <GiftCard {...quote} />
+                    </LikeHandler>
                 </PerspectiveCard>
 
                 <div

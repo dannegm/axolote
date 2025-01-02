@@ -22,7 +22,7 @@ export const SaveContainer = ({ className, quote, children, onPrepare, onSave })
     const $container = useRef(null);
     const [shotting, setShotting] = useState(false);
 
-    const [playCamera] = useSound('./camera.mp3');
+    const [playCamera] = useSound('./sounds/camera.mp3');
 
     const handleSave = canvas => {
         const link = document.createElement('a');
