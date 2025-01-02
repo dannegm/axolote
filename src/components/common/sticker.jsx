@@ -14,7 +14,7 @@ export default function Sticker({ id, type = 'inline' }) {
 
     const types = {
         inline: 'inline-blockw-5 h-5',
-        badge: 'block w-24 h-24 m-4',
+        badge: 'block w-24 h-24 m-0 md:m-4',
         full: 'block w-44 h-44 -mt-4 -mb-2',
     };
 
