@@ -12,17 +12,17 @@ import { SaveContainer, SaveButton } from '@/components/common/save-element';
 
 export const dynamic = 'force-dynamic';
 
-const getQuote = code => {
-    if (code) {
-        return quoteFromSettings(code);
-    }
+const HOSTNAME = process.env.NEXT_PUBLIC_HOSTNAME || 'http://localhost:3000';
 
-    return getRandomQuote();
+const fetchQuote = async (code = undefined) => {
+    const codeQuery = code ? `?code=${code}` : '';
+    const response = await fetch(`${HOSTNAME}/krystel/api${codeQuery}`);
+    return await response.json();
 };
 
 export async function generateMetadata({ searchParams }) {
     const { code } = await searchParams;
-    const quote = getQuote(code);
+    const quote = await fetchQuote(code);
 
     const description = code ? quote.quote : 'Entra aquí para encontrar un mensaje especial.';
     const url = code
@@ -44,7 +44,7 @@ export async function generateMetadata({ searchParams }) {
 
 export default async function Home({ searchParams }) {
     const { code } = await searchParams;
-    const quote = getQuote(code);
+    const quote = await fetchQuote(code);
 
     return (
         <main
