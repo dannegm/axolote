@@ -44,7 +44,7 @@ export default function GiftCard({ quote, icon, border, scheme }) {
         >
             <div
                 className={cn(
-                    'w-full h-[calc(100%_-_1.5rem)] md:h-[calc(100%_-_3rem)] xl:h-full rounded-sm overflow-hidden bg-white text-gray-800',
+                    'w-full h-[calc(100%_-_1.5rem)] md:h-[calc(100%_-_3rem)] xl:h-full rounded-sm overflow-hidden bg-white text-gray-800 shadow-xl',
                 )}
             >
                 <div

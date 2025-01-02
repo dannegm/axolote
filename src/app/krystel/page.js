@@ -4,8 +4,11 @@ import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
 
 import PerspectiveCard from '@/components/common/perspective-card';
 import GiftCard from '@/components/common/gift-card';
-import LikeButton from '@/components/common/like-button';
+import Button from '@/components/common/button';
 import ShareButton from '@/components/common/share-button';
+import LikeButton from '@/components/common/like-button';
+
+import { SaveContainer, SaveButton } from '@/components/common/save-element';
 
 export const dynamic = 'force-dynamic';
 
@@ -50,27 +53,30 @@ export default async function Home({ searchParams }) {
         >
             <div className='fade-out fixed inset-0 z-0 bg-gray-100' />
 
-            <PerspectiveCard className='-mt-4'>
-                <GiftCard {...quote} />
-            </PerspectiveCard>
+            <SaveContainer className='relative -mt-4 px-10 py-20 transition-all' quote={quote}>
+                <PerspectiveCard>
+                    <GiftCard {...quote} />
+                </PerspectiveCard>
 
-            <div className='relative z-10 flex flex-row justify-center items-center m-4 gap-4'>
-                <a
-                    className='flex flex-row gap-2 justify-center items-center px-6 py-3 rounded-full shadow-md font-delius bg-white text-gray-800 hover:shadow-lg hover:bg-gray-50 active:shadow-sm transition-all duration-200 hover:scale-110 active:scale-100'
-                    href='/krystel'
+                <div
+                    className='relative z-10 flex flex-row justify-center items-center m-4 gap-4'
+                    data-html2canvas-ignore
                 >
-                    Another
-                    <RefreshCcw size={20} />
-                </a>
+                    <Button as='a' href='/krystel'>
+                        <RefreshCcw size={20} />
+                    </Button>
 
-                <ShareButton
-                    title={''}
-                    text={''}
-                    url={`https://axolote.me/krystel?code=${quote.settings}`}
-                />
+                    <ShareButton
+                        title={''}
+                        text={''}
+                        url={`https://axolote.me/krystel?code=${quote.settings}`}
+                    />
 
-                <LikeButton {...quote} />
-            </div>
+                    <SaveButton />
+
+                    <LikeButton {...quote} />
+                </div>
+            </SaveContainer>
         </main>
     );
 }

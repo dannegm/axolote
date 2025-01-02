@@ -2,8 +2,9 @@
 
 import { Share } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import Button from './button';
 
-const ShareButton = ({ title, text, url }) => {
+export default function ShareButton({ title, text, url }) {
     const [canShare, setCanShare] = useState(false);
 
     const handleShare = async ev => {
@@ -21,14 +22,8 @@ const ShareButton = ({ title, text, url }) => {
     }
 
     return (
-        <button
-            type='button'
-            className='flex flex-row justify-center items-center px-6 py-3 rounded-full shadow-md font-delius bg-white text-gray-800 hover:shadow-lg hover:bg-gray-50 active:shadow-sm transition-all duration-200 hover:scale-110 active:scale-100'
-            onClick={handleShare}
-        >
+        <Button onClick={handleShare}>
             <Share size={20} />
-        </button>
+        </Button>
     );
-};
-
-export default ShareButton;
+}
