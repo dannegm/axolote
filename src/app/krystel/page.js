@@ -53,7 +53,10 @@ export default async function Home({ searchParams }) {
         >
             <div className='fade-out fixed inset-0 z-0 bg-gray-100' />
 
-            <SaveContainer className='relative -mt-4 px-10 py-20 transition-all' quote={quote}>
+            <SaveContainer
+                className='relative -mt-4 px-5 py-10 md:px-10 md:py-20 transition-all'
+                quote={quote}
+            >
                 <PerspectiveCard>
                     <GiftCard {...quote} />
                 </PerspectiveCard>
