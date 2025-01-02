@@ -26,9 +26,8 @@ export const SaveContainer = ({ className, quote, children, onPrepare, onSave })
 
     const handleSave = canvas => {
         const link = document.createElement('a');
-        // link.download = `axolote_${Date.now()}.png`;
+        link.download = `axolote_${Date.now()}.png`;
         link.href = canvas.toDataURL('image/png');
-        link.target = '_blank';
         link.click();
 
         onSave?.($container, canvas);
