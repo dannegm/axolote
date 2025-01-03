@@ -6,6 +6,7 @@ import Button from '@/components/common/button';
 import ShareButton from '@/components/common/share-button';
 import LikeButton, { LikeHandler } from '@/components/common/like-button';
 import { SaveContainer, SaveButton } from '@/components/common/save-element';
+import CopyText from '@/components/common/copy-text';
 
 export const dynamic = 'force-dynamic';
 
@@ -78,7 +79,9 @@ export default async function Home({ searchParams }) {
                 </div>
             </SaveContainer>
 
-            <div className='absolute bottom-2 py-1 px-2 bg-red-500 text-red-100 text-xs font-bold rounded-md'>{quote.settings}</div>
+            <CopyText content={`https://axolote.me/krystel?code=${quote.settings}`}>
+                {quote.settings}
+            </CopyText>
         </main>
     );
 }
