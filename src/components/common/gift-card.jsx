@@ -3,41 +3,8 @@ import { cn } from '@/helpers/utils';
 
 import RichText from './rich-text';
 
-import {
-    Cake,
-    Gift,
-    PartyPopper,
-    Snowflake,
-    Candy,
-    Clover,
-    Cookie,
-    Cat,
-    Flower,
-    Gem,
-    Lollipop,
-    MoonStar,
-    Origami,
-    Sparkles,
-    Asterisk,
-} from 'lucide-react';
+import { Asterisk, icons } from 'lucide-react';
 import { useEffect, useState } from 'react';
-
-export const icons = {
-    Candy,
-    Cake,
-    Gift,
-    PartyPopper,
-    Snowflake,
-    Clover,
-    Cookie,
-    Cat,
-    Flower,
-    Gem,
-    Lollipop,
-    MoonStar,
-    Origami,
-    Sparkles,
-};
 
 const useFirstAppearance = id => {
     const [isFirstAppearance, setIsFirstAppearance] = useState(false);
@@ -57,15 +24,21 @@ const useFirstAppearance = id => {
     return isFirstAppearance;
 };
 
-export default function GiftCard({ quote, icon, border, scheme, settings }) {
-    const Icon = icons[icon];
+export default function GiftCard({
+    quote,
+    icon,
+    border = '',
+    scheme = 'bg-white text-gray-600',
+    settings,
+}) {
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
+    const LucideIcon = icons[icon];
 
     return (
         <div
-            className='fade-slide-up w-full max-w-sm aspect-[3/4] bg-white rounded-lg p-6 shadow-xl transition-all duration-300 ease-in-out'
-            style={{ backgroundImage: border }}
+            className='fade-slide-up w-full max-w-sm aspect-[3/4] bg-gray-200 rounded-lg p-6 shadow-xl transition-all duration-300 ease-in-out'
+            style={{ background: border }}
         >
             <div
                 className={cn(
@@ -86,11 +59,9 @@ export default function GiftCard({ quote, icon, border, scheme, settings }) {
 
                     <p className='font-pacifico text-3xl text-center'>Krystel,</p>
 
-                    {Icon && (
-                        <div className='block'>
-                            <Icon size={64} className='text-current' />
-                        </div>
-                    )}
+                    <div className='block'>
+                        <LucideIcon size={56} className='text-current' />
+                    </div>
 
                     <div className='font-delius text-center text-xl font-medium leading-relaxed'>
                         <center>

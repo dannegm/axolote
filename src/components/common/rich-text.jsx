@@ -3,6 +3,7 @@ import LoveText from './love-text';
 import ShineText from './shine-text';
 import SpoilerText from './spoiler-text';
 import Sticker from './sticker';
+import Polaroid from './polaroid';
 
 export const defaultElements = [
     // Strikethrough
@@ -34,12 +35,21 @@ export const defaultElements = [
     },
     // Code
     {
-        pattern: /'''(.*?)'''/g,
+        pattern: /`(.*?)`/g,
         parser: text => (
             <code className='text-sm py-0.5 px-1 rounded-sm bg-pink-200 text-pink-600s'>
                 {text}
             </code>
         ),
+    },
+    // Polaroid
+    {
+        pattern: /\{\{(.*?)\|(.*?)\}\}/g,
+        parser: (url, description) => <Polaroid url={url} description={description} />,
+    },
+    {
+        pattern: /\{\{(.*?)\}\}/g,
+        parser: url => <Polaroid url={url} />,
     },
     // Sticker Full
     {
@@ -69,7 +79,9 @@ export const stripedElements = [
     { pattern: /\%\%(.*?)\%\%/g, parser: text => text },
     { pattern: /\|\|/g, parser: () => ' ¬ ' },
     { pattern: /\*\/(.*?)\/\*/g, parser: text => text },
-    { pattern: /'''(.*?)'''/g, parser: text => text },
+    { pattern: /`(.*?)`/g, parser: text => text },
+    { pattern: /\{\{(.*?)\|(.*?)\}\}/g, parser: (_, description) => `[${description}]` },
+    { pattern: /\{\{(.*?)\}\}/g, parser: url => `[${url}]` },
     { pattern: /\[\[\[\[(.*?)\]\]\]\]/g, parser: id => `[${id}]` },
     { pattern: /\[\[\[(.*?)\]\]\]/g, parser: id => `[${id}]` },
     { pattern: /\[\[(.*?)\]\]/g, parser: id => `[${id}]` },
@@ -90,7 +102,8 @@ export const parseText = (text, elements) => {
 
             while ((match = pattern.exec(segment)) !== null) {
                 parts.push(segment.slice(lastIndex, match.index));
-                parts.push(parser(match[1]));
+                const [matcher, ...params] = match;
+                parts.push(parser(...params, matcher));
                 lastIndex = pattern.lastIndex;
             }
 
