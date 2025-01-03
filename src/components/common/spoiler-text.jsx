@@ -17,7 +17,7 @@ export default function SpoilerText({ children }) {
     return (
         <span
             className={cn(
-                'relative z-50 cursor-pointer bg-purple-400 text-white rounded-md px-1 box-decoration-clone transition-all duration-500',
+                'cursor-pointer bg-purple-400 text-white rounded-md px-1 box-decoration-clone transition-all duration-500',
                 { 'blur-sm': hidden },
             )}
             onClick={handleClick}

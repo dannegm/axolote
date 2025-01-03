@@ -24,6 +24,11 @@ body {
         rgb(var(--background-start-rgb));
 }
 
+.box-decoration-clone {
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+}
+
 .font-pacifico {
     font-family: var(--font-pacifico);
 }
