@@ -1,15 +1,14 @@
+import useDebouncedCallback from '@/app/hooks/use-debounced-callback';
 import { useEffect } from 'react';
 
 const useShakeDetector = (onShake, threshold = 15) => {
-    useEffect(() => {
-        if (typeof onShake !== 'function') {
-            console.error('useShakeDetector: "onShake" must be a function.');
-            return;
-        }
+    const debouncedOnShake = useDebouncedCallback(() => onShake?.(), 1000);
 
+    useEffect(() => {
         let lastX = null,
             lastY = null,
             lastZ = null;
+
         let timeout;
 
         const handleMotion = event => {
@@ -24,7 +23,7 @@ const useShakeDetector = (onShake, threshold = 15) => {
                 const deltaZ = Math.abs(z - lastZ);
 
                 if (deltaX > threshold || deltaY > threshold || deltaZ > threshold) {
-                    onShake();
+                    debouncedOnShake();
                     clearTimeout(timeout);
                     timeout = setTimeout(() => {}, 500);
                 }
