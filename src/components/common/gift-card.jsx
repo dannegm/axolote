@@ -58,8 +58,9 @@ const useFirstAppearance = id => {
 };
 
 export default function GiftCard({ quote, icon, border, scheme, settings }) {
-    const firstAppearance = useFirstAppearance(settings);
     const Icon = icons[icon];
+    const [id] = settings.split(':');
+    const firstAppearance = useFirstAppearance(id);
 
     return (
         <div
