@@ -19,7 +19,6 @@ import {
     Origami,
     Sparkles,
 } from 'lucide-react';
-import { LikeHandler } from './like-button';
 
 export const icons = {
     Candy,

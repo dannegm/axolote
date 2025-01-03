@@ -1,7 +1,7 @@
 'use client';
-import { cn } from '@/helpers/utils';
-import Sparkles from 'react-sparkle';
 import useSound from 'use-sound';
+import Sparkles from 'react-sparkle';
+import { cn } from '@/helpers/utils';
 
 const heartExplosion = () => {
     const defaults = {

@@ -1,22 +1,17 @@
 import { RefreshCcw } from 'lucide-react';
 
-import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
-
 import PerspectiveCard from '@/components/common/perspective-card';
 import GiftCard from '@/components/common/gift-card';
 import Button from '@/components/common/button';
 import ShareButton from '@/components/common/share-button';
 import LikeButton, { LikeHandler } from '@/components/common/like-button';
-
 import { SaveContainer, SaveButton } from '@/components/common/save-element';
 
 export const dynamic = 'force-dynamic';
 
-const HOSTNAME = process.env.NEXT_PUBLIC_HOSTNAME || 'http://localhost:3000';
-
 const fetchQuote = async (code = undefined) => {
     const codeQuery = code ? `?code=${code}` : '';
-    const response = await fetch(`${HOSTNAME}/krystel/api${codeQuery}`);
+    const response = await fetch(`https://endpoints.hckr.mx/krystel/quote${codeQuery}`);
     return await response.json();
 };
 

@@ -1,12 +1,13 @@
 'use client';
 
+import useSound from 'use-sound';
 import { useMutation } from '@tanstack/react-query';
 import { confetti } from '@tsparticles/confetti';
 import { Heart } from 'lucide-react';
-import useSound from 'use-sound';
 
 import ntfy from '@/services/ntfy';
 import useDebouncedCallback from '@/app/hooks/use-debounced-callback';
+
 import { parseText, stripedElements } from './rich-text';
 
 const heartExplosion = () => {
