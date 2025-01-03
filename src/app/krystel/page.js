@@ -77,6 +77,8 @@ export default async function Home({ searchParams }) {
                     <LikeButton {...quote} />
                 </div>
             </SaveContainer>
+
+            <div className='absolute bottom-2 py-1 px-2 bg-red-500 text-red-100 text-xs font-bold rounded-md'>{quote.settings}</div>
         </main>
     );
 }
