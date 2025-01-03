@@ -50,7 +50,7 @@ const heartExplosion = () => {
 
 export default function ShineText({ children }) {
     const [playShine] = useSound('./sounds/shine.mp3', {
-        volume: 0.5,
+        volume: 0.3,
     });
 
     const handleClick = ev => {
