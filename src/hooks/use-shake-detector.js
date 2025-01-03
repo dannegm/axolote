@@ -1,5 +1,5 @@
-import useDebouncedCallback from '@/app/hooks/use-debounced-callback';
 import { useEffect } from 'react';
+import useDebouncedCallback from '@/app/hooks/use-debounced-callback';
 
 const useShakeDetector = (onShake, threshold = 15) => {
     const debouncedOnShake = useDebouncedCallback(() => onShake?.(), 1000);
