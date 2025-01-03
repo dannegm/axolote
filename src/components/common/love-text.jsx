@@ -58,7 +58,7 @@ export default function LoveText({ children }) {
     };
 
     return (
-        <span className='font-bold text-red-500 italic' onClick={handleButtonClick}>
+        <span className='font-extrabold text-red-500 italic' onClick={handleButtonClick}>
             {children}
         </span>
     );

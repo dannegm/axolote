@@ -160,7 +160,7 @@ const quotes = [
     'Me la paso muy bien cuando pasamos tiempo juntos.',
     '¿Te gusta la nueva opción de descargar las tarjetitas?',
     'Mientras sigas viniendo aquí a leerme, seguiré escribiendo para ti.',
-    '[[[sun]]] Buenos días, por cierto :).',
+    '[[[sun]]] Buenos días,||por cierto :)',
     'Ojalá pudiera ver la %%sonrisa%% que pones cuando lees esto 🫢.',
     'Quizá ya lo sabes, pero ~:me encanta cuando me mandas fotos tuyas:~ 🫢.',
     'Me hizo muy %%feliz%% ver tu reacción a esta sorpresa, no esperaba que te gustara tanto.',
