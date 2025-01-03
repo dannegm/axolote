@@ -4,6 +4,7 @@ import { useState } from 'react';
 import useSound from 'use-sound';
 
 import { cn } from '@/helpers/utils';
+import useShakeDetector from '@/hooks/use-shake-detector';
 
 export default function SpoilerText({ children }) {
     const [playHush] = useSound('./sounds/shush.mp3');
@@ -13,6 +14,9 @@ export default function SpoilerText({ children }) {
         setHidden(!hidden);
         playHush();
     };
+
+    useShakeDetector(toggleSpoiler);
+
     return (
         <span
             className={cn(
