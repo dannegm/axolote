@@ -4,7 +4,7 @@ import useSound from 'use-sound';
 const heartExplosion = () => {
     const defaults = {
         angle: 90,
-        position: { x: 50, y: 100 },
+        position: { x: 50, y: 50 },
         spread: 360,
         startVelocity: 30,
         decay: 0.94,
@@ -31,19 +31,19 @@ const heartExplosion = () => {
     confetti('tsparticles', {
         ...defaults,
         count: 50,
-        scalar: 2,
+        scalar: 1,
     });
 
     confetti('tsparticles', {
         ...defaults,
         count: 25,
-        scalar: 3,
+        scalar: 2,
     });
 
     confetti('tsparticles', {
         ...defaults,
         count: 10,
-        scalar: 4,
+        scalar: 3,
     });
 };
 
