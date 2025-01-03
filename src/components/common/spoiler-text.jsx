@@ -20,8 +20,8 @@ export default function SpoilerText({ children }) {
     return (
         <span
             className={cn(
-                'cursor-pointer px-1 font-extrabold text-purple-500 transition-all duration-500',
-                { 'blur-md bg-purple-500 rounded-md box-decoration-clone': hidden },
+                'cursor-pointer px-1 font-extrabold text-fuchsia-500 transition-all duration-500',
+                { 'blur-md bg-fuchsia-500 rounded-md box-decoration-clone': hidden },
             )}
             onClick={toggleSpoiler}
         >
