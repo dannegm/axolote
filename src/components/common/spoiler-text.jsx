@@ -1,28 +1,48 @@
 'use client';
 
-import { useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import useSound from 'use-sound';
 
 import { cn } from '@/helpers/utils';
+
+const SpoilerContext = createContext();
+
+const SpoilerWord = ({ children }) => {
+    const { hidden, toggleSpoiler } = useContext(SpoilerContext);
+    return (
+        <span
+            className={cn(
+                'cursor-pointer rounded-md px-1 box-decoration-clone bg-purple-400 text-white transition-all duration-500',
+                { 'blur-sm': hidden },
+            )}
+            onClick={toggleSpoiler}
+        >
+            {children}
+        </span>
+    );
+};
 
 export default function SpoilerText({ children }) {
     const [playHush] = useSound('./sounds/shush.mp3');
     const [hidden, setHidden] = useState(true);
 
-    const handleClick = ev => {
+    const toggleSpoiler = ev => {
         setHidden(!hidden);
         playHush();
     };
 
+    const words = children
+        .trim()
+        .split(' ')
+        .map((word, index) => ({ key: `${word}_${index}`, word }));
+
     return (
-        <span
-            className={cn(
-                'cursor-pointer bg-purple-400 text-white rounded-md px-1 box-decoration-clone transition-all duration-500',
-                { 'blur-sm': hidden },
-            )}
-            onClick={handleClick}
-        >
-            {children}
-        </span>
+        <SpoilerContext.Provider value={{ hidden, toggleSpoiler }}>
+            <span className='inline-flex flex-row flex-wrap gap-1'>
+                {words.map(item => (
+                    <SpoilerWord key={item.key}>{item.word}</SpoilerWord>
+                ))}
+            </span>
+        </SpoilerContext.Provider>
     );
 }

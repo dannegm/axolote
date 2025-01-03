@@ -162,7 +162,7 @@ const quotes = [
     'Mientras sigas viniendo aquí a leerme, seguiré escribiendo para ti.',
     '[[[sun]]] Buenos días, por cierto :).',
     'Ojalá pudiera ver la %%sonrisa%% que pones cuando lees esto 🫢.',
-    'Quizá ya lo sabes, pero ~: me encanta cuando me mandas fotos tuyas:~ 🫢.',
+    'Quizá ya lo sabes, pero ~:me encanta cuando me mandas fotos tuyas:~ 🫢.',
     'Me hizo muy %%feliz%% ver tu reacción a esta sorpresa, no esperaba que te gustara tanto.',
     'Soy muy $$afortunado$$ de tenerte en mi vida.',
     'Casi me derrito cuando me dijiste que he sido de las pocas personas que de verdad te han hecho $$feliz$$.',
