@@ -88,7 +88,7 @@ export default function ShineText({ children }) {
             <span
                 className={cn(
                     'relative z-10 top-0 w-fit h-auto flex justify-center items-center',
-                    'font-extrabold text-purple-500 text-center',
+                    'font-extrabold text-violet-500 text-center',
                     'select-auto',
                 )}
             >
