@@ -38,7 +38,7 @@ export default function SpoilerText({ children }) {
 
     return (
         <SpoilerContext.Provider value={{ hidden, toggleSpoiler }}>
-            <span className='inline-flex flex-row flex-wrap gap-1'>
+            <span className='inline-flex flex-row justify-center flex-wrap gap-1'>
                 {words.map(item => (
                     <SpoilerWord key={item.key}>{item.word}</SpoilerWord>
                 ))}
