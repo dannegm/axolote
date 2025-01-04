@@ -4,7 +4,7 @@ import { Share } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Button from './button';
 
-export default function ShareButton({ title, text, url }) {
+export default function ShareButton({ url, title = '', text = '' }) {
     const [canShare, setCanShare] = useState(false);
 
     const handleShare = async ev => {

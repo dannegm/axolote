@@ -76,11 +76,7 @@ export default async function Home({ searchParams }) {
                         <RefreshCcw size={20} />
                     </Button>
 
-                    <ShareButton
-                        title={''}
-                        text={''}
-                        url={`https://axolote.me/krystel?code=${quote.settings}`}
-                    />
+                    <ShareButton url={`https://axolote.me/krystel?code=${quote.settings}`} />
 
                     <SaveButton />
 
