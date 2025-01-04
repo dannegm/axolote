@@ -73,7 +73,10 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
                     onClick={requestPermission}
                     className='group absolute bottom-2 left-1/2 -translate-x-1/2 '
                 >
-                    <div className='relative block bg-cyan-300 text-cyan-800 text-sm py-2 px-4 font-delius rounded-full shadow-lg group-hover:shadow-xl group-active:shadow-md'>
+                    <div
+                        className='relative block bg-cyan-300 text-cyan-800 text-sm py-2 px-4 font-delius rounded-full shadow-lg group-hover:shadow-xl group-active:shadow-md'
+                        data-html2canvas-ignore
+                    >
                         Activar resplandor
                         <Sparkles color='teal' overflowPx={8} />
                     </div>
