@@ -52,16 +52,13 @@ export default async function Home({ searchParams }) {
     }
 
     return (
-        <main
-            style={{ backgroundImage: quote.bg }}
-            className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'
-        >
-            <div className='fade-out fixed inset-0 z-0 bg-gray-100' />
+        <main className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
+            <SaveContainer className='-mt-4 px-5 py-10 md:px-10 md:py-20 transition-all'>
+                <div
+                    className='fade-in-slow fixed inset-0 bg-gray-100 bg-center bg-[length:50%] opacity-50 transition-all'
+                    style={{ backgroundImage: quote.bg }}
+                />
 
-            <SaveContainer
-                className='relative -mt-4 px-5 py-10 md:px-10 md:py-20 transition-all'
-                quote={quote}
-            >
                 <PerspectiveCard>
                     <LikeHandler quote={quote.quote} settings={quote.settings} type='double'>
                         <GiftCard {...quote} />

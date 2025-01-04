@@ -1,5 +1,5 @@
 'use client';
-import { createContext, useContext, useRef, useState } from 'react';
+import { createContext, useContext, useRef } from 'react';
 import useSound from 'use-sound';
 
 import html2canvas from 'html2canvas-pro';
@@ -19,9 +19,8 @@ const html2canvasOptions = {
     scale: window.devicePixelRatio,
 };
 
-export const SaveContainer = ({ className, quote, children, onPrepare, onSave }) => {
+export const SaveContainer = ({ className, children, onPrepare, onSave }) => {
     const $container = useRef(null);
-    const [shotting, setShotting] = useState(false);
 
     const [playCamera] = useSound('./sounds/camera.mp3');
 
@@ -30,30 +29,17 @@ export const SaveContainer = ({ className, quote, children, onPrepare, onSave })
         link.download = `axolote_${Date.now()}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
-
         onSave?.($container, canvas);
-        setShotting(false);
-
-        children.forEach(child => {
-            child.style.opacity = '';
-            child.style.animation = '';
-            child.style.transform = '';
-        });
-
-        document.removeChild(link);
     };
 
     const handlePrepare = () => {
-        setShotting(true);
+        const children = $container.current.querySelectorAll('*');
+        children.forEach(child => {
+            const classesToRemove = ['fade-in', 'fade-in-slow', 'fade-slide-up'];
+            child.classList.remove(...classesToRemove);
+        });
 
         setTimeout(() => {
-            const children = $container.current.querySelectorAll('*');
-            children.forEach(child => {
-                child.style.opacity = '1';
-                child.style.transform = 'none';
-                child.style.animation = 'none';
-            });
-
             playCamera();
             onPrepare?.($container);
             html2canvas($container.current, html2canvasOptions).then(handleSave);
@@ -67,11 +53,7 @@ export const SaveContainer = ({ className, quote, children, onPrepare, onSave })
 
     return (
         <SaveContext.Provider value={{ $container, save }}>
-            <div
-                ref={$container}
-                className={className}
-                style={{ backgroundImage: shotting ? quote.bg : '' }}
-            >
+            <div ref={$container} className={className}>
                 {children}
             </div>
         </SaveContext.Provider>
