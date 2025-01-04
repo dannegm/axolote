@@ -1,5 +1,6 @@
 import { RefreshCcw } from 'lucide-react';
 import { format } from 'date-fns';
+import { TZDate } from '@date-fns/tz';
 
 import PerspectiveCard from '@/components/common/perspective-card';
 import GiftCard from '@/components/common/gift-card';
@@ -9,6 +10,8 @@ import LikeButton, { LikeHandler } from '@/components/common/like-button';
 import { SaveContainer, SaveButton } from '@/components/common/save-element';
 import CopyText from '@/components/common/copy-text';
 import { isElevenEleven, isThreeInTheMorning } from '@/helpers/dates';
+
+const tzDate = new TZDate(new Date(), 'America/Mazatlan');
 
 export const dynamic = 'force-dynamic';
 
@@ -90,7 +93,7 @@ export default async function Home({ searchParams }) {
             </SaveContainer>
 
             <CopyText content={`https://axolote.me/krystel?code=${quote.settings}`}>
-                {format(new Date(), 'HH:mm')}
+                {format(tzDate, 'HH:mm')}
             </CopyText>
         </main>
     );

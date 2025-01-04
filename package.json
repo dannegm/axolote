@@ -9,6 +9,7 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@date-fns/tz": "^1.2.0",
         "@tanstack/react-query": "^5.62.10",
         "@tsparticles/confetti": "^3.7.1",
         "@uidotdev/usehooks": "^2.4.1",
