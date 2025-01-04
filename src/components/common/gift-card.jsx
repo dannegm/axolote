@@ -88,10 +88,6 @@ export default function GiftCard({
                     </div>
 
                     <p className='font-pacifico text-xl text-center'>Feliz cumple.</p>
-
-                    <CopyText content={`https://axolote.me/krystel?code=${quote.settings}`}>
-                        {format(new Date(), 'HH:mm')}
-                    </CopyText>
                 </div>
             </div>
         </div>
