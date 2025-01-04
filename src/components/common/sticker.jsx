@@ -9,6 +9,7 @@ const stickerMap = {
     need_a_break: '/stickers/need_a_break.png',
     sun: '/stickers/sun.png',
     ufo: '/stickers/ufo.png',
+    pray: '/stickers/pray.png',
 };
 
 export default function Sticker({ id, type = 'inline' }) {

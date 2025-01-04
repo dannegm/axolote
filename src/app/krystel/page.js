@@ -7,6 +7,7 @@ import ShareButton from '@/components/common/share-button';
 import LikeButton, { LikeHandler } from '@/components/common/like-button';
 import { SaveContainer, SaveButton } from '@/components/common/save-element';
 import CopyText from '@/components/common/copy-text';
+import { isElevenEleven, isThreeInTheMorning } from '@/helpers/dates';
 
 export const dynamic = 'force-dynamic';
 
@@ -41,6 +42,14 @@ export async function generateMetadata({ searchParams }) {
 export default async function Home({ searchParams }) {
     const { code } = await searchParams;
     const quote = await fetchQuote(code);
+
+    if (isElevenEleven()) {
+        quote.quote = '[[[pray]]]$$11:11$$ pide un deseo.';
+    }
+
+    if (isThreeInTheMorning()) {
+        quote.quote = '[[[[ufo]]]]';
+    }
 
     return (
         <main
