@@ -16,6 +16,7 @@ const html2canvasOptions = {
     backgroundColor: '#fafafa',
     useCORS: true,
     imageTimeout: 15000,
+    scale: window.devicePixelRatio,
 };
 
 export const SaveContainer = ({ className, quote, children, onPrepare, onSave }) => {
