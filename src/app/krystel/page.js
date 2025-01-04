@@ -1,4 +1,5 @@
 import { RefreshCcw } from 'lucide-react';
+import { format } from 'date-fns';
 
 import PerspectiveCard from '@/components/common/perspective-card';
 import GiftCard from '@/components/common/gift-card';
@@ -89,7 +90,7 @@ export default async function Home({ searchParams }) {
             </SaveContainer>
 
             <CopyText content={`https://axolote.me/krystel?code=${quote.settings}`}>
-                {quote.settings}
+                {format(new Date(), 'HH:mm')}
             </CopyText>
         </main>
     );
