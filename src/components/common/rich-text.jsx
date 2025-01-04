@@ -4,6 +4,7 @@ import ShineText from './shine-text';
 import SpoilerText from './spoiler-text';
 import Sticker from './sticker';
 import Polaroid from './polaroid';
+import SpotifyPlayer from './spotify-player';
 
 export const defaultElements = [
     // Strikethrough
@@ -50,6 +51,11 @@ export const defaultElements = [
     {
         pattern: /\{\{(.*?)\}\}/g,
         parser: url => <Polaroid url={url} />,
+    },
+    // Spotify Player
+    {
+        pattern: /\#\#(.*?)\#\#/g,
+        parser: uri => <SpotifyPlayer uri={uri} />,
     },
     // Sticker Full
     {

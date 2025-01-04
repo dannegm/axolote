@@ -1,10 +1,13 @@
 'use client';
+import { useEffect, useState } from 'react';
+import { Asterisk, icons } from 'lucide-react';
+import { format } from 'date-fns';
+
 import { cn } from '@/helpers/utils';
+import { isElevenEleven, isThreeInTheMorning } from '@/helpers/dates';
 
 import RichText from './rich-text';
-
-import { Asterisk, icons } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import CopyText from './copy-text';
 
 const useFirstAppearance = id => {
     const [isFirstAppearance, setIsFirstAppearance] = useState(false);
@@ -35,6 +38,16 @@ export default function GiftCard({
     const firstAppearance = useFirstAppearance(id);
     const LucideIcon = icons[icon];
 
+    if (isElevenEleven()) {
+        quote.quote = '[[[pray]]]$$11:11$$ pide un deseo.';
+    }
+
+    if (isThreeInTheMorning()) {
+        quote.quote = '[[[[ufo]]]]';
+    }
+
+    const isLongText = quote.length > 120;
+
     return (
         <div
             className='fade-slide-up w-full max-w-sm aspect-[3/4] bg-gray-200 rounded-lg p-6 shadow-xl transition-all duration-300 ease-in-out'
@@ -63,13 +76,22 @@ export default function GiftCard({
                         <LucideIcon size={56} className='text-current' />
                     </div>
 
-                    <div className='font-delius text-center text-xl font-medium leading-relaxed'>
+                    <div
+                        className={cn(
+                            'font-delius text-center text-xl font-medium leading-relaxed',
+                            { 'text-md': isLongText },
+                        )}
+                    >
                         <center>
                             <RichText>{quote}</RichText>
                         </center>
                     </div>
 
                     <p className='font-pacifico text-xl text-center'>Feliz cumple.</p>
+
+                    <CopyText content={`https://axolote.me/krystel?code=${quote.settings}`}>
+                        {format(new Date(), 'HH:mm')}
+                    </CopyText>
                 </div>
             </div>
         </div>

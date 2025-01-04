@@ -11,15 +11,15 @@ import Button from './button';
 
 const SaveContext = createContext();
 
-const html2canvasOptions = {
-    allowTaint: true,
-    backgroundColor: '#fafafa',
-    useCORS: true,
-    imageTimeout: 15000,
-    scale: window.devicePixelRatio,
-};
-
 export const SaveContainer = ({ className, children, onPrepare, onSave }) => {
+    const html2canvasOptions = {
+        allowTaint: true,
+        backgroundColor: '#fafafa',
+        useCORS: true,
+        imageTimeout: 15000,
+        // scale: window?.devicePixelRatio,
+    };
+
     const $container = useRef(null);
 
     const [playCamera] = useSound('./sounds/camera.mp3');

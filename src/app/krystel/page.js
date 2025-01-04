@@ -4,10 +4,9 @@ import PerspectiveCard from '@/components/common/perspective-card';
 import GiftCard from '@/components/common/gift-card';
 import Button from '@/components/common/button';
 import ShareButton from '@/components/common/share-button';
-import LikeButton, { LikeHandler } from '@/components/common/like-button';
+import LikeButton from '@/components/common/like-button';
 import { SaveContainer, SaveButton } from '@/components/common/save-element';
 import CopyText from '@/components/common/copy-text';
-import { isElevenEleven, isThreeInTheMorning } from '@/helpers/dates';
 
 export const dynamic = 'force-dynamic';
 
@@ -43,14 +42,6 @@ export default async function Home({ searchParams }) {
     const { code } = await searchParams;
     const quote = await fetchQuote(code);
 
-    if (isElevenEleven()) {
-        quote.quote = '[[[pray]]]$$11:11$$ pide un deseo.';
-    }
-
-    if (isThreeInTheMorning()) {
-        quote.quote = '[[[[ufo]]]]';
-    }
-
     return (
         <main className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
             <SaveContainer className='-mt-4 px-5 py-10 md:px-10 md:py-20 transition-all'>
@@ -60,9 +51,7 @@ export default async function Home({ searchParams }) {
                 />
 
                 <PerspectiveCard>
-                    <LikeHandler quote={quote.quote} settings={quote.settings} type='double'>
-                        <GiftCard {...quote} />
-                    </LikeHandler>
+                    <GiftCard {...quote} />
                 </PerspectiveCard>
 
                 <div

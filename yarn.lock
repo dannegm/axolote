@@ -480,6 +480,11 @@
   dependencies:
     "@tsparticles/engine" "3.7.1"
 
+"@types/spotify-web-playback-sdk@^0.1.12":
+  version "0.1.19"
+  resolved "https://registry.yarnpkg.com/@types/spotify-web-playback-sdk/-/spotify-web-playback-sdk-0.1.19.tgz#0fe4a7bdab95321309e4bc8a3f2124c17dfd3578"
+  integrity sha512-Is7x9gMIMoERxE0uvb2SPFQoy5OR7nO1B24CJiaDAUIdq195OLTQedN95XJQtxB2mfm+zi2j3LvEtpPdHKnB3w==
+
 "@uidotdev/usehooks@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@uidotdev/usehooks/-/usehooks-2.4.1.tgz#4b733eaeae09a7be143c6c9ca158b56cc1ea75bf"
@@ -543,6 +548,11 @@ balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
+
+base-64@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/base-64/-/base-64-1.0.0.tgz#09d0f2084e32a3fd08c2475b973788eee6ae8f4a"
+  integrity sha512-kwDPIFCGx0NZHog36dj+tHiwP4QMzsZ3AgMViUBKI0+V5n4U0ufTCUMhnQ04diaRI8EX/QcPfql7zlhZ7j4zgg==
 
 base64-arraybuffer@^1.0.2:
   version "1.0.2"
@@ -1123,6 +1133,13 @@ react-sparkle@^2.0.0:
   integrity sha512-Gy0us35SH25HeDa4t6Gu8oM4raAH4EKBzArENOoysgVl+jB5XCjsYRJhRF8Bfi8fdsVPjkNLNh1R6VYgGsInoA==
   dependencies:
     "@juggle/resize-observer" "^3.4.0"
+
+react-spotify-web-playback-sdk@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/react-spotify-web-playback-sdk/-/react-spotify-web-playback-sdk-3.0.2.tgz#80aa3d17f0c3ae4251d5870292dee9120981e99b"
+  integrity sha512-FqCgDEAZkNk6qJ80L38YyxIa0B/SBBaaStvKiYtf5CT+dVCMNEFhDDMUml2JQ7EIiuGraHNaae7Q6ZEmnv9vCA==
+  dependencies:
+    "@types/spotify-web-playback-sdk" "^0.1.12"
 
 react@^19.0.0:
   version "19.0.0"
