@@ -21,6 +21,7 @@ const useFirstAppearance = id => {
             appearedItems.push(id);
             localStorage.setItem('appearedItems', JSON.stringify(appearedItems));
             setIsFirstAppearance(true);
+            // Agregar interacción para saber si es la primera vez aparece
         }
     }, [id]);
 
