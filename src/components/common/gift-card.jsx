@@ -1,13 +1,11 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { Asterisk, icons } from 'lucide-react';
-import { format } from 'date-fns';
 
 import { cn } from '@/helpers/utils';
 import { isElevenEleven, isThreeInTheMorning } from '@/helpers/dates';
 
 import RichText from './rich-text';
-import CopyText from './copy-text';
 
 const useFirstAppearance = id => {
     const [isFirstAppearance, setIsFirstAppearance] = useState(false);
@@ -21,7 +19,6 @@ const useFirstAppearance = id => {
             appearedItems.push(id);
             localStorage.setItem('appearedItems', JSON.stringify(appearedItems));
             setIsFirstAppearance(true);
-            // Agregar interacción para saber si es la primera vez aparece
         }
     }, [id]);
 
@@ -40,11 +37,11 @@ export default function GiftCard({
     const LucideIcon = icons[icon];
 
     if (isElevenEleven()) {
-        quote.quote = '[[[pray]]]$$11:11$$ pide un deseo.';
+        quote = '[[[pray]]]$$11:11$$ pide un deseo.';
     }
 
     if (isThreeInTheMorning()) {
-        quote.quote = '[[[[ufo]]]]';
+        quote = '[[[[ufo]]]]';
     }
 
     const isLongText = quote.length > 120;
