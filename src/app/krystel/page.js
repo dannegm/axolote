@@ -1,5 +1,7 @@
 import { RefreshCcw } from 'lucide-react';
 
+import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
+
 import PerspectiveCard from '@/components/common/perspective-card';
 import GiftCard from '@/components/common/gift-card';
 import Button from '@/components/common/button';
@@ -7,7 +9,7 @@ import ShareButton from '@/components/common/share-button';
 import LikeButton from '@/components/common/like-button';
 import { SaveContainer, SaveButton } from '@/components/common/save-element';
 import CopyText from '@/components/common/copy-text';
-import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
+import { parseText, stripedElements } from '@/components/common/rich-text';
 
 export const dynamic = 'force-dynamic';
 
@@ -46,9 +48,10 @@ export async function generateMetadata({ searchParams }) {
     const { code } = await searchParams;
     const quote = await fetchQuote(code);
 
-    console.log(quote);
+    const description = code
+        ? parseText(quote.quote, stripedElements)
+        : 'Entra aquí para encontrar un mensaje especial.';
 
-    const description = code ? quote.quote : 'Entra aquí para encontrar un mensaje especial.';
     const url = code
         ? `https://axolote.me/krystel?code=${quote.settings}`
         : `https://axolote.me/krystel`;
