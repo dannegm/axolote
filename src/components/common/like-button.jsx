@@ -1,34 +1,19 @@
 'use client';
 
 import useSound from 'use-sound';
-import { useMutation } from '@tanstack/react-query';
 import { Heart } from 'lucide-react';
 
 import { heartsExplosion } from '@/helpers/particles';
-
-import useDebouncedCallback from '@/app/hooks/use-debounced-callback';
-
-const postAction = async ({ action, quoteId, settings }) => {
-    const url = `https://endpoints.hckr.mx/quotes/krystel/${quoteId}/action/${action}?code=${settings}`;
-    const response = await fetch(url, { method: 'POST' });
-    return response.json();
-};
+import usePostAction from '@/hooks/use-post-action';
 
 export const LikeHandler = ({ settings, type = 'single', children }) => {
     const [playPop] = useSound('./sounds/pop.mp3');
 
-    const mutation = useMutation({
-        mutationFn: postAction,
-    });
-
-    const pushNotification = useDebouncedCallback(() => {
-        const [quoteId] = settings.split(':');
-        mutation.mutate({ action: 'like', quoteId, settings });
-    }, 1000);
+    const postLike = usePostAction({ action: 'like', settings });
 
     const handleButtonClick = ev => {
         ev.preventDefault();
-        pushNotification();
+        postLike();
         heartsExplosion({ position: 'bottomCenter' });
         playPop();
     };
