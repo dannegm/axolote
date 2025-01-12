@@ -4,27 +4,26 @@ import useSound from 'use-sound';
 import { useMutation } from '@tanstack/react-query';
 import { Heart } from 'lucide-react';
 
-import ntfy from '@/services/ntfy';
 import { heartsExplosion } from '@/helpers/particles';
 
 import useDebouncedCallback from '@/app/hooks/use-debounced-callback';
 
-import { parseText, stripedElements } from './rich-text';
+const postLike = async ({ quoteId, settings }) => {
+    const url = `https://endpoints.hckr.mx/quotes/krystel/${quoteId}/like?code=${settings}`;
+    const response = await fetch(url, { method: 'POST' });
+    return response.json();
+};
 
-export const LikeHandler = ({ quote, settings, type = 'single', children }) => {
+export const LikeHandler = ({ settings, type = 'single', children }) => {
     const [playPop] = useSound('./sounds/pop.mp3');
 
     const mutation = useMutation({
-        mutationFn: data => ntfy.pushRich(data),
+        mutationFn: postLike,
     });
 
     const pushNotification = useDebouncedCallback(() => {
-        mutation.mutate({
-            title: 'Krystel liked',
-            message: parseText(quote, stripedElements).join(''),
-            tags: 'heart',
-            click: `https://axolote.me/krystel?code=${settings}`,
-        });
+        const [quoteId] = settings.split(':');
+        mutation.mutate({ quoteId, settings });
     }, 1000);
 
     const handleButtonClick = ev => {

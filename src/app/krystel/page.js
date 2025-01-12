@@ -7,18 +7,46 @@ import ShareButton from '@/components/common/share-button';
 import LikeButton from '@/components/common/like-button';
 import { SaveContainer, SaveButton } from '@/components/common/save-element';
 import CopyText from '@/components/common/copy-text';
+import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
 
 export const dynamic = 'force-dynamic';
 
+const QUOTES_API_URL = 'https://endpoints.hckr.mx/quotes/krystel/pick';
+
 const fetchQuote = async (code = undefined) => {
-    const codeQuery = code ? `?code=${code}` : '';
-    const response = await fetch(`https://endpoints.hckr.mx/krystel/quote${codeQuery}`);
-    return await response.json();
+    if (code) {
+        const [quoteId, ...remaining] = code.split(':');
+        const response = await fetch(`${QUOTES_API_URL}?quote.id=${quoteId}`);
+        const data = await response.json();
+
+        const settings = quoteFromSettings(remaining.join(':'));
+        const settingsCode = `${data.id}:${settings.settings}`;
+
+        return {
+            ...settings,
+            ...data,
+            settings: settingsCode,
+        };
+    }
+
+    const response = await fetch(QUOTES_API_URL);
+    const data = await response.json();
+
+    const settings = getRandomQuote();
+    const settingsCode = `${data.id}:${settings.settings}`;
+
+    return {
+        ...settings,
+        ...data,
+        settings: settingsCode,
+    };
 };
 
 export async function generateMetadata({ searchParams }) {
     const { code } = await searchParams;
     const quote = await fetchQuote(code);
+
+    console.log(quote);
 
     const description = code ? quote.quote : 'Entra aquí para encontrar un mensaje especial.';
     const url = code
