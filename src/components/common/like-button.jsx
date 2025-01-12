@@ -3,8 +3,8 @@
 import useSound from 'use-sound';
 import { Heart } from 'lucide-react';
 
-import { heartsExplosion } from '@/helpers/particles';
 import usePostAction from '@/hooks/use-post-action';
+import { heartsExplosion } from '@/helpers/particles';
 
 export const LikeHandler = ({ settings, type = 'single', children }) => {
     const [playPop] = useSound('./sounds/pop.mp3');
