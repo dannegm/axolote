@@ -6,6 +6,8 @@ import html2canvas from 'html2canvas-pro';
 import { Camera } from 'lucide-react';
 
 import { cn } from '@/helpers/utils';
+import { useQuote } from '@/providers/quote-provider';
+import usePostAction from '@/hooks/use-post-action';
 
 import Button from './button';
 
@@ -24,12 +26,16 @@ export const SaveContainer = ({ className, children, onPrepare, onSave }) => {
 
     const [playCamera] = useSound('./sounds/camera.mp3');
 
+    const quote = useQuote();
+    const postSave = usePostAction({ action: 'save', settings: quote.settings });
+
     const handleSave = canvas => {
         const link = document.createElement('a');
         link.download = `axolote_${Date.now()}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
         onSave?.($container, canvas);
+        postSave();
     };
 
     const handlePrepare = () => {

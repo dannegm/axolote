@@ -3,6 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import base64 from 'base-64';
 import { Play, ExternalLink } from 'lucide-react';
 
+import { useQuote } from '@/providers/quote-provider';
+import usePostAction from '@/hooks/use-post-action';
+
 const CLIENT_ID = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
 
@@ -67,8 +70,11 @@ const useGetTrackInfo = trackId => {
 };
 
 export default function SpotifyPlayer({ uri }) {
+    const quote = useQuote();
+    const postPlay = usePostAction({ action: 'play', settings: quote.settings });
+
     const { trackId } = parseSpotifyUri(uri);
-    const { data, error, isLoading } = useGetTrackInfo(trackId);
+    const { data } = useGetTrackInfo(trackId);
 
     const playerInfo = {
         cover: data?.album.images[0].url || '#',
@@ -76,6 +82,10 @@ export default function SpotifyPlayer({ uri }) {
         title: data?.name || '--',
         artist: data?.artists[0].name || '--',
         externalUrl: `${data?.external_urls.spotify || '#'}?si=axolote`, //
+    };
+
+    const handlePlay = () => {
+        postPlay();
     };
 
     return (
@@ -92,6 +102,7 @@ export default function SpotifyPlayer({ uri }) {
                         className='absolute w-10 h-10 inset-0 m-auto bg-black/50 text-white hover:bg-black/70 hover:text-white rounded-md p-2 flex items-center justify-center'
                         href={playerInfo.externalUrl}
                         target='_blank'
+                        onClick={handlePlay}
                     >
                         <Play className='h-8 w-8' />
                     </a>
