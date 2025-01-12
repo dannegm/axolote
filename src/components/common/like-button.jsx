@@ -8,8 +8,8 @@ import { heartsExplosion } from '@/helpers/particles';
 
 import useDebouncedCallback from '@/app/hooks/use-debounced-callback';
 
-const postLike = async ({ quoteId, settings }) => {
-    const url = `https://endpoints.hckr.mx/quotes/krystel/${quoteId}/like?code=${settings}`;
+const postAction = async ({ action, quoteId, settings }) => {
+    const url = `https://endpoints.hckr.mx/quotes/krystel/${quoteId}/action/${action}?code=${settings}`;
     const response = await fetch(url, { method: 'POST' });
     return response.json();
 };
@@ -18,12 +18,12 @@ export const LikeHandler = ({ settings, type = 'single', children }) => {
     const [playPop] = useSound('./sounds/pop.mp3');
 
     const mutation = useMutation({
-        mutationFn: postLike,
+        mutationFn: postAction,
     });
 
     const pushNotification = useDebouncedCallback(() => {
         const [quoteId] = settings.split(':');
-        mutation.mutate({ quoteId, settings });
+        mutation.mutate({ action: 'like', quoteId, settings });
     }, 1000);
 
     const handleButtonClick = ev => {
