@@ -6,6 +6,7 @@ import {
     getCoreRowModel,
     useReactTable,
 } from '@tanstack/react-table';
+import { UAParser } from 'ua-parser-js';
 import { Clock3 } from 'lucide-react';
 
 import Badge from '@/components/tremor/badge';
@@ -19,6 +20,7 @@ import {
     TableRoot,
     TableRow,
 } from '@/components/tremor/table';
+import { UserAgentInfo } from './user-agent-info';
 
 const columnHelper = createColumnHelper();
 
@@ -30,6 +32,7 @@ const columns = [
             <div className='flex flex-col gap-2 items-start'>
                 <span>{info.getValue().ip_location}</span>
                 <Badge variant='neutral'>{info.getValue().ip}</Badge>
+                <UserAgentInfo userAgent={info.getValue().user_agent} />
             </div>
         ),
     }),

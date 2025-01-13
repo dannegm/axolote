@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 export default function DataLoader({ url, params, tags = [], children = () => null } = {}) {
     const { data, error, isLoading } = useQuery({
-        queryKey: [url, params, ...tags],
+        queryKey: tags,
         queryFn: async () => {
             const resp = await fetch(url + new URLSearchParams(params));
             if (!resp.ok) {

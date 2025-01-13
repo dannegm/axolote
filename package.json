@@ -25,11 +25,14 @@
         "next": "15.1.2",
         "react": "^19.0.0",
         "react-dom": "^19.0.0",
+        "react-icons": "^5.4.0",
         "react-sparkle": "^2.0.0",
         "react-spotify-web-playback-sdk": "^3.0.2",
         "tailwind-merge": "^2.6.0",
         "tailwind-variants": "^0.3.0",
-        "use-sound": "^4.0.3"
+        "ua-parser-js": "^2.0.0",
+        "use-sound": "^4.0.3",
+        "useragent": "^2.3.0"
     },
     "devDependencies": {
         "postcss": "^8",
