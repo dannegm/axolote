@@ -88,15 +88,13 @@ export function UserAgentInfo({ userAgent }) {
         <div className='inline-flex items-center space-x-2 text-sm bg-gray-100 rounded-full px-3 py-1'>
             <span className='flex items-center'>
                 {getBrowserIcon(browser.name || '')}
-                <span className='ml-1'>
-                    {browser.name} {browser.version}
-                </span>
+                <span className='ml-1'>{browser.name}</span>
+                <span className='ml-1 hidden'>{browser.version}</span>
             </span>
             <span className='flex items-center'>
                 {getOSIcon(os.name || '')}
-                <span className='ml-1'>
-                    {os.name} {os.version}
-                </span>
+                <span className='ml-1'>{os.name}</span>
+                <span className='ml-1 hidden'>{os.version}</span>
             </span>
             <span className='flex items-center'>
                 {getDeviceIcon(device.type || 'desktop')}

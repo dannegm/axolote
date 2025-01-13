@@ -124,8 +124,7 @@ export const parseText = (text, elements) => {
     );
 };
 
-export default function RichText({ children, options = {} }) {
-    const elements = [...defaultElements, ...(options.elements || [])];
+export default function RichText({ children, elements = defaultElements }) {
     return parseText(children, elements).map((element, index) => (
         <React.Fragment key={index}>{element}</React.Fragment>
     ));
