@@ -2,8 +2,10 @@
 import { useEffect, useState } from 'react';
 import { Asterisk, icons } from 'lucide-react';
 
+import { useQuote } from '@/providers/quote-provider';
 import { cn } from '@/helpers/utils';
 import { isElevenEleven, isThreeInTheMorning } from '@/helpers/dates';
+import usePostAction from '@/hooks/use-post-action';
 
 import RichText from './rich-text';
 
@@ -36,6 +38,9 @@ export default function GiftCard({
     const firstAppearance = useFirstAppearance(id);
     const LucideIcon = icons[icon];
 
+    const quote = useQuote();
+    const postView = usePostAction({ action: 'view', settings });
+
     if (isElevenEleven()) {
         quote = '[[[pray]]]$$11:11$$ pide un deseo.';
     }
@@ -45,6 +50,10 @@ export default function GiftCard({
     }
 
     const isLongText = quote.length > 120;
+
+    useEffect(() => {
+        postView();
+    }, [settings]);
 
     return (
         <div
