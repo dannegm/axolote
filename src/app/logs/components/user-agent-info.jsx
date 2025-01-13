@@ -52,7 +52,13 @@ export function UserAgentInfo({ userAgent }) {
         default: <Server className='w-4 h-4 -mt-[2px]' />,
     };
 
-    const getBrowserIcon = name => browserIcons[name.toLowerCase()] || browserIcons.default;
+    const getBrowserIcon = name =>
+        browserIcons[
+            name
+                .replace(/mobile/i, '')
+                .trim()
+                .toLowerCase()
+        ] || browserIcons.default;
     const getOSIcon = name => osIcons[name.toLowerCase()] || osIcons.default;
     const getDeviceIcon = type => deviceIcons[type.toLowerCase()] || deviceIcons.default;
 
@@ -94,7 +100,7 @@ export function UserAgentInfo({ userAgent }) {
             </span>
             <span className='flex items-center'>
                 {getDeviceIcon(device.type || 'desktop')}
-                <span className='ml-1'>{device.type || 'Desktop'}</span>
+                <span className='ml-1'>{device.model || 'Desktop'}</span>
             </span>
         </div>
     );
