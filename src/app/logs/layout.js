@@ -1,7 +1,7 @@
-import KrystelLayout from '@/components/layout/krystel-layout';
+import RootLayout from '@/components/layout/root-layout';
 
 export const metadata = {
-    title: 'Krystel',
+    title: 'Krystel - Logs',
 };
 
 export const viewport = {
@@ -12,5 +12,5 @@ export const viewport = {
 };
 
 export default function Layout({ children }) {
-    return <KrystelLayout>{children}</KrystelLayout>;
+    return <RootLayout>{children}</RootLayout>;
 }

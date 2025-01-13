@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useQuote } from '@/providers/quote-provider';
 import usePostAction from '@/hooks/use-post-action';
 
-import Button from './button';
+import Button from '../common/button';
 
 export default function ShareButton({ url, title = '', text = '' }) {
     const [canShare, setCanShare] = useState(false);

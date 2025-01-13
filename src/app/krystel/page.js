@@ -3,13 +3,13 @@ import { RefreshCcw } from 'lucide-react';
 import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
 
 import PerspectiveCard from '@/components/common/perspective-card';
-import GiftCard from '@/components/common/gift-card';
+import GiftCard from '@/components/krystel/gift-card';
 import Button from '@/components/common/button';
-import ShareButton from '@/components/common/share-button';
-import LikeButton from '@/components/common/like-button';
-import { SaveContainer, SaveButton } from '@/components/common/save-element';
-import CopyText from '@/components/common/copy-text';
-import { parseText, stripedElements } from '@/components/common/rich-text';
+import ShareButton from '@/components/krystel/share-button';
+import LikeButton from '@/components/krystel/like-button';
+import { SaveContainer, SaveButton } from '@/components/krystel/save-element';
+import CopyText from '@/components/krystel/copy-text';
+import { parseText, stripedElements } from '@/components/krystel/rich-text';
 import QuoteProvider from '@/providers/quote-provider';
 
 export const dynamic = 'force-dynamic';

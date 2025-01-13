@@ -1,7 +1,7 @@
 'use client';
 import { useMutation } from '@tanstack/react-query';
 import { postAction } from '@/actions/postAction';
-import useDebouncedCallback from '@/app/hooks/use-debounced-callback';
+import useDebouncedCallback from '@/hooks/use-debounced-callback';
 
 export default function usePostAction({ action, settings }) {
     const mutation = useMutation({

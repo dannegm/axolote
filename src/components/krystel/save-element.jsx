@@ -9,7 +9,7 @@ import { cn } from '@/helpers/utils';
 import { useQuote } from '@/providers/quote-provider';
 import usePostAction from '@/hooks/use-post-action';
 
-import Button from './button';
+import Button from '../common/button';
 
 const SaveContext = createContext();
 
