@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { Asterisk, icons } from 'lucide-react';
 
-import { useQuote } from '@/providers/quote-provider';
 import { cn } from '@/helpers/utils';
 import { isElevenEleven, isThreeInTheMorning } from '@/helpers/dates';
 import usePostAction from '@/hooks/use-post-action';
@@ -38,7 +37,6 @@ export default function GiftCard({
     const firstAppearance = useFirstAppearance(id);
     const LucideIcon = icons[icon];
 
-    const quote = useQuote();
     const postView = usePostAction({ action: 'view', settings });
 
     if (isElevenEleven()) {
@@ -53,7 +51,7 @@ export default function GiftCard({
 
     useEffect(() => {
         postView();
-    }, [settings]);
+    }, []);
 
     return (
         <div
