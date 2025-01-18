@@ -39,7 +39,7 @@ export default function Polaroid({ url, description }) {
         <div className='-mt-20' onClick={toggleReveal}>
             <figure
                 className={cn(
-                    'flex flex-col gap-2 bg-white p-2 mt-4 mb-4 -rotate-6 scale-[2] shadow-md transition-all',
+                    'flex flex-col gap-2 bg-white p-2 mt-4 mb-4 -rotate-6 scale-150 shadow-md transition-all',
                     'md:scale-[1.7]',
                     rotation,
                 )}
