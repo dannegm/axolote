@@ -70,10 +70,7 @@ const useGetTrackInfo = trackId => {
     };
 };
 
-export default function SpotifyPlayer({ uri, compact = false }) {
-    const quote = useQuote();
-    const postPlay = usePostAction({ action: 'play', settings: quote.settings });
-
+export default function SpotifyPreview({ uri }) {
     const { trackId } = parseSpotifyUri(uri);
     const { data } = useGetTrackInfo(trackId);
 
@@ -85,33 +82,21 @@ export default function SpotifyPlayer({ uri, compact = false }) {
         externalUrl: `${data?.external_urls.spotify || '#'}?si=axolote`, //
     };
 
-    const handlePlay = () => {
-        postPlay();
-    };
-
     return (
-        <div className='block w-48 md:w-52 -mt-20 md:-mt-24 -mb-4 bg-zinc-900 text-white overflow-hidden rounded-lg shadow-lg font-sans'>
+        <div className='flex gap-3 p-2 items-center bg-zinc-800 text-white overflow-hidden rounded-lg shadow-lg font-sans'>
             {/* Album Art */}
-            <div className='relative aspect-square flex-grow p-3'>
+            <div className='relative h-12 aspect-square flex-grow'>
                 <div className='relative w-full h-full'>
                     <img
                         src={playerInfo.cover}
                         alt={playerInfo.album}
                         className='absolute inset-0 w-full h-full object-cover rounded-md'
                     />
-                    <a
-                        className='absolute w-10 h-10 inset-0 m-auto bg-black/50 text-white hover:bg-black/70 hover:text-white rounded-md p-2 flex items-center justify-center'
-                        href={playerInfo.externalUrl}
-                        target='_blank'
-                        onClick={handlePlay}
-                    >
-                        <Play className='h-8 w-8' />
-                    </a>
                 </div>
             </div>
 
             {/* Player Info and Controls */}
-            <div className='bg-zinc-800 p-3 gap-4 flex items-center justify-between'>
+            <div className='gap-4 flex items-center justify-between'>
                 <div className='flex-grow text-left'>
                     <h3 className='font-semibold text-sm truncate'>{playerInfo.title}</h3>
                     <p className='text-xs text-zinc-400 truncate'>{playerInfo.artist}</p>

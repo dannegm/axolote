@@ -7,6 +7,7 @@ import { isElevenEleven, isThreeInTheMorning } from '@/helpers/dates';
 import usePostAction from '@/hooks/use-post-action';
 
 import RichText from './rich-text';
+import { useGreetings } from '@/services/greetings';
 
 const useFirstAppearance = id => {
     const [isFirstAppearance, setIsFirstAppearance] = useState(false);
@@ -48,6 +49,8 @@ export default function GiftCard({
     }
 
     const isLongText = quote.length > 120;
+
+    const greetings = useGreetings();
 
     useEffect(() => {
         postView();
@@ -92,7 +95,16 @@ export default function GiftCard({
                         </center>
                     </div>
 
-                    <p className='font-pacifico text-xl text-center'>Feliz cumple.</p>
+                    <p
+                        className={cn(
+                            'font-pacifico text-xl text-center opacity-1 transition-all duration-300',
+                            {
+                                'opacity-0 blur-sm': greetings === '...',
+                            },
+                        )}
+                    >
+                        {greetings}
+                    </p>
                 </div>
             </div>
         </div>

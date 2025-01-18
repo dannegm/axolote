@@ -54,7 +54,7 @@ export const defaultElements = [
     },
     // Spotify Player
     {
-        pattern: /\#\#(.*?)\#\#/g,
+        pattern: /https?:\/\/open\.spotify\.com\/[^\s]+/g,
         parser: uri => <SpotifyPlayer uri={uri} />,
     },
     // Sticker Full

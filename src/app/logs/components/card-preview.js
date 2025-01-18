@@ -1,7 +1,9 @@
 import RichText from '@/components/krystel/rich-text';
+import Sticker from '@/components/krystel/sticker';
 import { cn } from '@/helpers/utils';
 import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
 import { icons } from 'lucide-react';
+import SpotifyPreview from './spotify-preview';
 
 export const customElements = [
     // Strikethrough
@@ -52,16 +54,25 @@ export const customElements = [
     // Polaroid
     {
         pattern: /\{\{(.*?)\|(.*?)\}\}/g,
-        parser: (url, description) => <Polaroid url={url} description={description} />,
+        parser: (url, description) => (
+            <div className='flex flex-row gap-4'>
+                <img className='max-h-32' src={url} />
+                <span>{description}</span>
+            </div>
+        ),
     },
     {
         pattern: /\{\{(.*?)\}\}/g,
-        parser: url => <Polaroid url={url} />,
+        parser: url => (
+            <div>
+                <img className='max-h-32' src={url} />
+            </div>
+        ),
     },
     // Spotify Player
     {
-        pattern: /\#\#(.*?)\#\#/g,
-        parser: uri => <SpotifyPlayer uri={uri} />,
+        pattern: /https?:\/\/open\.spotify\.com\/[^\s]+/g,
+        parser: uri => <SpotifyPreview uri={uri} />,
     },
     // Sticker Full
     {
