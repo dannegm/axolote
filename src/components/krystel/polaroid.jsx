@@ -39,7 +39,7 @@ export default function Polaroid({ url, description }) {
         <div className='-mt-20' onClick={toggleReveal}>
             <figure
                 className={cn(
-                    'flex flex-col gap-2 bg-white p-2 mt-4 mb-4 -rotate-6 scale-150 shadow-md transition-all',
+                    'flex flex-col gap-2 bg-white p-2 mt-4 mb-4 -rotate-6 scale-[1.7] shadow-md transition-all',
                     'md:scale-[1.7]',
                     rotation,
                 )}
@@ -55,17 +55,6 @@ export default function Polaroid({ url, description }) {
                         src={url}
                         alt=''
                     />
-                    <span
-                        className={cn(
-                            'absolute inset-0 flex items-center justify-center -mt-4 text-center text-xs text-white font-sans font-bold opacity-40 transition-all',
-                            {
-                                'opacity-0': !hidden,
-                            },
-                        )}
-                        data-html2canvas-ignore
-                    >
-                        agita.
-                    </span>
                 </div>
                 <figcaption className='w-28 text-center text-[0.5rem]'>{description}</figcaption>
             </figure>

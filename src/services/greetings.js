@@ -10,21 +10,14 @@ import {
 
 const greetings = [
     ['Sonríe.', 0.95],
-    ['Bonita tú.', 0.6],
-    ['Te quiero.', 0.3],
-    ['Con todo mi cariño', 0.8],
-    ['Te amo demasiado.', 0.01],
+    ['Bonita tú.', 0.3],
+    ['Te quiero.', 0.1],
+    ['Con todo mi cariño.', 0.8],
+    ['Te amo demasiado.', 0.001],
     ['Especialmente para tí', 0.6],
     ['Para mi persona favorita.', 0.7],
-    ['Nunca pares de brillar.', 0.5],
-    ['Sólo para ti.', 0.7],
-    ['Siempre en mi mente.', 0.6],
-    ['Sólo tú.', 0.3],
-    ['Skibidi.', 0.7],
-    ['Linda tarde.', 0.95],
-    ['Bonito día.', 0.95],
+    ['Para ti.', 0.7],
     ['Disfrútalo.', 0.95],
-    ['Mis mejores deseos.', 0.95],
 ];
 
 export const getGreetings = () => {
