@@ -76,7 +76,10 @@ export default function GiftCard({
                     )}
                 >
                     {created_at && (
-                        <div className='fixed bottom-0 text-xs text-black flex gap-1 items-center scale-75 bg-white py-1 px-2 rounded-full opacity-80'>
+                        <div
+                            className='fixed bottom-0 text-xs text-black flex gap-1 items-center scale-75 bg-white py-1 px-2 rounded-full opacity-80'
+                            data-html2canvas-ignore
+                        >
                             <Clock3 size='0.80rem' />
                             {formatDistance(new Date(created_at + 'Z'), new Date())}
                         </div>
