@@ -102,3 +102,43 @@ export const startsExplosion = ({ position = 'middleCenter' } = {}) => {
         scalar: 3,
     });
 };
+
+export const snowExplosion = ({ position = 'middleCenter' } = {}) => {
+    const magnifier = 3;
+    const defaults = {
+        angle: 90,
+        position: positions[position],
+        spread: 360,
+        startVelocity: 30,
+        decay: 0.94,
+        gravity: 1,
+        drift: 0,
+        ticks: 100,
+        shapes: ['emoji'],
+        shapeOptions: {
+            emoji: {
+                value: ['❄️', '⛄', '✨', '🤍'],
+            },
+        },
+        zIndex: 2000,
+        disableForReducedMotion: true,
+    };
+
+    confetti('tsparticles', {
+        ...defaults,
+        count: 50,
+        scalar: 1 * magnifier,
+    });
+
+    confetti('tsparticles', {
+        ...defaults,
+        count: 25,
+        scalar: 2 * magnifier,
+    });
+
+    confetti('tsparticles', {
+        ...defaults,
+        count: 10,
+        scalar: 3 * magnifier,
+    });
+};

@@ -1,17 +1,16 @@
 import '../../app/globals.css';
-import { Pacifico, Delius } from 'next/font/google';
 
 import { cn } from '@/helpers/utils';
+import Fonts from '@/providers/fonts';
 import Providers from '@/providers/providers';
-
-const pacifico = Pacifico({ weight: '400', subsets: ['latin'], variable: '--font-pacifico' });
-const delius = Delius({ weight: '400', subsets: ['latin'], variable: '--font-delius' });
 
 export default function KrystelLayout({ children }) {
     return (
         <html lang='en' className='light'>
-            <body className={cn(pacifico.variable, delius.variable, 'antialiased')}>
-                <Providers>{children}</Providers>
+            <body className={cn('antialiased')}>
+                <Fonts>
+                    <Providers>{children}</Providers>
+                </Fonts>
             </body>
         </html>
     );

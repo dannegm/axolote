@@ -79,9 +79,11 @@ export default async function Home({ searchParams }) {
             <main className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
                 <SaveContainer className='-mt-4 px-5 py-10 md:px-10 md:py-20 transition-all'>
                     <div
-                        className='fade-in-slow fixed inset-0 bg-gray-100 bg-center bg-[length:50%] opacity-50 transition-all'
+                        className='background fade-in-slow fixed inset-0 bg-gray-100 bg-center bg-[length:50%] opacity-50 transition-all'
                         style={{ backgroundImage: quote.bg }}
                     />
+
+                    <div id='global-bg-portal' />
 
                     <PerspectiveCard>
                         <GiftCard {...quote} />

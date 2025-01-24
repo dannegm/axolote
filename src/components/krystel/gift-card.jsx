@@ -8,6 +8,7 @@ import usePostAction from '@/hooks/use-post-action';
 
 import RichText from './rich-text';
 import { useGreetings } from '@/services/greetings';
+import { extractConfigsAndContent, replaceWithLongestSentence } from '@/helpers/strings';
 
 const useFirstAppearance = id => {
     const [isFirstAppearance, setIsFirstAppearance] = useState(false);
@@ -36,21 +37,21 @@ export default function GiftCard({
 }) {
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
-    const LucideIcon = icons[icon];
 
     const postView = usePostAction({ action: 'view', settings });
 
     if (isElevenEleven()) {
-        quote = '[[[pray]]]$$11:11$$ pide un deseo.';
+        quote = '({icon:hidden})[[[pray]]]$$11:11$$ pide un deseo.';
     }
 
     if (isThreeInTheMorning()) {
-        quote = '[[[[ufo]]]]';
+        quote = '({icon:hidden})[[[[ufo]]]]';
     }
 
-    const isLongText = quote.length > 120;
-
-    const greetings = useGreetings();
+    const { configs, content } = extractConfigsAndContent(quote);
+    const isLongText = replaceWithLongestSentence(content).length > 120;
+    const greetings = configs?.greetings || useGreetings();
+    const LucideIcon = configs?.icon === 'hidden' ? <></> : icons[configs?.icon || icon];
 
     useEffect(() => {
         postView();
@@ -58,7 +59,7 @@ export default function GiftCard({
 
     return (
         <div
-            className='fade-slide-up w-full max-w-sm aspect-[3/4] bg-gray-200 rounded-lg p-6 shadow-xl transition-all duration-300 ease-in-out'
+            className='gift-card fade-slide-up w-full max-w-sm aspect-[3/4] bg-gray-200 rounded-lg p-6 shadow-xl transition-all duration-300 ease-in-out'
             style={{ background: border }}
         >
             <div
@@ -72,17 +73,21 @@ export default function GiftCard({
                         scheme,
                     )}
                 >
-                    {firstAppearance && (
+                    {!configs?.fullscreen && configs?.badge !== 'hidden' && firstAppearance && (
                         <div className='fade-in absolute top-2 right-2 flex items-center justify-center w-6 h-6 bg-pink-600 rounded-full'>
                             <Asterisk size={24} className='text-white' />
                         </div>
                     )}
 
-                    <p className='font-pacifico text-3xl text-center'>Krystel,</p>
+                    {!configs?.fullscreen && configs?.name !== 'hidden' && (
+                        <p className='font-pacifico text-3xl text-center'>Krystel,</p>
+                    )}
 
-                    <div className='block'>
-                        <LucideIcon size={56} className='text-current' />
-                    </div>
+                    {!configs?.fullscreen && configs?.icon !== 'hidden' && (
+                        <div className='block'>
+                            <LucideIcon size={56} className='text-current' />
+                        </div>
+                    )}
 
                     <div
                         className={cn(
@@ -91,20 +96,22 @@ export default function GiftCard({
                         )}
                     >
                         <center>
-                            <RichText>{quote}</RichText>
+                            <RichText>{content}</RichText>
                         </center>
                     </div>
 
-                    <p
-                        className={cn(
-                            'font-pacifico text-xl text-center opacity-1 transition-all duration-300',
-                            {
-                                'opacity-0 blur-sm': greetings === '...',
-                            },
-                        )}
-                    >
-                        {greetings}
-                    </p>
+                    {!configs?.fullscreen && configs?.greetings !== 'hidden' && (
+                        <p
+                            className={cn(
+                                'font-pacifico text-xl text-center opacity-1 transition-all duration-300',
+                                {
+                                    'opacity-0 blur-sm': greetings === '...',
+                                },
+                            )}
+                        >
+                            {greetings}
+                        </p>
+                    )}
                 </div>
             </div>
         </div>

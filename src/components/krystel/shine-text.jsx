@@ -29,7 +29,7 @@ export default function ShineText({ children }) {
                 className={cn(
                     'absolute z-40 mx-auto flex w-fit box-content',
                     'bg-gradient-to-r from-blue-500 via-teal-500 to-pink-500 bg-clip-text blur-sm',
-                    'font-extrabold text-transparent text-center',
+                    'font-dosis font-extrabold text-transparent text-center  text-[1.3rem]',
                     'select-none',
                 )}
                 data-html2canvas-ignore
@@ -40,7 +40,7 @@ export default function ShineText({ children }) {
                 className={cn(
                     'absolute z-50 mx-auto flex w-fit box-content',
                     'bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text',
-                    'font-extrabold text-transparent text-center',
+                    'font-dosis font-extrabold text-transparent text-center  text-[1.3rem]',
                     'select-none',
                 )}
                 data-html2canvas-ignore
@@ -50,7 +50,7 @@ export default function ShineText({ children }) {
             <span
                 className={cn(
                     'relative z-10 top-0 w-fit h-auto flex justify-center items-center',
-                    'font-extrabold text-violet-500 text-center',
+                    'font-dosis font-extrabold text-violet-500 text-center  text-[1.3rem]',
                     'select-auto',
                 )}
             >

@@ -5,6 +5,8 @@ import SpoilerText from './spoiler-text';
 import Sticker from './sticker';
 import Polaroid from './polaroid';
 import SpotifyPlayer from './spotify-player';
+import SnowText from './snow-text';
+import RandomWord from './random-word';
 
 export const defaultElements = [
     // Strikethrough
@@ -23,6 +25,13 @@ export const defaultElements = [
     { pattern: /\~\:(.*?)\:\~/g, parser: text => <SpoilerText>{text}</SpoilerText> },
     // Love
     { pattern: /\%\%(.*?)\%\%/g, parser: text => <LoveText>{text}</LoveText> },
+    // Snow
+    { pattern: /\$\@(.*?)\@\$/g, parser: text => <SnowText>{text}</SnowText> },
+    // Random word
+    {
+        pattern: /<<([^>]+)>>/g,
+        parser: match => <RandomWord words={match.split('|')} />,
+    },
     // Breakline
     { pattern: /\|\|/g, parser: () => <br /> },
     // Bold and italic
@@ -83,6 +92,7 @@ export const stripedElements = [
     { pattern: /\$\$(.*?)\$\$/g, parser: text => text },
     { pattern: /\~\:(.*?)\:\~/g, parser: text => text },
     { pattern: /\%\%(.*?)\%\%/g, parser: text => text },
+    { pattern: /\$\@(.*?)\@\$/g, parser: text => text },
     { pattern: /\|\|/g, parser: () => ' ¬ ' },
     { pattern: /\*\/(.*?)\/\*/g, parser: text => text },
     { pattern: /`(.*?)`/g, parser: text => text },

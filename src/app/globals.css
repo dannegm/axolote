@@ -3,21 +3,14 @@
 @tailwind utilities;
 
 html,
-body {
+body,
+#fonts {
     height: 100%;
 }
 
 .box-decoration-clone {
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
-}
-
-.font-pacifico {
-    font-family: var(--font-pacifico);
-}
-
-.font-delius {
-    font-family: var(--font-delius);
 }
 
 .fade-slide-up {

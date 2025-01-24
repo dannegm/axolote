@@ -69,6 +69,11 @@ export const badgeVariants = tv({
                 'bg-yellow-50 text-yellow-900 ring-yellow-600/30',
                 'dark:bg-yellow-400/10 dark:text-yellow-500 dark:ring-yellow-400/20',
             ],
+            snow: [
+                'uppercase font-bold',
+                'bg-sky-50 text-sky-900 ring-sky-600/30',
+                'dark:bg-sky-400/10 dark:text-sky-500 dark:ring-sky-400/20',
+            ],
             new: [
                 'uppercase font-bold',
                 'bg-purple-50 text-purple-900 ring-purple-600/30',

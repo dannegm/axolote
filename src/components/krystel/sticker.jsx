@@ -11,6 +11,12 @@ const stickerMap = {
     ufo: '/stickers/ufo.png',
     pray: '/stickers/pray.png',
     silence: '/stickers/silence.png',
+    flowers: '/stickers/flowers.png',
+    gift: '/stickers/gift.png',
+    rocket: '/stickers/rocket.png',
+    snowflakes: '/stickers/snowflakes.png',
+    snowy_house: '/stickers/snowy-house.png',
+    stars: '/stickers/stars.png',
 };
 
 export default function Sticker({ id, type = 'inline' }) {
