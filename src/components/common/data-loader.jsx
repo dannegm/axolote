@@ -1,6 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
-export default function DataLoader({ url, params, tags = [], children = () => null } = {}) {
+export default function DataLoader({
+    url,
+    params,
+    tags = [],
+    loader = null,
+    children = () => null,
+} = {}) {
     const { data, error, isLoading } = useQuery({
         queryKey: tags,
         queryFn: async () => {
@@ -14,7 +20,7 @@ export default function DataLoader({ url, params, tags = [], children = () => nu
     });
 
     if (isLoading) {
-        return <div>Loading...</div>;
+        return loader || <div>Loading...</div>;
     }
 
     if (error) {

@@ -19,17 +19,17 @@ export const customElements = [
     // Shine
     {
         pattern: /\$\$(.*?)\$\$/g,
-        parser: text => <span class='font-extrabold text-violet-500'>{text}</span>,
+        parser: text => <span className='font-extrabold text-violet-500'>{text}</span>,
     },
     // Spoiler
     {
         pattern: /\~\:(.*?)\:\~/g,
-        parser: text => <span class='font-extrabold text-fuchsia-500'>{text}</span>,
+        parser: text => <span className='font-extrabold text-fuchsia-500'>{text}</span>,
     },
     // Love
     {
         pattern: /\%\%(.*?)\%\%/g,
-        parser: text => <span class='font-extrabold text-red-500'>{text}</span>,
+        parser: text => <span className='font-extrabold text-red-500'>{text}</span>,
     },
     // Breakline
     { pattern: /\|\|/g, parser: () => <br /> },
