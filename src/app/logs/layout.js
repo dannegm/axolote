@@ -1,4 +1,5 @@
 import RootLayout from '@/components/layout/root-layout';
+import Fonts from '@/providers/fonts';
 
 export const metadata = {
     title: 'Krystel - Logs',
@@ -12,5 +13,9 @@ export const viewport = {
 };
 
 export default function Layout({ children }) {
-    return <RootLayout>{children}</RootLayout>;
+    return (
+        <RootLayout>
+            <Fonts>{children}</Fonts>
+        </RootLayout>
+    );
 }

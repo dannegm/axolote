@@ -4,6 +4,7 @@ import { cn } from '@/helpers/utils';
 import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
 import { icons } from 'lucide-react';
 import SpotifyPreview from './spotify-preview';
+import { extractConfigsAndContent } from '@/helpers/strings';
 
 export const customElements = [
     // Strikethrough
@@ -30,6 +31,16 @@ export const customElements = [
     {
         pattern: /\%\%(.*?)\%\%/g,
         parser: text => <span className='font-extrabold text-red-500'>{text}</span>,
+    },
+    {
+        pattern: /\$\@(.*?)\@\$/g,
+        parser: text => <span className='font-extrabold text-sky-500'>{text}</span>,
+    },
+    {
+        pattern: /<<([^>]+)>>/g,
+        parser: match => {
+            return <span className='font-bold'>{match.split('|').join(', ')}</span>;
+        },
     },
     // Breakline
     { pattern: /\|\|/g, parser: () => <br /> },
@@ -99,7 +110,10 @@ export default function CardPreview({ quote, code }) {
         quoteSettings = quoteFromSettings(settings.join(':'));
     }
 
-    const LucideIcon = icons[quoteSettings.icon];
+    const { configs, content } = extractConfigsAndContent(quote);
+    const greetings = configs?.greetings || '';
+    const LucideIcon =
+        configs?.icon === 'hidden' ? <></> : icons[configs?.icon || quoteSettings.icon];
 
     return (
         <div
@@ -116,11 +130,15 @@ export default function CardPreview({ quote, code }) {
                         quoteSettings.scheme,
                     )}
                 >
-                    <div>
-                        <LucideIcon className='text-current' />
-                    </div>
+                    {!configs?.fullscreen && configs?.icon !== 'hidden' && (
+                        <div>
+                            <LucideIcon className='text-current' />
+                        </div>
+                    )}
                     <div className='mt-[2px] font-delius font-medium'>
-                        <RichText elements={customElements}>{quote}</RichText>
+                        <RichText elements={customElements}>{content}</RichText>
+
+                        {greetings && <div className='mt-2 font-pacifico'>Saludos.</div>}
                     </div>
                 </div>
             </div>

@@ -48,9 +48,6 @@ export default function GiftCard({
         quote = '({icon:hidden})[[[[ufo]]]]';
     }
 
-    quote =
-        'Nunca me cansaré de recordarte lo||<<hermosa|bonita|cute|linda|sexy|inteligente|maravillosa|curiosa|increíble>>||que eres.';
-
     const { configs, content } = extractConfigsAndContent(quote);
     const isLongText = replaceWithLongestSentence(content).length > 120;
     const greetings = configs?.greetings || useGreetings();

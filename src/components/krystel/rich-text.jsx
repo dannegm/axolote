@@ -93,6 +93,12 @@ export const stripedElements = [
     { pattern: /\~\:(.*?)\:\~/g, parser: text => text },
     { pattern: /\%\%(.*?)\%\%/g, parser: text => text },
     { pattern: /\$\@(.*?)\@\$/g, parser: text => text },
+    {
+        pattern: /<<([^>]+)>>/g,
+        parser: match => {
+            return match.split('|').join(', ');
+        },
+    },
     { pattern: /\|\|/g, parser: () => ' ¬ ' },
     { pattern: /\*\/(.*?)\/\*/g, parser: text => text },
     { pattern: /`(.*?)`/g, parser: text => text },
