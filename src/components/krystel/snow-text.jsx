@@ -20,7 +20,7 @@ export default function SnowText({ children }) {
     const postSnow = usePostAction({ action: 'snow', settings: quote.settings });
 
     const snowFallConfig = {
-        color: '#e9ecf9',
+        color: '#ffffff',
         snowflakeCount: 320,
         speed: [0.5, 2.5],
         wind: [-0.5, 0.5],
