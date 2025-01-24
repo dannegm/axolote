@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { Asterisk, icons } from 'lucide-react';
+import { Asterisk, Clock3, icons } from 'lucide-react';
+import { formatDistance } from 'date-fns';
 
 import { cn } from '@/helpers/utils';
 import { isElevenEleven, isThreeInTheMorning } from '@/helpers/dates';
@@ -34,6 +35,7 @@ export default function GiftCard({
     border = '',
     scheme = 'bg-white text-gray-600',
     settings,
+    created_at,
 }) {
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
@@ -73,6 +75,13 @@ export default function GiftCard({
                         scheme,
                     )}
                 >
+                    {created_at && (
+                        <div className='fixed bottom-8 text-xs text-gray-500 flex gap-1 items-center scale-90'>
+                            <Clock3 size='0.80rem' />
+                            {formatDistance(new Date(created_at + 'Z'), new Date())}
+                        </div>
+                    )}
+
                     {!configs?.fullscreen && configs?.badge !== 'hidden' && firstAppearance && (
                         <div className='fade-in absolute top-2 right-2 flex items-center justify-center w-6 h-6 bg-pink-600 rounded-full'>
                             <Asterisk size={24} className='text-white' />
