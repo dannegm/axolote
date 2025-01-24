@@ -67,7 +67,7 @@ const defaultStyles = [
     `font-light text-yellow-600 font-playwrite`,
 ];
 
-export default function RandomWord({ className, words, styles = defaultStyles, interval = 150 }) {
+export default function RandomWord({ className, words, styles = defaultStyles, interval = 120 }) {
     const [currentWord, setCurrentWord] = useState('');
     const [currentStyle, setCurrentStyle] = useState('');
 
