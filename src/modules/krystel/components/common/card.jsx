@@ -6,7 +6,6 @@ export default function Card({
     scheme = 'bg-white text-gray-600',
     children,
 }) {
-    console.log({ scheme });
     return (
         <div
             className={cn(
