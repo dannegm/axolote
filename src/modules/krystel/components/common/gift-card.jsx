@@ -46,8 +46,6 @@ export default function GiftCard({
     const greetings = configs?.greetings || useGreetings();
     const LucideIcon = configs?.icon === 'hidden' ? <></> : icons[configs?.icon || icon];
 
-    console.log({ configs });
-
     useEffect(() => {
         postView();
     }, []);
