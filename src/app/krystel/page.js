@@ -84,6 +84,7 @@ export default async function Home({ searchParams }) {
                     />
 
                     <div id='global-bg-portal' />
+                    <div id='card-bg-portal' />
 
                     <PerspectiveCard>
                         <GiftCard {...quote} />

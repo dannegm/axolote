@@ -68,17 +68,17 @@ export const customElements = [
     {
         pattern: /\{\{(.*?)\|(.*?)\}\}/g,
         parser: (url, description) => (
-            <div className='flex flex-row gap-4'>
-                <img className='max-h-32' src={url} />
-                <span>{description}</span>
+            <div className='flex flex-row gap-4 items-start'>
+                <img className='max-h-36 bg-white shadow-md rounded-md p-2' src={url} />
+                <span className='bg-white shadow-md rounded-md p-2'>{description}</span>
             </div>
         ),
     },
     {
         pattern: /\{\{(.*?)\}\}/g,
         parser: url => (
-            <div>
-                <img className='max-h-32' src={url} />
+            <div className='flex flex-row gap-4 items-start'>
+                <img className='max-h-36 bg-white shadow-md rounded-md p-2' src={url} />
             </div>
         ),
     },
@@ -90,12 +90,12 @@ export const customElements = [
     // Sticker Full
     {
         pattern: /\[\[\[\[(.*?)\]\]\]\]/g,
-        parser: id => <Sticker id={id} />,
+        parser: id => <Sticker id={id} type='preview' />,
     },
     // Sticker Badge
     {
         pattern: /\[\[\[(.*?)\]\]\]/g,
-        parser: id => <Sticker id={id} />,
+        parser: id => <Sticker id={id} type='preview' />,
     },
     // Sticker Inline
     {
@@ -119,17 +119,31 @@ export default function GiftCardPreview({ quote, code }) {
 
     return (
         <div
-            className='bg-gray-100 bg-center bg-[length:50%] p-2 rounded-md  shadow-xl'
-            style={{ backgroundImage: quoteSettings.bg }}
+            className={cn(
+                'relative overflow-hidden bg-gray-100 bg-center bg-[length:50%] p-2 rounded-md shadow-xl',
+                {
+                    'bg-none': configs?.bg,
+                },
+            )}
+            style={{ backgroundImage: configs?.bg ? '' : quoteSettings.bg }}
         >
+            {configs?.bg && (
+                <div className={cn('absolute z-0 inset-0 pointer-events-none', configs?.bg)} />
+            )}
+
             <div
-                className='bg-gray-200 rounded-lg p-1 shadow-xl'
-                style={{ background: quoteSettings.border }}
+                className={cn(
+                    'relative z-10 bg-gray-200 rounded-lg p-1 shadow-xl',
+                    { 'bg-none': configs?.border },
+                    configs?.border,
+                )}
+                style={{ background: configs?.border ? '' : quoteSettings.border }}
             >
                 <div
                     className={cn(
                         'flex flex-row gap-2 items-start p-3 rounded',
                         quoteSettings.scheme,
+                        configs?.scheme,
                     )}
                 >
                     {!configs?.fullscreen && configs?.icon !== 'hidden' && (

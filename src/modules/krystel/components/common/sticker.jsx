@@ -17,6 +17,7 @@ const stickerMap = {
     snowflakes: '/stickers/snowflakes.png',
     snowy_house: '/stickers/snowy-house.png',
     stars: '/stickers/stars.png',
+    constellation: '/stickers/constellation.png',
 };
 
 export default function Sticker({ id, type = 'inline' }) {
@@ -27,6 +28,7 @@ export default function Sticker({ id, type = 'inline' }) {
         inline: 'inline-block w-5 h-5',
         badge: 'block w-24 h-24 -mt-2 md:-mt-4',
         full: 'block w-44 h-44 -mt-4 -mb-2',
+        preview: 'block bg-white rounded-md shadow-sm w-16 h-16 p-2',
     };
 
     return <img src={src} alt={id} className={cn('object-contain', types[type])} />;

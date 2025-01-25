@@ -51,7 +51,7 @@ export default function SnowText({ children }) {
                     `
                     }
                 </style>
-                <div className='fixed fade-in inset-0 pointer-events-none bg-slate-900 transition-all duration-150 backdrop-blur-lg opacity-50'></div>
+                <div className='fixed fade-in inset-0 pointer-events-none bg-slate-900 transition-all duration-150 backdrop-blur-lg opacity-50' />
                 <div className='fixed fade-in inset-0 z-max pointer-events-none'>
                     <Snowfall {...snowFallConfig} />
                 </div>
