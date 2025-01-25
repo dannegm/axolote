@@ -36,7 +36,7 @@ export default function CopyText({ content, children, onCopy }) {
     return (
         <div
             className={cn(
-                'absolute bottom-2 py-1 px-2 bg-red-500 text-red-100 text-xs font-bold rounded-md',
+                'inline-block py-1 px-2 bg-red-500 text-red-100 text-xs font-bold rounded-md',
                 'hover:bg-red-600',
                 'active:bg-green-500 active:text-green-100 active:scale-110',
                 'transition-all cursor-pointer',

@@ -9,8 +9,8 @@ import Button from '@/modules/krystel/components/common/button';
 import ShareButton from '@/modules/krystel/components/common/share-button';
 import LikeButton from '@/modules/krystel/components/common/like-button';
 import { SaveContainer, SaveButton } from '@/modules/krystel/components/common/save-element';
-import CopyText from '@/modules/krystel/components/common/copy-text';
 import { parseText, stripedElements } from '@/modules/krystel/components/common/rich-text';
+import Menu from './components/menu';
 
 export const dynamic = 'force-dynamic';
 
@@ -76,6 +76,8 @@ export default async function Home({ searchParams }) {
 
     return (
         <QuoteProvider quote={quote}>
+            <Menu code={quote.settings} />
+
             <main className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
                 <SaveContainer className='-mt-4 px-5 py-10 md:px-10 md:py-20 transition-all'>
                     <div
@@ -105,10 +107,6 @@ export default async function Home({ searchParams }) {
                         <LikeButton {...quote} />
                     </div>
                 </SaveContainer>
-
-                <CopyText content={`https://axolote.me/krystel?code=${quote.settings}`}>
-                    {quote.settings}
-                </CopyText>
             </main>
         </QuoteProvider>
     );

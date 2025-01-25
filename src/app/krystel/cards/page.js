@@ -1,3 +1,5 @@
+import Menu from '../components/menu';
+
 export function generateMetadata() {
     return {
         title: 'Krystel - Cards',
@@ -5,5 +7,10 @@ export function generateMetadata() {
 }
 
 export default function Cards() {
-    return <h1>Cards</h1>;
+    return (
+        <main>
+            <Menu />
+            <h1>Cards</h1>
+        </main>
+    );
 }
