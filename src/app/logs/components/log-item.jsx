@@ -1,5 +1,5 @@
 'use client';
-import { formatDistance } from 'date-fns';
+import { formatDistanceToNow } from 'date-fns';
 import { Clock3, ExternalLink } from 'lucide-react';
 
 import Badge from '@/modules/core/components/tremor/badge';
@@ -50,7 +50,7 @@ export default function LogItem({ item }) {
                 </span>
                 <span className='text-gray-500 flex gap-1 items-center'>
                     <Clock3 size='0.85rem' />
-                    {formatDistance(new Date(item.created_at + 'Z'), new Date())}
+                    {formatDistanceToNow(new Date(item.created_at + 'Z'))}
                 </span>
             </div>
         </div>

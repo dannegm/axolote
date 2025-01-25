@@ -1,8 +1,8 @@
 'use client';
 import { useEffect } from 'react';
 import { Asterisk, Clock3, icons } from 'lucide-react';
-import { formatDistance } from 'date-fns';
-import { es } from 'date-fns/locale';
+import { formatDistanceToNow } from 'date-fns';
+import { es as locale } from 'date-fns/locale';
 
 import { cn } from '@/modules/core/helpers/utils';
 import { isElevenEleven, isThreeInTheMorning } from '@/modules/krystel/helpers/dates';
@@ -76,7 +76,7 @@ export default function GiftCard({
                     data-html2canvas-ignore
                 >
                     <Clock3 size='0.80rem' />
-                    {formatDistance(new Date(created_at + 'Z'), new Date(), { locale: es })}
+                    {formatDistanceToNow(new Date(created_at + 'Z'), { locale })}
                 </div>
             )}
 

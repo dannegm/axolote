@@ -22,26 +22,35 @@ export const customElements = [
     // Shine
     {
         pattern: /\$\$(.*?)\$\$/g,
-        parser: text => <span className='font-extrabold text-violet-500'>{text}</span>,
+        parser: text => <span className='font-dosis font-extrabold text-violet-500'>{text}</span>,
     },
     // Spoiler
     {
         pattern: /\~\:(.*?)\:\~/g,
-        parser: text => <span className='font-extrabold text-fuchsia-500'>{text}</span>,
+        parser: text => (
+            <span className='font-quicksand font-extrabold text-fuchsia-500'>{text}</span>
+        ),
     },
     // Love
     {
         pattern: /\%\%(.*?)\%\%/g,
-        parser: text => <span className='font-extrabold text-red-500'>{text}</span>,
+        parser: text => <span className='font-lora font-extrabold text-red-500'>{text}</span>,
     },
+    // Snow
     {
         pattern: /\$\@(.*?)\@\$/g,
-        parser: text => <span className='font-extrabold text-sky-500'>{text}</span>,
+        parser: text => (
+            <>
+                <div className='absolute inset-0 bg-sky-900 mix-blend-color rounded-lg' />
+                <span className='font-playwrite font-extrabold text-sky-500'>{text}</span>
+            </>
+        ),
     },
+    // Multiple
     {
         pattern: /<<([^>]+)>>/g,
         parser: match => {
-            return <span className='font-bold'>{match.split('|').join(', ')}</span>;
+            return <span className='font-oswald font-bold text-indigo-700'>{match.split('|').join(', ')}</span>;
         },
     },
     // Breakline
