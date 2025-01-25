@@ -9,7 +9,7 @@ export default {
         { pattern: /text-(.*)-(.*)/ },
         { pattern: /border-(.*)-(.*)/ },
         { pattern: /bg-(.*)-(.*)/ },
-        { pattern: /bg-\[.*\]/ },
+        // { pattern: /bg-\[.*\]/ },
     ],
     theme: {
         extend: {
