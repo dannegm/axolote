@@ -18,7 +18,7 @@ export default function CardItem({ item }) {
             >
                 <GiftCardPreview quote={item.quote} code={code} />
             </a>
-            <span className='text-gray-500 flex gap-1 items-center'>
+            <span className='text-gray-500 flex gap-1 items-center text-xs'>
                 <Clock3 size='0.85rem' />
                 {formatDistanceToNow(date, { locale })} -{' '}
                 {format(date, 'MMMM d, yyyy · hh:mm aaa', { locale })}
