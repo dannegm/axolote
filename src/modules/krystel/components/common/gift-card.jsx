@@ -97,7 +97,7 @@ export default function GiftCard({
             )}
 
             <div
-                className={cn('font-delius text-center text-xl font-medium leading-relaxed', {
+                className={cn('font-delius text-center text-xl font-medium leading-snug', {
                     'text-md': isLongText,
                 })}
             >
