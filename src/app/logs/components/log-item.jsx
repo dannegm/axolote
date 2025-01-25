@@ -1,10 +1,11 @@
 'use client';
 import { formatDistance } from 'date-fns';
-import { Clock3 } from 'lucide-react';
+import { Clock3, X } from 'lucide-react';
 
 import Badge from '@/modules/core/components/tremor/badge';
+import GiftCardPreview from '@/modules/krystel/components/common/gift-card-preview';
 import { UserAgentInfo } from './user-agent-info';
-import CardPreview from '../../../modules/krystel/components/common/card-preview';
+import DeleteLogButton from './delete-log-button';
 
 export default function LogItem({ item }) {
     return (
@@ -16,11 +17,12 @@ export default function LogItem({ item }) {
             </div>
 
             <div className='flex flex-col gap-4 items-start md:w-full'>
-                <div className='flex gap-2'>
+                <div className='flex w-full gap-2 justify-between'>
                     <Badge variant={item.type}>{item.type}</Badge>
+                    <DeleteLogButton id={item.id} />
                 </div>
                 <span className='flex-none w-full'>
-                    <CardPreview quote={item.quotes.quote} code={item.metadata?.code} />
+                    <GiftCardPreview quote={item.quotes.quote} code={item.metadata?.code} />
                 </span>
                 <span className='text-gray-500 flex gap-1 items-center'>
                     <Clock3 size='0.85rem' />

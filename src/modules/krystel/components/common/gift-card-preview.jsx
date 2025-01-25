@@ -104,7 +104,7 @@ export const customElements = [
     },
 ];
 
-export default function CardPreview({ quote, code }) {
+export default function GiftCardPreview({ quote, code }) {
     let quoteSettings = getRandomQuote();
 
     if (code) {
