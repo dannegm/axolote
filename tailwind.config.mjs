@@ -9,7 +9,10 @@ export default {
         { pattern: /text-(.*)-(.*)/ },
         { pattern: /border-(.*)-(.*)/ },
         { pattern: /bg-(.*)-(.*)/ },
-        { pattern: /bg-\[url\(.*\)\]/ },
+        { pattern: /scale-(.*)/ },
+        { pattern: /blur-(.*)/ },
+        { pattern: /brightness-(.*)/ },
+        { pattern: /saturate-(.*)/ },
     ],
     theme: {
         extend: {
@@ -19,6 +22,9 @@ export default {
             },
             zIndex: {
                 max: `${Number.MAX_SAFE_INTEGER}`,
+            },
+            backgroundImage: {
+                'blue-galaxy': "url('/backgrounds/blue-galaxy.jpg')",
             },
         },
     },
