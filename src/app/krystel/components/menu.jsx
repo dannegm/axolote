@@ -70,8 +70,8 @@ export default function Menu({ code }) {
                     </button>
 
                     <MenuContent
-                        className={cn('w-full h-0 p-0 transition-all interpolate-size', {
-                            'w-80 h-auto pb-2': open,
+                        className={cn('w-24 h-0 p-0 transition-all duration-150 interpolate-size opacity-0', {
+                            'w-80 h-auto pb-2 opacity-100': open,
                         })}
                         code={code}
                     />
