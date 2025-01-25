@@ -5,10 +5,15 @@ import CopyText from '@/modules/krystel/components/common/copy-text';
 import { BookMarked, Ellipsis, MessageSquareQuote, RefreshCcw } from 'lucide-react';
 import { useState } from 'react';
 
-const MenuItem = ({ href, children }) => {
+const MenuItem = ({ primary, href, children }) => {
     return (
         <a
-            className='flex flex-col items-center gap-1 font-sans text-xs w-20 py-2 rounded-lg hover:bg-gray-200 active:bg-slate-300 transition-all'
+            className={cn(
+                'flex flex-col items-center gap-1 font-sans text-xs w-24 py-3 rounded-full hover:bg-gray-200 active:bg-slate-300 transition-all',
+                {
+                    'bg-purple-600 text-white hover:bg-purple-800 active:bg-purple-950': primary,
+                },
+            )}
             href={href}
         >
             {children}
@@ -20,17 +25,14 @@ const MenuContent = ({ className, code }) => {
     return (
         <div className={cn('flex flex-col gap-2', className)}>
             <div className='flex flex-row items-center justify-evenly'>
-                <MenuItem href='/krystel'>
-                    <RefreshCcw />
-                    Another
-                </MenuItem>
                 <MenuItem href='/krystel/cards'>
                     <BookMarked />
-                    Cards
+                </MenuItem>
+                <MenuItem href='/krystel' primary>
+                    <RefreshCcw />
                 </MenuItem>
                 <MenuItem href='/krystel/posts'>
                     <MessageSquareQuote />
-                    Posts
                 </MenuItem>
             </div>
 
@@ -70,9 +72,12 @@ export default function Menu({ code }) {
                     </button>
 
                     <MenuContent
-                        className={cn('w-24 h-0 p-0 transition-all duration-150 interpolate-size opacity-0', {
-                            'w-80 h-auto pb-2 opacity-100': open,
-                        })}
+                        className={cn(
+                            'w-24 h-0 p-0 transition-all duration-150 interpolate-size opacity-0',
+                            {
+                                'w-80 h-auto pb-2 opacity-100': open,
+                            },
+                        )}
                         code={code}
                     />
                 </div>
