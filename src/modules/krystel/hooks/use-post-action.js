@@ -6,7 +6,7 @@ import useDebouncedCallback from '@/modules/core/hooks/use-debounced-callback';
 import { postAction } from '@/modules/krystel/actions/postAction';
 
 export default function usePostAction({ action, settings }) {
-    const [skipActions] = useQueryState('skip-actions', parseAsBoolean.withDefault(true));
+    const [skipActions] = useQueryState('skip-actions', parseAsBoolean.withDefault(false));
 
     const mutation = useMutation({
         mutationFn: postAction,
