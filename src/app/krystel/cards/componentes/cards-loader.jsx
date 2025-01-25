@@ -2,14 +2,14 @@
 
 import DataLoader from '@/modules/core/components/common/data-loader';
 import Loader from '@/modules/core/components/common/loader';
-import LogsTable from './logs-table';
+import CardsList from './cards-lists';
 
 const BASE_URL = 'https://endpoints.hckr.mx/quotes';
 
-export default function QuotesLoader() {
+export default function CardsLoader() {
     return (
-        <DataLoader tags={['quotes']} url={`${BASE_URL}/krystel/actions`} loader={<Loader />}>
-            {data => <LogsTable data={data} />}
+        <DataLoader tags={['cards']} url={`${BASE_URL}/krystel`} loader={<Loader />}>
+            {data => <CardsList data={data} />}
         </DataLoader>
     );
 }
