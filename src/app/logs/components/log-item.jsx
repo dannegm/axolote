@@ -2,9 +2,9 @@
 import { formatDistance } from 'date-fns';
 import { Clock3 } from 'lucide-react';
 
-import Badge from '@/components/tremor/badge';
+import Badge from '@/modules/core/components/tremor/badge';
 import { UserAgentInfo } from './user-agent-info';
-import CardPreview from './card-preview';
+import CardPreview from '../../../modules/krystel/components/common/card-preview';
 
 export default function LogItem({ item }) {
     return (

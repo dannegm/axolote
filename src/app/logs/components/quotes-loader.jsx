@@ -1,8 +1,8 @@
 'use client';
 
-import DataLoader from '@/components/common/data-loader';
+import DataLoader from '@/modules/core/components/common/data-loader';
 import LogsTable from './logs-table';
-import Loader from '@/components/common/loader';
+import Loader from '@/modules/core/components/common/loader';
 
 const BASE_URL = 'https://endpoints.hckr.mx/quotes';
 

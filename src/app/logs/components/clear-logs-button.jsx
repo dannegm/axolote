@@ -1,7 +1,7 @@
 'use client';
 
 import Button from '@/components/common/button';
-import useClearLogsAction from '@/hooks/use-clear-logs-action';
+import useClearLogsAction from '@/modules/krystel/hooks/use-clear-logs-action';
 import { Trash2 } from 'lucide-react';
 
 export default function ClearLogsButton() {

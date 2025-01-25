@@ -1,16 +1,16 @@
 import { RefreshCcw } from 'lucide-react';
 
-import { getRandomQuote, quoteFromSettings } from '@/services/quotes';
+import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
+import QuoteProvider from '@/modules/krystel/providers/quote-provider';
 
-import PerspectiveCard from '@/components/common/perspective-card';
-import GiftCard from '@/components/krystel/gift-card';
-import Button from '@/components/common/button';
-import ShareButton from '@/components/krystel/share-button';
-import LikeButton from '@/components/krystel/like-button';
-import { SaveContainer, SaveButton } from '@/components/krystel/save-element';
-import CopyText from '@/components/krystel/copy-text';
-import { parseText, stripedElements } from '@/components/krystel/rich-text';
-import QuoteProvider from '@/providers/quote-provider';
+import PerspectiveCard from '@/modules/krystel/components/common/perspective-card';
+import GiftCard from '@/modules/krystel/components/common/gift-card';
+import Button from '@/modules/krystel/components/common/button';
+import ShareButton from '@/modules/krystel/components/common/share-button';
+import LikeButton from '@/modules/krystel/components/common/like-button';
+import { SaveContainer, SaveButton } from '@/modules/krystel/components/common/save-element';
+import CopyText from '@/modules/krystel/components/common/copy-text';
+import { parseText, stripedElements } from '@/modules/krystel/components/common/rich-text';
 
 export const dynamic = 'force-dynamic';
 

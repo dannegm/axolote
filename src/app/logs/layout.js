@@ -1,5 +1,6 @@
-import RootLayout from '@/components/layout/root-layout';
-import Fonts from '@/providers/fonts';
+import '../globals.css';
+import RootLayout from '@/modules/core/components/layout/root-layout';
+import Fonts from '@/modules/krystel/providers/fonts';
 
 export const metadata = {
     title: 'Krystel - Logs',
