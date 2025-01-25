@@ -2,13 +2,17 @@
 import { useEffect, useState } from 'react';
 import { Asterisk, Clock3, icons } from 'lucide-react';
 import { formatDistance } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 import { cn } from '@/modules/core/helpers/utils';
 import { isElevenEleven, isThreeInTheMorning } from '@/modules/krystel/helpers/dates';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 
 import { useGreetings } from '@/modules/krystel/services/greetings';
-import { extractConfigsAndContent, replaceWithLongestSentence } from '@/modules/krystel/helpers/strings';
+import {
+    extractConfigsAndContent,
+    replaceWithLongestSentence,
+} from '@/modules/krystel/helpers/strings';
 import RichText from './rich-text';
 
 const useFirstAppearance = id => {
@@ -81,7 +85,7 @@ export default function GiftCard({
                             data-html2canvas-ignore
                         >
                             <Clock3 size='0.80rem' />
-                            {formatDistance(new Date(created_at + 'Z'), new Date())}
+                            {formatDistance(new Date(created_at + 'Z'), new Date(), { locale: es })}
                         </div>
                     )}
 
