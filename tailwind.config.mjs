@@ -3,6 +3,7 @@
 import plugin from 'tailwindcss/plugin';
 
 export default {
+    mode: 'jit',
     content: ['./src/app/**/*.{js,ts,jsx,tsx,mdx}', './src/modules/**/*.{js,ts,jsx,tsx,mdx}'],
     safelist: [
         { pattern: /text-(.*)-(.*)/ },
