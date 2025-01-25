@@ -1,7 +1,8 @@
 'use client';
 
-import useDeleteLogAction from '@/modules/krystel/hooks/use-detelete-log-action';
 import { X } from 'lucide-react';
+import useTimeout from '@/modules/core/hooks/use-timeout';
+import useDeleteLogAction from '@/modules/krystel/hooks/use-detelete-log-action';
 
 export default function DeleteLogButton({ id, onDelete }) {
     const deleteLog = useDeleteLogAction();
