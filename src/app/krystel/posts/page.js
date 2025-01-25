@@ -8,9 +8,11 @@ export function generateMetadata() {
 
 export default function Posts() {
     return (
-        <main>
+        <>
             <Menu />
-            <h1>Posts</h1>
-        </main>
+            <main className='w-full h-screen flex items-center justify-center'>
+                <h1 className='font-pacifico text-2xl'>Próximamente</h1>
+            </main>
+        </>
     );
 }
