@@ -1,4 +1,5 @@
-import { icons } from 'lucide-react';
+'use client';
+import { icons, Asterisk } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
@@ -7,6 +8,7 @@ import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 import RichText from './rich-text';
 import Sticker from './sticker';
 import SpotifyPreview from './spotify-preview';
+import { useFirstAppearanceAnom } from '../../hooks/use-first-appearance';
 
 export const customElements = [
     // Strikethrough
@@ -50,7 +52,11 @@ export const customElements = [
     {
         pattern: /<<([^>]+)>>/g,
         parser: match => {
-            return <span className='font-oswald font-bold text-indigo-700'>{match.split('|').join(', ')}</span>;
+            return (
+                <span className='font-oswald font-bold text-indigo-700'>
+                    {match.split('|').join(', ')}
+                </span>
+            );
         },
     },
     // Breakline
@@ -116,6 +122,9 @@ export const customElements = [
 export default function GiftCardPreview({ quote, code }) {
     let quoteSettings = getRandomQuote();
 
+    const [id] = code.split(':');
+    const isFirstAppearance = useFirstAppearanceAnom(id);
+
     if (code) {
         const [, ...settings] = code.split(':');
         quoteSettings = quoteFromSettings(settings.join(':'));
@@ -155,6 +164,12 @@ export default function GiftCardPreview({ quote, code }) {
                         configs?.scheme,
                     )}
                 >
+                    {isFirstAppearance && (
+                        <div className='fade-in absolute top-2 right-2 flex items-center justify-center w-4 h-4 bg-pink-600 rounded-full'>
+                            <Asterisk size={16} className='text-white' />
+                        </div>
+                    )}
+
                     {!configs?.fullscreen && configs?.icon !== 'hidden' && (
                         <div>
                             <LucideIcon className='text-current' />

@@ -93,19 +93,11 @@ export default function SpotifyPreview({ uri }) {
             </div>
 
             {/* Player Info and Controls */}
-            <div className='gap-4 flex items-center justify-between'>
+            <div className='gap-4 flex items-center justify-between pr-4'>
                 <div className='flex-grow text-left'>
                     <h3 className='font-semibold text-sm truncate'>{playerInfo.title}</h3>
                     <p className='text-xs text-zinc-400 truncate'>{playerInfo.artist}</p>
                 </div>
-                <a
-                    className='bg-green-500 hover:bg-green-600 text-black px-3 py-[0.45rem] rounded-full text-xs flex items-center gap-1'
-                    href={playerInfo.externalUrl}
-                    target='_blank'
-                >
-                    <ExternalLink size={14} />
-                    <span className='hidden md:block'>Spotify</span>
-                </a>
             </div>
         </div>
     );
