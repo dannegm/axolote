@@ -21,7 +21,7 @@ export default function CardItem({ item }) {
             <span className='text-gray-500 flex gap-1 items-center text-xs'>
                 <Clock3 size='0.85rem' />
                 {formatDistanceToNow(date, { locale })} -{' '}
-                {format(date, 'MMMM d, yyyy · hh:mm aaa', { locale })}
+                {format(date, 'MMMM d, yyyy · h:mm aaa', { locale })}
             </span>
         </div>
     );
