@@ -9,20 +9,31 @@ import useShakeDetector from '@/modules/core/hooks/use-shake-detector';
 import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 
-export default function SpoilerText({ children }) {
+export default function SpoilerText({ inPreview = false, preventReveal = false, children }) {
     const [playHush] = useSound('./sounds/shush.mp3');
     const [hidden, setHidden] = useState(true);
 
     const quote = useQuote();
-    const postReveal = usePostAction({ action: 'reveal', settings: quote.settings });
+    const postReveal = usePostAction({ action: 'reveal', settings: quote?.settings });
 
     const toggleSpoiler = ev => {
+        if (preventReveal) return;
+
+        ev.preventDefault();
+        ev.stopPropagation();
         setHidden(!hidden);
         playHush();
-        postReveal();
+
+        if (!inPreview) {
+            postReveal();
+        }
     };
 
-    useShakeDetector(toggleSpoiler);
+    useShakeDetector(() => {
+        if (!inPreview) {
+            toggleSpoiler();
+        }
+    });
 
     return (
         <span

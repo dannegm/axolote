@@ -1,5 +1,5 @@
 'use client';
-import { formatDistanceToNow, format } from 'date-fns';
+import { formatDistanceToNowStrict, format } from 'date-fns';
 import { es as locale } from 'date-fns/locale';
 import { Clock3 } from 'lucide-react';
 
@@ -16,11 +16,11 @@ export default function CardItem({ item }) {
                 href={`/krystel?code=${code}`}
                 className='flex-none w-full transition-all duration-150 lg:hover:scale-105 active:scale-95'
             >
-                <GiftCardPreview quote={item.quote} code={code} />
+                <GiftCardPreview quote={item.quote} code={code} hidden={!item.show} preventReveal />
             </a>
             <span className='text-gray-500 flex gap-1 items-center text-xs'>
                 <Clock3 size='0.85rem' />
-                {formatDistanceToNow(date, { locale })} -{' '}
+                {formatDistanceToNowStrict(date, { locale })} -{' '}
                 {format(date, 'MMMM d, yyyy · h:mm aaa', { locale })}
             </span>
         </div>

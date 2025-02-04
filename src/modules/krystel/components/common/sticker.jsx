@@ -18,6 +18,7 @@ const stickerMap = {
     snowy_house: '/stickers/snowy-house.png',
     stars: '/stickers/stars.png',
     constellation: '/stickers/constellation.png',
+    secret: '/stickers/secret.png',
 };
 
 export default function Sticker({ id, type = 'inline' }) {

@@ -1,5 +1,5 @@
 'use client';
-import { icons, Asterisk } from 'lucide-react';
+import { icons, Asterisk, EyeOff } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
@@ -9,8 +9,9 @@ import RichText from './rich-text';
 import Sticker from './sticker';
 import SpotifyPreview from './spotify-preview';
 import { useFirstAppearanceAnom } from '../../hooks/use-first-appearance';
+import SpoilerText from './spoiler-text';
 
-export const customElements = [
+export const buildCustomElements = ({ preventReveal }) => [
     // Strikethrough
     { pattern: /~~(.*?)~~/g, parser: text => <s>{text}</s> },
     // Underline
@@ -30,7 +31,9 @@ export const customElements = [
     {
         pattern: /\~\:(.*?)\:\~/g,
         parser: text => (
-            <span className='font-quicksand font-extrabold text-fuchsia-500'>{text}</span>
+            <SpoilerText preventReveal={preventReveal} inPreview>
+                {text}
+            </SpoilerText>
         ),
     },
     // Love
@@ -119,8 +122,10 @@ export const customElements = [
     },
 ];
 
-export default function GiftCardPreview({ quote, code }) {
+export default function GiftCardPreview({ quote, code, hidden = false, preventReveal = false }) {
     let quoteSettings = getRandomQuote();
+
+    const customElements = buildCustomElements({ preventReveal });
 
     const [id] = code.split(':');
     const isFirstAppearance = useFirstAppearanceAnom(id);
@@ -141,6 +146,7 @@ export default function GiftCardPreview({ quote, code }) {
                 'relative overflow-hidden bg-gray-100 bg-center bg-[length:50%] p-2 rounded-md shadow-xl',
                 {
                     'bg-none': configs?.bg,
+                    'blur-sm select-none': hidden,
                 },
             )}
             style={{ backgroundImage: configs?.bg ? '' : quoteSettings.bg }}
@@ -164,21 +170,23 @@ export default function GiftCardPreview({ quote, code }) {
                         configs?.scheme,
                     )}
                 >
-                    {isFirstAppearance && (
-                        <div className='fade-in absolute top-2 right-2 flex items-center justify-center w-4 h-4 bg-pink-600 rounded-full'>
-                            <Asterisk size={16} className='text-white' />
-                        </div>
-                    )}
+                    <div className='absolute top-2 right-2 flex flex-row gap-1'>
+                        {isFirstAppearance && (
+                            <div className='fade-in flex items-center justify-center gap-2 w-4 h-4 bg-pink-600 rounded-full'>
+                                <Asterisk size={16} className='text-white' />
+                            </div>
+                        )}
+                    </div>
 
                     {!configs?.fullscreen && configs?.icon !== 'hidden' && (
                         <div>
                             <LucideIcon className='text-current' />
                         </div>
                     )}
-                    <div className='mt-[2px] font-delius font-medium'>
+                    <div className='mt-[2px] font-delius font-medium pr-4'>
                         <RichText elements={customElements}>{content}</RichText>
 
-                        {greetings && <div className='mt-2 font-pacifico'>Saludos.</div>}
+                        {greetings && <div className='mt-2 font-pacifico'>{greetings}</div>}
                     </div>
                 </div>
             </div>

@@ -12,6 +12,12 @@ body,
     height: 100%;
 }
 
+s {
+    font-style: italic;
+    text-decoration-thickness: 3px;
+    text-decoration-color: rgba(0 0 0 / 0.5);
+}
+
 #tsparticles {
     pointer-events: none;
 }
