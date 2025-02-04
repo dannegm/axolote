@@ -9,6 +9,7 @@ export default {
         { pattern: /text-(.*)-(.*)/ },
         { pattern: /border-(.*)-(.*)/ },
         { pattern: /bg-(.*)-(.*)/ },
+        { pattern: /bg-img-(.*)/ },
         { pattern: /scale-(.*)/ },
         { pattern: /blur-(.*)/ },
         { pattern: /brightness-(.*)/ },
@@ -24,8 +25,8 @@ export default {
                 max: `${Number.MAX_SAFE_INTEGER}`,
             },
             backgroundImage: {
-                'blue-galaxy': "url('/backgrounds/blue-galaxy.jpg')",
-                'glitch': "url('/backgrounds/glitch.gif')",
+                'img-blue-galaxy': "url('/backgrounds/blue-galaxy.jpg')",
+                'img-glitch': "url('/backgrounds/glitch.gif')",
             },
         },
     },
