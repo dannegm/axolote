@@ -19,11 +19,18 @@ const stickerMap = {
     stars: '/stickers/stars.png',
     constellation: '/stickers/constellation.png',
     secret: '/stickers/secret.png',
+    nyancat: '/stickers/nyancat.gif',
+};
+
+const customStyles = {
+    nyancat: 'rounded-full shadow-xl',
 };
 
 export default function Sticker({ id, type = 'inline' }) {
     const src = stickerMap[id];
     if (!src) return `[${id}]`;
+
+    const stickerStyles = customStyles[id] || '';
 
     const types = {
         inline: 'inline-block w-6 h-6 -mt-1 scale-110',
@@ -32,5 +39,5 @@ export default function Sticker({ id, type = 'inline' }) {
         preview: 'block bg-white rounded-md shadow-sm w-16 h-16 p-2',
     };
 
-    return <img src={src} alt={id} className={cn('object-contain', types[type])} />;
+    return <img src={src} alt={id} className={cn('object-contain', types[type], stickerStyles)} />;
 }

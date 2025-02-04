@@ -25,6 +25,7 @@ export default {
             },
             backgroundImage: {
                 'blue-galaxy': "url('/backgrounds/blue-galaxy.jpg')",
+                'glitch': "url('/backgrounds/glitch.gif')",
             },
         },
     },
