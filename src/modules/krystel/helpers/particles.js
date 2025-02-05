@@ -58,7 +58,7 @@ export const heartsExplosion = ({ position = 'middleCenter' } = {}) => {
     });
 };
 
-export const startsExplosion = ({ position = 'middleCenter' } = {}) => {
+export const starsExplosion = ({ position = 'middleCenter' } = {}) => {
     const defaults = {
         angle: 90,
         position: positions[position],

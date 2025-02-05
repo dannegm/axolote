@@ -5,7 +5,7 @@ import Sparkles from 'react-sparkle';
 import { cn } from '@/modules/core/helpers/utils';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 import { useQuote } from '@/modules/krystel/providers/quote-provider';
-import { startsExplosion } from '@/modules/krystel/helpers/particles';
+import { starsExplosion } from '@/modules/krystel/helpers/particles';
 
 export default function ShineText({ children }) {
     const [playShine] = useSound('./sounds/shine.mp3', {
@@ -17,7 +17,7 @@ export default function ShineText({ children }) {
 
     const handleClick = ev => {
         ev.preventDefault();
-        startsExplosion();
+        starsExplosion();
         playShine();
         postShine();
     };

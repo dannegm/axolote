@@ -1282,6 +1282,11 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-rain-animation@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-rain-animation/-/react-rain-animation-1.0.4.tgz#cbe4c96d5825211a3cdfba6674d74afc8b2353c9"
+  integrity sha512-D+u59rSiv0GikgnhhgyRN1REwtzuCF8Q5/Bj1d418W+bu/XtJ/sGaYPy3kLbt4LWoVp5dac2ffP8vOZPsoK3tQ==
+
 react-snowfall@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-snowfall/-/react-snowfall-2.2.0.tgz#0856a72c4d29d27a6a14301c0f5deb51296fb4df"
