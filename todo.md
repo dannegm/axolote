@@ -9,18 +9,18 @@
 
 -   [ ] Una forma de interactuar mandandole eventos
     -   [ ] Un panel con botones
-    -   [ ] Mandar globitos con mensajes
+    -   [x] Mandar globitos con mensajes
     -   [ ] Mandar vibraciones
-    -   [ ] Mandar particulas
+    -   [x] Mandar particulas
     -   [ ] Mandar sonidos
     -   [ ] Mandar configuraciones (?) Cambios de fondo, borde y así
     -   [ ] Mandar zumbido
     -   [ ] Mandar notificación
-    -   [ ] Con atajos?
+    -   [x] Con atajos?
 -   [ ] Un componente que vaya escribiendo letra por letra como máquina de escribir
 -   [ ] Un componente que reprodusca una pequeña animación, estilo gartic phone
 -   [ ] Un componente de páginas o diapositivas
--   [ ] Un componente de globos que revienten y den una especie de recompenza?
+-   [x] Un componente de globos que revienten y den una especie de recompenza?
 -   [ ] Bloquear la aparición de cierto card hasta que se cumpla algún criterio por medio de la IP?
     -   [ ] Al visitar otro card
     -   [ ] Al accionar un evento
@@ -39,6 +39,7 @@
     -   [ ] De lluvia
     -   [ ] De fiesta
     -   [ ] De lluvia de estrellas
+    -   [ ] Gifs
 -   [ ] Pequeños jueguitos tipo los de tiktok
     -   [ ] Seguir el punto con el dedo, final sorpresa?
     -   [ ] Un qué prefieres? Que me notifique, tipo, votaciones
@@ -53,7 +54,7 @@
     -   [ ] Un cómo se siente hoy
     -   [ ] Algo que le guste
     -   [ ] Opción para dibujar
--   [-] Un componente de configuraciones, para por ejemplo
+-   [X] Un componente de configuraciones, para por ejemplo
 
     -   [x] quitar el icono
     -   [x] forzar un icono
