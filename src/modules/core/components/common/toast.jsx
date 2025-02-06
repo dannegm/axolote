@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 const iconClassNames = 'flex w-8 h-8 items-center justify-center rounded-full bg-gray-200';
 
-export default function Toast({ content, onAccept, onCancel }) {
+export default function Toast({ content, hasOnAccept, hasOnCancel, onAccept, onCancel }) {
     const [show, setShow] = useState(true);
 
     const handleAccept = ev => {
@@ -36,9 +36,9 @@ export default function Toast({ content, onAccept, onCancel }) {
                 <div className={cn(iconClassNames)}>
                     <Lightbulb size='1rem' />
                 </div>
-                <div className='block flex-1'>{content}</div>
+                <div className='block flex-1 text-center'>{content}</div>
                 <div className='flex flex-row gap-2'>
-                    {onCancel && (
+                    {hasOnCancel && (
                         <button
                             type='button'
                             className={cn(iconClassNames, 'bg-red-500 text-white')}
@@ -47,7 +47,7 @@ export default function Toast({ content, onAccept, onCancel }) {
                             <X size='1rem' />
                         </button>
                     )}
-                    {onAccept && (
+                    {hasOnAccept && (
                         <button
                             type='button'
                             className={cn(iconClassNames, 'bg-green-500 text-white')}

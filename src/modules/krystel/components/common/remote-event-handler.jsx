@@ -78,12 +78,22 @@ export default function RemoteEventHandler() {
         action: 'balloons',
         settings: quote.settings,
     });
+    const postBalloonsStart = usePostAction({
+        action: 'balloons-start',
+        settings: quote.settings,
+    });
 
     const summonBalloons = (count = 6) => {
         playPartySound();
+        postBalloonsStart();
+
         setBalloonWaves(prev => {
             const key = `balloon-wave-${Date.now()}`;
             return [...prev, { key, count }];
+        });
+
+        showToast({
+            content: 'Rompe todos los globos! 🎈✨',
         });
     };
 
@@ -124,6 +134,9 @@ export default function RemoteEventHandler() {
                 content: '¿Lista para la fiesta 🫢?',
                 onAccept: () => {
                     summonBalloons();
+                },
+                onCancel: () => {
+                    console.log('Nope');
                 },
             });
         },

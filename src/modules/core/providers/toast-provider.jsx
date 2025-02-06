@@ -11,7 +11,7 @@ export const useToast = () => {
 export default function ToastProvider({ children }) {
     const [toastCollection, setToastCollection] = useState([]);
 
-    const showToast = ({ content, onAccept, onCancel }) => {
+    const showToast = ({ content, onAccept = undefined, onCancel = undefined }) => {
         const payload = {
             id: nanoid(),
             content,

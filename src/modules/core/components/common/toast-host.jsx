@@ -11,6 +11,8 @@ export default function ToastHost() {
                 <Toast
                     key={toast.id}
                     content={toast.content}
+                    hasOnAccept={toast.onAccept}
+                    hasOnCancel={toast.onCancel}
                     onAccept={() => handleAccept(toast.id)}
                     onCancel={() => handleCancel(toast.id)}
                 />
