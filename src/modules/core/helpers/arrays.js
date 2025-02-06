@@ -1,7 +1,7 @@
-export const randomPick = arr => arr[Math.floor(Math.random() * arr.length)];
-export const randomIndex = arr => Math.floor(Math.random() * arr.length);
+export const randomPick = (arr = []) => arr[Math.floor(Math.random() * arr.length)];
+export const randomIndex = (arr = []) => Math.floor(Math.random() * arr.length);
 
-export const pickFromIndex = (arr, index) => {
+export const pickFromIndex = (arr = [], index = 0) => {
     if (Number.isNaN(index)) {
         return randomPick(arr);
     }
@@ -12,3 +12,5 @@ export const pickFromIndex = (arr, index) => {
 
     return arr[index];
 };
+
+export const sequence = size => Array.from(Array(size), (_, index) => index);

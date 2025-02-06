@@ -33,7 +33,7 @@ export default function LogItem({ item }) {
                     {item.metadata?.code && (
                         <a
                             className='bg-slate-200 hover:bg-slate-700 text-slate-600 hover:text-white flex gap-2 text-xs items-center px-2 font-bold rounded-md transition-all duration-150'
-                            href={`/krystel?skip-actions=true&code=${item.metadata?.code}`}
+                            href={`/krystel?code=${item.metadata?.code}&skip-actions=true`}
                             target='_blank'
                         >
                             Open in a new tab <ExternalLink size='0.85rem' />

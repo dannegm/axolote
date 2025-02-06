@@ -8,6 +8,7 @@ import Polaroid from './polaroid';
 import SpotifyPlayer from './spotify-player';
 import SnowText from './snow-text';
 import RandomWord from './random-word';
+import BalloonsText from './balloons-text';
 
 export const defaultElements = [
     // Strikethrough
@@ -28,6 +29,8 @@ export const defaultElements = [
     { pattern: /\%\%(.*?)\%\%/g, parser: text => <LoveText>{text}</LoveText> },
     // Snow
     { pattern: /\$\@(.*?)\@\$/g, parser: text => <SnowText>{text}</SnowText> },
+    // Balloons
+    { pattern: /\º\º(.*?)\º\º/g, parser: text => <BalloonsText>{text}</BalloonsText> },
     // Random word
     {
         pattern: /<<([^>]+)>>/g,

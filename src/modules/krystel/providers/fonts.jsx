@@ -14,6 +14,7 @@ import {
     Dancing_Script,
     Anton,
     Jersey_10,
+    Boogaloo,
 } from 'next/font/google';
 
 import { cn } from '@/modules/core/helpers/utils';
@@ -33,6 +34,7 @@ const dosis = Dosis({ subsets: ['latin'], variable: '--font-dosis' });
 const dancingScript = Dancing_Script({ subsets: ['latin'], variable: '--font-dancingScript' });
 const anton = Anton({ weight: '400', subsets: ['latin'], variable: '--font-anton' });
 const jersey10 = Jersey_10({ weight: '400', subsets: ['latin'], variable: '--font-jersey10' });
+const boogaloo = Boogaloo({ weight: '400', subsets: ['latin'], variable: '--font-boogaloo' });
 
 const fontClasses = [
     pacifico.variable,
@@ -50,6 +52,7 @@ const fontClasses = [
     dancingScript.variable,
     anton.variable,
     jersey10.variable,
+    boogaloo.variable,
 ];
 
 const classNames = /* css */ `
@@ -68,6 +71,7 @@ const classNames = /* css */ `
 .font-dancingScript { font-family: var(--font-dancingScript); }
 .font-anton { font-family: var(--font-anton); }
 .font-jersey10 { font-family: var(--font-jersey10); }
+.font-boogaloo { font-family: var(--font-boogaloo); }
 `;
 
 export default function Fonts({ children }) {

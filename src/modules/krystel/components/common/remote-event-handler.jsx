@@ -1,11 +1,15 @@
 'use client';
+import { useState } from 'react';
 import useSound from 'use-sound';
 
 import Snowfall from 'react-snowfall';
 import ReactRain from 'react-rain-animation';
 import 'react-rain-animation/lib/style.css';
 
+import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import useNtfy from '@/modules/core/hooks/use-ntfy';
+import usePostAction from '@/modules/krystel/hooks/use-post-action';
+import useAudio from '@/modules/core/hooks/use-audio';
 
 import Portal from '@/modules/core/components/common/portal';
 import Audio from '@/modules/core/components/common/audio';
@@ -15,7 +19,8 @@ import {
     starsExplosion,
     snowExplosion,
 } from '@/modules/krystel/helpers/particles';
-import { useState } from 'react';
+
+import Balloons from './balloons';
 
 const snowFallConfig = {
     color: '#ffffff',
@@ -52,8 +57,41 @@ const useToggles = () => {
 };
 
 export default function RemoteEventHandler() {
-    const [toggles, handleToggle] = useToggles();
+    const quote = useQuote();
     const { playPop, playShine, playJingle } = useSfx();
+
+    const [toggles, handleToggle] = useToggles();
+
+    const [balloonWaves, setBalloonWaves] = useState([]);
+    const [playPartySound, pauseParySound] = useAudio({
+        src: './sounds/little-happy-tune.mp3',
+        volume: 0.3,
+        fadeIn: 1500,
+        fadeOut: 1500,
+        loop: true,
+    });
+
+    const postBalloonsComplete = usePostAction({
+        action: 'balloons',
+        settings: quote.settings,
+    });
+
+    const summonBalloons = (count = 6) => {
+        playPartySound();
+        setBalloonWaves(prev => {
+            const key = `balloon-wave-${Date.now()}`;
+            return [...prev, { key, count }];
+        });
+    };
+
+    const handleBalloonsPopAll = () => {
+        postBalloonsComplete();
+        pauseParySound();
+
+        setTimeout(() => {
+            window.location.href = '/krystel?code=128:6:23:20:2';
+        }, 1500);
+    };
 
     const commands = {
         'particles:hearts': () => {
@@ -77,6 +115,9 @@ export default function RemoteEventHandler() {
         'toggle:raining': () => {
             handleToggle('raining');
         },
+        'summon:balloons': () => {
+            summonBalloons();
+        },
     };
 
     useNtfy({
@@ -89,6 +130,14 @@ export default function RemoteEventHandler() {
 
     return (
         <>
+            <Portal portalId='global-bg-portal'>
+                <div>
+                    {balloonWaves.map(({ key, count }) => (
+                        <Balloons key={key} count={count} onPopAll={handleBalloonsPopAll} loop />
+                    ))}
+                </div>
+            </Portal>
+
             {toggles.snowing && (
                 <Portal portalId='global-bg-portal'>
                     <Audio src='./sounds/chimes.mp3' volume={0.1} fadeIn={3000} autoplay loop />

@@ -13,7 +13,6 @@ const greetings = [
     ['Te quiero.', 0.1],
     ['Disfrútalo.', 0.95],
     ['Feliz cumple.', 0.5],
-    ['Snow time.', 0.75],
 ];
 
 export const getGreetings = () => {

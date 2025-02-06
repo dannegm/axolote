@@ -142,3 +142,33 @@ export const snowExplosion = ({ position = 'middleCenter' } = {}) => {
         scalar: 3 * magnifier,
     });
 };
+
+export const confettiExplosion = ({ x, y } = {}) => {
+    const magnifier = 1;
+    const defaults = {
+        position: { x, y },
+        zIndex: 2000,
+        disableForReducedMotion: true,
+    };
+
+    confetti('tsparticles', {
+        ...defaults,
+        count: 100,
+        scalar: 1.3 * magnifier,
+        spread: 30,
+    });
+
+    confetti('tsparticles', {
+        ...defaults,
+        count: 50,
+        scalar: 1.5 * magnifier,
+        spread: 50,
+    });
+
+    confetti('tsparticles', {
+        ...defaults,
+        count: 30,
+        scalar: 1.7 * magnifier,
+        spread: 100,
+    });
+};
