@@ -43,10 +43,12 @@ export default function BalloonsText({ children }) {
     });
 
     const quote = useQuote();
+
     const postBalloonsComplete = usePostAction({
         action: 'balloons',
         settings: quote.settings,
     });
+
     const postBalloonsStart = usePostAction({
         action: 'balloons-start',
         settings: quote.settings,
