@@ -156,7 +156,7 @@ const Balloon = ({ colors = defaultColors, loop, onPop }) => {
     const color = randomPick(colors);
     const left = random(20, 80);
     const delay = random(0, 5);
-    const duration = 10 + random(1, 5);
+    const duration = 5 + random(1, 5);
 
     const popBalloon = event => {
         playGlitter();
