@@ -5,11 +5,13 @@ import { cn } from '@/modules/core/helpers/utils';
 import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
 import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 
+import { useFirstAppearanceAnom } from '../../hooks/use-first-appearance';
+
 import RichText from './rich-text';
 import Sticker from './sticker';
 import SpotifyPreview from './spotify-preview';
-import { useFirstAppearanceAnom } from '../../hooks/use-first-appearance';
 import SpoilerText from './spoiler-text';
+import { BalloonsTextSimple } from './balloons-text';
 
 export const buildCustomElements = ({ preventReveal }) => [
     // Strikethrough
@@ -50,6 +52,11 @@ export const buildCustomElements = ({ preventReveal }) => [
                 <span className='font-playwrite font-extrabold text-sky-500'>{text}</span>
             </>
         ),
+    },
+    // Balloons
+    {
+        pattern: /\º\º(.*?)\º\º/g,
+        parser: text => <BalloonsTextSimple>{text}</BalloonsTextSimple>,
     },
     // Multiple
     {

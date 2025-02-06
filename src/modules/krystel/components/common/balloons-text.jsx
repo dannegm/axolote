@@ -19,6 +19,18 @@ const colors = [
     'text-purple-500',
 ];
 
+export const BalloonsTextSimple = ({ children }) => {
+    return (
+        <span className={cn('font-boogaloo font-extrabold text-[1.15rem]')}>
+            {children.split('').map((letter, index) => (
+                <span key={`balloon-letter-${letter}-${index}`} className={cn(randomPick(colors))}>
+                    {letter}
+                </span>
+            ))}
+        </span>
+    );
+};
+
 export default function BalloonsText({ children }) {
     const [showBalloons, setShowBalloons] = useState(false);
 
