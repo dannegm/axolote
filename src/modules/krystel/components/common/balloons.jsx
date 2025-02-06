@@ -122,10 +122,6 @@ const StyledBalloon = styled.div`
         transform: rotateZ(-45deg);
     }
 
-    &:active {
-        transform: scale(0.75) rotateZ(45deg);
-    }
-
     .string {
         position: absolute;
         top: calc(${`${balloonDimension}vmax`} - 6px);
@@ -140,9 +136,8 @@ const StyledBalloon = styled.div`
     }
 
     .trigger {
-        width: 90%;
-        height: 90%;
-        margin: 5%;
+        width: 100%;
+        height: 100%;
         border-radius: 100%;
         pointer-events: auto;
     }
