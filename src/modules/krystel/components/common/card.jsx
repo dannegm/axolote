@@ -16,7 +16,7 @@ export default function Card({
         >
             <div
                 className={cn(
-                    'w-full h-[calc(100%_-_1.5rem)] md:h-[calc(100%_-_3rem)] xl:h-full rounded overflow-hidden bg-white text-gray-800 shadow-xl',
+                    'w-full h-full rounded overflow-hidden bg-white text-gray-800 shadow-xl',
                     classNames?.container,
                 )}
             >

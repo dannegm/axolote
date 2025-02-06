@@ -94,3 +94,48 @@ s {
         opacity: var(--end-opacity);
     }
 }
+
+@keyframes toastIn {
+    0% {
+        opacity: 0;
+        transform: translateY(3rem);
+        width: 3rem;
+    }
+
+    15% {
+        opacity: 1;
+        transform: translateY(0);
+        width: 3rem;
+    }
+
+    100% {
+        width: auto;
+    }
+}
+
+.toast-in {
+    animation: toastIn 0.3s ease-in forwards;
+}
+
+@keyframes toastOut {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+        width: auto;
+    }
+
+    85% {
+        opacity: 1;
+        transform: scale(1);
+        width: 3rem;
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+.toast-out {
+    animation: toastOut 0.3s ease-out forwards;
+}

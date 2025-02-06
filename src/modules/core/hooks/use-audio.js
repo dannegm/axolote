@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useRef } from 'react';
 
 export default function useAudio({
@@ -8,14 +9,16 @@ export default function useAudio({
     fadeIn = 0,
     fadeOut = 0,
 }) {
-    const audioRef = useRef(new Audio(src));
-    const audio = audioRef.current;
+    const $audio = useRef();
 
     useEffect(() => {
-        audio.loop = loop;
-        audio.volume = fadeIn > 0 ? 0 : volume;
-        if (autoplay) play();
-    }, []);
+        if (typeof window !== 'undefined') {
+            $audio.current = new Audio(src);
+            $audio.current.loop = loop;
+            $audio.current.volume = fadeIn > 0 ? 0 : volume;
+            if (autoplay) play();
+        }
+    }, [src]);
 
     const play = () => {
         if (fadeIn > 0) {
@@ -24,21 +27,21 @@ export default function useAudio({
             const fadeInterval = setInterval(() => {
                 currentStep++;
                 const progress = currentStep / steps;
-                audio.volume = Math.min(volume * Math.pow(progress, 2), volume);
+                $audio.current.volume = Math.min(volume * Math.pow(progress, 2), volume);
                 if (currentStep >= steps) {
-                    audio.volume = volume;
+                    $audio.current.volume = volume;
                     clearInterval(fadeInterval);
                 }
             }, 10);
         }
-        audio.play();
+        $audio.current.play();
     };
 
     const pauseStop = stop => {
         if (stop) {
-            audio.currentTime = 0;
+            $audio.current.currentTime = 0;
         }
-        audio.pause();
+        $audio.current.pause();
     };
 
     const pause = (stop = false) => {
@@ -48,9 +51,9 @@ export default function useAudio({
             const fadeInterval = setInterval(() => {
                 currentStep++;
                 const progress = currentStep / steps;
-                audio.volume = Math.max(volume * (1 - Math.pow(progress, 2)), 0);
+                $audio.current.volume = Math.max(volume * (1 - Math.pow(progress, 2)), 0);
                 if (currentStep >= steps) {
-                    audio.volume = 0;
+                    $audio.current.volume = 0;
                     pauseStop(stop);
                     clearInterval(fadeInterval);
                 }

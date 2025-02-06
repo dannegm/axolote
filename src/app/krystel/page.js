@@ -10,8 +10,10 @@ import ShareButton from '@/modules/krystel/components/common/share-button';
 import LikeButton from '@/modules/krystel/components/common/like-button';
 import { SaveContainer, SaveButton } from '@/modules/krystel/components/common/save-element';
 import { parseText, stripedElements } from '@/modules/krystel/components/common/rich-text';
-import Menu from './components/menu';
 import RemoteEventHandler from '@/modules/krystel/components/common/remote-event-handler';
+
+import ToastHost from '@/modules/core/components/common/toast-host';
+import Menu from './components/menu';
 
 export const dynamic = 'force-dynamic';
 
@@ -78,6 +80,7 @@ export default async function Home({ searchParams }) {
     return (
         <QuoteProvider quote={quote}>
             <Menu code={quote.settings} />
+            <ToastHost />
 
             <main className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
                 <SaveContainer className='-mt-4 px-5 py-10 md:px-10 md:py-20 transition-all'>

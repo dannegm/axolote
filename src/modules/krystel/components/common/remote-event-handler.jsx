@@ -21,6 +21,7 @@ import {
 } from '@/modules/krystel/helpers/particles';
 
 import Balloons from './balloons';
+import { useToast } from '@/modules/core/providers/toast-provider';
 
 const snowFallConfig = {
     color: '#ffffff',
@@ -57,12 +58,14 @@ const useToggles = () => {
 };
 
 export default function RemoteEventHandler() {
+    const { showToast } = useToast();
     const quote = useQuote();
     const { playPop, playShine, playJingle } = useSfx();
 
     const [toggles, handleToggle] = useToggles();
 
     const [balloonWaves, setBalloonWaves] = useState([]);
+
     const [playPartySound, pauseParySound] = useAudio({
         src: './sounds/little-happy-tune.mp3',
         volume: 0.3,
@@ -116,7 +119,13 @@ export default function RemoteEventHandler() {
             handleToggle('raining');
         },
         'summon:balloons': () => {
-            summonBalloons();
+            // summonBalloons();
+            showToast({
+                content: '¿Lista para la fiesta 🫢?',
+                onAccept: () => {
+                    summonBalloons();
+                },
+            });
         },
     };
 
