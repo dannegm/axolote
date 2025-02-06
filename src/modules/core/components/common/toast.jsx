@@ -32,7 +32,7 @@ export default function Toast({ content, onAccept, onCancel }) {
                 { 'toast-out': !show },
             ])}
         >
-            <div className='w-[380px] flex flex-row items-center gap-4 p-2'>
+            <div className='w-[340px] flex flex-row justify-center items-center gap-4 p-2'>
                 <div className={cn(iconClassNames)}>
                     <Lightbulb size='1rem' />
                 </div>
