@@ -22,6 +22,13 @@ export const buildCustomElements = ({ preventReveal }) => [
     { pattern: /\/\/(.*?)\/\//g, parser: text => <i>{text}</i> },
     // Bold
     { pattern: /\*\*(.*?)\*\*/g, parser: text => <b>{text}</b> },
+    // Small
+    { pattern: /---(.*?)---/g, parser: text => <span className='text-[0.75em]'>{text}</span> },
+    // Big
+    {
+        pattern: /\+\+\+(.*?)\+\+\+/g,
+        parser: text => <span className='text-[1.15em]'>{text}</span>,
+    },
     // Marked
     { pattern: /::(.*?)::/g, parser: text => <mark>{text}</mark> },
     // Shine

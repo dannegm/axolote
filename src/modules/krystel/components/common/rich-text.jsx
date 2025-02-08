@@ -19,6 +19,13 @@ export const defaultElements = [
     { pattern: /\/\/(.*?)\/\//g, parser: text => <i>{text}</i> },
     // Bold
     { pattern: /\*\*(.*?)\*\*/g, parser: text => <b>{text}</b> },
+    // Small
+    { pattern: /---(.*?)---/g, parser: text => <span className='text-[0.75em]'>{text}</span> },
+    // Big
+    {
+        pattern: /\+\+\+(.*?)\+\+\+/g,
+        parser: text => <span className='text-[1.25em]'>{text}</span>,
+    },
     // Marked
     { pattern: /::(.*?)::/g, parser: text => <mark>{text}</mark> },
     // Shine
@@ -92,6 +99,8 @@ export const stripedElements = [
     { pattern: /__(.*?)__/g, parser: text => text },
     { pattern: /\/\/(.*?)\/\//g, parser: text => text },
     { pattern: /\*\*(.*?)\*\*/g, parser: text => text },
+    { pattern: /---(.*?)---/g, parser: text => text },
+    { pattern: /\+\+\+(.*?)\+\+\+/g, parser: text => text },
     { pattern: /::(.*?)::/g, parser: text => text },
     { pattern: /\$\$(.*?)\$\$/g, parser: text => text },
     { pattern: /\~\:(.*?)\:\~/g, parser: text => text },
@@ -110,31 +119,29 @@ export const stripedElements = [
 ];
 
 export const parseText = (text, elements) => {
-    // Handle escaped characters
     const unescapedText = text.replace(/\\([*~_/:\[\]$])/g, (_, char) => `\0${char}`);
 
-    let parsedElements = [unescapedText];
+    const processSegment = (segment, remainingElements) => {
+        if (typeof segment !== 'string' || remainingElements.length === 0) return segment;
 
-    elements.forEach(({ pattern, parser }) => {
-        parsedElements = parsedElements.flatMap(segment => {
-            if (typeof segment !== 'string') return segment;
-            const parts = [];
-            let match;
-            let lastIndex = 0;
+        const [{ pattern, parser }, ...rest] = remainingElements;
+        const parts = [];
+        let match;
+        let lastIndex = 0;
 
-            while ((match = pattern.exec(segment)) !== null) {
-                parts.push(segment.slice(lastIndex, match.index));
-                const [matcher, ...params] = match;
-                parts.push(parser(...params, matcher));
-                lastIndex = pattern.lastIndex;
-            }
+        while ((match = pattern.exec(segment)) !== null) {
+            parts.push(segment.slice(lastIndex, match.index));
+            const [matcher, ...params] = match;
+            parts.push(parser(...params, matcher));
+            lastIndex = pattern.lastIndex;
+        }
 
-            parts.push(segment.slice(lastIndex));
-            return parts;
-        });
-    });
+        parts.push(segment.slice(lastIndex));
+        return parts.flatMap(part => processSegment(part, rest));
+    };
 
-    // Restore escaped characters
+    let parsedElements = processSegment(unescapedText, elements);
+
     return parsedElements.map(segment =>
         typeof segment === 'string' ? segment.replace(/\0([*~_/:\[\]$])/g, '$1') : segment,
     );
