@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import { formatDistanceToNowStrict, format } from 'date-fns';
+import { formatDistanceToNowStrict, format, isBefore } from 'date-fns';
 import { es as locale } from 'date-fns/locale';
 import { Clock3 } from 'lucide-react';
 
@@ -10,6 +10,8 @@ import { getRandomSettings } from '@/modules/krystel/services/quotes';
 export default function CardItem({ item }) {
     const code = `${item.id}:${getRandomSettings()}`;
     const date = new Date(item.published_at + 'Z');
+
+    const datePrefix = isBefore(date, new Date()) ? 'hace ' : 'dentro de ';
 
     return (
         <div className='flex flex-col gap-4 items-start md:w-full py-4 border-t border-gray-200 text-sm'>
@@ -21,7 +23,7 @@ export default function CardItem({ item }) {
             </Link>
             <span className='text-gray-500 flex gap-1 items-center text-xs'>
                 <Clock3 size='0.85rem' />
-                {formatDistanceToNowStrict(date, { locale })} -{' '}
+                {datePrefix + formatDistanceToNowStrict(date, { locale })} -{' '}
                 {format(date, 'MMMM d, yyyy · h:mm aaa', { locale })}
             </span>
         </div>

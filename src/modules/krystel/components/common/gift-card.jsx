@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 import { Asterisk, Clock3, icons } from 'lucide-react';
-import { formatDistanceToNow } from 'date-fns';
+import { formatDistanceToNow, isBefore } from 'date-fns';
 import { es as locale } from 'date-fns/locale';
 
 import { cn } from '@/modules/core/helpers/utils';
@@ -48,6 +48,9 @@ export default function GiftCard({
     const greetings = configs?.greetings || useGreetings();
     const letter = configs?.letter;
     const LucideIcon = configs?.icon !== 'hidden' ? icons[configs?.icon] || icons[icon] : <></>;
+
+    const date = new Date(published_at + 'Z');
+    const datePrefix = isBefore(date, new Date()) ? 'hace ' : 'dentro de ';
 
     useEffect(() => {
         postView();
@@ -143,7 +146,7 @@ export default function GiftCard({
                     data-html2canvas-ignore
                 >
                     <Clock3 size='0.80rem' />
-                    {formatDistanceToNow(new Date(published_at + 'Z'), { locale })}
+                    {datePrefix + formatDistanceToNow(date, { locale })}
                 </div>
             )}
         </Card>
