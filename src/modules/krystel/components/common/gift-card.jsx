@@ -44,7 +44,8 @@ export default function GiftCard({
     const { configs, content } = extractConfigsAndContent(quote);
     const isLongText = replaceWithLongestSentence(content).length > 120;
     const greetings = configs?.greetings || useGreetings();
-    const LucideIcon = configs?.icon === 'hidden' ? <></> : icons[configs?.icon || icon];
+    const letter = configs?.letter;
+    const LucideIcon = configs?.icon !== 'hidden' ? icons[configs?.icon] || icons[icon] : <></>;
 
     useEffect(() => {
         postView();
@@ -54,6 +55,7 @@ export default function GiftCard({
         <Card
             border={configs?.border ? '' : border}
             scheme={scheme}
+            letter={letter}
             classNames={{
                 border: cn({ 'bg-none': configs?.border }, configs?.border),
                 content: cn(configs?.scheme),
@@ -70,40 +72,50 @@ export default function GiftCard({
                 </Portal>
             )}
 
-            {created_at && (
+            {!configs?.fullscreen && configs?.badge !== 'hidden' && !firstAppearance && (
                 <div
-                    className='fixed bottom-0 text-xs text-black flex gap-1 items-center scale-75 bg-white py-1 px-2 rounded-full opacity-80'
-                    data-html2canvas-ignore
+                    className={cn(
+                        'fade-in absolute top-2 right-2 flex items-center justify-center w-6 h-6 bg-pink-600 rounded-full',
+                        { 'right-auto top-6 left-1/2 -ml-3 scale-75': letter },
+                    )}
                 >
-                    <Clock3 size='0.80rem' />
-                    {formatDistanceToNow(new Date(created_at + 'Z'), { locale })}
-                </div>
-            )}
-
-            {!configs?.fullscreen && configs?.badge !== 'hidden' && firstAppearance && (
-                <div className='fade-in absolute top-2 right-2 flex items-center justify-center w-6 h-6 bg-pink-600 rounded-full'>
-                    <Asterisk size={24} className='text-white' />
-                </div>
-            )}
-
-            {!configs?.fullscreen && configs?.name !== 'hidden' && (
-                <p className='font-pacifico text-3xl text-center'>Krystel,</p>
-            )}
-
-            {!configs?.fullscreen && configs?.icon !== 'hidden' && (
-                <div className='block'>
-                    <LucideIcon size={56} className='text-current' />
+                    <Asterisk
+                        className={cn('text-white h-[56px] w-[56px]', { 'h-6 w-6': letter })}
+                    />
                 </div>
             )}
 
             <div
-                className={cn('font-delius text-center text-xl font-medium leading-snug', {
-                    'text-md': isLongText,
+                className={cn('flex flex-col items-center gap-8', {
+                    'w-full flex-row gap-2 justify-between': letter,
                 })}
             >
-                <center>
-                    <RichText>{content}</RichText>
-                </center>
+                {!configs?.fullscreen && configs?.name !== 'hidden' && (
+                    <p
+                        className={cn('font-pacifico text-3xl text-center', {
+                            'text-left text-xl': letter,
+                        })}
+                    >
+                        Krystel,
+                    </p>
+                )}
+
+                {!configs?.fullscreen && configs?.icon !== 'hidden' && (
+                    <div className={cn('block')}>
+                        <LucideIcon
+                            className={cn('text-current h-[56px] w-[56px]', { 'h-6 w-6': letter })}
+                        />
+                    </div>
+                )}
+            </div>
+
+            <div
+                className={cn('font-delius text-center text-xl font-medium leading-snug', {
+                    'text-md': isLongText,
+                    'text-left text-md text-balance leading-normal': letter,
+                })}
+            >
+                <RichText>{content}</RichText>
             </div>
 
             {!configs?.fullscreen && configs?.greetings !== 'hidden' && (
@@ -112,11 +124,25 @@ export default function GiftCard({
                         'font-pacifico text-xl text-center opacity-1 transition-all duration-300',
                         {
                             'opacity-0 blur-sm': greetings === '...',
+                            'text-md': letter,
                         },
                     )}
                 >
                     {greetings}
                 </p>
+            )}
+
+            {created_at && (
+                <div
+                    className={cn(
+                        'fixed bottom-0 text-xs text-black flex gap-1 items-center scale-75 bg-white py-1 px-2 rounded-full opacity-80',
+                        { 'relative bottom-auto scale-100 -ml-1': letter },
+                    )}
+                    data-html2canvas-ignore
+                >
+                    <Clock3 size='0.80rem' />
+                    {formatDistanceToNow(new Date(created_at + 'Z'), { locale })}
+                </div>
             )}
         </Card>
     );
