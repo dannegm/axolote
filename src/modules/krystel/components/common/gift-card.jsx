@@ -27,7 +27,7 @@ export default function GiftCard({
     border = '',
     scheme = 'bg-white text-gray-600',
     settings,
-    created_at,
+    published_at,
 }) {
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
@@ -134,7 +134,7 @@ export default function GiftCard({
                 </p>
             )}
 
-            {created_at && (
+            {published_at && (
                 <div
                     className={cn(
                         'fixed bottom-0 text-xs text-black flex gap-1 items-center scale-75 bg-white py-1 px-2 rounded-full opacity-80',
@@ -143,7 +143,7 @@ export default function GiftCard({
                     data-html2canvas-ignore
                 >
                     <Clock3 size='0.80rem' />
-                    {formatDistanceToNow(new Date(created_at + 'Z'), { locale })}
+                    {formatDistanceToNow(new Date(published_at + 'Z'), { locale })}
                 </div>
             )}
         </Card>

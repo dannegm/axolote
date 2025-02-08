@@ -9,7 +9,7 @@ import { getRandomSettings } from '@/modules/krystel/services/quotes';
 
 export default function CardItem({ item }) {
     const code = `${item.id}:${getRandomSettings()}`;
-    const date = new Date(item.created_at + 'Z');
+    const date = new Date(item.published_at + 'Z');
 
     return (
         <div className='flex flex-col gap-4 items-start md:w-full py-4 border-t border-gray-200 text-sm'>
