@@ -3,19 +3,18 @@ import { useQueryState, parseAsBoolean } from 'nuqs';
 import { useMutation } from '@tanstack/react-query';
 
 import useDebouncedCallback from '@/modules/core/hooks/use-debounced-callback';
-import { postAction } from '@/modules/krystel/actions/postAction';
+import { postPageViewAction } from '@/modules/krystel/actions/postPageViewAction';
 
-export default function usePostAction({ action, settings = 'none' }) {
+export default function usePageViewAction({ page }) {
     const [skipActions] = useQueryState('skip-actions', parseAsBoolean.withDefault(false));
 
     const mutation = useMutation({
-        mutationFn: postAction,
+        mutationFn: postPageViewAction,
     });
 
     return useDebouncedCallback(() => {
         if (skipActions) return;
-        const [quoteId] = settings.split(':');
         const userAgent = window.navigator.userAgent;
-        mutation.mutate({ action, quoteId, settings, userAgent });
+        mutation.mutate({ page, userAgent });
     }, 1000);
 }

@@ -1,6 +1,6 @@
 'use client';
 import { formatDistanceToNow } from 'date-fns';
-import { Clock3, ExternalLink } from 'lucide-react';
+import { Clock3, ExternalLink, BookMarked, MessageSquareQuote, SquareDashed } from 'lucide-react';
 
 import Badge from '@/modules/core/components/tremor/badge';
 import GiftCardPreview from '@/modules/krystel/components/common/gift-card-preview';
@@ -10,8 +10,24 @@ import { useState } from 'react';
 import { cn } from '@/modules/core/helpers/utils';
 import JsonViewer from '@/modules/core/components/common/json-viewer';
 
+const defaultIcon = <SquareDashed />;
+const pages = {
+    cards: {
+        icon: <BookMarked />,
+        label: 'Cards',
+        link: '/krystel/cards',
+    },
+    posts: {
+        icon: <MessageSquareQuote />,
+        label: 'Posts',
+        link: '/krystel/posts',
+    },
+};
+
 export default function LogItem({ item }) {
+    console.log(item);
     const [deleting, setDeleting] = useState(false);
+
     return (
         <div
             className={cn(
@@ -43,10 +59,22 @@ export default function LogItem({ item }) {
                     <DeleteLogButton id={item.id} onDelete={() => setDeleting(true)} />
                 </div>
                 <span className='flex-none w-full'>
-                    <GiftCardPreview quote={item.quotes.quote} code={item.metadata?.code} />
+                    {item.type !== 'page_view' && (
+                        <GiftCardPreview quote={item.quotes.quote} code={item.metadata?.code} />
+                    )}
+                    {item.type === 'page_view' && (
+                        <a href={pages[item.metadata?.page]?.link || '#'}>
+                            <div className='flex flex-row gap-2 p-2 items-center justify-start bg-white border-2 rounded-md shadow-sm'>
+                                {pages[item.metadata?.page]?.icon || defaultIcon}
+                                <span className='font-bold'>
+                                    {pages[item.metadata?.page]?.label || 'Página desconocida'}
+                                </span>
+                            </div>
+                        </a>
+                    )}
                 </span>
                 <span className='flex-none w-full'>
-                    <JsonViewer name='quote' data={item} />
+                    <JsonViewer name='payload' data={item} />
                 </span>
                 <span className='text-gray-500 flex gap-1 items-center'>
                     <Clock3 size='0.85rem' />

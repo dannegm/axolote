@@ -17,9 +17,9 @@ import useFirstAppearance from '@/modules/krystel/hooks/use-first-appearance';
 
 import { useGreetings } from '@/modules/krystel/services/greetings';
 
+import useTrackAction from '../../hooks/use-track-action';
 import RichText from './rich-text';
 import Card from './card';
-import useTrackAction from '../../hooks/use-track-action';
 
 export default function GiftCard({
     quote,
