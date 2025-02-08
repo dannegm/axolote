@@ -19,6 +19,7 @@ import { useGreetings } from '@/modules/krystel/services/greetings';
 
 import RichText from './rich-text';
 import Card from './card';
+import useTrackAction from '../../hooks/use-track-action';
 
 export default function GiftCard({
     quote,
@@ -31,6 +32,7 @@ export default function GiftCard({
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
 
+    useTrackAction();
     const postView = usePostAction({ action: 'view', settings });
 
     if (isElevenEleven()) {
