@@ -31,6 +31,10 @@ s {
     interpolate-size: allow-keywords;
 }
 
+.mask-gradient {
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0));
+}
+
 .fade-slide-up {
     opacity: 0;
     transform: translateY(20px);

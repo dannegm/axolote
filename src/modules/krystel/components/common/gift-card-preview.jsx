@@ -144,6 +144,7 @@ export default function GiftCardPreview({ quote, code, hidden = false, preventRe
 
     const { configs, content } = extractConfigsAndContent(quote);
     const greetings = configs?.greetings || '';
+    const letter = configs?.letter;
     const LucideIcon =
         configs?.icon === 'hidden' ? <></> : icons[configs?.icon || quoteSettings.icon];
 
@@ -190,8 +191,14 @@ export default function GiftCardPreview({ quote, code, hidden = false, preventRe
                             <LucideIcon className='text-current' />
                         </div>
                     )}
-                    <div className='mt-[2px] font-delius font-medium pr-4'>
-                        <RichText elements={customElements}>{content}</RichText>
+                    <div className={cn('mt-[2px] font-delius font-medium pr-4')}>
+                        <div
+                            className={cn('block', {
+                                'overflow-hidden line-clamp-4 mask-gradient': letter,
+                            })}
+                        >
+                            <RichText elements={customElements}>{content}</RichText>
+                        </div>
 
                         {greetings && <div className='mt-2 font-pacifico'>{greetings}</div>}
                     </div>
