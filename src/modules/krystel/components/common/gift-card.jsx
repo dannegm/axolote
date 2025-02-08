@@ -87,7 +87,7 @@ export default function GiftCard({
 
             <div
                 className={cn('flex flex-col items-center gap-8', {
-                    'w-full flex-row gap-2 justify-between': letter,
+                    'w-full flex-row gap-2 justify-between mb-8': letter,
                 })}
             >
                 {!configs?.fullscreen && configs?.name !== 'hidden' && (
@@ -124,7 +124,7 @@ export default function GiftCard({
                         'font-pacifico text-xl text-center opacity-1 transition-all duration-300',
                         {
                             'opacity-0 blur-sm': greetings === '...',
-                            'text-md': letter,
+                            'text-md mb-4 mt-4': letter,
                         },
                     )}
                 >
