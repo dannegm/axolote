@@ -112,7 +112,7 @@ export default function GiftCard({
             <div
                 className={cn('font-delius text-center text-xl font-medium leading-snug', {
                     'text-md': isLongText,
-                    'text-left text-md text-balance leading-normal': letter,
+                    'text-left text-sm text-balance leading-normal': letter,
                 })}
             >
                 <RichText>{content}</RichText>

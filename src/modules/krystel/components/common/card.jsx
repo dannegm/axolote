@@ -12,7 +12,7 @@ export default function Card({
             className={cn(
                 'gift-card fade-slide-up w-full max-w-sm aspect-[3/4] bg-gray-200 rounded-lg p-6 shadow-xl transition-all duration-300 ease-in-out',
                 classNames?.border,
-                { 'p-1 aspect-auto': letter },
+                { 'w-screen max-w-none p-1 aspect-auto': letter },
             )}
             style={{ backgroundImage: border }}
         >
