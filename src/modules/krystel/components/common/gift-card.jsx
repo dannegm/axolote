@@ -72,7 +72,7 @@ export default function GiftCard({
                 </Portal>
             )}
 
-            {!configs?.fullscreen && configs?.badge !== 'hidden' && !firstAppearance && (
+            {!configs?.fullscreen && configs?.badge !== 'hidden' && firstAppearance && (
                 <div
                     className={cn(
                         'fade-in absolute top-2 right-2 flex items-center justify-center w-6 h-6 bg-pink-600 rounded-full',
