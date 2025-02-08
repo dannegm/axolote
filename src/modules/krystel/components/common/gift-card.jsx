@@ -11,6 +11,7 @@ import {
     replaceWithLongestSentence,
 } from '@/modules/krystel/helpers/strings';
 
+import Portal from '@/modules/core/components/common/portal';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 import useFirstAppearance from '@/modules/krystel/hooks/use-first-appearance';
 
@@ -18,7 +19,6 @@ import { useGreetings } from '@/modules/krystel/services/greetings';
 
 import RichText from './rich-text';
 import Card from './card';
-import Portal from '@/modules/core/components/common/portal';
 
 export default function GiftCard({
     quote,
