@@ -19,28 +19,22 @@ export default function SpoilerText({ inPreview = false, preventReveal = false, 
     const toggleSpoiler = ev => {
         if (preventReveal) return;
 
-        console.log('executed?');
-
         setHidden(!hidden);
         playHush();
-
-        console.log('stopped?');
-
-        ev.preventDefault();
-        ev.stopPropagation();
 
         if (!inPreview) {
             postReveal();
         }
+
+        ev.preventDefault();
+        ev.stopPropagation();
     };
 
     useShakeDetector(() => {
-        console.log({ inPreview, preventReveal });
         if (inPreview || preventReveal) {
             return;
         }
 
-        console.log('passed?');
         toggleSpoiler();
     });
 
