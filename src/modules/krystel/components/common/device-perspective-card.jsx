@@ -1,4 +1,6 @@
 'use client';
+import { clamp } from '@/modules/core/helpers/maths';
+import { SparklesIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Sparkles from 'react-sparkle';
 
@@ -19,8 +21,8 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
     };
 
     const setRotationStyles = ({ xRotation, yRotation, xPercentage, yPercentage }) => {
-        document.body.style.setProperty('--x-rotation', `${xRotation}deg`);
-        document.body.style.setProperty('--y-rotation', `${yRotation}deg`);
+        document.body.style.setProperty('--x-rotation', `${clamp(xRotation, -3, 3)}deg`);
+        document.body.style.setProperty('--y-rotation', `${clamp(yRotation, -5, 5)}deg`);
         document.body.style.setProperty('--x', `${xPercentage * 100}%`);
         document.body.style.setProperty('--y', `${yPercentage * 100}%`);
     };
@@ -58,7 +60,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
         <div
             className={`wrapper relative transition-transform ease-out ${className}`}
             style={{
-                transform: 'rotateX(var(--x-rotation)) rotateY(var(--y-rotation))',
+                transform: 'rotateY(var(--x-rotation)) rotateY(var(--y-rotation))',
             }}
         >
             {children}
@@ -71,15 +73,12 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
             <div className='flare pointer-events-none absolute inset-0 bg-[radial-gradient(at_var(--x)_var(--y),rgba(255,255,255,0.3)_20%,transparent_80%)]' />
 
             {!permissionGranted && (
-                <button
-                    onClick={requestPermission}
-                    className='group absolute bottom-2 left-1/2 -translate-x-1/2 '
-                >
+                <button onClick={requestPermission} className='group absolute bottom-8 right-8'>
                     <div
-                        className='relative block bg-cyan-300 text-cyan-800 text-sm py-2 px-4 font-delius rounded-full shadow-lg group-hover:shadow-xl group-active:shadow-md'
+                        className='relative block bg-cyan-300 text-cyan-800 text-sm py-1 px-2 font-delius rounded-full shadow-lg group-hover:shadow-xl group-active:shadow-md'
                         data-html2canvas-ignore
                     >
-                        Activar resplandor
+                        <SparklesIcon size='1.2rem' />
                         <Sparkles color='teal' overflowPx={8} />
                     </div>
                 </button>
