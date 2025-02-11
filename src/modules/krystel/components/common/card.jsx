@@ -6,6 +6,7 @@ export default function Card({
     scheme = 'bg-white text-gray-600',
     children,
     letter,
+    frame,
 }) {
     return (
         <div
@@ -29,7 +30,11 @@ export default function Card({
                         scheme,
                         classNames?.content,
                         { 'h-auto justify-start items-start p-6 gap-2': letter },
+                        { 'bg-center bg-cover': frame },
                     )}
+                    style={{
+                        backgroundImage: `url(${frame})`,
+                    }}
                 >
                     {children}
                 </div>

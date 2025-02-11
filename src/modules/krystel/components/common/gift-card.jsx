@@ -47,6 +47,8 @@ export default function GiftCard({
     const isLongText = replaceWithLongestSentence(content).length > 120;
     const greetings = configs?.greetings || useGreetings();
     const letter = configs?.letter;
+    const frame = configs?.frame;
+    const dark = configs?.dark;
     const LucideIcon = configs?.icon !== 'hidden' ? icons[configs?.icon] || icons[icon] : <></>;
 
     const date = new Date(published_at + 'Z');
@@ -61,9 +63,13 @@ export default function GiftCard({
             border={configs?.border ? '' : border}
             scheme={scheme}
             letter={letter}
+            frame={frame}
             classNames={{
                 border: cn({ 'bg-none': configs?.border }, configs?.border),
-                content: cn(configs?.scheme),
+                content: cn(configs?.scheme, {
+                    'text-white [text-shadow:_1px_1px_8px_rgb(0_0_0_/_30%)]': frame,
+                    'text-black': dark,
+                }),
             }}
         >
             {configs?.bg && (
@@ -108,7 +114,10 @@ export default function GiftCard({
                 {!configs?.fullscreen && configs?.icon !== 'hidden' && (
                     <div className={cn('block')}>
                         <LucideIcon
-                            className={cn('text-current h-[56px] w-[56px]', { 'h-6 w-6': letter })}
+                            className={cn('text-current h-[56px] w-[56px]', {
+                                'h-6 w-6': letter,
+                                'drop-shadow-md': frame,
+                            })}
                         />
                     </div>
                 )}

@@ -25,7 +25,6 @@ const pages = {
 };
 
 export default function LogItem({ item }) {
-    console.log(item);
     const [deleting, setDeleting] = useState(false);
 
     return (

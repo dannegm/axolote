@@ -152,6 +152,8 @@ export default function GiftCardPreview({ quote, code, hidden = false, preventRe
     const { configs, content } = extractConfigsAndContent(quote);
     const greetings = configs?.greetings || '';
     const letter = configs?.letter;
+    const frame = configs?.frame;
+    const dark = configs?.dark;
     const LucideIcon =
         configs?.icon === 'hidden' ? <></> : icons[configs?.icon || quoteSettings.icon];
 
@@ -183,7 +185,15 @@ export default function GiftCardPreview({ quote, code, hidden = false, preventRe
                         'flex flex-row gap-2 items-start p-3 rounded',
                         quoteSettings.scheme,
                         configs?.scheme,
+                        {
+                            'text-white [text-shadow:_1px_1px_8px_rgb(0_0_0_/_30%)] bg-center bg-cover':
+                                frame,
+                            'text-black': dark,
+                        },
                     )}
+                    style={{
+                        backgroundImage: `url(${frame})`,
+                    }}
                 >
                     <div className='absolute top-2 right-2 flex flex-row gap-1'>
                         {isFirstAppearance && (
