@@ -23,8 +23,11 @@ export default function SpoilerText({ inPreview = false, preventReveal = false, 
 
         ev.preventDefault();
         ev.stopPropagation();
+
         setHidden(!hidden);
         playHush();
+
+        console.log('stopped?');
 
         if (!inPreview) {
             postReveal();
