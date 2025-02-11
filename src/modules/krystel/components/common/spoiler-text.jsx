@@ -19,6 +19,8 @@ export default function SpoilerText({ inPreview = false, preventReveal = false, 
     const toggleSpoiler = ev => {
         if (preventReveal) return;
 
+        console.log('executed?');
+
         ev.preventDefault();
         ev.stopPropagation();
         setHidden(!hidden);
@@ -34,6 +36,8 @@ export default function SpoilerText({ inPreview = false, preventReveal = false, 
         if (inPreview || preventReveal) {
             return;
         }
+
+        console.log('passed?');
         toggleSpoiler();
     });
 
