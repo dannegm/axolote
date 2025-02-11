@@ -30,6 +30,7 @@ export default function SpoilerText({ inPreview = false, preventReveal = false, 
     };
 
     useShakeDetector(() => {
+        console.log({ inPreview, preventReveal });
         if (inPreview || preventReveal) {
             return;
         }

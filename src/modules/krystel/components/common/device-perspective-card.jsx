@@ -73,7 +73,10 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
             <div className='flare pointer-events-none absolute inset-0 bg-[radial-gradient(at_var(--x)_var(--y),rgba(255,255,255,0.3)_20%,transparent_80%)]' />
 
             {!permissionGranted && (
-                <button onClick={requestPermission} className='group absolute bottom-8 right-8'>
+                <button
+                    onClick={requestPermission}
+                    className='group absolute bottom-8 right-8 z-max'
+                >
                     <div
                         className='relative block bg-cyan-300 text-cyan-800 text-sm py-1 px-2 font-delius rounded-full shadow-lg group-hover:shadow-xl group-active:shadow-md'
                         data-html2canvas-ignore
