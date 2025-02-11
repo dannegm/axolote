@@ -34,7 +34,7 @@ export default function MousePerspectiveCard({ children, className = '' }) {
             ref={el => {
                 if (el) boundingRef.current = el.getBoundingClientRect();
             }}
-            className={`wrapper group relative transition-transform ease-out hover:[transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation))_scale(1.1)] ${className}`}
+            className={`wrapper group relative transition-transform ease-out hover:[transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation))_scale(1.02)] ${className}`}
             onMouseMove={calculateRotationFromMouse}
         >
             {children}
