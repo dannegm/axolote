@@ -20,6 +20,8 @@ const stickerMap = {
     constellation: '/stickers/constellation.png',
     secret: '/stickers/secret.png',
     nyancat: '/stickers/nyancat.gif',
+    sushi: '/stickers/sushi.png',
+    cat: '/stickers/cat.png',
 };
 
 const customStyles = {
