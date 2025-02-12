@@ -57,9 +57,9 @@ export default function LogItem({ item }) {
                     <div className='flex-1' />
                     <DeleteLogButton id={item.id} onDelete={() => setDeleting(true)} />
                 </div>
-                <span className='flex-none w-full'>
-                    {item.type !== 'page_view' && (
-                        <GiftCardPreview quote={item.quotes.quote} code={item.metadata?.code} />
+                <div className='flex-none w-full'>
+                    {item.type !== 'page_view' && item.quote && (
+                        <GiftCardPreview quote={item.quote.quote} code={item.metadata?.code} />
                     )}
                     {item.type === 'page_view' && (
                         <a href={pages[item.metadata?.page]?.link || '#'}>
@@ -71,14 +71,14 @@ export default function LogItem({ item }) {
                             </div>
                         </a>
                     )}
-                </span>
-                <span className='flex-none w-full'>
+                </div>
+                <div className='flex-none w-full'>
                     <JsonViewer name='payload' data={item} />
-                </span>
-                <span className='text-gray-500 flex gap-1 items-center'>
+                </div>
+                <div className='text-gray-500 flex gap-1 items-center'>
                     <Clock3 size='0.85rem' />
                     {formatDistanceToNow(new Date(item.created_at + 'Z'))}
-                </span>
+                </div>
             </div>
         </div>
     );
