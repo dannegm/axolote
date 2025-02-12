@@ -49,6 +49,7 @@ export default function GiftCard({
     const letter = configs?.letter;
     const frame = configs?.frame;
     const dark = configs?.dark;
+    const showDate = configs?.date !== 'hidden';
     const LucideIcon = configs?.icon !== 'hidden' ? icons[configs?.icon] || icons[icon] : <></>;
 
     const date = new Date(published_at + 'Z');
@@ -146,7 +147,7 @@ export default function GiftCard({
                 </p>
             )}
 
-            {published_at && (
+            {showDate && published_at && (
                 <div
                     className={cn(
                         'fixed bottom-0 text-xs text-black flex gap-1 items-center scale-75 bg-white py-1 px-2 rounded-full opacity-80',
