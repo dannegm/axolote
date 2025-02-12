@@ -23,7 +23,7 @@ export const extractConfigs = (configsText = null) => {
         .map(i => i.trim())
         .reduce((a, c) => {
             const [key, ...value] = c.split(':');
-            a[key] = value.join(':') ?? true;
+            a[key] = value.join(':') !== '' ? value.join(':') : true;
             return a;
         }, {});
 };
@@ -34,6 +34,8 @@ export const extractConfigsAndContent = text => {
 
     if (match) {
         const configs = extractConfigs(match[1]);
+        console.log(match[1]);
+        console.log(configs);
         return {
             configs,
             content: text.slice(match[0].length).trim(),
