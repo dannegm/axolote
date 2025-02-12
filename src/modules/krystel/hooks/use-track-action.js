@@ -7,6 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import { trackAction } from '@/modules/krystel/actions/trackAction';
 
 export default function useTrackAction() {
+    if (typeof window === 'undefined') return;
     const [sid] = useLocalStorage('sid', nanoid());
     const [skipActions] = useQueryState('skip-actions', parseAsBoolean.withDefault(false));
 
