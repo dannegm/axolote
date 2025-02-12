@@ -1,11 +1,11 @@
 'use client';
-import { icons, Asterisk, EyeOff } from 'lucide-react';
+import { icons, Asterisk } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
 import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 
-import { useFirstAppearanceAnom } from '../../hooks/use-first-appearance';
+import { useFirstAppearanceAnom } from '@/modules/krystel/hooks/use-first-appearance';
 
 import RichText from './rich-text';
 import Sticker from './sticker';

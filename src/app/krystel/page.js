@@ -1,5 +1,8 @@
 import { RefreshCcw } from 'lucide-react';
 
+import ToastHost from '@/modules/core/components/common/toast-host';
+import Menu from '@/app/krystel/components/menu';
+
 import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
 import QuoteProvider from '@/modules/krystel/providers/quote-provider';
 
@@ -11,9 +14,6 @@ import LikeButton from '@/modules/krystel/components/common/like-button';
 import { SaveContainer, SaveButton } from '@/modules/krystel/components/common/save-element';
 import { parseText, stripedElements } from '@/modules/krystel/components/common/rich-text';
 import RemoteEventHandler from '@/modules/krystel/components/common/remote-event-handler';
-
-import ToastHost from '@/modules/core/components/common/toast-host';
-import Menu from './components/menu';
 
 export const dynamic = 'force-dynamic';
 

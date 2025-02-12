@@ -1,8 +1,8 @@
 'use client';
-import { clamp } from '@/modules/core/helpers/maths';
-import { SparklesIcon } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import Sparkles from 'react-sparkle';
+import { SparklesIcon } from 'lucide-react';
+import { clamp } from '@/modules/core/helpers/maths';
 
 export default function DevicePerspectiveCard({ children, className = '' }) {
     const [permissionGranted, setPermissionGranted] = useState(false);

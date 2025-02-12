@@ -5,19 +5,19 @@ import { formatDistanceToNow, isBefore } from 'date-fns';
 import { es as locale } from 'date-fns/locale';
 
 import { cn } from '@/modules/core/helpers/utils';
+import Portal from '@/modules/core/components/common/portal';
+
 import { isElevenEleven, isThreeInTheMorning } from '@/modules/krystel/helpers/dates';
 import {
     extractConfigsAndContent,
     replaceWithLongestSentence,
 } from '@/modules/krystel/helpers/strings';
 
-import Portal from '@/modules/core/components/common/portal';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 import useFirstAppearance from '@/modules/krystel/hooks/use-first-appearance';
-
+import useTrackAction from '@/modules/krystel/hooks/use-track-action';
 import { useGreetings } from '@/modules/krystel/services/greetings';
 
-import useTrackAction from '../../hooks/use-track-action';
 import RichText from './rich-text';
 import Card from './card';
 

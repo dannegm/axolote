@@ -1,14 +1,15 @@
 'use client';
+import { useState } from 'react';
 import { formatDistanceToNow } from 'date-fns';
 import { Clock3, ExternalLink, BookMarked, MessageSquareQuote, SquareDashed } from 'lucide-react';
 
+import { cn } from '@/modules/core/helpers/utils';
 import Badge from '@/modules/core/components/tremor/badge';
+import JsonViewer from '@/modules/core/components/common/json-viewer';
 import GiftCardPreview from '@/modules/krystel/components/common/gift-card-preview';
+
 import { UserAgentInfo } from './user-agent-info';
 import DeleteLogButton from './delete-log-button';
-import { useState } from 'react';
-import { cn } from '@/modules/core/helpers/utils';
-import JsonViewer from '@/modules/core/components/common/json-viewer';
 
 const defaultIcon = <SquareDashed />;
 const pages = {

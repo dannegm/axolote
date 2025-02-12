@@ -1,5 +1,6 @@
 'use client';
-import { useToast } from '../../providers/toast-provider';
+
+import { useToast } from '@/modules/core/providers/toast-provider';
 import Toast from './toast';
 
 export default function ToastHost() {

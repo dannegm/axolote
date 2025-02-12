@@ -1,9 +1,11 @@
 'use client';
 import { useLayoutEffect, useState } from 'react';
 import useSound from 'use-sound';
+
 import { cn } from '@/modules/core/helpers/utils';
-import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import useShakeDetector from '@/modules/core/hooks/use-shake-detector';
+
+import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 
 export default function Polaroid({ url, description }) {

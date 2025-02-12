@@ -1,4 +1,4 @@
-import '../globals.css';
+import '@/app/globals.css';
 import RootLayout from '@/modules/core/components/layout/root-layout';
 import Fonts from '@/modules/krystel/providers/fonts';
 

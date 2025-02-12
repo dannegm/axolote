@@ -3,11 +3,11 @@ import { useState } from 'react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import { randomPick } from '@/modules/core/helpers/arrays';
+import useAudio from '@/modules/core/hooks/use-audio';
 import Portal from '@/modules/core/components/common/portal';
 
 import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
-import useAudio from '@/modules/core/hooks/use-audio';
 
 import Balloons from './balloons';
 

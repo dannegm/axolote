@@ -1,7 +1,7 @@
 'use client';
+import { useState } from 'react';
 import { Check, Lightbulb, X } from 'lucide-react';
-import { cn } from '../../helpers/utils';
-import { useEffect, useState } from 'react';
+import { cn } from '@/modules/core/helpers/utils';
 
 const iconClassNames = 'flex w-8 h-8 items-center justify-center rounded-full bg-gray-200';
 

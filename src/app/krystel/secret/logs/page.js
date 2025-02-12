@@ -1,4 +1,4 @@
-import Menu from '../krystel/components/menu';
+import Menu from '@/app/krystel/components/menu';
 import QuotesLoader from './components/quotes-loader';
 
 export default function Logs() {

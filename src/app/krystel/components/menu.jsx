@@ -1,9 +1,10 @@
 'use client';
 
+import { useState } from 'react';
+import { BookMarked, Ellipsis, MessageSquareQuote, RefreshCcw } from 'lucide-react';
+
 import { cn } from '@/modules/core/helpers/utils';
 import CopyText from '@/modules/krystel/components/common/copy-text';
-import { BookMarked, Ellipsis, MessageSquareQuote, RefreshCcw } from 'lucide-react';
-import { useState } from 'react';
 
 const MenuItem = ({ primary, href, children }) => {
     return (

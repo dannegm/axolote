@@ -1,4 +1,4 @@
-import '../globals.css';
+import '@/app/globals.css';
 import KrystelLayout from '@/modules/krystel/components/layout/krystel-layout';
 
 export const metadata = {

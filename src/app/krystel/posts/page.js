@@ -1,5 +1,5 @@
+import Menu from '@/app/krystel/components/menu';
 import PageViewAction from '@/modules/krystel/components/common/page-view-action';
-import Menu from '../components/menu';
 import TrackAction from '@/modules/krystel/components/common/track-action';
 
 export function generateMetadata() {
