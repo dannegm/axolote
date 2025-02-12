@@ -34,8 +34,6 @@ export const extractConfigsAndContent = text => {
 
     if (match) {
         const configs = extractConfigs(match[1]);
-        console.log(match[1]);
-        console.log(configs);
         return {
             configs,
             content: text.slice(match[0].length).trim(),
