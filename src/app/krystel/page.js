@@ -4,7 +4,6 @@ import ToastHost from '@/modules/core/components/common/toast-host';
 import Menu from '@/app/krystel/components/menu';
 
 import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
-import QuoteProvider from '@/modules/krystel/providers/quote-provider';
 
 import PerspectiveCard from '@/modules/krystel/components/common/perspective-card';
 import GiftCard from '@/modules/krystel/components/common/gift-card';
@@ -78,13 +77,16 @@ export default async function Home({ searchParams }) {
     const quote = await fetchQuote(code);
 
     return (
-        <QuoteProvider quote={quote}>
+        <>
             <Menu code={quote.settings} />
             <ToastHost />
 
             <main className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
-                <SaveContainer className='-mt-4 px-5 py-10 md:px-10 md:py-20 transition-all'>
-                    <RemoteEventHandler />
+                <SaveContainer
+                    className='-mt-4 px-5 py-10 md:px-10 md:py-20 transition-all'
+                    quote={quote}
+                >
+                    <RemoteEventHandler quote={quote} />
 
                     <div
                         className='background fade-in-slow fixed inset-0 bg-gray-100 bg-center bg-[length:50%] opacity-50 transition-all'
@@ -106,7 +108,10 @@ export default async function Home({ searchParams }) {
                             <RefreshCcw size={20} />
                         </Button>
 
-                        <ShareButton url={`https://axolote.me/krystel?code=${quote.settings}`} />
+                        <ShareButton
+                            url={`https://axolote.me/krystel?code=${quote.settings}`}
+                            quote={quote}
+                        />
 
                         <SaveButton />
 
@@ -114,6 +119,6 @@ export default async function Home({ searchParams }) {
                     </div>
                 </SaveContainer>
             </main>
-        </QuoteProvider>
+        </>
     );
 }

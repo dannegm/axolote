@@ -12,7 +12,6 @@ import useAudio from '@/modules/core/hooks/use-audio';
 import Portal from '@/modules/core/components/common/portal';
 import Audio from '@/modules/core/components/common/audio';
 
-import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 
 import {
@@ -57,9 +56,8 @@ const useToggles = () => {
     return [toggles, handleToggle];
 };
 
-export default function RemoteEventHandler() {
+export default function RemoteEventHandler({ quote }) {
     const { showToast } = useToast();
-    const quote = useQuote();
     const { playPop, playShine, playJingle } = useSfx();
 
     const [toggles, handleToggle] = useToggles();

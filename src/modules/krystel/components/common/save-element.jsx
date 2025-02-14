@@ -6,27 +6,24 @@ import html2canvas from 'html2canvas-pro';
 import { Camera } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
-import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 
 import Button from './button';
 
 const SaveContext = createContext();
 
-export const SaveContainer = ({ className, children, onPrepare, onSave }) => {
+export const SaveContainer = ({ className, children, quote, onPrepare, onSave }) => {
     const html2canvasOptions = {
         allowTaint: true,
         backgroundColor: '#fafafa',
         useCORS: true,
         imageTimeout: 15000,
-        // scale: window?.devicePixelRatio,
     };
 
     const $container = useRef(null);
 
     const [playCamera] = useSound('./sounds/camera.mp3');
 
-    const quote = useQuote();
     const postSave = usePostAction({ action: 'save', settings: quote.settings });
 
     const handleSave = canvas => {

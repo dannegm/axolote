@@ -13,6 +13,8 @@ import {
     replaceWithLongestSentence,
 } from '@/modules/krystel/helpers/strings';
 
+import QuoteProvider from '@/modules/krystel/providers/quote-provider';
+
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 import useFirstAppearance from '@/modules/krystel/hooks/use-first-appearance';
 import useTrackAction from '@/modules/krystel/hooks/use-track-action';
@@ -22,12 +24,12 @@ import RichText from './rich-text';
 import Card from './card';
 
 export default function GiftCard({
-    quote,
-    icon,
+    quote = '...',
+    icon = 'Badge',
     border = '',
     scheme = 'bg-white text-gray-600',
-    settings,
-    published_at,
+    settings = 'none',
+    published_at = undefined,
 }) {
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
@@ -43,122 +45,128 @@ export default function GiftCard({
         quote = '({icon:hidden})[[[[ufo]]]]';
     }
 
+    const generatedGreetings = useGreetings();
+
     const { configs, content } = extractConfigsAndContent(quote);
     const isLongText = replaceWithLongestSentence(content).length > 120;
-    const greetings = configs?.greetings || useGreetings();
+    const greetings = configs?.greetings || generatedGreetings;
     const letter = configs?.letter;
     const frame = configs?.frame;
     const dark = configs?.dark;
     const showDate = configs?.date !== 'hidden';
     const LucideIcon = configs?.icon !== 'hidden' ? icons[configs?.icon] || icons[icon] : <></>;
 
-    const date = new Date(published_at + 'Z');
+    const date = published_at ? new Date(published_at + 'Z') : new Date();
     const datePrefix = isBefore(date, new Date()) ? 'hace ' : 'dentro de ';
 
     useEffect(() => {
-        postView();
+        if (settings !== 'none') {
+            postView();
+        }
     }, []);
 
     return (
-        <Card
-            border={configs?.border ? '' : border}
-            scheme={scheme}
-            letter={letter}
-            frame={frame}
-            classNames={{
-                border: cn({ 'bg-none': configs?.border }, configs?.border),
-                content: cn(configs?.scheme, {
-                    'text-white [text-shadow:_1px_1px_8px_rgb(0_0_0_/_30%)]': frame,
-                    'text-black': dark,
-                }),
-            }}
-        >
-            {configs?.bg && (
-                <Portal portalId='card-bg-portal'>
-                    <div
-                        className={cn(
-                            'fixed fade-in-custom inset-0 pointer-events-none transition-all duration-150',
-                            configs?.bg,
-                        )}
-                    />
-                </Portal>
-            )}
-
-            {!configs?.fullscreen && configs?.badge !== 'hidden' && firstAppearance && (
-                <div
-                    className={cn(
-                        'fade-in absolute top-2 right-2 flex items-center justify-center w-6 h-6 bg-pink-600 rounded-full',
-                        { 'right-auto top-6 left-1/2 -ml-3 scale-75': letter },
-                    )}
-                >
-                    <Asterisk
-                        className={cn('text-white h-[56px] w-[56px]', { 'h-6 w-6': letter })}
-                    />
-                </div>
-            )}
-
-            <div
-                className={cn('flex flex-col items-center gap-8', {
-                    'w-full flex-row gap-2 justify-between mb-8': letter,
-                })}
+        <QuoteProvider quote={quote}>
+            <Card
+                border={configs?.border ? '' : border}
+                scheme={scheme}
+                letter={letter}
+                frame={frame}
+                classNames={{
+                    border: cn({ 'bg-none': configs?.border }, configs?.border),
+                    content: cn(configs?.scheme, {
+                        'text-white [text-shadow:_1px_1px_8px_rgb(0_0_0_/_30%)]': frame,
+                        'text-black': dark,
+                    }),
+                }}
             >
-                {!configs?.fullscreen && configs?.name !== 'hidden' && (
-                    <p
-                        className={cn('font-pacifico text-3xl text-center', {
-                            'text-left text-xl': letter,
-                        })}
-                    >
-                        Krystel,
-                    </p>
+                {configs?.bg && (
+                    <Portal portalId='card-bg-portal'>
+                        <div
+                            className={cn(
+                                'fixed fade-in-custom inset-0 pointer-events-none transition-all duration-150',
+                                configs?.bg,
+                            )}
+                        />
+                    </Portal>
                 )}
 
-                {!configs?.fullscreen && configs?.icon !== 'hidden' && (
-                    <div className={cn('block')}>
-                        <LucideIcon
-                            className={cn('text-current h-[56px] w-[56px]', {
-                                'h-6 w-6': letter,
-                                'drop-shadow-md': frame,
-                            })}
+                {!configs?.fullscreen && configs?.badge !== 'hidden' && firstAppearance && (
+                    <div
+                        className={cn(
+                            'fade-in absolute top-2 right-2 flex items-center justify-center w-6 h-6 bg-pink-600 rounded-full',
+                            { 'right-auto top-6 left-1/2 -ml-3 scale-75': letter },
+                        )}
+                    >
+                        <Asterisk
+                            className={cn('text-white h-[56px] w-[56px]', { 'h-6 w-6': letter })}
                         />
                     </div>
                 )}
-            </div>
 
-            <div
-                className={cn('font-delius text-center text-xl font-medium leading-snug', {
-                    'text-md': isLongText,
-                    'text-left text-sm text-balance leading-normal': letter,
-                })}
-            >
-                <RichText>{content}</RichText>
-            </div>
-
-            {!configs?.fullscreen && configs?.greetings !== 'hidden' && (
-                <p
-                    className={cn(
-                        'font-pacifico text-xl text-center opacity-1 transition-all duration-300',
-                        {
-                            'opacity-0 blur-sm': greetings === '...',
-                            'text-md mb-4 mt-4': letter,
-                        },
-                    )}
-                >
-                    {greetings}
-                </p>
-            )}
-
-            {showDate && published_at && (
                 <div
-                    className={cn(
-                        'fixed bottom-0 text-xs text-black flex gap-1 items-center scale-75 bg-white py-1 px-2 rounded-full opacity-80',
-                        { 'relative bottom-auto scale-100 -ml-1': letter },
-                    )}
-                    data-html2canvas-ignore
+                    className={cn('flex flex-col items-center gap-8', {
+                        'w-full flex-row gap-2 justify-between mb-8': letter,
+                    })}
                 >
-                    <Clock3 size='0.80rem' />
-                    {datePrefix + formatDistanceToNow(date, { locale })}
+                    {!configs?.fullscreen && configs?.name !== 'hidden' && (
+                        <p
+                            className={cn('font-pacifico text-3xl text-center', {
+                                'text-left text-xl': letter,
+                            })}
+                        >
+                            Krystel,
+                        </p>
+                    )}
+
+                    {!configs?.fullscreen && configs?.icon !== 'hidden' && (
+                        <div className={cn('block')}>
+                            <LucideIcon
+                                className={cn('text-current h-[56px] w-[56px]', {
+                                    'h-6 w-6': letter,
+                                    'drop-shadow-md': frame,
+                                })}
+                            />
+                        </div>
+                    )}
                 </div>
-            )}
-        </Card>
+
+                <div
+                    className={cn('font-delius text-center text-xl font-medium leading-snug', {
+                        'text-md': isLongText,
+                        'text-left text-sm text-balance leading-normal': letter,
+                    })}
+                >
+                    <RichText>{content}</RichText>
+                </div>
+
+                {!configs?.fullscreen && configs?.greetings !== 'hidden' && (
+                    <p
+                        className={cn(
+                            'font-pacifico text-xl text-center opacity-1 transition-all duration-300',
+                            {
+                                'opacity-0 blur-sm': greetings === '...',
+                                'text-md mb-4 mt-4': letter,
+                            },
+                        )}
+                    >
+                        {greetings}
+                    </p>
+                )}
+
+                {showDate && published_at && (
+                    <div
+                        className={cn(
+                            'fixed bottom-0 text-xs text-black flex gap-1 items-center scale-75 bg-white py-1 px-2 rounded-full opacity-80',
+                            { 'relative bottom-auto scale-100 -ml-1': letter },
+                        )}
+                        data-html2canvas-ignore
+                    >
+                        <Clock3 size='0.80rem' />
+                        {datePrefix + formatDistanceToNow(date, { locale })}
+                    </div>
+                )}
+            </Card>
+        </QuoteProvider>
     );
 }

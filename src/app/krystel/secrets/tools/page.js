@@ -6,6 +6,6 @@ export function generateMetadata() {
     };
 }
 
-export default function Posts() {
+export default function Tools() {
     return <ToolsGrid />;
 }
