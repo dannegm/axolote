@@ -24,10 +24,10 @@ export default function Navbar({ classNames }) {
     const pathname = usePathname();
 
     const navItems = [
-        { name: 'Logs', href: '/krystel/secret/logs' },
-        { name: 'Editor', href: '/krystel/secret/editor' },
-        { name: 'Tools', href: '/krystel/secret/tools' },
-        { name: 'Settings', href: '/krystel/secret/settings' },
+        { name: 'Logs', href: '/krystel/secrets/logs' },
+        { name: 'Editor', href: '/krystel/secrets/editor' },
+        { name: 'Tools', href: '/krystel/secrets/tools' },
+        { name: 'Settings', href: '/krystel/secrets/settings' },
     ];
 
     return (
