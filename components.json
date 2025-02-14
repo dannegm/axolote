@@ -7,12 +7,12 @@
         "config": "tailwind.config.mjs",
         "css": "src/app/globals.css",
         "baseColor": "neutral",
-        "cssVariables": true,
+        "cssVariables": false,
         "prefix": ""
     },
     "aliases": {
-        "utils": "@/modules/shadcn/utils",
         "components": "@/modules/shadcn/components",
+        "utils": "@/modules/shadcn/lib/utils",
         "ui": "@/modules/shadcn/ui",
         "lib": "@/modules/shadcn/lib",
         "hooks": "@/modules/shadcn/hooks"

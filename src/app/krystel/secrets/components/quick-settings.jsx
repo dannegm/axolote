@@ -3,6 +3,9 @@ import { useLocalStorage } from '@uidotdev/usehooks';
 
 import { cn } from '@/modules/core/helpers/utils';
 
+import { Label } from '@/modules/shadcn/ui/label';
+import { Switch } from '@/modules/shadcn/ui/switch';
+
 export default function QuickSettings({ classNames }) {
     const [skipActions, setSkipActions] = useLocalStorage('settings:skip_actions', false);
 
@@ -14,12 +17,11 @@ export default function QuickSettings({ classNames }) {
             )}
         >
             <div className='flex flex-row justify-between items-center'>
-                <labe htmlFor='skip-actions'>Skip Actions</labe>
-                <input
-                    type='checkbox'
+                <Label htmlFor='skip-actions'>Skip Actions</Label>
+                <Switch
                     id='skip-actions'
                     checked={skipActions}
-                    onChange={() => setSkipActions(!skipActions)}
+                    onCheckedChange={() => setSkipActions(!skipActions)}
                 />
             </div>
         </div>

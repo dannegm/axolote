@@ -28,5 +28,5 @@ export default function useTrackAction() {
 
     useEffect(() => {
         registerSession();
-    }, [sid, skipActions, skipActionsSettings, registerSession]);
+    }, [sid]);
 }
