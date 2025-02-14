@@ -1,13 +1,13 @@
 'use client';
-import { useLocalStorage } from '@uidotdev/usehooks';
 
 import { cn } from '@/modules/core/helpers/utils';
+import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 
 import { Label } from '@/modules/shadcn/ui/label';
 import { Switch } from '@/modules/shadcn/ui/switch';
 
 export default function QuickSettings({ classNames }) {
-    const [skipActions, setSkipActions] = useLocalStorage('settings:skip_actions', false);
+    const [skipActions, setSkipActions] = useLocalStorage('settings:skip_actions_test', false);
 
     return (
         <div

@@ -2,8 +2,9 @@
 import { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { useQueryState, parseAsBoolean } from 'nuqs';
-import { useLocalStorage } from '@uidotdev/usehooks';
 import { useMutation } from '@tanstack/react-query';
+
+import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import { trackAction } from '@/modules/krystel/actions/trackAction';
 
 export default function useTrackAction() {

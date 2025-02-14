@@ -1,8 +1,8 @@
 'use client';
 import { useQueryState, parseAsBoolean } from 'nuqs';
-import { useLocalStorage } from '@uidotdev/usehooks';
 import { useMutation } from '@tanstack/react-query';
 
+import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import useDebouncedCallback from '@/modules/core/hooks/use-debounced-callback';
 import { postAction } from '@/modules/krystel/actions/postAction';
 
