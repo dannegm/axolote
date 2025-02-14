@@ -1,21 +1,44 @@
 'use client';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { Save, Loader2 } from 'lucide-react';
 
 import { Button } from '@/modules/shadcn/ui/button';
 import { Textarea } from '@/modules/shadcn/ui/textarea';
 
 import GiftCard from '@/modules/krystel/components/common/gift-card';
 import { cn } from '@/modules/core/helpers/utils';
+import useCreateQuoteAction from '@/modules/krystel/hooks/use-create-quote-action';
 
 const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
 const rich = (text = '') => text.replaceAll('\n', '||');
 
 export default function CardEditor() {
+    const router = useRouter();
     const [content, setContent] = useState('');
+    const [posting, setPosting] = useState(false);
+
+    const canSave = content !== '';
+
+    const createQuote = useCreateQuoteAction({
+        onSuccess: () => {
+            router.push('/krystel/secrets/cards');
+        },
+        onError: () => {
+            setPosting(false);
+        },
+    });
 
     const handleChange = ev => {
         setContent(ev.target.value);
+    };
+
+    const handleSubmit = () => {
+        if (!canSave) return;
+        setPosting(true);
+        createQuote(content);
     };
 
     return (
@@ -43,7 +66,16 @@ export default function CardEditor() {
                         value={content}
                         onChange={handleChange}
                     />
-                    <Button>Crear</Button>
+
+                    {posting ? (
+                        <Button type='button' disabled>
+                            <Loader2 className='animate-spin' /> Guardando
+                        </Button>
+                    ) : (
+                        <Button type='button' disabled={!canSave} onClick={handleSubmit}>
+                            <Save /> Guardar
+                        </Button>
+                    )}
                 </div>
             </div>
 
