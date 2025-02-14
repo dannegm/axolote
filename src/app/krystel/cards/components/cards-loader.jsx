@@ -2,7 +2,7 @@
 
 import DataLoader from '@/modules/core/components/common/data-loader';
 import Loader from '@/modules/core/components/common/loader';
-import CardsList from './cards-lists';
+import CardsList from './cards-list';
 
 const BASE_URL = 'https://endpoints.hckr.mx/quotes';
 

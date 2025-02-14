@@ -1,7 +1,7 @@
 import Menu from '@/app/krystel/components/menu';
 import PageViewAction from '@/modules/krystel/components/common/page-view-action';
 import TrackAction from '@/modules/krystel/components/common/track-action';
-import CardsLoader from './componentes/cards-loader';
+import CardsLoader from './components/cards-loader';
 
 export function generateMetadata() {
     return {

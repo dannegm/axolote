@@ -136,7 +136,13 @@ export const buildCustomElements = ({ preventReveal }) => [
     },
 ];
 
-export default function GiftCardPreview({ quote, code, hidden = false, preventReveal = false }) {
+export default function GiftCardPreview({
+    quote,
+    code,
+    hidden = false,
+    preview = false,
+    preventReveal = false,
+}) {
     let quoteSettings = getRandomQuote();
 
     const customElements = buildCustomElements({ preventReveal });
@@ -164,6 +170,8 @@ export default function GiftCardPreview({ quote, code, hidden = false, preventRe
                 {
                     'bg-none': configs?.bg,
                     'blur-sm select-none': hidden,
+                    'blur-none md:blur-sm md:hover:blur-none ring-4 md:ring-0 ring-slate-400 ring-offset-4 md:ring-offset-0 opacity-60 md:opacity-100':
+                        preview && hidden,
                 },
             )}
             style={{ backgroundImage: configs?.bg ? '' : quoteSettings.bg }}
