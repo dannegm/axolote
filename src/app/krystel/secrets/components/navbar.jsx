@@ -25,8 +25,8 @@ export default function Navbar({ classNames }) {
 
     const navItems = [
         { name: 'Logs', href: '/krystel/secrets/logs' },
-        { name: 'Editor', href: '/krystel/secrets/editor' },
         { name: 'Tools', href: '/krystel/secrets/tools' },
+        { name: 'Editor', href: '/krystel/secrets/editor' },
         { name: 'Settings', href: '/krystel/secrets/settings' },
     ];
 

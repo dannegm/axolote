@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const APP_TOPIC = process.env.NEXT_PUBLIC_APP_TOPIC;
 
-class Ntfy {
+export class Ntfy {
     constructor(topic) {
         this.topic = topic;
 
