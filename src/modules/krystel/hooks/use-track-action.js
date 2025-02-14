@@ -9,19 +9,24 @@ import { trackAction } from '@/modules/krystel/actions/trackAction';
 export default function useTrackAction() {
     if (typeof window === 'undefined') return;
     const [sid] = useLocalStorage('sid', nanoid());
+    const [skipActionsSettings] = useLocalStorage('settings:skip_actions', false);
     const [skipActions] = useQueryState('skip-actions', parseAsBoolean.withDefault(false));
 
     const mutation = useMutation({
         mutationFn: trackAction,
     });
 
+    const registerSession = () => {
+        if (skipActions || skipActionsSettings) return;
+
+        mutation.mutate({
+            sid,
+            userAgent: window.navigator.userAgent,
+            referrer: document.referrer,
+        });
+    };
+
     useEffect(() => {
-        if (!skipActions) {
-            mutation.mutate({
-                sid,
-                userAgent: window.navigator.userAgent,
-                referrer: document.referrer,
-            });
-        }
-    }, [sid]);
+        registerSession();
+    }, [sid, skipActions, skipActionsSettings, registerSession]);
 }

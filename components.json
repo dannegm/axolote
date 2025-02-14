@@ -10,5 +10,12 @@
         "cssVariables": true,
         "prefix": ""
     },
+    "aliases": {
+        "utils": "@/modules/shadcn/utils",
+        "components": "@/modules/shadcn/components",
+        "ui": "@/modules/shadcn/ui",
+        "lib": "@/modules/shadcn/lib",
+        "hooks": "@/modules/shadcn/hooks"
+    },
     "iconLibrary": "lucide"
 }
