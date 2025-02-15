@@ -11,7 +11,7 @@ export default function Card({
     return (
         <div
             className={cn(
-                'gift-card fade-slide-up w-full max-w-sm aspect-[3/4] p-6 overflow-hidden bg-gray-200 rounded-lg shadow-xl transition-all duration-300 ease-in-out',
+                'gift-card fade-slide-up flex w-full max-w-sm aspect-[3/4] p-6 bg-gray-200 rounded-lg shadow-xl transition-all duration-300 ease-in-out',
                 classNames?.border,
                 { 'max-w-none w-[360px] p-1 aspect-auto': letter },
             )}
@@ -19,7 +19,7 @@ export default function Card({
         >
             <div
                 className={cn(
-                    'w-full h-full rounded overflow-hidden bg-white text-gray-800 shadow-xl',
+                    'flex-1 w-full h-full rounded overflow-hidden bg-white text-gray-800 shadow-xl',
                     classNames?.container,
                     { 'h-auto': letter },
                 )}
