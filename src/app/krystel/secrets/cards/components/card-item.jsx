@@ -25,7 +25,7 @@ export default function CardItem({ item }) {
     return (
         <div
             className={cn(
-                'flex flex-col h-auto gap-4 items-start w-full py-4 border-t border-gray-200 text-sm',
+                'flex flex-col h-auto gap-4 items-start w-full py-4 border-t border-gray-200 text-sm transition-all duration-150',
                 {
                     'opacity-0 h-0 overflow-hidden': deleting,
                 },
@@ -33,7 +33,7 @@ export default function CardItem({ item }) {
         >
             <div className='flex flex-row gap-4 items-start justify-center w-full'>
                 <Link
-                    className='bg-slate-200 hover:bg-slate-700 text-slate-600 hover:text-white flex gap-2 text-xs items-center px-2 font-bold rounded-md transition-all duration-150'
+                    className='bg-slate-200 hover:bg-slate-700 text-slate-600 hover:text-white flex gap-2 text-xs items-center py-1 px-2 font-bold rounded-md transition-all duration-150'
                     href={`/krystel?code=${code}&skip-actions=true`}
                     target='_blank'
                 >
@@ -62,7 +62,7 @@ export default function CardItem({ item }) {
                 <div className='text-gray-500 flex gap-1 items-center text-xs'>
                     <Clock3 size='0.85rem' />
                     <span>
-                        {datePrefix + formatDistanceToNowStrict(date, { locale })} -
+                        {datePrefix + formatDistanceToNowStrict(date, { locale })} -{' '}
                         {format(date, 'MMMM d, yyyy · h:mm aaa', { locale })}
                     </span>
                 </div>

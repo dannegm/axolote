@@ -166,7 +166,7 @@ export default function GiftCardPreview({
     return (
         <div
             className={cn(
-                'relative overflow-hidden bg-gray-100 bg-center bg-[length:50%] p-2 rounded-md shadow-xl',
+                'relative overflow-hidden bg-gray-100 bg-center bg-[length:50%] p-2 rounded-md shadow-xl transition-all duration-150',
                 {
                     'bg-none': configs?.bg,
                     'blur-sm select-none': hidden,
