@@ -31,6 +31,10 @@ export default function CardEditor() {
         },
     });
 
+    const prepare = content => {
+        return content.replaceAll('\n', '\n||');
+    };
+
     const handleChange = ev => {
         setContent(ev.target.value);
     };
@@ -38,7 +42,8 @@ export default function CardEditor() {
     const handleSubmit = () => {
         if (!canSave) return;
         setPosting(true);
-        createQuote(content);
+        const preparedContent = prepare(content);
+        createQuote(preparedContent);
     };
 
     return (
