@@ -11,7 +11,7 @@ export default function Card({
     return (
         <div
             className={cn(
-                'gift-card fade-slide-up relative flex w-full max-w-sm aspect-[3/4] p-6 bg-gray-200 rounded-lg shadow-xl transition-all duration-300 ease-in-out',
+                'gift-card fade-slide-up flex w-full max-w-sm aspect-[3/4] p-6 bg-gray-200 rounded-lg shadow-xl transition-all duration-300 ease-in-out',
                 classNames?.border,
                 { 'max-w-none w-[360px] p-1 aspect-auto': letter },
             )}
