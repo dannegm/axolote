@@ -25,6 +25,7 @@ export default function Settings() {
     );
 
     const [skipActions, setSkipActions] = useLocalStorage('settings:skip_actions', false);
+    const [debugMode, setDebugMode] = useLocalStorage('settings:debug_mode', false);
 
     return (
         <>
@@ -57,6 +58,13 @@ export default function Settings() {
                         onCheckedChange={() => setSkipActions(!skipActions)}
                     />
                 )}
+
+                <SwitchOption
+                    id='settings:debug_mode'
+                    label='Debug Mode'
+                    checked={debugMode}
+                    onCheckedChange={() => setDebugMode(!debugMode)}
+                />
             </div>
         </>
     );

@@ -25,6 +25,7 @@ const MenuItem = ({ primary, href, children }) => {
 };
 
 const MenuContent = ({ className, code }) => {
+    const [debugMode] = useLocalStorage('settings:debug_mode', false);
     const [showSecrets] = useLocalStorage('settings:show_secrets', false);
 
     return (
@@ -45,14 +46,14 @@ const MenuContent = ({ className, code }) => {
                 <div className='flex justify-center'>
                     <Link
                         className='px-3 py-1 bg-black text-white font-pacifico rounded-lg transition-all duration-150 hover:scale-105 active:scale-95'
-                        href='/krystel/secrets/logs'
+                        href='/krystel/secrets/tools'
                     >
                         Secrets.
                     </Link>
                 </div>
             )}
 
-            {code && (
+            {code && debugMode && (
                 <div className='flex justify-center'>
                     <CopyText content={`https://axolote.me/krystel?code=${code}`}>{code}</CopyText>
                 </div>
