@@ -50,7 +50,6 @@ export default function CardItem({ item }) {
                     code={code}
                     hidden={!item.show}
                     preview
-                    preventReveal
                 />
             </div>
 
