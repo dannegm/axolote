@@ -1,18 +1,14 @@
 # Ideas para seguir añadiendo
 
 -   [x] Un componente que vaya poniendo muchas palabras rápidamente, tipo
-
-    `|amor|deseo|pasion|`
-
--   [ ] Una forma de notificar cuando inicia sesión la muchacha, que notifique una sola vez.
--   [ ] Tracking de impresion de página, duración de la sesión
-
+-   [x] Una forma de notificar cuando inicia sesión la muchacha, que notifique una sola vez.
+-   [x] Tracking de impresion de página, duración de la sesión
 -   [ ] Una forma de interactuar mandandole eventos
-    -   [ ] Un panel con botones
+    -   [x] Un panel con botones
     -   [x] Mandar globitos con mensajes
     -   [ ] Mandar vibraciones
     -   [x] Mandar particulas
-    -   [ ] Mandar sonidos
+    -   [ ] Mandar notificaciones con mensajes
     -   [ ] Mandar configuraciones (?) Cambios de fondo, borde y así
     -   [ ] Mandar zumbido
     -   [ ] Mandar notificación
@@ -39,6 +35,8 @@
     -   [ ] De lluvia
     -   [ ] De fiesta
     -   [ ] De lluvia de estrellas
+    -   [ ] De fuego
+    -   [ ] Degradados
     -   [ ] Gifs
 -   [ ] Pequeños jueguitos tipo los de tiktok
     -   [ ] Seguir el punto con el dedo, final sorpresa?
@@ -54,8 +52,7 @@
     -   [ ] Un cómo se siente hoy
     -   [ ] Algo que le guste
     -   [ ] Opción para dibujar
--   [X] Un componente de configuraciones, para por ejemplo
-
+-   [x] Un componente de configuraciones, para por ejemplo
     -   [x] quitar el icono
     -   [x] forzar un icono
     -   [x] quitar el nombre
@@ -66,7 +63,27 @@
     -   [x] Cambiar el esquema de colores
     -   [x] Cambiar el borde
     -   [x] La insignia de primera vez
+    -   [ ] Cambiar la tipografía
+-   [ ] Añadir opción de redirigir, al dar click en el botón de another, en lugar de sacar another, que rediriga al target
+-   [ ] Añadir botones a links o acciones, programables
 
-    ({ icon:hidden/Id | greetings:hidden/texto | name:hidden | fullscreen | badge:hidden })
-    ({icon:hidden})
-    ({icon:Snowflake})
+-   [x] Editor
+    -   [ ] Añadir pestañas (Contenido, Diseño, Avanzado)
+    -   [ ] Contenido
+        -   [ ] Añadir botones WYSIWYG
+        -   [ ] Añadir opción de subir fotos
+        -   [ ] Selector de stickers
+        -   [ ] Opción de subir sticker
+        -   [ ] Selector de efectos
+    -   [ ] Diseño
+        -   [ ] Selector de fondos
+        -   [ ] Selector de bordes
+        -   [ ] Selector de schemes
+    -   [ ] Avanzado
+        -   [ ] Selector de iconos
+        -   [ ] Selector de fondos
+        -   [ ] Selector de bordes
+        -   [ ] Selector de schemas
+        -   [ ] Añadir saludo
+        -   [ ] Es una carta
+        -   [ ] Es un frame

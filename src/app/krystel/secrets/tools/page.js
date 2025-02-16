@@ -1,3 +1,4 @@
+import Settings from './components/settings';
 import ToolsGrid from './components/tools-grid';
 
 export function generateMetadata() {
@@ -7,5 +8,10 @@ export function generateMetadata() {
 }
 
 export default function Tools() {
-    return <ToolsGrid />;
+    return (
+        <div className='pt-4 pb-16'>
+            <ToolsGrid />
+            <Settings />
+        </div>
+    );
 }

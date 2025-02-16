@@ -1,14 +1,16 @@
 'use client';
 
+import Link from 'next/link';
 import { useState } from 'react';
 import { BookMarked, Ellipsis, MessageSquareQuote, RefreshCcw } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
+import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import CopyText from '@/modules/krystel/components/common/copy-text';
 
 const MenuItem = ({ primary, href, children }) => {
     return (
-        <a
+        <Link
             className={cn(
                 'flex flex-col items-center gap-1 font-sans text-xs w-24 py-3 rounded-full hover:bg-gray-200 active:bg-slate-300 transition-all',
                 {
@@ -18,11 +20,13 @@ const MenuItem = ({ primary, href, children }) => {
             href={href}
         >
             {children}
-        </a>
+        </Link>
     );
 };
 
 const MenuContent = ({ className, code }) => {
+    const [showSecrets] = useLocalStorage('settings:show_secrets', false);
+
     return (
         <div className={cn('flex flex-col gap-2', className)}>
             <div className='flex flex-row items-center justify-evenly'>
@@ -36,6 +40,17 @@ const MenuContent = ({ className, code }) => {
                     <MessageSquareQuote />
                 </MenuItem>
             </div>
+
+            {showSecrets && (
+                <div className='flex justify-center'>
+                    <Link
+                        className='px-3 py-1 bg-black text-white font-pacifico rounded-lg transition-all duration-150 hover:scale-105 active:scale-95'
+                        href='/krystel/secrets/logs'
+                    >
+                        Secrets.
+                    </Link>
+                </div>
+            )}
 
             {code && (
                 <div className='flex justify-center'>

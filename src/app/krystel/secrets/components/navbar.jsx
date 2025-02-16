@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/modules/core/helpers/utils';
+import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 
 const NavLink = ({ className, href, active, children }) => {
     return (
@@ -22,18 +23,22 @@ const NavLink = ({ className, href, active, children }) => {
 
 export default function Navbar({ classNames }) {
     const pathname = usePathname();
+    const [showLogs] = useLocalStorage('settings:show_logs', false);
 
     const navItems = [
-        { name: 'Logs', href: '/krystel/secrets/logs' },
         { name: 'Tools', href: '/krystel/secrets/tools' },
         { name: 'Editor', href: '/krystel/secrets/editor' },
         { name: 'Cards', href: '/krystel/secrets/cards' },
     ];
 
+    if (showLogs) {
+        navItems.unshift({ name: 'Logs', href: '/krystel/secrets/logs' });
+    }
+
     return (
         <nav
             className={cn(
-                'sticky top-4 z-max flex flex-row gap-1 p-2 bg-black text-white rounded-md',
+                'sticky top-4 z-[100] flex flex-row gap-1 p-2 bg-black text-white rounded-md',
                 classNames?.container,
             )}
         >

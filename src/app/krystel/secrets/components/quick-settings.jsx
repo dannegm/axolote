@@ -8,6 +8,9 @@ import { Switch } from '@/modules/shadcn/ui/switch';
 
 export default function QuickSettings({ classNames }) {
     const [skipActions, setSkipActions] = useLocalStorage('settings:skip_actions', false);
+    const [showQuickSettings] = useLocalStorage('settings:show_quick_settings', false);
+
+    if (!showQuickSettings) return null;
 
     return (
         <div

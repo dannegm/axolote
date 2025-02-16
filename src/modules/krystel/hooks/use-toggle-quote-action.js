@@ -9,7 +9,5 @@ export default function useToggleQuoteAction() {
         onSettled: () => queryClient.invalidateQueries({ queryKey: ['cards'] }),
     });
 
-    return (quoteId, show) => {
-        mutation.mutate({ quoteId, show });
-    };
+    return mutation;
 }
