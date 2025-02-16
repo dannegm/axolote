@@ -5,6 +5,7 @@ export default function DataLoader({
     params,
     tags = [],
     loader = null,
+    preventRefetch = false,
     children = () => null,
 } = {}) {
     const { data, error, isLoading } = useQuery({
@@ -17,6 +18,11 @@ export default function DataLoader({
 
             return resp.json();
         },
+        refetchOnWindowFocus: !preventRefetch,
+        refetchOnReconnect: !preventRefetch,
+        refetchOnMount: !preventRefetch,
+        refetchInterval: !preventRefetch,
+        refetchIntervalInBackground: !preventRefetch,
     });
 
     if (isLoading) {

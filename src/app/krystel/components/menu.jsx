@@ -6,7 +6,7 @@ import { BookMarked, Ellipsis, MessageSquareQuote, RefreshCcw } from 'lucide-rea
 
 import { cn } from '@/modules/core/helpers/utils';
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
-import CopyText from '@/modules/krystel/components/common/copy-text';
+import ClientOnly from '@/modules/core/components/common/client-only';
 
 const MenuItem = ({ primary, href, children }) => {
     return (
@@ -24,8 +24,7 @@ const MenuItem = ({ primary, href, children }) => {
     );
 };
 
-const MenuContent = ({ className, code }) => {
-    const [debugMode] = useLocalStorage('settings:debug_mode', false);
+const MenuContent = ({ className }) => {
     const [showSecrets] = useLocalStorage('settings:show_secrets', false);
 
     return (
@@ -52,21 +51,15 @@ const MenuContent = ({ className, code }) => {
                     </Link>
                 </div>
             )}
-
-            {code && debugMode && (
-                <div className='flex justify-center'>
-                    <CopyText content={`https://axolote.me/krystel?code=${code}`}>{code}</CopyText>
-                </div>
-            )}
         </div>
     );
 };
 
-export default function Menu({ code }) {
+export default function Menu() {
     const [open, setOpen] = useState(false);
 
     return (
-        <>
+        <ClientOnly>
             {open && (
                 <div
                     className='fixed z-max inset-0 cursor-pointer bg-black backdrop-blur-md end-opacity-[0.3] fade-in-custom'
@@ -95,10 +88,9 @@ export default function Menu({ code }) {
                                 'w-80 h-auto pb-2 opacity-100': open,
                             },
                         )}
-                        code={code}
                     />
                 </div>
             </div>
-        </>
+        </ClientOnly>
     );
 }

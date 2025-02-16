@@ -1,70 +1,19 @@
-import { RefreshCcw } from 'lucide-react';
-
-import ToastHost from '@/modules/core/components/common/toast-host';
 import Menu from '@/app/krystel/components/menu';
-
-import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
-
-import PerspectiveCard from '@/modules/krystel/components/common/perspective-card';
-import GiftCard from '@/modules/krystel/components/common/gift-card';
-import Button from '@/modules/krystel/components/common/button';
-import ShareButton from '@/modules/krystel/components/common/share-button';
-import LikeButton from '@/modules/krystel/components/common/like-button';
-import { SaveContainer, SaveButton } from '@/modules/krystel/components/common/save-element';
-import { parseText, stripedElements } from '@/modules/krystel/components/common/rich-text';
-import RemoteEventHandler from '@/modules/krystel/components/common/remote-event-handler';
+import ToastHost from '@/modules/core/components/common/toast-host';
+import QuoteLoader from './components/quote-loader';
 
 export const dynamic = 'force-dynamic';
 
-const QUOTES_API_URL = 'https://endpoints.hckr.mx/quotes/krystel/pick';
-
-const fetchQuote = async (code = undefined) => {
-    if (code) {
-        const [quoteId, ...remaining] = code.split(':');
-        const response = await fetch(`${QUOTES_API_URL}?quote.id=${quoteId}`);
-        const data = await response.json();
-
-        const settings = quoteFromSettings(remaining.join(':'));
-        const settingsCode = `${data.id}:${settings.settings}`;
-
-        return {
-            ...settings,
-            ...data,
-            settings: settingsCode,
-        };
-    }
-
-    const response = await fetch(QUOTES_API_URL);
-    const data = await response.json();
-
-    const settings = getRandomQuote();
-    const settingsCode = `${data.id}:${settings.settings}`;
-
-    return {
-        ...settings,
-        ...data,
-        settings: settingsCode,
-    };
-};
-
 export async function generateMetadata({ searchParams }) {
     const { code } = await searchParams;
-    const quote = await fetchQuote(code);
-
-    const description = code
-        ? parseText(quote.quote, stripedElements)
-        : 'Entra aquí para encontrar un mensaje especial.';
-
-    const url = code
-        ? `https://axolote.me/krystel?code=${quote.settings}`
-        : `https://axolote.me/krystel`;
+    const url = code ? `https://axolote.me/krystel?code=${code}` : `https://axolote.me/krystel`;
 
     return {
         title: 'Krystel',
-        description,
+        description: 'Entra aquí para encontrar un mensaje especial.',
         openGraph: {
             title: 'Krystel',
-            description,
+            description: 'Entra aquí para encontrar un mensaje especial.',
             url,
             type: 'website',
             locale: 'en_US',
@@ -72,53 +21,12 @@ export async function generateMetadata({ searchParams }) {
     };
 }
 
-export default async function Home({ searchParams }) {
-    const { code } = await searchParams;
-    const quote = await fetchQuote(code);
-
+export default function Krystel() {
     return (
         <>
-            <Menu code={quote.settings} />
+            <Menu />
             <ToastHost />
-
-            <main className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
-                <SaveContainer
-                    className='-mt-4 px-5 py-10 md:px-10 md:py-20 transition-all'
-                    quote={quote}
-                >
-                    <RemoteEventHandler quote={quote} />
-
-                    <div
-                        className='background fade-in-slow fixed inset-0 bg-gray-100 bg-center bg-[length:50%] opacity-50 transition-all'
-                        style={{ backgroundImage: quote.bg }}
-                    />
-
-                    <div id='global-bg-portal' />
-                    <div id='card-bg-portal' />
-
-                    <PerspectiveCard>
-                        <GiftCard {...quote} />
-                    </PerspectiveCard>
-
-                    <div
-                        className='relative z-10 flex flex-row justify-center items-center m-4 gap-4'
-                        data-html2canvas-ignore
-                    >
-                        <Button as='a' href='/krystel'>
-                            <RefreshCcw size={20} />
-                        </Button>
-
-                        <ShareButton
-                            url={`https://axolote.me/krystel?code=${quote.settings}`}
-                            quote={quote}
-                        />
-
-                        <SaveButton />
-
-                        <LikeButton {...quote} />
-                    </div>
-                </SaveContainer>
-            </main>
+            <QuoteLoader />
         </>
     );
 }
