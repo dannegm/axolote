@@ -27,6 +27,15 @@ export default function Settings() {
     const [skipActions, setSkipActions] = useLocalStorage('settings:skip_actions', false);
     const [debugMode, setDebugMode] = useLocalStorage('settings:debug_mode', false);
 
+    const [includesFuture, setIncludesFuture] = useLocalStorage(
+        'settings:cards:includes_future',
+        false,
+    );
+    const [includesDeleted, setIncludesDeleted] = useLocalStorage(
+        'settings:cards:includes_deleted',
+        false,
+    );
+
     return (
         <>
             <h2 className='font-bold text-xl mt-4'>Settings</h2>
@@ -64,6 +73,18 @@ export default function Settings() {
                     label='Debug Mode'
                     checked={debugMode}
                     onCheckedChange={() => setDebugMode(!debugMode)}
+                />
+                <SwitchOption
+                    id='settings:cards:includes_future'
+                    label='Includes Future Cards'
+                    checked={includesFuture}
+                    onCheckedChange={() => setIncludesFuture(!includesFuture)}
+                />
+                <SwitchOption
+                    id='settings:cards:includes_deleted'
+                    label='Includes Deleted Cards'
+                    checked={includesDeleted}
+                    onCheckedChange={() => setIncludesDeleted(!includesDeleted)}
                 />
             </div>
         </>
