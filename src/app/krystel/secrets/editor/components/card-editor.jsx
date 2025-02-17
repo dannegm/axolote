@@ -15,7 +15,7 @@ import { Textarea } from '@/modules/shadcn/ui/textarea';
 import useCreateQuoteAction from '@/modules/krystel/hooks/use-create-quote-action';
 import GiftCard from '@/modules/krystel/components/common/gift-card';
 
-const loremIpsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+const loremIpsum = '████   ████   ██||███████   ██████||████   ██████';
 
 const rich = (text = '') => text.replaceAll('\n', '||');
 
@@ -92,7 +92,7 @@ export default function CardEditor() {
                             )}
                         >
                             <Textarea
-                                className='bg-white min-h-24 max-h-64 field-sizing-content'
+                                className='bg-white min-h-24 max-h-64 field-sizing-content placeholder:text-gray-300'
                                 placeholder='Cuéntale a Krys lo mucho que la amas.'
                                 value={content}
                                 onChange={handleChange}
@@ -149,7 +149,15 @@ export default function CardEditor() {
                         'lg:w-96 lg:justify-center lg:mx-auto',
                     )}
                 >
-                    <GiftCard quote={rich(content) || loremIpsum} />
+                    <GiftCard
+                        classNames={{
+                            text: cn({
+                                'text-gray-200 text-sm leading-6 whitespace-pre':
+                                    !rich(content),
+                            }),
+                        }}
+                        quote={rich(content) || loremIpsum}
+                    />
                 </div>
             </div>
         </ClientOnly>

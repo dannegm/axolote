@@ -24,6 +24,7 @@ import RichText from './rich-text';
 import Card from './card';
 
 export default function GiftCard({
+    classNames = {},
     quote = '...',
     icon = 'Badge',
     border = '',
@@ -73,11 +74,16 @@ export default function GiftCard({
                 letter={letter}
                 frame={frame}
                 classNames={{
-                    border: cn({ 'bg-none': configs?.border }, configs?.border),
-                    content: cn(configs?.scheme, {
-                        'text-white [text-shadow:_1px_1px_8px_rgb(0_0_0_/_30%)]': frame,
-                        'text-black': dark,
-                    }),
+                    border: cn({ 'bg-none': configs?.border }, configs?.border, classNames?.border),
+                    content: cn(
+                        configs?.scheme,
+                        {
+                            'text-white [text-shadow:_1px_1px_8px_rgb(0_0_0_/_30%)]': frame,
+                            'text-black': dark,
+                        },
+                        classNames?.content,
+                    ),
+                    container: classNames?.container,
                 }}
             >
                 {configs?.bg && (
@@ -132,10 +138,14 @@ export default function GiftCard({
                 </div>
 
                 <div
-                    className={cn('font-delius text-center text-xl font-medium leading-snug', {
-                        'text-md': isLongText,
-                        'text-left text-sm text-balance leading-normal': letter,
-                    })}
+                    className={cn(
+                        'font-delius text-center text-xl font-medium leading-snug',
+                        {
+                            'text-md': isLongText,
+                            'text-left text-sm text-balance hyphens-auto leading-normal': letter,
+                        },
+                        classNames?.text,
+                    )}
                 >
                     <RichText>{content}</RichText>
                 </div>
