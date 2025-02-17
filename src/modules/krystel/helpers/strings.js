@@ -1,3 +1,5 @@
+import { trim } from 'lodash';
+
 export const replaceWithLongestSentence = text => {
     const regex = /<<([^>]+)>>/;
     const match = text.match(regex);
@@ -34,9 +36,10 @@ export const extractConfigsAndContent = text => {
 
     if (match) {
         const configs = extractConfigs(match[1]);
+        const content = trim(text.slice(match[0].length), '||').trim();
         return {
             configs,
-            content: text.slice(match[0].length).trim(),
+            content,
         };
     }
 
