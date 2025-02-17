@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/modules/core/helpers/utils';
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
+import ClientOnly from '@/modules/core/components/common/client-only';
 
 const NavLink = ({ className, href, active, children }) => {
     return (
@@ -36,22 +37,24 @@ export default function Navbar({ classNames }) {
     }
 
     return (
-        <nav
-            className={cn(
-                'sticky top-4 z-[100] flex flex-row gap-1 p-2 bg-black text-white rounded-md',
-                classNames?.container,
-            )}
-        >
-            {navItems.map(item => (
-                <NavLink
-                    key={item.href}
-                    className={classNames?.item}
-                    active={pathname === item.href}
-                    href={item.href}
-                >
-                    {item.name}
-                </NavLink>
-            ))}
-        </nav>
+        <ClientOnly>
+            <nav
+                className={cn(
+                    'sticky top-4 z-[100] flex flex-row gap-1 p-2 bg-black text-white rounded-md',
+                    classNames?.container,
+                )}
+            >
+                {navItems.map(item => (
+                    <NavLink
+                        key={item.href}
+                        className={classNames?.item}
+                        active={pathname === item.href}
+                        href={item.href}
+                    >
+                        {item.name}
+                    </NavLink>
+                ))}
+            </nav>
+        </ClientOnly>
     );
 }

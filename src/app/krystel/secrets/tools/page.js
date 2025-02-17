@@ -1,3 +1,4 @@
+import ClientOnly from '@/modules/core/components/common/client-only';
 import Settings from './components/settings';
 import ToolsGrid from './components/tools-grid';
 
@@ -9,9 +10,11 @@ export function generateMetadata() {
 
 export default function Tools() {
     return (
-        <div className='pt-4 pb-16'>
-            <ToolsGrid />
-            <Settings />
-        </div>
+        <ClientOnly>
+            <div className='pt-4 pb-16'>
+                <ToolsGrid />
+                <Settings />
+            </div>
+        </ClientOnly>
     );
 }

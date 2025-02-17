@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 export default function useClonePosition() {
     const ref = useRef(null);
     const [rectStyles, setRectStyles] = useState({ top: 0, left: 0 });
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const updatePosition = () => {
             if (ref.current) {
                 const rect = ref.current.getBoundingClientRect();
@@ -16,6 +16,7 @@ export default function useClonePosition() {
         };
 
         updatePosition();
+        setTimeout(updatePosition, 100);
         window.addEventListener('scroll', updatePosition);
         window.addEventListener('resize', updatePosition);
 
