@@ -1,4 +1,5 @@
 import { RefreshCcw } from 'lucide-react';
+import { parseAsString, useQueryState } from 'nuqs';
 
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import ClientOnly from '@/modules/core/components/common/client-only';
@@ -15,6 +16,7 @@ import ShareButton from '@/modules/krystel/components/common/share-button';
 import LikeButton from '@/modules/krystel/components/common/like-button';
 import JsonViewer from '@/modules/core/components/common/json-viewer';
 import CopyText from '@/modules/krystel/components/common/copy-text';
+import { useEffect } from 'react';
 
 const getBaseUrl = () => window.location.origin + window.location.pathname;
 
@@ -39,12 +41,19 @@ const buildQuoteSettings = ({ code, data }) => {
 
 export default function CardViewer({ code, data }) {
     const [debugMode] = useLocalStorage('settings:debug_mode', false);
+    const [, setCodeQuery] = useQueryState('code', parseAsString.withDefault(code));
 
     const { configs } = extractConfigsAndContent(data?.quote);
     const refreshUrl = configs?.target ?? '/krystel';
 
     const quote = buildQuoteSettings({ code, data });
     const url = `${getBaseUrl()}?code=${quote.settings}`;
+
+    useEffect(() => {
+        if (!code) {
+            setCodeQuery(quote.settings);
+        }
+    }, [code, quote]);
 
     return (
         <ClientOnly>
