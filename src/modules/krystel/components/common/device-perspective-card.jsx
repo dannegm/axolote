@@ -78,7 +78,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
                     className='group absolute bottom-8 right-8 z-50'
                 >
                     <div
-                        className='relative block bg-cyan-300 text-cyan-800 text-sm py-1 px-2 font-delius rounded-full shadow-lg group-hover:shadow-xl group-active:shadow-md'
+                        className='relative block bg-cyan-300 text-cyan-800 text-sm py-1 px-2 font-delius rounded-full shadow-lg group-hover:shadow-xl group-active:shadow-md group-active:scale-95'
                         data-html2canvas-ignore
                     >
                         <SparklesIcon size='1.2rem' />
