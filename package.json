@@ -17,6 +17,7 @@
         "@tanstack/react-table": "^8.20.6",
         "@tsparticles/confetti": "^3.7.1",
         "@uidotdev/usehooks": "^2.4.1",
+        "@vercel/analytics": "^1.5.0",
         "axios": "^1.7.9",
         "base-64": "^1.0.0",
         "class-variance-authority": "^0.7.1",
