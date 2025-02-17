@@ -2,6 +2,10 @@
     interpolate-size: allow-keywords;
 }
 
+.field-sizing-content {
+    field-sizing: content;
+}
+
 .mask-gradient {
     mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0));
 }

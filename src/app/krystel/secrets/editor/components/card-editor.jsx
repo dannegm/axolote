@@ -2,9 +2,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Save, Loader2, CircleDashed, Circle, ChevronDown } from 'lucide-react';
+import { Save, Loader2, CircleDashed, Circle, ChevronDown, X } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
+import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import useClonePosition from '@/modules/core/hooks/use-clone-position';
 import ClientOnly from '@/modules/core/components/common/client-only';
 
@@ -20,7 +21,7 @@ const rich = (text = '') => text.replaceAll('\n', '||');
 
 export default function CardEditor() {
     const router = useRouter();
-    const [content, setContent] = useState('');
+    const [content, setContent] = useLocalStorage('editor:content', '');
 
     const [$translucedButton, translucedButtonPosition] = useClonePosition();
     const [transluced, setTransluced] = useState(false);
@@ -31,6 +32,7 @@ export default function CardEditor() {
     const createQuote = useCreateQuoteAction({
         onSuccess: () => {
             router.push('/krystel/secrets/cards');
+            setContent('');
         },
     });
 
@@ -76,7 +78,7 @@ export default function CardEditor() {
                 >
                     <div
                         className={cn(
-                            'flex flex-col gap-2 p-4 pt-2 pb-14',
+                            'flex flex-col gap-2 p-4 pt-2 pb-16',
                             'md:w-3/4 md:mx-auto',
                             'lg:w-full lg:p-4 lg:gap-4',
                         )}
@@ -90,7 +92,7 @@ export default function CardEditor() {
                             )}
                         >
                             <Textarea
-                                className='bg-white min-h-24 max-h-48'
+                                className='bg-white min-h-24 max-h-64 field-sizing-content'
                                 placeholder='Cuéntale a Krys lo mucho que la amas.'
                                 value={content}
                                 onChange={handleChange}
@@ -114,6 +116,19 @@ export default function CardEditor() {
                             </Button>
 
                             <div className='flex-1' />
+
+                            <Button
+                                type='button'
+                                size='icon'
+                                variant='destructive'
+                                onClick={() => setContent('')}
+                            >
+                                <X
+                                    className={cn('transition-all duration-150', {
+                                        'rotate-180': !expanded,
+                                    })}
+                                />
+                            </Button>
 
                             {createQuote.isPending ? (
                                 <Button type='button' disabled>
