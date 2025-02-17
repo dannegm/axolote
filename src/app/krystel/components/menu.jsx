@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
 import { BookMarked, Ellipsis, MessageSquareQuote, RefreshCcw } from 'lucide-react';
 
@@ -10,7 +9,7 @@ import ClientOnly from '@/modules/core/components/common/client-only';
 
 const MenuItem = ({ primary, href, children }) => {
     return (
-        <Link
+        <a
             className={cn(
                 'flex flex-col items-center gap-1 font-sans text-xs w-24 py-3 rounded-full hover:bg-gray-200 active:bg-slate-300 transition-all',
                 {
@@ -20,7 +19,7 @@ const MenuItem = ({ primary, href, children }) => {
             href={href}
         >
             {children}
-        </Link>
+        </a>
     );
 };
 
@@ -43,12 +42,12 @@ const MenuContent = ({ className }) => {
 
             {showSecrets && (
                 <div className='flex justify-center'>
-                    <Link
+                    <a
                         className='px-3 py-1 bg-black text-white font-pacifico rounded-lg transition-all duration-150 hover:scale-105 active:scale-95'
                         href='/krystel/secrets/tools'
                     >
                         Secrets.
-                    </Link>
+                    </a>
                 </div>
             )}
         </div>
