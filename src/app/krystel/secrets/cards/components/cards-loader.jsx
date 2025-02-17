@@ -8,7 +8,11 @@ const BASE_URL = 'https://endpoints.hckr.mx/quotes';
 
 export default function CardsLoader() {
     return (
-        <DataLoader tags={['cards']} url={`${BASE_URL}/krystel`} loader={<Loader />}>
+        <DataLoader
+            tags={['cards']}
+            url={`${BASE_URL}/krystel?includes=future`}
+            loader={<Loader />}
+        >
             {data => <CardsList data={data} />}
         </DataLoader>
     );
