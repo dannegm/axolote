@@ -1,8 +1,9 @@
 'use client';
 import { useEffect } from 'react';
-import { Asterisk, Clock3, icons } from 'lucide-react';
+import { useQueryState, parseAsBoolean } from 'nuqs';
 import { formatDistanceToNow, isBefore } from 'date-fns';
 import { es as locale } from 'date-fns/locale';
+import { Asterisk, Clock3, icons } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import Portal from '@/modules/core/components/common/portal';
@@ -32,6 +33,8 @@ export default function GiftCard({
     settings = 'none',
     published_at = undefined,
 }) {
+    const [uwu] = useQueryState('uwu', parseAsBoolean.withDefault(false));
+
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
 
@@ -115,7 +118,7 @@ export default function GiftCard({
                         'w-full flex-row gap-2 justify-between mb-8': letter,
                     })}
                 >
-                    {!configs?.fullscreen && configs?.name !== 'hidden' && (
+                    {!configs?.fullscreen && configs?.name !== 'hidden' && !uwu && (
                         <p
                             className={cn('font-pacifico text-3xl text-center', {
                                 'text-left text-xl': letter,
@@ -123,6 +126,14 @@ export default function GiftCard({
                         >
                             Krystel,
                         </p>
+                    )}
+
+                    {!configs?.fullscreen && configs?.name !== 'hidden' && uwu && (
+                        <img
+                            className='block h-24 -mb-4 -mt-12'
+                            src='/krystel-uwu.png'
+                            alt='Krystel'
+                        />
                     )}
 
                     {!configs?.fullscreen && configs?.icon !== 'hidden' && (

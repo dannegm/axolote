@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import Link from 'next/link';
 import { formatDistanceToNowStrict, format, isBefore } from 'date-fns';
 import { es as locale } from 'date-fns/locale';
@@ -10,15 +11,16 @@ import JsonViewer from '@/modules/core/components/common/json-viewer';
 import { getRandomSettings } from '@/modules/krystel/services/quotes';
 import GiftCardPreview from '@/modules/krystel/components/common/gift-card-preview';
 
-import DeleteCardButton from './delete-card-button';
 import ToggleCardButton from './toggle-card-switch';
-import { useState } from 'react';
+import DeleteCardButton from './delete-card-button';
+import RestoreCardButton from './restore-card-button';
 
 export default function CardItem({ item }) {
     const [deleting, setDeleting] = useState(false);
 
     const code = `${item.id}:${getRandomSettings()}`;
     const date = new Date(item.published_at + 'Z');
+    const deleted = Boolean(item.deleted_at);
 
     const datePrefix = isBefore(date, new Date()) ? 'hace ' : 'dentro de ';
 
@@ -41,7 +43,11 @@ export default function CardItem({ item }) {
                 </Link>
 
                 <div className='flex-1' />
-                <DeleteCardButton id={item.id} onDelete={() => setDeleting(true)} />
+                {deleted ? (
+                    <RestoreCardButton id={item.id} />
+                ) : (
+                    <DeleteCardButton id={item.id} onDelete={() => setDeleting(true)} />
+                )}
             </div>
 
             <div className='flex-none w-full'>
@@ -49,6 +55,7 @@ export default function CardItem({ item }) {
                     quote={item.quote}
                     code={code}
                     hidden={!item.show}
+                    deleted={deleted}
                     preview
                 />
             </div>

@@ -141,6 +141,7 @@ export default function GiftCardPreview({
     code,
     hidden = false,
     preview = false,
+    deleted = false,
     preventReveal = false,
 }) {
     let quoteSettings = getRandomQuote();
@@ -170,8 +171,9 @@ export default function GiftCardPreview({
                 {
                     'bg-none': configs?.bg,
                     'blur-sm select-none': hidden,
-                    'blur-none md:blur-sm md:hover:blur-none ring-4 md:ring-0 ring-slate-400 ring-offset-4 md:ring-offset-0 opacity-60 md:opacity-100':
+                    'blur-none md:blur-sm md:hover:blur-none ring-4 md:ring-0 ring-slate-300 ring-offset-4 md:ring-offset-0 opacity-60 md:opacity-100':
                         preview && hidden,
+                    'ring-4 ring-red-600 ring-offset-4 opacity-60': deleted,
                 },
             )}
             style={{ backgroundImage: configs?.bg ? '' : quoteSettings.bg }}
