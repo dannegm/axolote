@@ -1,8 +1,8 @@
 import { trim } from 'lodash';
 
 export const replaceWithLongestSentence = text => {
-    const regex = /<<([^>]+)>>/;
-    const match = text.match(regex);
+    const regex = /<words::([^>]+)>/g;
+    const match = regex.exec(text);
 
     if (match) {
         const options = match[1].split('|');

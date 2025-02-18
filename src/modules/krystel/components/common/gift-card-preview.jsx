@@ -8,9 +8,12 @@ import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 import { useFirstAppearanceAnom } from '@/modules/krystel/hooks/use-first-appearance';
 
 import RichText from './rich-text';
+import Icon from './icon';
 import Sticker from './sticker';
 import SpotifyPreview from './spotify-preview';
 import SpoilerText from './spoiler-text';
+import FancySeparator from './fancy-separator';
+import QuoteText from './quote-text';
 import { BalloonsTextSimple } from './balloons-text';
 
 export const buildCustomElements = ({ preventReveal }) => [
@@ -23,14 +26,12 @@ export const buildCustomElements = ({ preventReveal }) => [
     // Bold
     { pattern: /\*\*(.*?)\*\*/g, parser: text => <b>{text}</b> },
     // Small
-    { pattern: /---(.*?)---/g, parser: text => <span className='text-[0.75em]'>{text}</span> },
+    { pattern: /-:(.*?):-/g, parser: text => <span className='text-[0.75em]'>{text}</span> },
     // Big
     {
-        pattern: /\+\+\+(.*?)\+\+\+/g,
+        pattern: /\+:(.*?):\+/g,
         parser: text => <span className='text-[1.15em]'>{text}</span>,
     },
-    // Marked
-    { pattern: /::(.*?)::/g, parser: text => <mark>{text}</mark> },
     // Shine
     {
         pattern: /\$\$(.*?)\$\$/g,
@@ -62,22 +63,15 @@ export const buildCustomElements = ({ preventReveal }) => [
     },
     // Balloons
     {
-        pattern: /\º\º(.*?)\º\º/g,
+        pattern: /ºº(.*?)ºº/g,
         parser: text => <BalloonsTextSimple>{text}</BalloonsTextSimple>,
-    },
-    // Multiple
-    {
-        pattern: /<<([^>]+)>>/g,
-        parser: match => {
-            return (
-                <span className='font-oswald font-bold text-indigo-700'>
-                    {match.split('|').join(', ')}
-                </span>
-            );
-        },
     },
     // Breakline
     { pattern: /\|\|/g, parser: () => <br /> },
+    // Separator with icon
+    { pattern: /---\s?(.*?)\s?---/g, parser: icon => <FancySeparator icon={icon} /> },
+    // Separator normal
+    { pattern: /---/g, parser: () => <FancySeparator /> },
     // Bold and italic
     {
         pattern: /\*\/(.*?)\/\*/g,
@@ -85,6 +79,13 @@ export const buildCustomElements = ({ preventReveal }) => [
             <b>
                 <i>{text}</i>
             </b>
+        ),
+    },
+    // Codeblock
+    {
+        pattern: /```(.*?)```/g,
+        parser: text => (
+            <pre className='block text-sm py-1 px-2 rounded-sm bg-slate-900 text-white'>{text}</pre>
         ),
     },
     // Code
@@ -96,36 +97,76 @@ export const buildCustomElements = ({ preventReveal }) => [
             </code>
         ),
     },
+    // Marked
+    { pattern: /<mark>(.*?)<\/mark>/g, parser: text => <mark>{text}</mark> },
+    // Quote
+    {
+        pattern: /<quote>(.*?)<\/quote>/g,
+        parser: text => <QuoteText>{text}</QuoteText>,
+    },
+    // Quote with author
+    {
+        pattern: /<quote::(.*?)>(.*?)<\/quote>/g,
+        parser: (author, text) => <QuoteText author={author}>{text}</QuoteText>,
+    },
+    // Random word
+    {
+        pattern: /<words::([^>]+)>/g,
+        parser: match => {
+            return (
+                <span className='font-oswald font-bold text-indigo-700'>
+                    {match.split('|').join(', ')}
+                </span>
+            );
+        },
+    },
+    // Icon
+    { pattern: /<icon::(.*?)>/g, parser: name => <Icon className='inline-block' name={name} /> },
+    // External link
+    {
+        pattern: /<link::(.*?)>(.*?)<\/link>/g,
+        parser: (url, label) => (
+            <a className='font-bold underline text-rose-600' href={url} target='_blank'>
+                {label}
+            </a>
+        ),
+    },
+    // Internal link
+    {
+        pattern: /<ilink::(.*?)>(.*?)<\/ilink>/g,
+        parser: (url, label) => (
+            <a className='font-bold underline text-rose-600' href={url}>
+                {label}
+            </a>
+        ),
+    },
+    // Button
+    {
+        pattern: /<button::(.*?)>(.*?)<\/button>/g,
+        parser: (action, label) => {
+            return (
+                <button
+                    className='inline-block px-2 py-1 -mt-4 bg-black font-sans text-white text-xs uppercase shadow-sm rounded-lg transition-all duration-150 -translate-y-0.5 active:translate-y-0'
+                    type='button'
+                >
+                    {label}
+                </button>
+            );
+        },
+    },
+    // Polaroid with description
+    {
+        pattern: /<polaroid::(.*?)>(.*?)<\/polaroid>/g,
+        parser: (url, description) => (
+            <div className='flex flex-row gap-4 items-start'>
+                <img className='max-h-36 bg-white shadow-md rounded-md p-2' src={url} />
+                <span className='bg-white shadow-md rounded-md p-2'>{description}</span>
+            </div>
+        ),
+    },
     // Polaroid
     {
-        pattern: /\{\{(.*?)\|(.*?)\}\}/g,
-        parser: (url, description) => (
-            <div className='flex flex-row gap-4 items-start'>
-                <img className='max-h-36 bg-white shadow-md rounded-md p-2' src={url} />
-                <span className='bg-white shadow-md rounded-md p-2'>{description}</span>
-            </div>
-        ),
-    },
-    {
-        pattern: /\{\{(.*?)\}\}/g,
-        parser: url => (
-            <div className='flex flex-row gap-4 items-start'>
-                <img className='max-h-36 bg-white shadow-md rounded-md p-2' src={url} />
-            </div>
-        ),
-    },
-
-    {
-        pattern: /<\[polaroid\|(.*?)\|(.*?)\]>/g,
-        parser: (url, description) => (
-            <div className='flex flex-row gap-4 items-start'>
-                <img className='max-h-36 bg-white shadow-md rounded-md p-2' src={url} />
-                <span className='bg-white shadow-md rounded-md p-2'>{description}</span>
-            </div>
-        ),
-    },
-    {
-        pattern: /<\[polaroid\|(.*?)\]>/g,
+        pattern: /<polaroid::(.*?)>/g,
         parser: url => (
             <div className='flex flex-row gap-4 items-start'>
                 <img className='max-h-36 bg-white shadow-md rounded-md p-2' src={url} />
@@ -134,17 +175,17 @@ export const buildCustomElements = ({ preventReveal }) => [
     },
     // Spotify Player
     {
-        pattern: /https?:\/\/open\.spotify\.com\/[^\s]+/g,
+        pattern: /<spotify::(.*?)>/g,
         parser: uri => <SpotifyPreview uri={uri} />,
     },
     // Sticker Full
     {
-        pattern: /\[\[\[\[(.*?)\]\]\]\]/g,
+        pattern: /<sticker::(.*?)>/g,
         parser: id => <Sticker id={id} type='preview' />,
     },
     // Sticker Badge
     {
-        pattern: /\[\[\[(.*?)\]\]\]/g,
+        pattern: /<badge::(.*?)>/g,
         parser: id => <Sticker id={id} type='preview' />,
     },
     // Sticker Inline

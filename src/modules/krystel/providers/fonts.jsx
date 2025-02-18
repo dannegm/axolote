@@ -36,24 +36,24 @@ const anton = Anton({ weight: '400', subsets: ['latin'], variable: '--font-anton
 const jersey10 = Jersey_10({ weight: '400', subsets: ['latin'], variable: '--font-jersey10' });
 const boogaloo = Boogaloo({ weight: '400', subsets: ['latin'], variable: '--font-boogaloo' });
 
-const fontClasses = [
-    pacifico.variable,
-    delius.variable,
-    roboto.variable,
-    noto.variable,
-    playwrite.variable,
-    oswald.variable,
-    playfair.variable,
-    lora.variable,
-    quicksand.variable,
-    bebasNeue.variable,
-    macondo.variable,
-    dosis.variable,
-    dancingScript.variable,
-    anton.variable,
-    jersey10.variable,
-    boogaloo.variable,
-];
+export const fonts = {
+    pacifico: pacifico.variable,
+    delius: delius.variable,
+    roboto: roboto.variable,
+    noto: noto.variable,
+    playwrite: playwrite.variable,
+    oswald: oswald.variable,
+    playfair: playfair.variable,
+    lora: lora.variable,
+    quicksand: quicksand.variable,
+    bebasNeue: bebasNeue.variable,
+    macondo: macondo.variable,
+    dosis: dosis.variable,
+    dancingScript: dancingScript.variable,
+    anton: anton.variable,
+    jersey10: jersey10.variable,
+    boogaloo: boogaloo.variable,
+};
 
 const classNames = /* css */ `
 .font-pacifico { font-family: var(--font-pacifico); }
@@ -78,7 +78,7 @@ export default function Fonts({ children }) {
     return (
         <>
             <style>{classNames}</style>
-            <div id='fonts' className={cn(...fontClasses, 'antialiased')}>
+            <div id='fonts' className={cn(...Object.values(fonts), 'antialiased')}>
                 {children}
             </div>
         </>

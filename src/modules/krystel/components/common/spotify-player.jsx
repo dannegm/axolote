@@ -70,7 +70,7 @@ const useGetTrackInfo = trackId => {
     };
 };
 
-export default function SpotifyPlayer({ uri, compact = false }) {
+export default function SpotifyPlayer({ uri }) {
     const quote = useQuote();
     const postPlay = usePostAction({ action: 'play', settings: quote.settings });
 

@@ -130,7 +130,9 @@ export default function GiftCard({
 
                     {!configs?.fullscreen && configs?.name !== 'hidden' && uwu && (
                         <img
-                            className='block h-24 -mb-4 -mt-12'
+                            className={cn('block h-24 -mb-4 -mt-12', {
+                                'h-14 -mt-3 -ml-3': letter,
+                            })}
                             src='/krystel-uwu.png'
                             alt='Krystel'
                         />
@@ -153,7 +155,8 @@ export default function GiftCard({
                         'font-delius text-center text-xl font-medium leading-snug',
                         {
                             'text-md': isLongText,
-                            'text-left text-sm text-balance hyphens-auto leading-normal': letter,
+                            'font-noto text-left text-[0.825rem] text-balance hyphens-auto leading-normal':
+                                letter,
                         },
                         classNames?.text,
                     )}

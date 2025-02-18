@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Icon from './icon';
 import LoveText from './love-text';
 import ShineText from './shine-text';
 import SpoilerText from './spoiler-text';
@@ -8,6 +9,8 @@ import Polaroid from './polaroid';
 import SpotifyPlayer from './spotify-player';
 import SnowText from './snow-text';
 import RandomWord from './random-word';
+import FancySeparator from './fancy-separator';
+import QuoteText from './quote-text';
 import BalloonsText from './balloons-text';
 
 export const defaultElements = [
@@ -20,14 +23,9 @@ export const defaultElements = [
     // Bold
     { pattern: /\*\*(.*?)\*\*/g, parser: text => <b>{text}</b> },
     // Small
-    { pattern: /---(.*?)---/g, parser: text => <span className='text-[0.75em]'>{text}</span> },
+    { pattern: /-:(.*?):-/g, parser: text => <span className='text-[0.75em]'>{text}</span> },
     // Big
-    {
-        pattern: /\+\+\+(.*?)\+\+\+/g,
-        parser: text => <span className='text-[1.25em]'>{text}</span>,
-    },
-    // Marked
-    { pattern: /::(.*?)::/g, parser: text => <mark>{text}</mark> },
+    { pattern: /\+:(.*?):\+/g, parser: text => <span className='text-[1.25em]'>{text}</span> },
     // Shine
     { pattern: /\$\$(.*?)\$\$/g, parser: text => <ShineText>{text}</ShineText> },
     // Spoiler
@@ -37,14 +35,13 @@ export const defaultElements = [
     // Snow
     { pattern: /\$\@(.*?)\@\$/g, parser: text => <SnowText>{text}</SnowText> },
     // Balloons
-    { pattern: /\º\º(.*?)\º\º/g, parser: text => <BalloonsText>{text}</BalloonsText> },
-    // Random word
-    {
-        pattern: /<<([^>]+)>>/g,
-        parser: match => <RandomWord words={match.split('|')} />,
-    },
+    { pattern: /ºº(.*?)ºº/g, parser: text => <BalloonsText>{text}</BalloonsText> },
     // Breakline
     { pattern: /\|\|/g, parser: () => <br /> },
+    // Separator with icon
+    { pattern: /---\s?(.*?)\s?---/g, parser: icon => <FancySeparator icon={icon} /> },
+    // Separator normal
+    { pattern: /---/g, parser: () => <FancySeparator /> },
     // Bold and italic
     {
         pattern: /\*\/(.*?)\/\*/g,
@@ -54,46 +51,91 @@ export const defaultElements = [
             </b>
         ),
     },
+    // Codeblock
+    {
+        pattern: /```(.*?)```/g,
+        parser: text => (
+            <pre className='block text-xs py-1 px-2 rounded-sm bg-slate-900 text-white'>{text}</pre>
+        ),
+    },
     // Code
     {
         pattern: /`(.*?)`/g,
         parser: text => (
-            <code className='text-sm py-0.5 px-1 rounded-sm bg-pink-200 text-pink-600s'>
-                {text}
-            </code>
+            <code className='text-xs py-0.5 px-1 rounded-sm bg-pink-200 text-pink-600'>{text}</code>
         ),
+    },
+    // Marked
+    { pattern: /<mark>(.*?)<\/mark>/g, parser: text => <mark>{text}</mark> },
+    // Quote
+    {
+        pattern: /<quote>(.*?)<\/quote>/g,
+        parser: text => <QuoteText>{text}</QuoteText>,
+    },
+    // Quote with author
+    {
+        pattern: /<quote::(.*?)>(.*?)<\/quote>/g,
+        parser: (author, text) => <QuoteText author={author}>{text}</QuoteText>,
+    },
+    // Random word
+    { pattern: /<words::([^>]+)>/g, parser: match => <RandomWord words={match.split('|')} /> },
+    // Icon
+    { pattern: /<icon::(.*?)>/g, parser: name => <Icon className='inline-block' name={name} /> },
+    // External link
+    {
+        pattern: /<link::(.*?)>(.*?)<\/link>/g,
+        parser: (url, label) => (
+            <a className='font-bold underline text-rose-600' href={url} target='_blank'>
+                {label}
+            </a>
+        ),
+    },
+    // Internal link
+    {
+        pattern: /<ilink::(.*?)>(.*?)<\/ilink>/g,
+        parser: (url, label) => (
+            <a className='font-bold underline text-rose-600' href={url}>
+                {label}
+            </a>
+        ),
+    },
+    // Button
+    {
+        pattern: /<button::(.*?)>(.*?)<\/button>/g,
+        parser: (action, label) => {
+            return (
+                <button
+                    className='inline-block px-2 py-1 -mt-4 bg-black font-sans text-white text-xs uppercase shadow-sm rounded-lg transition-all duration-150 -translate-y-0.5 active:translate-y-0'
+                    type='button'
+                >
+                    {label}
+                </button>
+            );
+        },
+    },
+    // Polaroid with description
+    {
+        pattern: /<polaroid::(.*?)>(.*?)<\/polaroid>/g,
+        parser: (url, description) => <Polaroid url={url} description={description} />,
     },
     // Polaroid
     {
-        pattern: /\{\{(.*?)\|(.*?)\}\}/g,
-        parser: (url, description) => <Polaroid url={url} description={description} />,
-    },
-    {
-        pattern: /\{\{(.*?)\}\}/g,
-        parser: url => <Polaroid url={url} />,
-    },
-
-    {
-        pattern: /<\[polaroid\|(.*?)\|(.*?)\]>/g,
-        parser: (url, description) => <Polaroid url={url} description={description} />,
-    },
-    {
-        pattern: /<\[polaroid\|(.*?)\]>/g,
+        pattern: /<polaroid::(.*?)>/g,
         parser: url => <Polaroid url={url} />,
     },
     // Spotify Player
     {
-        pattern: /https?:\/\/open\.spotify\.com\/[^\s]+/g,
+        pattern: /<spotify::(.*?)>/g,
         parser: uri => <SpotifyPlayer uri={uri} />,
     },
     // Sticker Full
     {
-        pattern: /\[\[\[\[(.*?)\]\]\]\]/g,
+        pattern: /<sticker::(.*?)>/g,
         parser: id => <Sticker id={id} type='full' />,
     },
     // Sticker Badge
     {
-        pattern: /\[\[\[(.*?)\]\]\]/g,
+        pattern: /<badge::(.*?)>/g,
         parser: id => <Sticker id={id} type='badge' />,
     },
     // Sticker Inline
@@ -108,24 +150,38 @@ export const stripedElements = [
     { pattern: /__(.*?)__/g, parser: text => text },
     { pattern: /\/\/(.*?)\/\//g, parser: text => text },
     { pattern: /\*\*(.*?)\*\*/g, parser: text => text },
-    { pattern: /---(.*?)---/g, parser: text => text },
-    { pattern: /\+\+\+(.*?)\+\+\+/g, parser: text => text },
-    { pattern: /::(.*?)::/g, parser: text => text },
+    { pattern: /-:(.*?):-/g, parser: text => text },
+    { pattern: /\+:(.*?):\+/g, parser: text => text },
     { pattern: /\$\$(.*?)\$\$/g, parser: text => text },
     { pattern: /\~\:(.*?)\:\~/g, parser: text => text },
     { pattern: /\%\%(.*?)\%\%/g, parser: text => text },
     { pattern: /\$\@(.*?)\@\$/g, parser: text => text },
-    { pattern: /\º\º(.*?)\º\º/g, parser: text => text },
-    { pattern: /<<([^>]+)>>/g, parser: match => match.split('|').join(', ') },
+    { pattern: /\ºº(.*?)ºº/g, parser: text => text },
     { pattern: /\|\|/g, parser: () => ' ¬ ' },
+    { pattern: /---\s?(.*?)\s?---/g, parser: icon => `\n-- [${icon}] --\n` },
+    { pattern: /---/g, parser: () => '\n---\n' },
     { pattern: /\*\/(.*?)\/\*/g, parser: text => text },
-    { pattern: /`(.*?)`/g, parser: text => text },
-    { pattern: /\{\{(.*?)\|(.*?)\}\}/g, parser: (_, description) => `[${description}]` },
-    { pattern: /\{\{(.*?)\}\}/g, parser: url => `[${url}]` },
-    { pattern: /<\[polaroid\|(.*?)\|(.*?)\]>/g, parser: (_, description) => `[${description}]` },
-    { pattern: /<\[polaroid\|(.*?)\]>/g, parser: url => `[${url}]` },
-    { pattern: /\[\[\[\[(.*?)\]\]\]\]/g, parser: id => `[${id}]` },
-    { pattern: /\[\[\[(.*?)\]\]\]/g, parser: id => `[${id}]` },
+    { pattern: /`(.*?)`/g, parser: text => `\n\`\`\`${text}\`\`\`\n` },
+    { pattern: /`(.*?)`/g, parser: text => `\`${text}\`` },
+    { pattern: /<mark>(.*?)<\/mark>/g, parser: text => text },
+    { pattern: /<quote>(.*?)<\/quote>/g, parser: text => `\n> ${text}\n` },
+    {
+        pattern: /<quote::(.*?)>(.*?)<\/quote>/g,
+        parser: (author, text) => `\n> ${text}\n>${author}\n`,
+    },
+    { pattern: /<words::([^>]+)>/g, parser: match => match.split('|').join(', ') },
+    { pattern: /<icon::(.*?)>/g, parser: name => `[${name}]` },
+    { pattern: /<link::(.*?)>(.*?)<\/link>/g, parser: (url, label) => `[${label}](${url})` },
+    { pattern: /<ilink::(.*?)>(.*?)<\/ilink>/g, parser: (url, label) => `[${label}](${url})` },
+    { pattern: /<button::(.*?)>(.*?)<\/button>/g, parser: (_, label) => `[${label}]` },
+    {
+        pattern: /<polaroid::(.*?)>(.*?)<\/polaroid>/g,
+        parser: (url, description) => `![${description}](${url})`,
+    },
+    { pattern: /<polaroid::(.*?)>/g, parser: url => `!(${url})` },
+    { pattern: /<spotify::(.*?)>/g, parser: uri => uri },
+    { pattern: /<sticker::(.*?)>/g, parser: id => `[${id}]` },
+    { pattern: /<badge::(.*?)>/g, parser: id => `[${id}]` },
     { pattern: /\[\[(.*?)\]\]/g, parser: id => `[${id}]` },
 ];
 
