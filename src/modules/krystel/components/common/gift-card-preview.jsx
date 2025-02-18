@@ -114,6 +114,24 @@ export const buildCustomElements = ({ preventReveal }) => [
             </div>
         ),
     },
+
+    {
+        pattern: /<\[polaroid\|(.*?)\|(.*?)\]>/g,
+        parser: (url, description) => (
+            <div className='flex flex-row gap-4 items-start'>
+                <img className='max-h-36 bg-white shadow-md rounded-md p-2' src={url} />
+                <span className='bg-white shadow-md rounded-md p-2'>{description}</span>
+            </div>
+        ),
+    },
+    {
+        pattern: /<\[polaroid\|(.*?)\]>/g,
+        parser: url => (
+            <div className='flex flex-row gap-4 items-start'>
+                <img className='max-h-36 bg-white shadow-md rounded-md p-2' src={url} />
+            </div>
+        ),
+    },
     // Spotify Player
     {
         pattern: /https?:\/\/open\.spotify\.com\/[^\s]+/g,

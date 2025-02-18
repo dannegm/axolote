@@ -72,6 +72,15 @@ export const defaultElements = [
         pattern: /\{\{(.*?)\}\}/g,
         parser: url => <Polaroid url={url} />,
     },
+
+    {
+        pattern: /<\[polaroid\|(.*?)\|(.*?)\]>/g,
+        parser: (url, description) => <Polaroid url={url} description={description} />,
+    },
+    {
+        pattern: /<\[polaroid\|(.*?)\]>/g,
+        parser: url => <Polaroid url={url} />,
+    },
     // Spotify Player
     {
         pattern: /https?:\/\/open\.spotify\.com\/[^\s]+/g,
@@ -113,6 +122,8 @@ export const stripedElements = [
     { pattern: /`(.*?)`/g, parser: text => text },
     { pattern: /\{\{(.*?)\|(.*?)\}\}/g, parser: (_, description) => `[${description}]` },
     { pattern: /\{\{(.*?)\}\}/g, parser: url => `[${url}]` },
+    { pattern: /<\[polaroid\|(.*?)\|(.*?)\]>/g, parser: (_, description) => `[${description}]` },
+    { pattern: /<\[polaroid\|(.*?)\]>/g, parser: url => `[${url}]` },
     { pattern: /\[\[\[\[(.*?)\]\]\]\]/g, parser: id => `[${id}]` },
     { pattern: /\[\[\[(.*?)\]\]\]/g, parser: id => `[${id}]` },
     { pattern: /\[\[(.*?)\]\]/g, parser: id => `[${id}]` },
