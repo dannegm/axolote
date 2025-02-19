@@ -119,7 +119,7 @@ export default function Valentine({}) {
     };
 
     return (
-        <Frame className='bg-pink-100 px-2 py-4 rounded-2xl shadow-sm'>
+        <Frame className='bg-white px-2 py-4 rounded-2xl shadow-md'>
             {saidYes && (
                 <div className='flex flex-col gap-4 items-center'>
                     <Portal portalId='global-bg-portal'>
