@@ -131,7 +131,7 @@ export default function GiftCard({
                     {!configs?.fullscreen && configs?.name !== 'hidden' && uwu && (
                         <img
                             className={cn('block h-24 -mb-8 md:-mb-4 -mt-10 md:-mt-12', {
-                                'h-14 -mt-3 -ml-3': letter,
+                                'h-14 -mt-3 -ml-3 md:-mt-1': letter,
                             })}
                             src='/krystel-uwu.png'
                             alt='Krystel'
