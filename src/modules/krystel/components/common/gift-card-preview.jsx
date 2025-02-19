@@ -16,6 +16,7 @@ import FancySeparator from './fancy-separator';
 import QuoteText from './quote-text';
 import { BalloonsTextSimple } from './balloons-text';
 import { pascalCase } from '@/modules/core/helpers/strings';
+import { getAppDescription } from './frame-apps';
 
 export const buildCustomElements = ({ preventReveal }) => [
     // Strikethrough
@@ -198,9 +199,11 @@ export const buildCustomElements = ({ preventReveal }) => [
     {
         pattern: /<app::(.*?)>/g,
         parser: name => (
-            <div className='flex flex-row flex-center gap-2 bg-black text-white shadow-md rounded-md p-3 pr-4'>
-                <Box />
-                <span className='font-roboto text-[1rem]'>{`<${pascalCase(name)} />`}</span>
+            <div className='flex flex-row gap-2 bg-black text-white shadow-md rounded-md p-3 pr-4'>
+                <div>
+                    <Box />
+                </div>
+                <span className='font-noto mt-0.5 text-[1rem]'>{getAppDescription(name)}</span>
             </div>
         ),
     },
