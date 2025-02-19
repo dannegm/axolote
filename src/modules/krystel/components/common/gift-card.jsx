@@ -86,7 +86,7 @@ export default function GiftCard({
                         },
                         classNames?.content,
                     ),
-                    container: classNames?.container,
+                    container: cn(classNames?.container, configs?.content),
                 }}
             >
                 {configs?.bg && (

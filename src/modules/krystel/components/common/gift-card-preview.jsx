@@ -300,7 +300,9 @@ export default function GiftCardPreview({
                             <RichText elements={customElements}>{content}</RichText>
                         </div>
 
-                        {greetings && <div className='mt-2 font-pacifico'>{greetings}</div>}
+                        {greetings && greetings !== 'hidden' && (
+                            <div className='mt-2 font-pacifico'>{greetings}</div>
+                        )}
                     </div>
                 </div>
             </div>
