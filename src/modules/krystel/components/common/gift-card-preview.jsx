@@ -1,5 +1,5 @@
 'use client';
-import { icons, Asterisk } from 'lucide-react';
+import { icons, Asterisk, Box } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
@@ -15,6 +15,7 @@ import SpoilerText from './spoiler-text';
 import FancySeparator from './fancy-separator';
 import QuoteText from './quote-text';
 import { BalloonsTextSimple } from './balloons-text';
+import { pascalCase } from '@/modules/core/helpers/strings';
 
 export const buildCustomElements = ({ preventReveal }) => [
     // Strikethrough
@@ -143,7 +144,7 @@ export const buildCustomElements = ({ preventReveal }) => [
     // Button
     {
         pattern: /<button::(.*?)>(.*?)<\/button>/g,
-        parser: (action, label) => {
+        parser: (_, label) => {
             return (
                 <button
                     className='inline-block px-2 py-1 -mt-4 bg-black font-sans text-white text-xs uppercase shadow-sm rounded-lg transition-all duration-150 -translate-y-0.5 active:translate-y-0'
@@ -192,6 +193,16 @@ export const buildCustomElements = ({ preventReveal }) => [
     {
         pattern: /\[\[(.*?)\]\]/g,
         parser: id => <Sticker id={id} />,
+    },
+    // Apps
+    {
+        pattern: /<app::(.*?)>/g,
+        parser: name => (
+            <div className='flex flex-row flex-center gap-2 bg-black text-white shadow-md rounded-md p-3 pr-4'>
+                <Box />
+                <span className='font-roboto text-[1rem]'>{`<${pascalCase(name)} />`}</span>
+            </div>
+        ),
     },
 ];
 

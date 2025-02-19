@@ -20,6 +20,13 @@ export default function useAudio({
         }
     }, [src]);
 
+    useEffect(() => {
+        return () => {
+            $audio.current?.pause?.();
+            $audio.current = null;
+        };
+    }, []);
+
     const play = () => {
         if (fadeIn > 0) {
             let currentStep = 0;

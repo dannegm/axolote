@@ -12,6 +12,8 @@ import RandomWord from './random-word';
 import FancySeparator from './fancy-separator';
 import QuoteText from './quote-text';
 import BalloonsText from './balloons-text';
+import FrameApps from './frame-apps';
+import { pascalCase } from '@/modules/core/helpers/strings';
 
 export const defaultElements = [
     // Strikethrough
@@ -143,6 +145,11 @@ export const defaultElements = [
         pattern: /\[\[(.*?)\]\]/g,
         parser: id => <Sticker id={id} />,
     },
+    // Apps
+    {
+        pattern: /<app::(.*?)>/g,
+        parser: name => <FrameApps name={name} />,
+    },
 ];
 
 export const stripedElements = [
@@ -183,6 +190,7 @@ export const stripedElements = [
     { pattern: /<sticker::(.*?)>/g, parser: id => `[${id}]` },
     { pattern: /<badge::(.*?)>/g, parser: id => `[${id}]` },
     { pattern: /\[\[(.*?)\]\]/g, parser: id => `[${id}]` },
+    { pattern: /<app::(.*?)>/g, parser: name => `<${pascalCase(name)} />` },
 ];
 
 export const parseText = (text, elements) => {

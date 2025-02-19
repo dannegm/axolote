@@ -145,8 +145,8 @@ const StyledBalloon = styled.div`
 
 const Balloon = ({ colors = defaultColors, loop, onPop }) => {
     const [show, setShow] = useState(true);
-    const [playBalloonpop] = useSound('./sounds/balloonpop.mp3');
-    const [playGlitter] = useSound('./sounds/glitter.mp3');
+    const [playBalloonpop] = useSound('/sounds/balloonpop.mp3');
+    const [playGlitter] = useSound('/sounds/glitter.mp3');
 
     const color = randomPick(colors);
     const left = random(20, 80);
