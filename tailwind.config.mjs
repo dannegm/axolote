@@ -67,6 +67,7 @@ export default {
                 'img-blue-galaxy': 'url(/backgrounds/blue-galaxy.jpg)',
                 'img-glitch': 'url(/backgrounds/glitch.gif)',
                 'img-memphis-two': 'url(/backgrounds/memphis-two.png)',
+                'img-plus': 'url(/backgrounds/plus.png)',
             },
             borderRadius: {
                 lg: 'var(--radius)',
