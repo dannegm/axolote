@@ -42,11 +42,11 @@ export default function GiftCard({
     const postView = usePostAction({ action: 'view', settings });
 
     if (isElevenEleven()) {
-        quote = '({icon:hidden})[[[pray]]]$$11:11$$ pide un deseo.';
+        quote = '({icon:hidden}) <badge::pray>$$11:11$$ pide un deseo.';
     }
 
     if (isThreeInTheMorning()) {
-        quote = '({icon:hidden})[[[[ufo]]]]';
+        quote = '({icon:hidden}) <sticker::ufo>';
     }
 
     const generatedGreetings = useGreetings();
