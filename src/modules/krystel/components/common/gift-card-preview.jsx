@@ -7,6 +7,7 @@ import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 
 import { useFirstAppearanceAnom } from '@/modules/krystel/hooks/use-first-appearance';
 
+import Button from './button';
 import RichText from './rich-text';
 import Icon from './icon';
 import Sticker from './sticker';
@@ -15,7 +16,6 @@ import SpoilerText from './spoiler-text';
 import FancySeparator from './fancy-separator';
 import QuoteText from './quote-text';
 import { BalloonsTextSimple } from './balloons-text';
-import { pascalCase } from '@/modules/core/helpers/strings';
 import { getAppDescription } from './frame-apps';
 
 export const buildCustomElements = ({ preventReveal }) => [
@@ -140,6 +140,32 @@ export const buildCustomElements = ({ preventReveal }) => [
             <a className='font-bold underline text-rose-600' href={url}>
                 {label}
             </a>
+        ),
+    },
+    // Button link
+    {
+        pattern: /<blink::(.*?)>(.*?)<\/blink>/g,
+        parser: (_, label) => (
+            <Button
+                className='block w-fit px-2 py-1 text-xs'
+                type='button'
+                onClick={ev => ev.preventDefault()}
+            >
+                {label}
+            </Button>
+        ),
+    },
+    // Internal Button link
+    {
+        pattern: /<blink::(.*?)>(.*?)<\/blink>/g,
+        parser: (_, label) => (
+            <Button
+                className='block w-fit px-2 py-1 text-xs'
+                type='button'
+                onClick={ev => ev.preventDefault()}
+            >
+                {label}
+            </Button>
         ),
     },
     // Button

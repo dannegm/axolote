@@ -14,6 +14,7 @@ import QuoteText from './quote-text';
 import BalloonsText from './balloons-text';
 import FrameApps from './frame-apps';
 import { pascalCase } from '@/modules/core/helpers/strings';
+import Button from './button';
 
 export const defaultElements = [
     // Strikethrough
@@ -101,6 +102,24 @@ export const defaultElements = [
             </a>
         ),
     },
+    // Button link
+    {
+        pattern: /<blink::(.*?)>(.*?)<\/blink>/g,
+        parser: (url, label) => (
+            <Button as='a' className='block w-fit mx-auto text-sm' href={url} target='_blank'>
+                {label}
+            </Button>
+        ),
+    },
+    // Internal Button link
+    {
+        pattern: /<iblink::(.*?)>(.*?)<\/iblink>/g,
+        parser: (url, label) => (
+            <Button as='a' className='block w-fit mx-auto text-sm' href={url}>
+                {label}
+            </Button>
+        ),
+    },
     // Button
     {
         pattern: /<button::(.*?)>(.*?)<\/button>/g,
@@ -180,6 +199,8 @@ export const stripedElements = [
     { pattern: /<icon::(.*?)>/g, parser: name => `[${name}]` },
     { pattern: /<link::(.*?)>(.*?)<\/link>/g, parser: (url, label) => `[${label}](${url})` },
     { pattern: /<ilink::(.*?)>(.*?)<\/ilink>/g, parser: (url, label) => `[${label}](${url})` },
+    { pattern: /<blink::(.*?)>(.*?)<\/blink>/g, parser: (url, label) => `[${label}](${url})` },
+    { pattern: /<iblink::(.*?)>(.*?)<\/iblink>/g, parser: (url, label) => `[${label}](${url})` },
     { pattern: /<button::(.*?)>(.*?)<\/button>/g, parser: (_, label) => `[${label}]` },
     {
         pattern: /<polaroid::(.*?)>(.*?)<\/polaroid>/g,
