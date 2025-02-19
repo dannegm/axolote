@@ -70,7 +70,7 @@ export default function GiftCard({
     }, []);
 
     return (
-        <QuoteProvider quote={quote}>
+        <QuoteProvider quote={{ settings }}>
             <Card
                 border={configs?.border ? '' : border}
                 scheme={scheme}
