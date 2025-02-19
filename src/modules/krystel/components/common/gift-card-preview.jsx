@@ -157,7 +157,7 @@ export const buildCustomElements = ({ preventReveal }) => [
     },
     // Internal Button link
     {
-        pattern: /<blink::(.*?)>(.*?)<\/blink>/g,
+        pattern: /<iblink::(.*?)>(.*?)<\/iblink>/g,
         parser: (_, label) => (
             <Button
                 className='block w-fit px-2 py-1 text-xs'
