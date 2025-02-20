@@ -3,7 +3,7 @@ import { icons, Asterisk, Box } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
-import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
+import { extractConfigs, extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 
 import { useFirstAppearanceAnom } from '@/modules/krystel/hooks/use-first-appearance';
 
@@ -221,6 +221,48 @@ export const buildCustomElements = ({ preventReveal }) => [
         pattern: /\[\[(.*?)\]\]/g,
         parser: id => <Sticker id={id} />,
     },
+    // Apps with props
+    {
+        pattern: /<app::(.*?)\(\{(.*?)\}\)>/g,
+        parser: (name, args) => {
+            const props = extractConfigs(args);
+            return (
+                <div className='flex flex-row gap-2 bg-black text-white shadow-md rounded-md p-3 pr-4'>
+                    <div>
+                        <Box />
+                    </div>
+                    <div className='flex flex-col gap-1 font-noto mt-0.5 text-[1rem]'>
+                        <span>{getAppDescription(name)}</span>
+                        <ul className='text-gray-300'>
+                            {Object.entries(props).map(([key, value], index) => (
+                                <li
+                                    key={`apps::props::${key}::${value}::${index}`}
+                                    className='text-xs'
+                                >
+                                    <span className='font-bold'>{key}:</span> <span>{value}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+            );
+        },
+    },
+    // Apps with input
+    {
+        pattern: /<app::(.*?)\((.*?)\)>/g,
+        parser: (name, input) => (
+            <div className='flex flex-row gap-2 bg-black text-white shadow-md rounded-md p-3 pr-4'>
+                <div>
+                    <Box />
+                </div>
+                <div className='flex flex-col gap-1 font-noto mt-0.5 text-[1rem]'>
+                    <span>{getAppDescription(name)}</span>
+                    <span className='text-xs text-gray-300'>{input}</span>
+                </div>
+            </div>
+        ),
+    },
     // Apps
     {
         pattern: /<app::(.*?)>/g,
@@ -247,7 +289,7 @@ export default function GiftCardPreview({
 
     const customElements = buildCustomElements({ preventReveal });
 
-    const [id] = code.split(':');
+    const [id] = code?.split(':') || [null];
     const isFirstAppearance = useFirstAppearanceAnom(id);
 
     if (code) {

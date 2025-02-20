@@ -152,8 +152,7 @@ export default function CardEditor() {
                     <GiftCard
                         classNames={{
                             text: cn({
-                                'text-gray-200 text-sm leading-6 whitespace-pre':
-                                    !rich(content),
+                                'text-gray-200 text-sm leading-6 whitespace-pre': !rich(content),
                             }),
                         }}
                         quote={rich(content) || loremIpsum}

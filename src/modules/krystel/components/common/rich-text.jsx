@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { pascalCase } from '@/modules/core/helpers/strings';
+import { extractConfigs } from '@/modules/krystel/helpers/strings';
+
 import Icon from './icon';
 import LoveText from './love-text';
 import ShineText from './shine-text';
@@ -13,7 +16,6 @@ import FancySeparator from './fancy-separator';
 import QuoteText from './quote-text';
 import BalloonsText from './balloons-text';
 import FrameApps from './frame-apps';
-import { pascalCase } from '@/modules/core/helpers/strings';
 import Button from './button';
 
 export const defaultElements = [
@@ -164,6 +166,21 @@ export const defaultElements = [
         pattern: /\[\[(.*?)\]\]/g,
         parser: id => <Sticker id={id} />,
     },
+    // Apps with props
+    {
+        pattern: /<app::(.*?)\(\{(.*?)\}\)>/g,
+        parser: (name, args) => {
+            const props = extractConfigs(args);
+            return <FrameApps name={name} props={props} />;
+        },
+    },
+    // Apps with input
+    {
+        pattern: /<app::(.*?)\((.*?)\)>/g,
+        parser: (name, input) => {
+            return <FrameApps name={name} input={input} />;
+        },
+    },
     // Apps
     {
         pattern: /<app::(.*?)>/g,
@@ -211,6 +228,17 @@ export const stripedElements = [
     { pattern: /<sticker::(.*?)>/g, parser: id => `[${id}]` },
     { pattern: /<badge::(.*?)>/g, parser: id => `[${id}]` },
     { pattern: /\[\[(.*?)\]\]/g, parser: id => `[${id}]` },
+    {
+        pattern: /<app::(.*?)\(\{(.*?)\}\)>/g,
+        parser: (name, args) => {
+            const props = extractConfigs(args);
+            return `<${pascalCase(name)} props={${JSON.stringify(props)}} />`;
+        },
+    },
+    {
+        pattern: /<app::(.*?)\((.*?)\)>/g,
+        parser: (name, input) => `<${pascalCase(name)} input="${input}" />`,
+    },
     { pattern: /<app::(.*?)>/g, parser: name => `<${pascalCase(name)} />` },
 ];
 
