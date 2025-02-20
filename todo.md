@@ -3,7 +3,7 @@
 -   [x] Un componente que vaya poniendo muchas palabras rápidamente, tipo
 -   [x] Una forma de notificar cuando inicia sesión la muchacha, que notifique una sola vez.
 -   [x] Tracking de impresion de página, duración de la sesión
--   [ ] Una forma de interactuar mandandole eventos
+-   [x] Una forma de interactuar mandandole eventos
     -   [x] Un panel con botones
     -   [x] Mandar globitos con mensajes
     -   [ ] Mandar vibraciones
@@ -15,7 +15,6 @@
     -   [x] Con atajos?
 -   [ ] Un componente que vaya escribiendo letra por letra como máquina de escribir
 -   [ ] Un componente que reprodusca una pequeña animación, estilo gartic phone
--   [ ] Un componente de páginas o diapositivas
 -   [x] Un componente de globos que revienten y den una especie de recompenza?
 -   [ ] Bloquear la aparición de cierto card hasta que se cumpla algún criterio por medio de la IP?
     -   [ ] Al visitar otro card
@@ -31,14 +30,16 @@
         -   [ ] X cantidad de views de una carta en específico
         -   [ ] X cantidad de días consecutivos
 -   [ ] Un componente de fondos personalizados
-    -   [ ] De nieve
-    -   [ ] De lluvia
-    -   [ ] De fiesta
+    -   [x] De nieve
+    -   [x] De lluvia
+    -   [x] De fiesta
     -   [ ] De lluvia de estrellas
     -   [ ] De fuego
     -   [ ] Degradados
     -   [ ] Gifs
--   [ ] Pequeños jueguitos tipo los de tiktok
+-   [ ] Un componente para apps
+    -   [x] Propuesta de san valentin
+    -   [ ] Una lista de todos los easter eggs
     -   [ ] Seguir el punto con el dedo, final sorpresa?
     -   [ ] Un qué prefieres? Que me notifique, tipo, votaciones
     -   [ ] Un jukebox synth
@@ -52,6 +53,7 @@
     -   [ ] Un cómo se siente hoy
     -   [ ] Algo que le guste
     -   [ ] Opción para dibujar
+    -   [ ] Botón de emergencia (Le pica y yo aparezco)
 -   [x] Un componente de configuraciones, para por ejemplo
     -   [x] quitar el icono
     -   [x] forzar un icono
@@ -64,10 +66,11 @@
     -   [x] Cambiar el borde
     -   [x] La insignia de primera vez
     -   [ ] Cambiar la tipografía
--   [ ] Añadir opción de redirigir, al dar click en el botón de another, en lugar de sacar another, que rediriga al target
--   [ ] Añadir botones a links o acciones, programables
+-   [x] Añadir opción de redirigir, al dar click en el botón de another, en lugar de sacar another, que rediriga al target
+-   [x] Añadir botones a links o acciones, programables
 
 -   [x] Editor
+
     -   [ ] Añadir pestañas (Contenido, Diseño, Avanzado)
     -   [ ] Contenido
         -   [ ] Añadir botones WYSIWYG
@@ -87,3 +90,23 @@
         -   [ ] Añadir saludo
         -   [ ] Es una carta
         -   [ ] Es un frame
+        -   [ ] Ocultar fecha
+        -   [ ] Personalizar saludo
+
+-   [ ] Easter eggs
+    -   [ ] 11:11
+    -   [ ] UFO 3am
+    -   [ ] Al reventar los globos te manda a una tarjeta secreta
+    -   [ ] Canción completa de "Locos"
+    -   [ ] Carta hablando sobre mi viaje
+    -   [ ] Modo uwu
+    -   [ ] Tarjeta oculta
+    -   [ ] El mayor secreto (Encontrar el panel)
+    -   [ ] Tarjeta que describe los easter eggs
+    -   [ ] Que pase algo cuando se pique el boton de like 100 veces
+    -   [ ] Que pase algo al entrar justo el día de mi cumpleaños
+    -   [ ] Que pase algo al entrar el día de el cumpleaños de ella
+    -   [ ] Que pase algo al entrar durante 5 días seguidos
+    -   [ ] Haber pasado un mes sin entrar
+    -   [ ] Leer una historia
+    -   [ ] Presionar el botón de emergencia

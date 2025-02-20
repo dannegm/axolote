@@ -5,7 +5,7 @@ export default function CardsList({ data = [] }) {
     return (
         <ClientOnly>
             <div className='grid grid-flow-row pb-16'>
-                {data.map(item => (
+                {data?.map(item => (
                     <CardItem key={`card-item-${item.id}`} item={item} />
                 ))}
             </div>
