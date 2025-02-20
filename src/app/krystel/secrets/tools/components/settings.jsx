@@ -59,14 +59,12 @@ export default function Settings() {
                     onCheckedChange={() => setShowQuickSettings(!showQuickSettings)}
                 />
 
-                {!showQuickSettings && (
-                    <SwitchOption
-                        id='settings:skip_actions'
-                        label='Skip Actions'
-                        checked={skipActions}
-                        onCheckedChange={() => setSkipActions(!skipActions)}
-                    />
-                )}
+                <SwitchOption
+                    id='settings:skip_actions'
+                    label='Skip Actions'
+                    checked={skipActions}
+                    onCheckedChange={() => setSkipActions(!skipActions)}
+                />
 
                 <SwitchOption
                     id='settings:debug_mode'
