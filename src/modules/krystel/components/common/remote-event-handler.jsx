@@ -31,11 +31,11 @@ const snowFallConfig = {
 };
 
 const useSfx = () => {
-    const [playPop] = useSound('./sounds/pop.mp3');
-    const [playShine] = useSound('./sounds/shine.mp3', {
+    const [playPop] = useSound('/sounds/pop.mp3');
+    const [playShine] = useSound('/sounds/shine.mp3', {
         volume: 0.3,
     });
-    const [playJingle] = useSound('./sounds/jingle-bells.mp3', {
+    const [playJingle] = useSound('/sounds/jingle-bells.mp3', {
         volume: 0.3,
     });
 

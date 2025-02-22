@@ -7,7 +7,7 @@ import usePostAction from '@/modules/krystel/hooks/use-post-action';
 import { heartsExplosion } from '@/modules/krystel/helpers/particles';
 
 export const LikeHandler = ({ settings, type = 'single', children }) => {
-    const [playPop] = useSound('./sounds/pop.mp3');
+    const [playPop] = useSound('/sounds/pop.mp3');
 
     const postLike = usePostAction({ action: 'like', settings });
 

@@ -11,9 +11,14 @@ import ClientOnly from '@/modules/core/components/common/client-only';
 
 import { Button } from '@/modules/shadcn/ui/button';
 import { Textarea } from '@/modules/shadcn/ui/textarea';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shadcn/ui/tabs';
+import { DatePicker } from '@/modules/shadcn/ui/date-picker';
 
 import useCreateQuoteAction from '@/modules/krystel/hooks/use-create-quote-action';
 import GiftCard from '@/modules/krystel/components/common/gift-card';
+import { Label } from '@/modules/shadcn/ui/label';
+import { TimePicker } from '@/modules/shadcn/ui/time-picker';
+import { mergeDateAndTime } from '@/modules/core/helpers/dates';
 
 const loremIpsum = '████   ████   ██||███████   ██████||████   ██████';
 
@@ -22,6 +27,9 @@ const rich = (text = '') => text.replaceAll('\n', '||');
 export default function CardEditor() {
     const router = useRouter();
     const [content, setContent] = useLocalStorage('editor:content', '');
+
+    const [publishedDate, setPublishedDate] = useState(new Date());
+    const [publishedTime, setPublishedTime] = useState(new Date());
 
     const [$translucedButton, translucedButtonPosition] = useClonePosition();
     const [transluced, setTransluced] = useState(false);
@@ -33,11 +41,19 @@ export default function CardEditor() {
         onSuccess: () => {
             router.push('/krystel/secrets/cards');
             setContent('');
+            setPublishedDate(new Date());
+            setPublishedTime(new Date());
         },
     });
 
     const prepare = content => {
         return content.replaceAll('\n', '\n||');
+    };
+
+    const handleReset = () => {
+        setContent('');
+        setPublishedDate(new Date());
+        setPublishedTime(new Date());
     };
 
     const handleChange = ev => {
@@ -47,7 +63,8 @@ export default function CardEditor() {
     const handleSubmit = () => {
         if (!canSave) return;
         const preparedContent = prepare(content);
-        createQuote.mutate(preparedContent);
+        const publishedAt = mergeDateAndTime(publishedDate, publishedTime);
+        createQuote.mutate({ quote: preparedContent, published_at: publishedAt });
     };
 
     return (
@@ -91,12 +108,35 @@ export default function CardEditor() {
                                 },
                             )}
                         >
-                            <Textarea
-                                className='bg-white min-h-24 max-h-64 field-sizing-content placeholder:text-gray-300'
-                                placeholder='Cuéntale a Krys lo mucho que la amas.'
-                                value={content}
-                                onChange={handleChange}
-                            />
+                            <Tabs defaultValue='advanced'>
+                                <TabsList className='grid w-full grid-cols-2'>
+                                    <TabsTrigger value='content'>Content</TabsTrigger>
+                                    <TabsTrigger value='advanced'>Advanced</TabsTrigger>
+                                </TabsList>
+                                <TabsContent value='content'>
+                                    <Textarea
+                                        className='bg-white min-h-24 max-h-64 field-sizing-content placeholder:text-gray-300'
+                                        placeholder='Cuéntale a Krys lo mucho que la amas.'
+                                        value={content}
+                                        onChange={handleChange}
+                                    />
+                                </TabsContent>
+                                <TabsContent value='advanced'>
+                                    <div className='flex flex-col gap-2'>
+                                        <Label>Published date</Label>
+                                        <div className='flex flex-row gap-2'>
+                                            <DatePicker
+                                                date={publishedDate}
+                                                onChange={setPublishedDate}
+                                            />
+                                            <TimePicker
+                                                value={publishedTime}
+                                                onChange={setPublishedTime}
+                                            />
+                                        </div>
+                                    </div>
+                                </TabsContent>
+                            </Tabs>
                         </div>
 
                         <div className='flex flex-row gap-2'>
@@ -121,7 +161,7 @@ export default function CardEditor() {
                                 type='button'
                                 size='icon'
                                 variant='destructive'
-                                onClick={() => setContent('')}
+                                onClick={handleReset}
                             >
                                 <X
                                     className={cn('transition-all duration-150', {

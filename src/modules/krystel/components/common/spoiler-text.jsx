@@ -10,7 +10,7 @@ import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 
 export default function SpoilerText({ inPreview = false, preventReveal = false, children }) {
-    const [playHush] = useSound('./sounds/shush.mp3');
+    const [playHush] = useSound('/sounds/shush.mp3');
     const [hidden, setHidden] = useState(true);
 
     const quote = useQuote();

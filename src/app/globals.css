@@ -25,3 +25,7 @@ s {
 #tsparticles {
     pointer-events: none;
 }
+
+
+
+@layer base {}

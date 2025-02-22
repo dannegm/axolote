@@ -12,7 +12,7 @@ import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 
 export default function SnowText({ children }) {
-    const [playJingle] = useSound('./sounds/jingle-bells.mp3', {
+    const [playJingle] = useSound('/sounds/jingle-bells.mp3', {
         volume: 0.3,
     });
 

@@ -16,8 +16,6 @@ import DeleteCardButton from './delete-card-button';
 import RestoreCardButton from './restore-card-button';
 
 export default function CardItem({ item }) {
-    const [deleting, setDeleting] = useState(false);
-
     const code = `${item.id}:${getRandomSettings()}`;
     const date = new Date(item.published_at + 'Z');
     const deleted = Boolean(item.deleted_at);
@@ -28,9 +26,6 @@ export default function CardItem({ item }) {
         <div
             className={cn(
                 'flex flex-col h-auto gap-4 items-start w-full py-4 border-t border-gray-200 text-sm transition-all duration-150',
-                {
-                    'opacity-0 h-0 overflow-hidden': deleting,
-                },
             )}
         >
             <div className='flex flex-row gap-4 items-start justify-center w-full'>
@@ -43,11 +38,7 @@ export default function CardItem({ item }) {
                 </Link>
 
                 <div className='flex-1' />
-                {deleted ? (
-                    <RestoreCardButton id={item.id} />
-                ) : (
-                    <DeleteCardButton id={item.id} onDelete={() => setDeleting(true)} />
-                )}
+                {deleted ? <RestoreCardButton id={item.id} /> : <DeleteCardButton id={item.id} />}
             </div>
 
             <div className='flex-none w-full'>

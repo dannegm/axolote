@@ -5,7 +5,7 @@ import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 
 export default function LoveText({ children }) {
-    const [playPop] = useSound('./sounds/pop.mp3');
+    const [playPop] = useSound('/sounds/pop.mp3');
 
     const quote = useQuote();
     const postLove = usePostAction({ action: 'love', settings: quote.settings });

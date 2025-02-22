@@ -11,8 +11,10 @@
     "dependencies": {
         "@date-fns/tz": "^1.2.0",
         "@radix-ui/react-label": "^2.1.2",
+        "@radix-ui/react-popover": "^1.1.6",
         "@radix-ui/react-slot": "^1.1.2",
         "@radix-ui/react-switch": "^1.1.3",
+        "@radix-ui/react-tabs": "^1.1.3",
         "@tanstack/react-query": "^5.62.10",
         "@tanstack/react-table": "^8.20.6",
         "@tsparticles/confetti": "^3.7.1",
@@ -31,6 +33,7 @@
         "nuqs": "^2.3.1",
         "polished": "^4.3.1",
         "react": "^19.0.0",
+        "react-day-picker": "8.10.1",
         "react-dom": "^19.0.0",
         "react-hook-form": "^7.54.2",
         "react-icons": "^5.4.0",
@@ -44,6 +47,7 @@
         "tailwind-merge": "^3.0.1",
         "tailwind-variants": "^0.3.0",
         "tailwindcss-animate": "^1.0.7",
+        "timescape": "^0.7.1",
         "ua-parser-js": "^2.0.0",
         "use-sound": "^4.0.3",
         "yarn": "^1.22.22"

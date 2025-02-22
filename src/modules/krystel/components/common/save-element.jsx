@@ -22,7 +22,7 @@ export const SaveContainer = ({ className, children, quote, onPrepare, onSave })
 
     const $container = useRef(null);
 
-    const [playCamera] = useSound('./sounds/camera.mp3');
+    const [playCamera] = useSound('/sounds/camera.mp3');
 
     const postSave = usePostAction({ action: 'save', settings: quote.settings });
 

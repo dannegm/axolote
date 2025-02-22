@@ -8,7 +8,7 @@ import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import { starsExplosion } from '@/modules/krystel/helpers/particles';
 
 export default function ShineText({ children }) {
-    const [playShine] = useSound('./sounds/shine.mp3', {
+    const [playShine] = useSound('/sounds/shine.mp3', {
         volume: 0.3,
     });
 
