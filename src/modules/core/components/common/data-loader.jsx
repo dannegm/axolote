@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
 
 export default function DataLoader({
     url,
@@ -6,6 +7,7 @@ export default function DataLoader({
     tags = [],
     loader = null,
     preventRefetch = false,
+    onError,
     children = () => null,
 } = {}) {
     const { data, error, isLoading } = useQuery({
@@ -24,6 +26,10 @@ export default function DataLoader({
         refetchInterval: !preventRefetch,
         refetchIntervalInBackground: !preventRefetch,
     });
+
+    useEffect(() => {
+        onError?.(error);
+    }, [error]);
 
     if (isLoading) {
         return loader || <div>Loading...</div>;
