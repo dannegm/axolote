@@ -7,6 +7,7 @@ import Portal from '@/modules/core/components/common/portal';
 
 import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
+import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
 
 import Frame from './frame';
 import Balloons from '../common/balloons';
@@ -90,6 +91,8 @@ export default function Valentine({}) {
     const [saidYes, setSaidYes] = useState(false);
     const [slide, setSlide] = useState(initialSlide);
 
+    const { discover } = useEasterEggs();
+
     const [playSound, pauseSound] = useAudio({
         src: '/sounds/little-happy-tune.mp3',
         volume: 0.3,
@@ -106,6 +109,7 @@ export default function Valentine({}) {
         setSaidYes(true);
         playSound();
         postSaidYes();
+        discover('valentin');
     };
 
     const handleNo = () => {

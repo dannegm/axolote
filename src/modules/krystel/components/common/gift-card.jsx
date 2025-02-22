@@ -19,6 +19,7 @@ import QuoteProvider from '@/modules/krystel/providers/quote-provider';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 import useFirstAppearance from '@/modules/krystel/hooks/use-first-appearance';
 import useTrackAction from '@/modules/krystel/hooks/use-track-action';
+import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
 import { useGreetings } from '@/modules/krystel/services/greetings';
 
 import RichText from './rich-text';
@@ -32,20 +33,29 @@ export default function GiftCard({
     scheme = 'bg-white text-gray-600',
     settings = 'none',
     published_at = undefined,
+    show,
 }) {
     const [uwu] = useQueryState('uwu', parseAsBoolean.withDefault(false));
 
+    const { discover } = useEasterEggs();
+
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
+
+    if (!show) {
+        discover('hidden_card');
+    }
 
     useTrackAction();
     const postView = usePostAction({ action: 'view', settings });
 
     if (isElevenEleven()) {
+        discover('eleven_eleven');
         quote = '({icon:hidden}) <badge::pray>$$11:11$$ pide un deseo.';
     }
 
     if (isThreeInTheMorning()) {
+        discover('ufo_time');
         quote = '({icon:hidden}) <sticker::ufo>';
     }
 
@@ -68,6 +78,22 @@ export default function GiftCard({
             postView();
         }
     }, []);
+
+    useEffect(() => {
+        if (uwu) {
+            discover('uwu_mode');
+        }
+    }, [uwu]);
+
+    if (id === '128') {
+        discover('secret_card');
+    }
+    if (id === '127') {
+        discover('nyancat');
+    }
+    if (id === '163') {
+        discover('locos');
+    }
 
     return (
         <QuoteProvider quote={{ settings }}>

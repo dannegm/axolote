@@ -9,6 +9,7 @@ import { random } from '@/modules/core/helpers/numbers';
 import { randomPick, sequence } from '@/modules/core/helpers/arrays';
 
 import { confettiExplosion } from '@/modules/krystel/helpers/particles';
+import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
 
 const balloonDimension = 15;
 const defaultColors = ['#e1e110', '#1717c8', '#561394', '#11ca11', '#dc5f25', '#d01a1a'];
@@ -187,12 +188,15 @@ const Balloons = ({ count, loop, onPop, onPopAll }) => {
     const canHandlePopAll = useRef(true);
     const $interval = useRef();
 
+    const { discover } = useEasterEggs();
+
     const handlePop = event => {
         onPop?.(event);
         popCount.current = popCount.current + 1;
     };
     const handlePopAll = () => {
         onPopAll?.();
+        discover('balloons');
         canHandlePopAll.current = false;
         clearInterval($interval);
     };
