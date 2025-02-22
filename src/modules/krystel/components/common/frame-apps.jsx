@@ -16,7 +16,7 @@ const appsDescriptions = {
     valentine: '¿Quieres ser mi san valentín?',
     wyr: '¿Qué prefieres?',
     simple: 'Ejemplo simple',
-    easter_eggs: 'Easter Eggs',
+    easter_eggs: 'Encuéntralos todos',
 };
 
 export const getAppDescription = name => {

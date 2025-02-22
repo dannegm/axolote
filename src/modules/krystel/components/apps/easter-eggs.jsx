@@ -24,9 +24,9 @@ export default function EasterEggs() {
                     <li key={`egg:${item.id}`} className='flex flex-row gap-2'>
                         <div
                             className={cn(
-                                'block flex-none w-4 h-4 bg-indigo-100 rounded-md text-green-500',
+                                'block flex-none w-4 h-4 bg-indigo-100 box-border border border-indigo-300 rounded-md text-green-500',
                                 {
-                                    'bg-slate-100': !item.discovered,
+                                    'bg-slate-100 border border-slate-300': !item.discovered,
                                 },
                             )}
                         >
@@ -35,8 +35,8 @@ export default function EasterEggs() {
                             )}
                         </div>
                         <span
-                            className={cn('font-delius text-pretty -mt-px line-through', {
-                                'blur-sm': !item.discovered,
+                            className={cn('font-delius text-pretty -mt-0.5 line-through', {
+                                'blur-sm select-none': !item.discovered,
                             })}
                         >
                             {item.description}

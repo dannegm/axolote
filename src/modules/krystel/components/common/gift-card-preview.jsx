@@ -18,7 +18,7 @@ import QuoteText from './quote-text';
 import { BalloonsTextSimple } from './balloons-text';
 import { getAppDescription } from './frame-apps';
 
-export const buildCustomElements = ({ preventReveal }) => [
+export const buildCustomElements = ({ letter, preventReveal }) => [
     // Strikethrough
     { pattern: /~~(.*?)~~/g, parser: text => <s>{text}</s> },
     // Underline
@@ -267,11 +267,17 @@ export const buildCustomElements = ({ preventReveal }) => [
     {
         pattern: /<app::(.*?)>/g,
         parser: name => (
-            <div className='flex flex-row gap-2 bg-black text-white shadow-md rounded-md p-3 pr-4'>
+            <div
+                className={cn(
+                    'flex flex-row gap-2 bg-black text-white shadow-md rounded-md p-3 pr-4',
+                )}
+            >
                 <div>
                     <Box />
                 </div>
-                <span className='font-noto mt-0.5 text-[1rem]'>{getAppDescription(name)}</span>
+                <span className={cn('font-noto mt-0.5 text-[1rem]')}>
+                    {getAppDescription(name)}
+                </span>
             </div>
         ),
     },
@@ -286,8 +292,6 @@ export default function GiftCardPreview({
     preventReveal = false,
 }) {
     let quoteSettings = getRandomQuote();
-
-    const customElements = buildCustomElements({ preventReveal });
 
     const [id] = code?.split(':') || [null];
     const isFirstAppearance = useFirstAppearanceAnom(id);
@@ -304,6 +308,9 @@ export default function GiftCardPreview({
     const dark = configs?.dark;
     const LucideIcon =
         configs?.icon === 'hidden' ? <></> : icons[configs?.icon || quoteSettings.icon];
+
+    const customElements = buildCustomElements({ letter, preventReveal });
+    const hasApp = /<app::/g.test(content);
 
     return (
         <div
@@ -363,7 +370,7 @@ export default function GiftCardPreview({
                     <div className={cn('mt-[2px] font-delius font-medium pr-4')}>
                         <div
                             className={cn('block', {
-                                'overflow-hidden line-clamp-4 mask-gradient': letter,
+                                'overflow-hidden line-clamp-4 mask-gradient': letter && !hasApp,
                             })}
                         >
                             <RichText elements={customElements}>{content}</RichText>

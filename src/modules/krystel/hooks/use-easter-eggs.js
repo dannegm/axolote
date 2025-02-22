@@ -26,7 +26,8 @@ const easterEggs = [
         description: 'Ahora ya sabes cómo ver cartitas ocultas',
     },
     {
-        id: 'balloons',
+        // Desactivando hasta encontrar una mejor recompensa.
+        id: '_balloons',
         description: '¿Viste el secreto después de haber reventado todos los globos?',
     },
     {
