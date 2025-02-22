@@ -10,6 +10,7 @@ import useClonePosition from '@/modules/core/hooks/use-clone-position';
 import ClientOnly from '@/modules/core/components/common/client-only';
 
 import { Button } from '@/modules/shadcn/ui/button';
+import { Switch } from '@/modules/shadcn/ui/switch';
 import { Textarea } from '@/modules/shadcn/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shadcn/ui/tabs';
 import { DatePicker } from '@/modules/shadcn/ui/date-picker';
@@ -49,16 +50,6 @@ export default function CardEditor() {
 
     const prepare = content => {
         return content.replaceAll('\n', '\n||');
-    };
-
-    const handlePublishedDateChange = date => {
-        setIncludesPushidedDate(true);
-        setPublishedDate(date);
-    };
-
-    const handlePublishedTimeChange = time => {
-        setIncludesPushidedDate(true);
-        setPublishedTime(time);
     };
 
     const handleReset = () => {
@@ -142,15 +133,32 @@ export default function CardEditor() {
                                 </TabsContent>
                                 <TabsContent value='advanced'>
                                     <div className='flex flex-col gap-2'>
-                                        <Label>Published date</Label>
-                                        <div className='flex flex-row gap-2'>
+                                        <div className='flex flex-row items-center justify-between'>
+                                            <Label htmlFor='includes-pushided-date'>
+                                                Published date
+                                            </Label>
+                                            <Switch
+                                                id='includes-pushided-date'
+                                                checked={includesPushidedDate}
+                                                onCheckedChange={() =>
+                                                    setIncludesPushidedDate(!includesPushidedDate)
+                                                }
+                                            />
+                                        </div>
+
+                                        <div
+                                            className={cn('flex flex-row gap-2', {
+                                                'opacity-60 pointer-events-none':
+                                                    !includesPushidedDate,
+                                            })}
+                                        >
                                             <DatePicker
                                                 date={publishedDate}
-                                                onChange={handlePublishedDateChange}
+                                                onChange={setPublishedDate}
                                             />
                                             <TimePicker
                                                 value={publishedTime}
-                                                onChange={handlePublishedTimeChange}
+                                                onChange={setPublishedTime}
                                             />
                                         </div>
                                     </div>
