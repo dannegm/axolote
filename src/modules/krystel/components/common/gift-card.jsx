@@ -14,6 +14,8 @@ import {
     replaceWithLongestSentence,
 } from '@/modules/krystel/helpers/strings';
 
+import useScrollPosition from '@/modules/core/hooks/use-scroll-position';
+
 import QuoteProvider from '@/modules/krystel/providers/quote-provider';
 
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
@@ -48,6 +50,7 @@ export default function GiftCard({
 
     useTrackAction();
     const postView = usePostAction({ action: 'view', settings });
+    const postReadCompleteAction = usePostAction({ action: 'read_complete', settings });
 
     if (isElevenEleven()) {
         discover('eleven_eleven');
@@ -94,6 +97,19 @@ export default function GiftCard({
     if (id === '163') {
         discover('locos');
     }
+
+    useScrollPosition(
+        {
+            tolerance: 140,
+            onBottom: () => {
+                if (id === '158') {
+                    discover('tldr');
+                    postReadCompleteAction();
+                }
+            },
+        },
+        [id],
+    );
 
     return (
         <QuoteProvider quote={{ settings }}>

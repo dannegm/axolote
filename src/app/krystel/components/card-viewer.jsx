@@ -30,8 +30,6 @@ const buildQuoteSettings = ({ code, data }) => {
 
     let settingsCode = `${data.id}:${settings.settings}`;
 
-    console.log(settingsCode);
-
     return {
         ...data,
         ...settings,

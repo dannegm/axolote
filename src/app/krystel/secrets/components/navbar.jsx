@@ -1,9 +1,23 @@
 'use client';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
 import { cn } from '@/modules/core/helpers/utils';
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import ClientOnly from '@/modules/core/components/common/client-only';
+
+import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
+
+const ClientEvents = () => {
+    const { discover } = useEasterEggs();
+
+    useEffect(() => {
+        discover('admin');
+    }, []);
+
+    return <></>;
+};
 
 const NavLink = ({ className, href, active, children }) => {
     return (
@@ -38,6 +52,7 @@ export default function Navbar({ classNames }) {
 
     return (
         <ClientOnly>
+            <ClientEvents />
             <nav
                 className={cn(
                     'sticky top-4 z-[100] flex flex-row gap-1 p-2 bg-black text-white rounded-md',
