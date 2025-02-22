@@ -28,6 +28,7 @@ export default function CardEditor() {
     const router = useRouter();
     const [content, setContent] = useLocalStorage('editor:content', '');
 
+    const [includesPushidedDate, setIncludesPushidedDate] = useState(false);
     const [publishedDate, setPublishedDate] = useState(new Date());
     const [publishedTime, setPublishedTime] = useState(new Date());
 
@@ -50,8 +51,19 @@ export default function CardEditor() {
         return content.replaceAll('\n', '\n||');
     };
 
+    const handlePublishedDateChange = date => {
+        setIncludesPushidedDate(true);
+        setPublishedDate(date);
+    };
+
+    const handlePublishedTimeChange = time => {
+        setIncludesPushidedDate(true);
+        setPublishedTime(time);
+    };
+
     const handleReset = () => {
         setContent('');
+        setIncludesPushidedDate(false);
         setPublishedDate(new Date());
         setPublishedTime(new Date());
     };
@@ -63,8 +75,15 @@ export default function CardEditor() {
     const handleSubmit = () => {
         if (!canSave) return;
         const preparedContent = prepare(content);
-        const publishedAt = mergeDateAndTime(publishedDate, publishedTime);
-        createQuote.mutate({ quote: preparedContent, published_at: publishedAt });
+        const publishedAt = includesPushidedDate
+            ? mergeDateAndTime(publishedDate, publishedTime)
+            : new Date();
+
+        createQuote.mutate({
+            // ...
+            quote: preparedContent,
+            published_at: publishedAt,
+        });
     };
 
     return (
@@ -108,7 +127,7 @@ export default function CardEditor() {
                                 },
                             )}
                         >
-                            <Tabs defaultValue='advanced'>
+                            <Tabs defaultValue='content'>
                                 <TabsList className='grid w-full grid-cols-2'>
                                     <TabsTrigger value='content'>Content</TabsTrigger>
                                     <TabsTrigger value='advanced'>Advanced</TabsTrigger>
@@ -127,11 +146,11 @@ export default function CardEditor() {
                                         <div className='flex flex-row gap-2'>
                                             <DatePicker
                                                 date={publishedDate}
-                                                onChange={setPublishedDate}
+                                                onChange={handlePublishedDateChange}
                                             />
                                             <TimePicker
                                                 value={publishedTime}
-                                                onChange={setPublishedTime}
+                                                onChange={handlePublishedTimeChange}
                                             />
                                         </div>
                                     </div>
