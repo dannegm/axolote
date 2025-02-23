@@ -37,11 +37,11 @@
     -   [ ] De fuego
     -   [ ] Degradados
     -   [ ] Gifs
+    -   [ ] Por clima
 -   [ ] Un componente para apps
     -   [x] Propuesta de san valentin
-    -   [ ] Una lista de todos los easter eggs
-    -   [ ] Seguir el punto con el dedo, final sorpresa?
-    -   [ ] Un qué prefieres? Que me notifique, tipo, votaciones
+    -   [x] Una lista de todos los easter eggs
+    -   [x] Un qué prefieres? Que me notifique, tipo, votaciones
     -   [ ] Un jukebox synth
     -   [ ] Sigue el botón
 -   [ ] Una tarjeta de vez en cuando que permita que me comparta:
@@ -79,30 +79,27 @@
         -   [ ] Opción de subir sticker
         -   [ ] Selector de efectos
     -   [ ] Diseño
+        -   [ ] Selector de iconos
         -   [ ] Selector de fondos
         -   [ ] Selector de bordes
         -   [ ] Selector de schemes
     -   [ ] Avanzado
-        -   [ ] Selector de iconos
-        -   [ ] Selector de fondos
-        -   [ ] Selector de bordes
-        -   [ ] Selector de schemas
-        -   [ ] Añadir saludo
         -   [ ] Es una carta
         -   [ ] Es un frame
         -   [ ] Ocultar fecha
+        -   [ ] Seleccionar fecha de publicación
         -   [ ] Personalizar saludo
 
--   [ ] Easter eggs
-    -   [ ] 11:11
-    -   [ ] UFO 3am
+-   [x] Easter eggs
+    -   [x] 11:11
+    -   [x] UFO 3am
     -   [ ] Al reventar los globos te manda a una tarjeta secreta
-    -   [ ] Canción completa de "Locos"
-    -   [ ] Carta hablando sobre mi viaje
-    -   [ ] Modo uwu
-    -   [ ] Tarjeta oculta
-    -   [ ] El mayor secreto (Encontrar el panel)
-    -   [ ] Tarjeta que describe los easter eggs
+    -   [x] Canción completa de "Locos"
+    -   [x] Carta hablando sobre mi viaje
+    -   [x] Modo uwu
+    -   [x] Tarjeta oculta
+    -   [x] El mayor secreto (Encontrar el panel)
+    -   [x] Tarjeta que describe los easter eggs
     -   [ ] Que pase algo cuando se pique el boton de like 100 veces
     -   [ ] Que pase algo al entrar justo el día de mi cumpleaños
     -   [ ] Que pase algo al entrar el día de el cumpleaños de ella
