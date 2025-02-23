@@ -51,6 +51,10 @@ const easterEggs = [
         id: 'matrix',
         description: 'Conociste las entrañas de la matrix',
     },
+    {
+        id: 'wyr',
+        description: 'La vida está llena de decisiones difíciles',
+    },
 ];
 
 export default function useEasterEggs() {

@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from 'react';
 import { useQueryState, parseAsBoolean } from 'nuqs';
 import { Check } from 'lucide-react';
 
@@ -6,7 +7,6 @@ import { cn } from '@/modules/core/helpers/utils';
 import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
 
 import Frame from './frame';
-import { useEffect } from 'react';
 
 export default function EasterEggs() {
     const [revealed] = useQueryState('revealed', parseAsBoolean.withDefault(false));
