@@ -30,7 +30,7 @@ export const extractConfigs = (configsText = null) => {
         }, {});
 };
 
-export const extractConfigsAndContent = text => {
+export const extractConfigsAndContent = (text = '') => {
     const regex = /^\(\{(.*?)\}\)/;
     const match = text.match(regex);
 
