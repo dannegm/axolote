@@ -234,14 +234,18 @@ export const buildCustomElements = ({ letter, preventReveal }) => [
                     <div className='flex flex-col gap-1 font-noto mt-0.5 text-[1rem]'>
                         <span>{getAppDescription(name)}</span>
                         <ul className='text-gray-300'>
-                            {Object.entries(props).map(([key, value], index) => (
-                                <li
-                                    key={`apps::props::${key}::${value}::${index}`}
-                                    className='text-xs'
-                                >
-                                    <span className='font-bold'>{key}:</span> <span>{value}</span>
-                                </li>
-                            ))}
+                            {Object.entries(props).map(([key, value], index) => {
+                                if (key.startsWith('_')) return null;
+                                return (
+                                    <li
+                                        key={`apps::props::${key}::${value}::${index}`}
+                                        className='text-xs'
+                                    >
+                                        <span className='font-bold'>{key}:</span>{' '}
+                                        <span>{value}</span>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
                 </div>
@@ -258,7 +262,9 @@ export const buildCustomElements = ({ letter, preventReveal }) => [
                 </div>
                 <div className='flex flex-col gap-1 font-noto mt-0.5 text-[1rem]'>
                     <span>{getAppDescription(name)}</span>
-                    <span className='text-xs text-gray-300'>{input}</span>
+                    {!input.startsWith('_') && (
+                        <span className='text-xs text-gray-300'>{input}</span>
+                    )}
                 </div>
             </div>
         ),

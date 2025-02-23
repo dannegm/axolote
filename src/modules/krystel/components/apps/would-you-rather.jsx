@@ -8,15 +8,15 @@ import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
 
 import Frame from './frame';
 
-export default function WouldYouRather({ oA = 'esto', oB = 'esto', cA, cB }) {
+export default function WouldYouRather({ a = 'esto', b = 'esto', _cA, _cB }) {
     const itemClassName =
         'block h-0 p-0 overflow-hidden text-white opacity-0 cursor-pointer interpolate-size transition-all duration-500';
 
     const [selected, setSelected] = useState('none');
 
     const comments = {
-        A: cA,
-        B: cB,
+        A: _cA,
+        B: _cB,
     };
 
     const { discover } = useEasterEggs();
@@ -53,7 +53,7 @@ export default function WouldYouRather({ oA = 'esto', oB = 'esto', cA, cB }) {
                     })}
                     onClick={handleSelectA}
                 >
-                    {oA}
+                    {a}
                 </div>
                 {selected === 'none' && (
                     <div className='relative left-1/2 -m-3 flex-center w-6 h-6 bg-white rounded-full text-xs ring-1 ring-gray-200'>
@@ -68,7 +68,7 @@ export default function WouldYouRather({ oA = 'esto', oB = 'esto', cA, cB }) {
                     })}
                     onClick={handleSelectB}
                 >
-                    {oB}
+                    {b}
                 </div>
             </div>
 
