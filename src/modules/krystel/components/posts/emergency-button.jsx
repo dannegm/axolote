@@ -41,7 +41,7 @@ export default function EmergencyButton({ triggerCreate }) {
                 <h2 className='font-noto font-bold text-right'>Botón de pánico</h2>
                 <p className='font-noto text-sm text-right'>Click en caso de emergencia</p>
             </div>
-            <div className='flex-none flex-center mr-16'>
+            <div className='flex-none flex-center mr-[10%] sm:mr-[20%] md:mr-[25%] lg:mr-[30%] xl:mr-[35%]'>
                 <button className='cursor-pointer outline-none' onClick={handleClick}>
                     <div className='w-[83px] h-[83px] bg-red-50 rounded-full relative shadow-[inset_0px_0px_1px_1px_rgba(0,0,0,0.3),_2px_3px_5px_rgba(0,0,0,0.1)] flex items-center justify-center'>
                         <div className='absolute w-[72px] h-[72px] z-10 bg-black rounded-full left-1/2 -translate-x-1/2 top-[5px] blur-[1px]'></div>
