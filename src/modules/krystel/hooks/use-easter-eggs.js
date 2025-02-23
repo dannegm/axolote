@@ -1,4 +1,5 @@
 'use client';
+import { useState, useEffect } from 'react';
 
 const easterEggs = [
     {
@@ -47,25 +48,46 @@ const easterEggs = [
         description: 'No pensé que fueras a leerlo todo',
     },
     {
-        id: 'admin',
-        description: 'Ahora te sientes observada, ¿no?',
+        id: 'matrix',
+        description: 'Conociste las entrañas de la matrix',
     },
 ];
 
 export default function useEasterEggs() {
+    const [secrets, setSecrets] = useState([]);
+
+    const channel = new BroadcastChannel('eeggs:channel');
+
+    const loadSecrets = () => {
+        setSecrets(
+            easterEggs.map(item => ({
+                ...item,
+                discovered: localStorage.getItem(`eeggs:${item.id}`) === 'true',
+            })),
+        );
+    };
+
     const discover = id => {
-        localStorage.setItem(`eeggs:${id}`, true);
+        const key = `eeggs:${id}`;
+        if (localStorage.getItem(key) === 'true') return;
+
+        localStorage.setItem(key, 'true');
+        loadSecrets();
+        channel.postMessage({ type: 'update' });
     };
 
-    const getSecrets = () => {
-        return easterEggs.map(item => ({
-            ...item,
-            discovered: localStorage.getItem(`eeggs:${item.id}`) ?? false,
-        }));
-    };
+    useEffect(() => {
+        loadSecrets();
 
-    return {
-        discover,
-        getSecrets,
-    };
+        const handleMessage = event => {
+            if (event.data.type === 'update') {
+                loadSecrets();
+            }
+        };
+
+        channel.addEventListener('message', handleMessage);
+        return () => channel.removeEventListener('message', handleMessage);
+    }, []);
+
+    return { secrets, discover };
 }

@@ -49,7 +49,7 @@ export default function CardEditor() {
     });
 
     const prepare = content => {
-        return content.replaceAll('\n', '\n||');
+        return content.replaceAll('\n', '\n||').replaceAll('})\n||', '})\n');
     };
 
     const handleReset = () => {

@@ -10,7 +10,7 @@ export default function DataLoader({
     onError,
     children = () => null,
 } = {}) {
-    const { data, error, isLoading } = useQuery({
+    const { data, error, isLoading, isFetching } = useQuery({
         queryKey: tags,
         queryFn: async () => {
             const resp = await fetch(url + new URLSearchParams(params));
@@ -28,15 +28,18 @@ export default function DataLoader({
     });
 
     useEffect(() => {
-        onError?.(error);
-    }, [error]);
+        if (!isFetching && error) {
+            console.log({ isFetching, error });
+            onError?.(error);
+        }
+    }, [isFetching, error]);
 
     if (isLoading) {
         return loader || <div>Loading...</div>;
     }
 
     if (error) {
-        return <div>Error: {error.message}</div>;
+        return loader || <div>Error: {error.message}</div>;
     }
 
     return children(data);

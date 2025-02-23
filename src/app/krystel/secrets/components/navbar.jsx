@@ -13,7 +13,7 @@ const ClientEvents = () => {
     const { discover } = useEasterEggs();
 
     useEffect(() => {
-        discover('admin');
+        discover('matrix');
     }, []);
 
     return <></>;

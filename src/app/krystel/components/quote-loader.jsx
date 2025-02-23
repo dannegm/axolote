@@ -6,6 +6,7 @@ import DataLoader from '@/modules/core/components/common/data-loader';
 import Loader from '@/modules/core/components/common/loader';
 
 import CardViewer from './card-viewer';
+import { ro } from 'date-fns/locale';
 
 const BASE_URL = 'https://endpoints.hckr.mx/quotes';
 
@@ -25,7 +26,7 @@ export default function QuoteLoader() {
     const codeQuery = quoteId ? `?quote.id=${quoteId}` : '';
 
     const handleError = () => {
-        router.push('/krystel');
+        window.location.href = '/krystel';
     };
 
     return (
