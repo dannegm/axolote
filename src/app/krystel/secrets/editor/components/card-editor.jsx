@@ -134,7 +134,7 @@ export default function CardEditor() {
                                         className='bg-white placeholder:text-gray-300'
                                         placeholder='Cuéntale a Krys lo mucho que la amas.'
                                         minRows={3}
-                                        maxRows={12}
+                                        maxRows={8}
                                         value={content}
                                         onChange={handleChange}
                                     />

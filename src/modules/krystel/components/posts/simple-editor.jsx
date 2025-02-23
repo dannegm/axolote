@@ -12,7 +12,7 @@ export default function SimpleEditor({ content, setContent }) {
             <Textarea
                 className='bg-white/30 focus:bg-white transition-all duration-150'
                 minRows={4}
-                maxRows={10}
+                maxRows={8}
                 value={content}
                 onChange={handleChange}
             />
