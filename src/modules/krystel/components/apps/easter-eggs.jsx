@@ -19,6 +19,12 @@ export default function EasterEggs() {
         discover('easter_card');
     }, []);
 
+    useEffect(() => {
+        if (revealed) {
+            discover('eggs_hacked');
+        }
+    }, [revealed]);
+
     return (
         <Frame className='max-h-auto flex flex-col gap-4'>
             <p className='font-delius text-pretty text-sm'>

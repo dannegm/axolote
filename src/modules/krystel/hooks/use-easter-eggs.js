@@ -55,6 +55,10 @@ const easterEggs = [
         id: 'wyr',
         description: 'La vida está llena de decisiones difíciles',
     },
+    {
+        id: 'eggs_hacked',
+        description: 'Oye!. Eso es hacer trampa...',
+    },
 ];
 
 export default function useEasterEggs() {
