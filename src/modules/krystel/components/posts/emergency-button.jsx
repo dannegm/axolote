@@ -31,7 +31,7 @@ export default function EmergencyButton({ triggerCreate }) {
     return (
         <div
             className={cn(
-                'flex flex-row gap-6 bg-pink-100 border border-red-300 rounded-lg p-4 transition-all duration-500',
+                'flex flex-row gap-6 bg-pink-100 border border-red-300 rounded-lg p-4 transition-all duration-500 select-none',
                 {
                     'bg-red-600 text-white': emergency,
                 },

@@ -2,7 +2,6 @@ import { useQueryState, parseAsBoolean } from 'nuqs';
 import RandomPicture from '@/modules/core/components/common/randim-picture';
 
 import PostEditor from '@/modules/krystel/components/posts/post-editor';
-import SimpleEditor from '@/modules/krystel/components/posts/simple-editor';
 import FancySeparator from '@/modules/krystel/components/common/fancy-separator';
 
 import PostItem from './post-item';
@@ -35,11 +34,7 @@ export default function PostsList({ data = [] }) {
             </div>
 
             <div>
-                <PostEditor>
-                    {({ content, setContent }) => (
-                        <SimpleEditor content={content} setContent={setContent} />
-                    )}
-                </PostEditor>
+                <PostEditor />
             </div>
 
             <FancySeparator className='mt-10' />
