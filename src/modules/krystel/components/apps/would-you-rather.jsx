@@ -8,15 +8,15 @@ import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
 
 import Frame from './frame';
 
-export default function WouldYouRather({ a = 'esto', b = 'esto', _cA, _cB }) {
+export default function WouldYouRather({ a = 'esto', b = 'esto', _a, _b }) {
     const itemClassName =
         'block h-0 p-0 overflow-hidden text-white opacity-0 cursor-pointer interpolate-size transition-all duration-500';
 
     const [selected, setSelected] = useState('none');
 
     const comments = {
-        A: _cA,
-        B: _cB,
+        A: _a,
+        B: _b,
     };
 
     const { discover } = useEasterEggs();
