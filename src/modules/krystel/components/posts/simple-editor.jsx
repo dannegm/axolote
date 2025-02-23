@@ -1,0 +1,21 @@
+'use client';
+
+import { Textarea } from '@/modules/shadcn/ui/textarea';
+
+export default function SimpleEditor({ content, setContent }) {
+    const handleChange = ev => {
+        setContent(ev.target.value);
+    };
+
+    return (
+        <div>
+            <Textarea
+                className='bg-white/30 focus:bg-white transition-all duration-150'
+                minRows={4}
+                maxRows={10}
+                value={content}
+                onChange={handleChange}
+            />
+        </div>
+    );
+}

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BookMarked, Ellipsis, MessageSquareQuote, RefreshCcw } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';

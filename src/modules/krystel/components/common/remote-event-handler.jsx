@@ -22,6 +22,8 @@ import {
 
 import Balloons from './balloons';
 
+const EVENTS_TOPIC = process.env.NEXT_PUBLIC_EVENTS_TOPIC;
+
 const snowFallConfig = {
     color: '#ffffff',
     snowflakeCount: 320,
@@ -92,6 +94,7 @@ export default function RemoteEventHandler({ quote }) {
 
         showToast({
             content: 'Rompe todos los globos! 🎈✨',
+            duration: 15_000,
         });
     };
 
@@ -130,6 +133,7 @@ export default function RemoteEventHandler({ quote }) {
             // summonBalloons();
             showToast({
                 content: '¿Lista para la fiesta 🫢?',
+                duration: 15_000,
                 onAccept: () => {
                     summonBalloons();
                 },
@@ -141,6 +145,7 @@ export default function RemoteEventHandler({ quote }) {
     };
 
     useNtfy({
+        topic: EVENTS_TOPIC,
         onMessage: event => {
             if (commands[event]) {
                 commands[event]();

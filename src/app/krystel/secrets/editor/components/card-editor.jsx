@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Save, Loader2, CircleDashed, Circle, ChevronDown, X } from 'lucide-react';
+import { Save, Loader2, CircleDashed, Circle, ChevronDown, X, RefreshCcw } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
@@ -27,6 +27,8 @@ const rich = (text = '') => text.replaceAll('\n', '||');
 
 export default function CardEditor() {
     const router = useRouter();
+    const [editorKey, setEditorKey] = useState(0);
+
     const [content, setContent] = useLocalStorage('editor:content', '');
 
     const [includesPushidedDate, setIncludesPushidedDate] = useState(false);
@@ -77,6 +79,10 @@ export default function CardEditor() {
         });
     };
 
+    const forceUpdate = () => {
+        setEditorKey(prevKey => prevKey + 1);
+    };
+
     return (
         <ClientOnly>
             <div className={cn('mt-4', 'lg:flex lg:flex-row lg:gap-4')}>
@@ -125,8 +131,10 @@ export default function CardEditor() {
                                 </TabsList>
                                 <TabsContent value='content'>
                                     <Textarea
-                                        className='bg-white min-h-24 max-h-64 field-sizing-content placeholder:text-gray-300'
+                                        className='bg-white placeholder:text-gray-300'
                                         placeholder='Cuéntale a Krys lo mucho que la amas.'
+                                        minRows={3}
+                                        maxRows={12}
                                         value={content}
                                         onChange={handleChange}
                                     />
@@ -182,6 +190,10 @@ export default function CardEditor() {
                                 />
                             </Button>
 
+                            <Button type='button' size='icon' onClick={forceUpdate}>
+                                <RefreshCcw />
+                            </Button>
+
                             <div className='flex-1' />
 
                             <Button
@@ -217,6 +229,7 @@ export default function CardEditor() {
                     )}
                 >
                     <GiftCard
+                        key={editorKey}
                         classNames={{
                             text: cn({
                                 'text-gray-200 text-sm leading-6 whitespace-pre': !rich(content),

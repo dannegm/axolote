@@ -36,6 +36,15 @@ export default function Settings() {
         false,
     );
 
+    const [enablePostsSection, setEnablePostsSection] = useLocalStorage(
+        'settings:posts:enable',
+        false,
+    );
+    const [includesDeletedPosts, setIncludesDeletedPosts] = useLocalStorage(
+        'settings:posts:includes_deleted',
+        false,
+    );
+
     return (
         <>
             <h2 className='font-bold text-xl mt-4'>Settings</h2>
@@ -83,6 +92,18 @@ export default function Settings() {
                     label='Includes Deleted Cards'
                     checked={includesDeleted}
                     onCheckedChange={() => setIncludesDeleted(!includesDeleted)}
+                />
+                <SwitchOption
+                    id='settings:posts:enable'
+                    label='Enable Posts Section'
+                    checked={enablePostsSection}
+                    onCheckedChange={() => setEnablePostsSection(!enablePostsSection)}
+                />
+                <SwitchOption
+                    id='settings:posts:includes_deleted'
+                    label='Includes Deleted Posts'
+                    checked={includesDeletedPosts}
+                    onCheckedChange={() => setIncludesDeletedPosts(!includesDeletedPosts)}
                 />
             </div>
         </>

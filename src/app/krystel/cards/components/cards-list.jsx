@@ -18,7 +18,7 @@ export default function CardsList({ data = [] }) {
                             <img className='h-24' src='/krystel-uwu.png' alt='Krystel' />
                         </figure>
                     )}
-                    <p className='text-center text-sm text-slate-500 mx-8'>
+                    <p className='font-noto text-center text-sm text-slate-500 mx-8'>
                         Aquí podrás encontrar todas las tarjetitas que he creado.
                     </p>
                 </div>

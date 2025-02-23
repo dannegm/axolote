@@ -32,3 +32,11 @@ export const pickFromIndex = (arr = [], index = 0) => {
 };
 
 export const sequence = size => Array.from(Array(size), (_, index) => index);
+
+export const updateItemById = (arr = [], id, key, newValue) => {
+    return arr.map(item => (item.id === id ? { ...item, [key]: newValue } : item));
+};
+
+export const removeItemById = (arr = [], id) => {
+    return arr.filter(item => item.id !== id);
+};
