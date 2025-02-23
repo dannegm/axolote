@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { cn } from '@/modules/core/helpers/utils';
 
 import { useQuote } from '@/modules/krystel/providers/quote-provider';
@@ -36,6 +36,7 @@ export default function WouldYouRather({ a = 'esto', b = 'esto', _a, _b }) {
         postSelectA();
         discover('wyr');
     };
+
     const handleSelectB = () => {
         setSelected('B');
         postSelectB();
