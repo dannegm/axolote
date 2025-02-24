@@ -5,7 +5,6 @@ import PostEditor from '@/modules/krystel/components/posts/post-editor';
 import FancySeparator from '@/modules/krystel/components/common/fancy-separator';
 
 import PostItem from './post-item';
-import BreakpointIndicator from '@/modules/core/components/common/breakpoint-indicator';
 
 const emptyPictures = [
     '/gifs/confused-travolta.gif',
@@ -21,8 +20,6 @@ export default function PostsList({ data = [] }) {
 
     return (
         <main className='px-4 md:p-0 max-w-[640px] w-full md:w-3/4 lg:w-4/6 xl:w-1/2 mx-auto border-t-8 border-gray-300'>
-            <BreakpointIndicator />
-
             <div className='flex flex-col gap-2 text-center my-6'>
                 {!uwu ? (
                     <h1 className='font-pacifico text-3xl text-center text-indigo-950'>Krystel,</h1>

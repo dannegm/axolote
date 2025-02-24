@@ -1,5 +1,7 @@
 import { cn } from '@/modules/core/helpers/utils';
 import Providers from '@/modules/core/providers/providers';
+import BreakpointIndicator from '@/modules/core/components/common/breakpoint-indicator';
+
 import Fonts from '@/modules/krystel/providers/fonts';
 
 export default function KrystelLayout({ children }) {
@@ -7,7 +9,10 @@ export default function KrystelLayout({ children }) {
         <html lang='en' className='light'>
             <body className={cn('antialiased')}>
                 <Fonts>
-                    <Providers>{children}</Providers>
+                    <Providers>
+                        <BreakpointIndicator />
+                        {children}
+                    </Providers>
                 </Fonts>
             </body>
         </html>

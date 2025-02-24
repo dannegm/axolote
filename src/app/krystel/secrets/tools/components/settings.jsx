@@ -23,10 +23,12 @@ export default function Settings() {
         'settings:show_quick_settings',
         false,
     );
-
     const [skipActions, setSkipActions] = useLocalStorage('settings:skip_actions', false);
     const [debugMode, setDebugMode] = useLocalStorage('settings:debug_mode', false);
-
+    const [showIndicator, setShowIndicator] = useLocalStorage(
+        'settings:show_breakpoint_indicator',
+        false,
+    );
     const [includesFuture, setIncludesFuture] = useLocalStorage(
         'settings:cards:includes_future',
         false,
@@ -35,7 +37,6 @@ export default function Settings() {
         'settings:cards:includes_deleted',
         false,
     );
-
     const [enablePostsSection, setEnablePostsSection] = useLocalStorage(
         'settings:posts:enable',
         false,
@@ -81,6 +82,14 @@ export default function Settings() {
                     checked={debugMode}
                     onCheckedChange={() => setDebugMode(!debugMode)}
                 />
+
+                <SwitchOption
+                    id='settings:show_breakpoint_indicator'
+                    label='Show Breakpoint Indicator'
+                    checked={showIndicator}
+                    onCheckedChange={() => setShowIndicator(!showIndicator)}
+                />
+
                 <SwitchOption
                     id='settings:cards:includes_future'
                     label='Includes Future Cards'
