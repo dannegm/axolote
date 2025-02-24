@@ -88,7 +88,7 @@ const IconButton = ({ className, active, children, ...props }) => {
 };
 
 export default function PostEditor() {
-    const [selectedEditor, setSelectedEditor] = useState(editors.feeling.key);
+    const [selectedEditor, setSelectedEditor] = useState(editors.post.key);
     const [content, setContent] = useState('');
     const [context, setContext] = useState('');
 
