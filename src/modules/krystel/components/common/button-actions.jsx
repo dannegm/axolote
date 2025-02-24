@@ -6,17 +6,16 @@ import { cn } from '@/modules/core/helpers/utils';
 
 export default function ButtonActions({ className, action, input, props = {}, label }) {
     const [, setMenuOpen] = useQueryState('menu', parseAsBoolean.withDefault(false));
+    const [, setMenuDemo] = useQueryState('menu-demo');
 
     const actions = {
         default: () => null,
         openMenu: () => {
             setMenuOpen(true);
         },
-        inputSample: ({ input }) => {
-            alert(input);
-        },
-        propsSample: ({ name, age }) => {
-            alert(`${name}, ${age} años`);
+        menuDemo: ({ input }) => {
+            setMenuOpen(true);
+            setMenuDemo(input);
         },
     };
 
