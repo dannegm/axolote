@@ -20,6 +20,7 @@ import Button from '@/modules/krystel/components/common/button';
 
 import { BalloonsTextSimple } from '@/modules/krystel/components/common/balloons-text';
 import FrameApps, { getAppDescription } from '@/modules/krystel/components/common/frame-apps';
+import ButtonActions from '../components/common/button-actions';
 
 export const defaultElements = [
     // Strikethrough
@@ -125,20 +126,6 @@ export const defaultElements = [
             </Button>
         ),
     },
-    // Button
-    {
-        pattern: /<button::(.*?)>(.*?)<\/button>/g,
-        parser: (action, label) => {
-            return (
-                <button
-                    className='inline-block px-2 py-1 -mt-4 bg-black font-sans text-white text-xs uppercase shadow-sm rounded-lg transition-all duration-150 -translate-y-0.5 active:translate-y-0'
-                    type='button'
-                >
-                    {label}
-                </button>
-            );
-        },
-    },
     // Polaroid with description
     {
         pattern: /<polaroid::(.*?)>(.*?)<\/polaroid>/g,
@@ -168,6 +155,32 @@ export const defaultElements = [
     {
         pattern: /\[\[(.*?)\]\]/g,
         parser: id => <Sticker id={id} />,
+    },
+    // Button Actions with props
+    {
+        pattern: /<button::(.*?)\(\{(.*?)\}\)>(.*?)<\/button>/g,
+        parser: (action, args, label) => {
+            const props = extractConfigs(args);
+            return (
+                <ButtonActions className='mx-auto' action={action} props={props} label={label} />
+            );
+        },
+    },
+    // Button Actions with input
+    {
+        pattern: /<button::(.*?)\((.*?)\)>(.*?)<\/button>/g,
+        parser: (action, input, label) => {
+            return (
+                <ButtonActions className='mx-auto' action={action} input={input} label={label} />
+            );
+        },
+    },
+    // Button Actions
+    {
+        pattern: /<button::(.*?)>(.*?)<\/button>/g,
+        parser: (action, label) => (
+            <ButtonActions className='mx-auto' action={action} label={label} />
+        ),
     },
     // Apps with props
     {
@@ -341,20 +354,6 @@ export const buildPreviewElements = ({ preventReveal }) => [
             </Button>
         ),
     },
-    // Button
-    {
-        pattern: /<button::(.*?)>(.*?)<\/button>/g,
-        parser: (_, label) => {
-            return (
-                <button
-                    className='inline-block px-2 py-1 -mt-4 bg-black font-sans text-white text-xs uppercase shadow-sm rounded-lg transition-all duration-150 -translate-y-0.5 active:translate-y-0'
-                    type='button'
-                >
-                    {label}
-                </button>
-            );
-        },
-    },
     // Polaroid with description
     {
         pattern: /<polaroid::(.*?)>(.*?)<\/polaroid>/g,
@@ -393,6 +392,21 @@ export const buildPreviewElements = ({ preventReveal }) => [
     {
         pattern: /\[\[(.*?)\]\]/g,
         parser: id => <Sticker id={id} />,
+    },
+    // Button Actions with props
+    {
+        pattern: /<button::(.*?)\(\{(.*?)\}\)>(.*?)<\/button>/g,
+        parser: (action, args, label) => <ButtonActions label={label} />,
+    },
+    // Button Actions with input
+    {
+        pattern: /<button::(.*?)\((.*?)\)>(.*?)<\/button>/g,
+        parser: (action, input, label) => <ButtonActions label={label} />,
+    },
+    // Button Actions
+    {
+        pattern: /<button::(.*?)>(.*?)<\/button>/g,
+        parser: (action, label) => <ButtonActions label={label} />,
     },
     // Apps with props
     {
@@ -492,7 +506,6 @@ export const stripedElements = [
     { pattern: /<ilink::(.*?)>(.*?)<\/ilink>/g, parser: (url, label) => `[${label}](${url})` },
     { pattern: /<blink::(.*?)>(.*?)<\/blink>/g, parser: (url, label) => `[${label}](${url})` },
     { pattern: /<iblink::(.*?)>(.*?)<\/iblink>/g, parser: (url, label) => `[${label}](${url})` },
-    { pattern: /<button::(.*?)>(.*?)<\/button>/g, parser: (_, label) => `[${label}]` },
     {
         pattern: /<polaroid::(.*?)>(.*?)<\/polaroid>/g,
         parser: (url, description) => `![${description}](${url})`,
@@ -502,6 +515,12 @@ export const stripedElements = [
     { pattern: /<sticker::(.*?)>/g, parser: id => `[${id}]` },
     { pattern: /<badge::(.*?)>/g, parser: id => `[${id}]` },
     { pattern: /\[\[(.*?)\]\]/g, parser: id => `[${id}]` },
+    {
+        pattern: /<button::(.*?)\(\{(.*?)\}\)>(.*?)<\/button>/g,
+        parser: (_, __, label) => `[${label}]`,
+    },
+    { pattern: /<button::(.*?)\((.*?)\)>(.*?)<\/button>/g, parser: (_, __, label) => `[${label}]` },
+    { pattern: /<button::(.*?)>(.*?)<\/button>/g, parser: (_, label) => `[${label}]` },
     {
         pattern: /<app::(.*?)\(\{(.*?)\}\)>/g,
         parser: (name, args) => {

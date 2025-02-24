@@ -1,7 +1,7 @@
 'use client';
 
+import { useQueryState, parseAsBoolean } from 'nuqs';
 import Link from 'next/link';
-import { useState } from 'react';
 import { BookMarked, Ellipsis, MessageSquareQuote, RefreshCcw } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
@@ -64,7 +64,7 @@ const MenuContent = ({ className }) => {
 };
 
 export default function Menu() {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useQueryState('menu', parseAsBoolean.withDefault(false));
 
     return (
         <ClientOnly>
