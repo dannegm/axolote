@@ -93,10 +93,10 @@ export const feelings = {
         label: 'scared',
         color: 'violet',
     },
-    playful: {
-        key: 'playful',
+    devil: {
+        key: 'devil',
         icon: '😈',
-        label: 'playful',
+        label: 'devil',
         color: 'purple',
     },
     clown: {
