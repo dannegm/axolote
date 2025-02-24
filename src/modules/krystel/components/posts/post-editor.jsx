@@ -99,6 +99,7 @@ export default function PostEditor() {
     });
 
     const handleReset = () => {
+        setContext('');
         setContent('');
     };
 
