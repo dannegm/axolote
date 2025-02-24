@@ -196,12 +196,12 @@ const Balloons = ({ count, loop, onPop, onPopAll }) => {
     };
     const handlePopAll = () => {
         onPopAll?.();
-        discover('balloons');
         canHandlePopAll.current = false;
         clearInterval($interval);
     };
 
     useEffect(() => {
+        discover('balloons');
         $interval.current = setInterval(() => {
             if (popCount.current >= count && canHandlePopAll.current) {
                 handlePopAll?.();
