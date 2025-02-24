@@ -2,7 +2,7 @@
 
 import { Textarea } from '@/modules/shadcn/ui/textarea';
 
-export default function SimpleEditor({ content, setContent }) {
+export default function SimpleEditor({ content, setContent, props }) {
     const handleChange = ev => {
         setContent(ev.target.value);
     };
@@ -14,6 +14,7 @@ export default function SimpleEditor({ content, setContent }) {
                 minRows={4}
                 maxRows={8}
                 value={content}
+                placeholder={props?.placeholder}
                 onChange={handleChange}
             />
         </div>

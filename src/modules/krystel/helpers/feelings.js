@@ -1,0 +1,222 @@
+export const feelingsContexts = {
+    today_feeling: {
+        key: 'today_feeling',
+        value: 'El día de hoy me siento...',
+    },
+    yesterday_feeling: {
+        key: 'yesterday_feeling',
+        value: 'Ayer me sentía...',
+    },
+    lately_feeling: {
+        key: 'lately_feeling',
+        value: 'Últimamente he estado...',
+    },
+    cant_stop_feeling: {
+        key: 'cant_stop_feeling',
+        value: 'No dejo de sentirme...',
+    },
+    dont_want_feeling: {
+        key: 'dont_want_feeling',
+        value: 'No quiero sentirme...',
+    },
+    hope_feeling: {
+        key: 'hope_feeling',
+        value: 'Ojalá pudiera estar...',
+    },
+};
+
+export const feelings = {
+    chill: {
+        key: 'chill',
+        icon: '😌',
+        label: 'chill',
+        color: 'green',
+    },
+    blue: {
+        key: 'blue',
+        icon: '😔',
+        label: 'blue',
+        color: 'blue',
+    },
+    angry: {
+        key: 'angry',
+        icon: '😡',
+        label: 'angry',
+        color: 'red',
+    },
+    rage: {
+        key: 'rage',
+        icon: '🤬',
+        label: '$@&#',
+        color: 'orange',
+    },
+    funny: {
+        key: 'funny',
+        icon: '🫢',
+        label: 'funny',
+        color: 'yellow',
+    },
+    flirts: {
+        key: 'flirts',
+        icon: '😏',
+        label: 'flirts',
+        color: 'pink',
+    },
+    ash: {
+        key: 'ash',
+        icon: '🙄',
+        label: 'ash',
+        color: 'cyan',
+    },
+    tired: {
+        key: 'tired',
+        icon: '😪',
+        label: 'tired',
+        color: 'emerald',
+    },
+    sick: {
+        key: 'sick',
+        icon: '🤧',
+        label: 'sick',
+        color: 'lime',
+    },
+    inexistent: {
+        key: 'inexistent',
+        icon: '🫥',
+        label: 'inexistent',
+        color: 'white',
+        className: 'text-gray-600',
+    },
+    scared: {
+        key: 'scared',
+        icon: '😰',
+        label: 'scared',
+        color: 'violet',
+    },
+    playful: {
+        key: 'playful',
+        icon: '😈',
+        label: 'playful',
+        color: 'purple',
+    },
+    clown: {
+        key: 'clown',
+        icon: '🤡',
+        label: 'clown',
+        color: 'rose',
+    },
+    alien: {
+        key: 'alien',
+        icon: '👽',
+        label: 'alien',
+        color: 'emerald',
+    },
+    sleepy: {
+        key: 'sleepy',
+        icon: '🥱',
+        label: 'sleepy',
+        color: 'indigo',
+    },
+    sad: {
+        key: 'sad',
+        icon: '😭',
+        label: 'sad',
+        color: 'sky',
+    },
+    tetchy: {
+        key: 'tetchy',
+        icon: '😣',
+        label: 'tetchy',
+        color: 'fuchsia',
+    },
+    nausea: {
+        key: 'nausea',
+        icon: '🤢',
+        label: 'nausea',
+        color: 'emerald',
+    },
+    down: {
+        key: 'down',
+        icon: '🫠',
+        label: 'down',
+        color: 'cyan',
+    },
+    lovely: {
+        key: 'lovely',
+        icon: '🥰',
+        label: 'lovely',
+        color: 'rose',
+    },
+    exhausted: {
+        key: 'exhausted',
+        icon: '😮‍💨',
+        label: 'exhausted',
+        color: 'slate',
+    },
+    impostor: {
+        key: 'impostor',
+        icon: '🥸',
+        label: 'impostor',
+        color: 'indigo',
+    },
+    nostalgic: {
+        key: 'nostalgic',
+        icon: '🥺',
+        label: 'nostalgic',
+        color: 'violet',
+    },
+    thought: {
+        key: 'thought',
+        icon: '💭',
+        label: 'thought',
+        color: 'slate',
+    },
+    fashion: {
+        key: 'fashion',
+        icon: '💅🏼',
+        label: 'fashion',
+        color: 'pink',
+    },
+    strong: {
+        key: 'strong',
+        icon: '💪🏼',
+        label: 'strong',
+        color: 'stone',
+    },
+    hopeful: {
+        key: 'hopeful',
+        icon: '🙏🏼',
+        label: 'hopeful',
+        color: 'emerald',
+    },
+    princess: {
+        key: 'princess',
+        icon: '👸🏻',
+        label: 'princess',
+        color: 'pink',
+    },
+    curious: {
+        key: 'curious',
+        icon: '🤔',
+        label: 'curious',
+        color: 'indigo',
+    },
+    shy: {
+        key: 'shy',
+        icon: '😳',
+        label: 'shy',
+        color: 'rose',
+    },
+    relaxed: {
+        key: 'relaxed',
+        icon: '🌿',
+        label: 'relaxed',
+        color: 'cyan',
+    },
+    hyped: {
+        key: 'hyped',
+        icon: '🤩',
+        label: 'hyped',
+        color: 'amber',
+    },
+};

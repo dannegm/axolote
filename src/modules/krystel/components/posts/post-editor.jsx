@@ -17,37 +17,45 @@ import { cn } from '@/modules/core/helpers/utils';
 import SimpleEditor from './simple-editor';
 import EmergencyButton from './emergency-button';
 import useCreatePostAction from '../../hooks/use-create-post-action';
+import FeelingsEditor from './feelings-editor';
 
 const editors = {
     post: {
         key: 'post',
-        icon: <MessageSquareHeart />,
+        icon: MessageSquareHeart,
         component: SimpleEditor,
+        props: {
+            placeholder: '¿Qué quieres contarme hoy?',
+        },
         enabled: true,
     },
     image: {
         key: 'image',
-        icon: <Image />,
+        icon: Image,
         component: SimpleEditor,
     },
     audio: {
         key: 'audio',
-        icon: <CassetteTape />,
+        icon: CassetteTape,
         component: SimpleEditor,
     },
     drawing: {
         key: 'drawing',
-        icon: <PenTool />,
+        icon: PenTool,
         component: SimpleEditor,
     },
     feeling: {
         key: 'feeling',
-        icon: <HandHeart />,
-        component: SimpleEditor,
+        icon: HandHeart,
+        component: FeelingsEditor,
+        props: {
+            showContextSelector: true,
+        },
+        enabled: true,
     },
     emergency: {
         key: 'emergency',
-        icon: <Siren />,
+        icon: Siren,
         component: EmergencyButton,
         defaultContent: 'Botón de pánico activado 🚨',
         enabled: true,
@@ -80,8 +88,9 @@ const IconButton = ({ className, active, children, ...props }) => {
 };
 
 export default function PostEditor() {
-    const [selectedEditor, setSelectedEditor] = useState(editors.post.key);
+    const [selectedEditor, setSelectedEditor] = useState(editors.feeling.key);
     const [content, setContent] = useState('');
+    const [context, setContext] = useState('');
 
     const createPost = useCreatePostAction({
         onSuccess: () => {
@@ -100,15 +109,16 @@ export default function PostEditor() {
 
     const handleCreate = () => {
         const payload = {
+            context: context.trim() || editors[selectedEditor].defaultContext || null,
             content: content.trim() || editors[selectedEditor].defaultContent,
             type: selectedEditor,
             deleted_at: sendBlacklist.includes(selectedEditor) ? new Date() : null,
         };
-        console.log('creating', payload);
         createPost.mutate(payload);
     };
 
     const Editor = editors[selectedEditor].component || editors.post.component;
+    const editorProps = editors[selectedEditor].props || editors.post.props;
     const canCreate = content !== '' && !sendBlacklist.includes(selectedEditor);
 
     return (
@@ -116,7 +126,10 @@ export default function PostEditor() {
             <div>
                 <Editor
                     key={selectedEditor}
+                    context={context}
                     content={content}
+                    props={editorProps}
+                    setContext={setContext}
                     setContent={setContent}
                     triggerCreate={handleCreate}
                 />
@@ -130,7 +143,7 @@ export default function PostEditor() {
                             onClick={() => handleSelect(item.key)}
                             disabled={!item.enabled || createPost.isPending}
                         >
-                            {item.icon}
+                            <item.icon />
                         </IconButton>
                     ))}
                     <IconButton

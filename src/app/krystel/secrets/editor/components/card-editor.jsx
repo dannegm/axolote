@@ -85,10 +85,10 @@ export default function CardEditor() {
 
     return (
         <ClientOnly>
-            <div className={cn('mt-4', 'lg:flex lg:flex-row lg:gap-4')}>
-                <div id='global-bg-portal' />
-                <div id='card-bg-portal' />
+            <div id='global-bg-portal' />
+            <div id='card-bg-portal' />
 
+            <div className={cn('mt-4', 'lg:flex lg:flex-row lg:gap-4')}>
                 {$translucedButton?.current && (
                     <Button
                         className='absolute z-[51] opacity-100 lg:hidden fade-in-custom duration-150'
@@ -103,9 +103,9 @@ export default function CardEditor() {
 
                 <div
                     className={cn(
-                        'border-gray-300 bg-gray-100 transition-all duration-150',
+                        'flex-1 border-gray-300 bg-gray-100 transition-all duration-150',
                         'fixed z-50 left-0 bottom-0 w-full border-t shadow-[0px_-2px_24px_4px_rgba(0,_0,_0,_0.1)]',
-                        'lg:relative lg:left-auto lg:bottom-auto lg:w-72 lg:h-auto lg:max-h-fit lg:border lg:rounded-md lg:shadow-none',
+                        'lg:relative lg:left-auto lg:bottom-auto lg:h-auto lg:max-h-fit lg:border lg:rounded-md lg:shadow-none',
                         { 'opacity-30 blur-[2px]': transluced },
                     )}
                 >

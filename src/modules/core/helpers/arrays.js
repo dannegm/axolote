@@ -1,3 +1,5 @@
+export const shuffle = arr => [...arr].sort(() => Math.random() - 0.5);
+
 export const randomIndex = (arr = []) => Math.floor(Math.random() * arr.length);
 export const randomPick = (arr = []) => arr[Math.floor(Math.random() * arr.length)];
 
@@ -39,4 +41,8 @@ export const updateItemById = (arr = [], id, key, newValue) => {
 
 export const removeItemById = (arr = [], id) => {
     return arr.filter(item => item.id !== id);
+};
+
+export const randomSlice = (arr = [], size = 1) => {
+    return [...shuffle(arr)].slice(0, size);
 };
