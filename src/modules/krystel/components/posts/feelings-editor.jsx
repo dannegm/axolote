@@ -144,7 +144,8 @@ export default function FeelingsEditor({
                         background: cn('bg-gray-300', classNames?.refreshClassNames?.background),
                         icon: cn('[&_svg]:size-5', classNames?.refreshClassNames?.icon),
                     }}
-                    icon={<RefreshCcw onClick={() => generateSlicedFeelings()} />}
+                    icon={<RefreshCcw />}
+                    onClick={() => generateSlicedFeelings()}
                     active
                 />
             </div>
