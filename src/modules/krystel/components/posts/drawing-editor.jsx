@@ -246,6 +246,7 @@ export default function DrawingEditor({ content, props, setContent, setSettings 
                 strokeWidth={strokeWidth}
                 eraserWidth={strokeWidth}
                 onChange={handleChange}
+                withViewBox
                 withTimestamp
             />
         </div>

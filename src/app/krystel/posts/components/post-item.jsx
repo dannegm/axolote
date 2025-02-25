@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { formatDistanceToNowStrict, format, isBefore } from 'date-fns';
 import { es as locale } from 'date-fns/locale';
 
@@ -17,6 +17,7 @@ import {
     Siren,
     Trash2,
     Download,
+    PlayCircle,
 } from 'lucide-react';
 
 import { cn, downloadBase64 } from '@/modules/core/helpers/utils';
@@ -36,17 +37,60 @@ const SimpleItem = ({ item }) => {
     );
 };
 
+const useReplayDrawing = ($canvas, originalStrokes, skipSteps = 10) => {
+    const startReplay = useCallback(() => {
+        if (!originalStrokes.length || !$canvas?.current) return;
+        $canvas.current?.clearCanvas();
+        $canvas.current?.resetCanvas();
+
+        let index = 0;
+        let pathIndex = 0;
+        let newStrokes = [];
+
+        const step = () => {
+            const currentStroke = originalStrokes[index];
+            if (!newStrokes[index]) {
+                newStrokes[index] = { ...currentStroke, paths: [] };
+            }
+
+            if (pathIndex < currentStroke.paths.length) {
+                newStrokes[index].paths.push(currentStroke.paths[pathIndex]);
+                pathIndex += skipSteps; // Skip specified number of steps
+            } else {
+                index++;
+                pathIndex = 0;
+            }
+
+            $canvas.current.loadPaths(newStrokes);
+
+            if (index < originalStrokes.length) {
+                requestAnimationFrame(step);
+            }
+        };
+
+        requestAnimationFrame(step);
+    }, [originalStrokes, $canvas, skipSteps]); // Add dependencies
+
+    useEffect(() => {
+        $canvas.current?.loadPaths(originalStrokes);
+    }, []);
+
+    return { startReplay };
+};
+
 const DrawingItem = ({ item }) => {
     const settings = JSON.parse(item.settings);
-    const paths = JSON.parse(item.content);
+    const paths = JSON.parse(item.content) || [];
 
     const $container = useRef();
     const $canvas = useRef();
     const [scaleFactor, setScaleFactor] = useState(1);
 
-    useEffect(() => {
-        $canvas.current?.loadPaths(paths);
-    }, []);
+    const { startReplay } = useReplayDrawing($canvas, paths);
+
+    // useEffect(() => {
+    // $canvas.current?.loadPaths(paths);
+    // }, [paths]);
 
     useResize(() => {
         if ($container.current) {
@@ -91,6 +135,15 @@ const DrawingItem = ({ item }) => {
                     readOnly
                 />
             </div>
+            <Button
+                className='absolute bottom-2 left-2 text-black'
+                variant='outline'
+                size='icon'
+                onClick={startReplay}
+            >
+                <PlayCircle />
+            </Button>
+
             <Button
                 className='absolute bottom-2 right-2 text-black'
                 variant='outline'
