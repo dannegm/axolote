@@ -8,7 +8,7 @@ export default function LoveText({ children }) {
     const [playPop] = useSound('/sounds/pop.mp3');
 
     const quote = useQuote();
-    const postLove = usePostAction({ action: 'love', settings: quote.settings });
+    const postLove = usePostAction({ action: 'love', settings: quote?.settings });
 
     const handleButtonClick = ev => {
         ev.preventDefault();

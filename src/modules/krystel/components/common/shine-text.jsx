@@ -13,7 +13,7 @@ export default function ShineText({ children }) {
     });
 
     const quote = useQuote();
-    const postShine = usePostAction({ action: 'shine', settings: quote.settings });
+    const postShine = usePostAction({ action: 'shine', settings: quote?.settings });
 
     const handleClick = ev => {
         ev.preventDefault();

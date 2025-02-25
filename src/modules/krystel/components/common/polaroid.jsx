@@ -17,7 +17,7 @@ export default function Polaroid({ url, description }) {
     const rotations = ['rotate-[-6deg]', 'rotate-[6deg]', 'rotate-[-3deg]', 'rotate-[3deg]'];
 
     const quote = useQuote();
-    const postReveal = usePostAction({ action: 'reveal', settings: quote.settings });
+    const postReveal = usePostAction({ action: 'reveal', settings: quote?.settings });
 
     const rotate = () => {
         const rng = Math.floor(Math.random() * rotations.length);

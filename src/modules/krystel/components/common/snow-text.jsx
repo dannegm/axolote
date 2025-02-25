@@ -17,7 +17,7 @@ export default function SnowText({ children }) {
     });
 
     const quote = useQuote();
-    const postSnow = usePostAction({ action: 'snow', settings: quote.settings });
+    const postSnow = usePostAction({ action: 'snow', settings: quote?.settings });
 
     const snowFallConfig = {
         color: '#ffffff',

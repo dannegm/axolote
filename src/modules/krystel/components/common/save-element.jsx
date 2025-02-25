@@ -24,7 +24,7 @@ export const SaveContainer = ({ className, children, quote, onPrepare, onSave })
 
     const [playCamera] = useSound('/sounds/camera.mp3');
 
-    const postSave = usePostAction({ action: 'save', settings: quote.settings });
+    const postSave = usePostAction({ action: 'save', settings: quote?.settings });
 
     const handleSave = canvas => {
         const link = document.createElement('a');

@@ -102,7 +102,7 @@ export default function Valentine({}) {
     });
 
     const quote = useQuote();
-    const postSaidYes = usePostAction({ action: 'said_yes', settings: quote.settings });
+    const postSaidYes = usePostAction({ action: 'said_yes', settings: quote?.settings });
 
     const handleYes = () => {
         setSlide(finalSlide);

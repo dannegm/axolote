@@ -24,13 +24,14 @@ import useResize from '@/modules/core/hooks/use-resize';
 
 import { feelings } from '@/modules/krystel/helpers/feelings';
 import { getColorClassName } from '@/modules/krystel/helpers/colors';
+import RichText from '@/modules/krystel/components/common/rich-text';
 
 import { Button } from '@/modules/shadcn/ui/button';
 
 const SimpleItem = ({ item }) => {
     return (
         <div className='flex-1 px-4 py-2 bg-gray-100 rounded-xl rounded-tl-none'>
-            {item.content}
+            <RichText>{item.content}</RichText>
         </div>
     );
 };
