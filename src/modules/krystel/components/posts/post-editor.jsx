@@ -18,6 +18,7 @@ import SimpleEditor from './simple-editor';
 import EmergencyButton from './emergency-button';
 import useCreatePostAction from '../../hooks/use-create-post-action';
 import FeelingsEditor from './feelings-editor';
+import DrawingEditor from './drawing-editor';
 
 const editors = {
     post: {
@@ -42,7 +43,11 @@ const editors = {
     drawing: {
         key: 'drawing',
         icon: PenTool,
-        component: SimpleEditor,
+        component: DrawingEditor,
+        props: {
+            className: 'h-[360px]',
+        },
+        enabled: true,
     },
     feeling: {
         key: 'feeling',
@@ -91,6 +96,7 @@ export default function PostEditor() {
     const [selectedEditor, setSelectedEditor] = useState(editors.post.key);
     const [content, setContent] = useState('');
     const [context, setContext] = useState('');
+    const [settings, setSettings] = useState('');
 
     const createPost = useCreatePostAction({
         onSuccess: () => {
@@ -101,15 +107,22 @@ export default function PostEditor() {
     const handleReset = () => {
         setContext('');
         setContent('');
+        setSettings('');
     };
 
     const handleSelect = editorKey => {
+        if (content !== '') {
+            const selectConfirmed = confirm('Tienes cambios sin guardar, ¿quieres continuar?');
+            if (!selectConfirmed) return;
+        }
+
         handleReset();
         setSelectedEditor(editorKey);
     };
 
     const handleCreate = () => {
         const payload = {
+            settings: settings.trim() || editors[selectedEditor].defaultSettings || null,
             context: context.trim() || editors[selectedEditor].defaultContext || null,
             content: content.trim() || editors[selectedEditor].defaultContent,
             type: selectedEditor,
@@ -127,9 +140,11 @@ export default function PostEditor() {
             <div>
                 <Editor
                     key={selectedEditor}
+                    settings={settings}
                     context={context}
                     content={content}
                     props={editorProps}
+                    setSettings={setSettings}
                     setContext={setContext}
                     setContent={setContent}
                     triggerCreate={handleCreate}

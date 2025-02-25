@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { formatDistanceToNow } from 'date-fns';
+import { format, formatDistanceToNow } from 'date-fns';
 import { Clock3, ExternalLink, BookMarked, MessageSquareQuote, SquareDashed } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
@@ -27,6 +27,7 @@ const pages = {
 
 export default function LogItem({ item }) {
     const [deleting, setDeleting] = useState(false);
+    const date = new Date(item.created_at + 'Z');
 
     return (
         <div
@@ -78,7 +79,7 @@ export default function LogItem({ item }) {
                 </div>
                 <div className='text-gray-500 flex gap-1 items-center'>
                     <Clock3 size='0.85rem' />
-                    {formatDistanceToNow(new Date(item.created_at + 'Z'))}
+                    {formatDistanceToNow(date)} - {format(date, 'MMM do, yyyy · h:mm aaa')}
                 </div>
             </div>
         </div>

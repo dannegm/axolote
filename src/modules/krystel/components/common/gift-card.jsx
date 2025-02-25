@@ -117,6 +117,7 @@ export default function GiftCard({
                 border={configs?.border ? '' : border}
                 scheme={scheme}
                 letter={letter}
+                fullscreen={configs?.fullscreen}
                 frame={frame}
                 classNames={{
                     border: cn({ 'bg-none': configs?.border }, configs?.border, classNames?.border),
@@ -155,42 +156,44 @@ export default function GiftCard({
                     </div>
                 )}
 
-                <div
-                    className={cn('flex flex-col items-center gap-8', {
-                        'w-full flex-row gap-2 justify-between mb-8': letter,
-                    })}
-                >
-                    {!configs?.fullscreen && configs?.name !== 'hidden' && !uwu && (
-                        <p
-                            className={cn('font-pacifico text-3xl text-center', {
-                                'text-left text-xl': letter,
-                            })}
-                        >
-                            Krystel,
-                        </p>
-                    )}
-
-                    {!configs?.fullscreen && configs?.name !== 'hidden' && uwu && (
-                        <img
-                            className={cn('block h-24 -mb-8 md:-mb-4 -mt-10 md:-mt-12', {
-                                'h-14 -mt-3 -ml-3 md:-mt-1': letter,
-                            })}
-                            src='/krystel-uwu.png'
-                            alt='Krystel'
-                        />
-                    )}
-
-                    {!configs?.fullscreen && configs?.icon !== 'hidden' && (
-                        <div className={cn('block')}>
-                            <LucideIcon
-                                className={cn('text-current h-[56px] w-[56px]', {
-                                    'h-6 w-6': letter,
-                                    'drop-shadow-md': frame,
+                {!configs?.fullscreen && (
+                    <div
+                        className={cn('flex flex-col items-center gap-8', {
+                            'w-full flex-row gap-2 justify-between mb-8': letter,
+                        })}
+                    >
+                        {configs?.name !== 'hidden' && !uwu && (
+                            <p
+                                className={cn('font-pacifico text-3xl text-center', {
+                                    'text-left text-xl': letter,
                                 })}
+                            >
+                                Krystel,
+                            </p>
+                        )}
+
+                        {configs?.name !== 'hidden' && uwu && (
+                            <img
+                                className={cn('block h-24 -mb-8 md:-mb-4 -mt-10 md:-mt-12', {
+                                    'h-14 -mt-3 -ml-3 md:-mt-1': letter,
+                                })}
+                                src='/krystel-uwu.png'
+                                alt='Krystel'
                             />
-                        </div>
-                    )}
-                </div>
+                        )}
+
+                        {configs?.icon !== 'hidden' && (
+                            <div className={cn('block')}>
+                                <LucideIcon
+                                    className={cn('text-current h-[56px] w-[56px]', {
+                                        'h-6 w-6': letter,
+                                        'drop-shadow-md': frame,
+                                    })}
+                                />
+                            </div>
+                        )}
+                    </div>
+                )}
 
                 <div
                     className={cn(
@@ -199,6 +202,8 @@ export default function GiftCard({
                             'text-md': isLongText,
                             'font-noto text-left text-[0.825rem] text-balance hyphens-auto leading-normal':
                                 letter,
+
+                            'flex-1 w-full h-full block': configs?.fullscreen,
                         },
                         classNames?.text,
                     )}

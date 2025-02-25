@@ -1,7 +1,9 @@
 'use client';
-import { cn } from '@/modules/core/helpers/utils';
+import { useEffect, useRef, useState } from 'react';
 import { formatDistanceToNowStrict, format, isBefore } from 'date-fns';
 import { es as locale } from 'date-fns/locale';
+
+import { ReactSketchCanvas } from 'react-sketch-canvas';
 
 import {
     Clock3,
@@ -14,15 +16,88 @@ import {
     SendHorizonal,
     Siren,
     Trash2,
+    Download,
 } from 'lucide-react';
+
+import { cn, downloadBase64 } from '@/modules/core/helpers/utils';
+import useResize from '@/modules/core/hooks/use-resize';
 
 import { feelings } from '@/modules/krystel/helpers/feelings';
 import { getColorClassName } from '@/modules/krystel/helpers/colors';
+
+import { Button } from '@/modules/shadcn/ui/button';
 
 const SimpleItem = ({ item }) => {
     return (
         <div className='flex-1 px-4 py-2 bg-gray-100 rounded-xl rounded-tl-none'>
             {item.content}
+        </div>
+    );
+};
+
+const DrawingItem = ({ item }) => {
+    const settings = JSON.parse(item.settings);
+    const paths = JSON.parse(item.content);
+
+    const $container = useRef();
+    const $canvas = useRef();
+    const [scaleFactor, setScaleFactor] = useState(1);
+
+    useEffect(() => {
+        $canvas.current?.loadPaths(paths);
+    }, []);
+
+    useResize(() => {
+        if ($container.current) {
+            const windowWidth = window.innerWidth;
+            const containerWidth = windowWidth - 220;
+            setScaleFactor(containerWidth / windowWidth);
+        }
+    });
+
+    const handleDownload = async () => {
+        const exportImage = await $canvas.current?.exportImage('png');
+        downloadBase64(exportImage, `'krystel-drawing-${Date.now()}.png'`);
+    };
+
+    return (
+        <div className='relative z-50 flex-1 px-4 py-2 bg-white border border-sky-300 rounded-xl rounded-tl-none'>
+            <div
+                ref={$container}
+                className='pointer-events-none'
+                style={{
+                    width: settings?.width * scaleFactor,
+                    height: settings?.height * scaleFactor,
+                    overflow: 'hidden',
+                    position: 'relative',
+                }}
+            >
+                <ReactSketchCanvas
+                    id={`drawing-${item.id}`}
+                    className='z-0'
+                    ref={$canvas}
+                    style={{
+                        border: 0,
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: `translate(-50%, -50%) scale(${scaleFactor})`,
+                    }}
+                    width={settings?.width}
+                    height={settings?.height}
+                    canvasColor='white'
+                    withViewBox
+                    readOnly
+                />
+            </div>
+            <Button
+                className='absolute bottom-2 right-2 text-black'
+                variant='outline'
+                size='icon'
+                onClick={handleDownload}
+            >
+                <Download />
+            </Button>
         </div>
     );
 };
@@ -65,6 +140,12 @@ const elements = {
         icon: MessageSquareHeart,
         iconClassName: '',
         component: SimpleItem,
+    },
+    drawing: {
+        key: 'drawing',
+        icon: PenTool,
+        iconClassName: 'bg-sky-600 text-white',
+        component: DrawingItem,
     },
     feeling: {
         key: 'feeling',

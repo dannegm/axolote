@@ -64,6 +64,7 @@ export default {
                 max: `${Number.MAX_SAFE_INTEGER}`,
             },
             backgroundImage: {
+                'chromatic-wheel': 'conic-gradient(red, yellow, lime, cyan, blue, magenta, red)',
                 'img-blue-galaxy': 'url(/backgrounds/blue-galaxy.jpg)',
                 'img-glitch': 'url(/backgrounds/glitch.gif)',
                 'img-memphis-two': 'url(/backgrounds/memphis-two.png)',

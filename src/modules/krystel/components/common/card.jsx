@@ -6,6 +6,7 @@ export default function Card({
     scheme = 'bg-white text-gray-600',
     children,
     letter,
+    fullscreen,
     frame,
 }) {
     return (
@@ -19,18 +20,21 @@ export default function Card({
         >
             <div
                 className={cn(
-                    'flex-1 w-full rounded overflow-hidden bg-white text-gray-800 shadow-xl',
+                    'flex-1 flex w-full rounded overflow-hidden bg-white text-gray-800 shadow-xl',
                     classNames?.container,
                     { 'h-auto': letter },
                 )}
             >
                 <div
                     className={cn(
-                        'relative flex h-full flex-col items-center gap-6 md:gap-8 justify-center p-10',
+                        'flex-1 relative flex w-full h-full flex-col items-center gap-6 md:gap-8 justify-center p-10',
                         scheme,
                         classNames?.content,
-                        { 'h-auto justify-start items-start p-6 gap-2': letter },
-                        { 'bg-center bg-cover': frame },
+                        {
+                            'h-auto justify-start items-start p-6 gap-2': letter,
+                            'bg-center bg-cover': frame,
+                            'p-0': fullscreen,
+                        },
                     )}
                     style={{
                         backgroundImage: `url(${frame})`,

@@ -10,12 +10,12 @@ export default function BreakpointIndicator({ position = 'bottom-right' }) {
     const positions = {
         'top-left': 'top-4 left-4',
         'top-right': 'top-4 right-4',
+        'top-center': 'top-4 left-1/2 transform -translate-x-1/2',
         'bottom-left': 'bottom-4 left-4',
         'bottom-right': 'bottom-4 right-4',
-        'center-top': 'top-4 left-1/2 transform -translate-x-1/2',
-        'center-bottom': 'bottom-4 left-1/2 transform -translate-x-1/2',
-        'center-left': 'left-4 top-1/2 transform -translate-y-1/2',
-        'center-right': 'right-4 top-1/2 transform -translate-y-1/2',
+        'bottom-center': 'bottom-4 left-1/2 transform -translate-x-1/2',
+        'middle-left': 'left-4 top-1/2 transform -translate-y-1/2',
+        'middle-right': 'right-4 top-1/2 transform -translate-y-1/2',
     };
 
     const positionClassName = positions[position] || positions['bottom-right'];

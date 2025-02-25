@@ -46,3 +46,5 @@ export const removeItemById = (arr = [], id) => {
 export const randomSlice = (arr = [], size = 1) => {
     return [...shuffle(arr)].slice(0, size);
 };
+
+export const unique = arr => [...new Set(arr)];

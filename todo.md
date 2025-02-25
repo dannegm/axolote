@@ -44,16 +44,16 @@
     -   [x] Un qué prefieres? Que me notifique, tipo, votaciones
     -   [ ] Un jukebox synth
     -   [ ] Sigue el botón
--   [ ] Una tarjeta de vez en cuando que permita que me comparta:
+-   [x] Una tarjeta de vez en cuando que permita que me comparta:
     -   [ ] Una foto
     -   [ ] Un audio
-    -   [ ] Una nota
+    -   [x] Una nota
     -   [ ] Una canción
-    -   [ ] Un dato curioso sobre ella
-    -   [ ] Un cómo se siente hoy
-    -   [ ] Algo que le guste
-    -   [ ] Opción para dibujar
-    -   [ ] Botón de emergencia (Le pica y yo aparezco)
+    -   [x] Un dato curioso sobre ella
+    -   [x] Un cómo se siente hoy
+    -   [x] Algo que le guste
+    -   [x] Opción para dibujar
+    -   [x] Botón de emergencia (Le pica y yo aparezco)
 -   [x] Un componente de configuraciones, para por ejemplo
     -   [x] quitar el icono
     -   [x] forzar un icono

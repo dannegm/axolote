@@ -17,6 +17,7 @@ const appsDescriptions = {
     wyr: '¿Qué prefieres?',
     simple: 'Ejemplo simple',
     easter_eggs: 'Encuéntralos todos',
+    canvax: 'Dibjumenos algo',
 };
 
 export const getAppDescription = name => {

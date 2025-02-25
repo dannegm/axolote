@@ -32,7 +32,6 @@ export const getColorHex = color => {
 
 export const getColorClassName = (type = 'bg', color = 'gray', shade = '300') => {
     const key = `${type}-${color}-${shade}`;
-    console.log(key);
     return classNames[key] || '';
 };
 
