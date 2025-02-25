@@ -32,7 +32,7 @@ function ColorPicker({ color, children, onChange, onSelect }) {
             <PopoverTrigger asChild>
                 <div ref={$target}>{children(color)}</div>
             </PopoverTrigger>
-            <PopoverContent align='start' className='w-auto p-0'>
+            <PopoverContent align='start' className='w-auto p-0 rounded-[12px]'>
                 <HexColorPicker color={internalColor} onChange={setInternalColor} />
             </PopoverContent>
         </Popover>
