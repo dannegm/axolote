@@ -15,3 +15,19 @@ export const downloadBase64 = (base64Image, filename = 'file.base64') => {
     link.click();
     document.body.removeChild(link);
 };
+
+export const buildQueryParams = (payload, prefix = '?') => {
+    const queryParams = new URLSearchParams();
+
+    Object.entries(payload).forEach(([key, value]) => {
+        if (value) {
+            queryParams.append(key, value);
+        }
+    });
+
+    if (queryParams.size === 0) {
+        return '';
+    }
+
+    return prefix + queryParams.toString();
+};
