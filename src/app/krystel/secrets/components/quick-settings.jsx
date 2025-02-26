@@ -1,14 +1,14 @@
 'use client';
 
 import { cn } from '@/modules/core/helpers/utils';
-import useLocalStorage from '@/modules/core/hooks/use-local-storage';
+import useSettings from '@/modules/core/hooks/use-settings';
 
 import { Label } from '@/modules/shadcn/ui/label';
 import { Switch } from '@/modules/shadcn/ui/switch';
 
 export default function QuickSettings({ classNames }) {
-    const [skipActions, setSkipActions] = useLocalStorage('settings:skip_actions', false);
-    const [showQuickSettings] = useLocalStorage('settings:show_quick_settings', false);
+    const [skipActions, setSkipActions] = useSettings('settings:skip_actions', false);
+    const [showQuickSettings] = useSettings('settings:show_quick_settings', false);
 
     if (!showQuickSettings) return null;
 

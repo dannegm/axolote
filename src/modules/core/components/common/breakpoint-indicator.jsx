@@ -1,11 +1,11 @@
 'use client';
 
-import useLocalStorage from '@/modules/core/hooks/use-local-storage';
-import ClientOnly from './client-only';
+import useSettings from '@/modules/core/hooks/use-settings';
 import { cn } from '@/modules/shadcn/lib/utils';
+import ClientOnly from './client-only';
 
 export default function BreakpointIndicator({ position = 'bottom-right' }) {
-    const [showIndicator] = useLocalStorage('settings:show_breakpoint_indicator', false);
+    const [showIndicator] = useSettings('settings:show_breakpoint_indicator', false);
 
     const positions = {
         'top-left': 'top-4 left-4',

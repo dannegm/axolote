@@ -1,7 +1,7 @@
 import { RefreshCcw } from 'lucide-react';
 import { parseAsString, useQueryState } from 'nuqs';
 
-import useLocalStorage from '@/modules/core/hooks/use-local-storage';
+import useSettings from '@/modules/core/hooks/use-settings';
 import ClientOnly from '@/modules/core/components/common/client-only';
 
 import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
@@ -38,7 +38,7 @@ const buildQuoteSettings = ({ code, data }) => {
 };
 
 export default function CardViewer({ code, data }) {
-    const [debugMode] = useLocalStorage('settings:debug_mode', false);
+    const [debugMode] = useSettings('settings:debug_mode', false);
     const [, setCodeQuery] = useQueryState('code', parseAsString.withDefault(code));
 
     const { configs } = extractConfigsAndContent(data?.quote);

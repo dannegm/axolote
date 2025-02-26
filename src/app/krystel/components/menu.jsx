@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { ArrowDown, BookMarked, Ellipsis, MessageSquareQuote, RefreshCcw } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
-import useLocalStorage from '@/modules/core/hooks/use-local-storage';
+import useSettings from '@/modules/core/hooks/use-settings';
 import ClientOnly from '@/modules/core/components/common/client-only';
 
 const MenuItem = ({ as = 'link', primary, href, label, demo, children }) => {
@@ -45,7 +45,7 @@ const MenuItem = ({ as = 'link', primary, href, label, demo, children }) => {
 };
 
 const MenuContent = ({ className }) => {
-    const [showSecrets] = useLocalStorage('settings:show_secrets', false);
+    const [showSecrets] = useSettings('settings:show_secrets', false);
     const [demo] = useQueryState('menu-demo');
 
     return (

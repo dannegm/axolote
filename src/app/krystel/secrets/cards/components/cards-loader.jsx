@@ -1,6 +1,6 @@
 'use client';
 
-import useLocalStorage from '@/modules/core/hooks/use-local-storage';
+import useSettings from '@/modules/core/hooks/use-settings';
 import ClientOnly from '@/modules/core/components/common/client-only';
 import DataLoader from '@/modules/core/components/common/data-loader';
 import Loader from '@/modules/core/components/common/loader';
@@ -9,8 +9,8 @@ import CardsList from './cards-list';
 const BASE_URL = 'https://endpoints.hckr.mx/quotes';
 
 export default function CardsLoader() {
-    const [includesFuture] = useLocalStorage('settings:cards:includes_future', false);
-    const [includesDeleted] = useLocalStorage('settings:cards:includes_deleted', false);
+    const [includesFuture] = useSettings('settings:cards:includes_future', false);
+    const [includesDeleted] = useSettings('settings:cards:includes_deleted', false);
 
     const includes = [];
     if (includesFuture) includes.push('future');

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { cn } from '@/modules/core/helpers/utils';
-import useLocalStorage from '@/modules/core/hooks/use-local-storage';
+import useSettings from '@/modules/core/hooks/use-settings';
 import ClientOnly from '@/modules/core/components/common/client-only';
 
 import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
@@ -38,7 +38,7 @@ const NavLink = ({ className, href, active, children }) => {
 
 export default function Navbar({ classNames }) {
     const pathname = usePathname();
-    const [showLogs] = useLocalStorage('settings:show_logs', false);
+    const [showLogs] = useSettings('settings:show_logs', false);
 
     const navItems = [
         { name: 'Tools', href: '/krystel/secrets/tools' },
