@@ -1,8 +1,9 @@
 'use client';
 
 import { useQueryState, parseAsBoolean } from 'nuqs';
-import Button from '@/modules/krystel/components/common/button';
+
 import { cn } from '@/modules/core/helpers/utils';
+import Button from '@/modules/krystel/components/common/button';
 
 export default function ButtonActions({ className, action, input, props = {}, label }) {
     const [, setMenuOpen] = useQueryState('menu', parseAsBoolean.withDefault(false));

@@ -7,10 +7,11 @@ import { cn } from '@/modules/core/helpers/utils';
 import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
 
 import Frame from './frame';
+import Button from '../common/button';
 
 export default function EasterEggs() {
     const [revealed] = useQueryState('revealed', parseAsBoolean.withDefault(false));
-    const { discover, secrets } = useEasterEggs();
+    const { secrets, discover, clearSecrets } = useEasterEggs();
 
     const found = secrets.filter(i => i.discovered).length;
     const total = secrets.length;
@@ -62,6 +63,10 @@ export default function EasterEggs() {
                     </li>
                 ))}
             </ul>
+
+            <Button className={cn('block w-fit text-sm px-4 py-2 mt-4')} onClick={clearSecrets}>
+                Comenzar de nuevo 🕵🏻‍♀️
+            </Button>
         </Frame>
     );
 }
