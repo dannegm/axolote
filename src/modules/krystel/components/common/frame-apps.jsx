@@ -2,6 +2,7 @@ import Simple from '../apps/simple';
 import Valentine from '../apps/valentine';
 import WouldYouRather from '../apps/would-you-rather';
 import EasterEggs from '../apps/easter-eggs';
+import Breakpoint from '../apps/breakpoint';
 
 const appsComponents = {
     default: () => <></>,
@@ -9,6 +10,7 @@ const appsComponents = {
     wyr: WouldYouRather,
     simple: Simple,
     easter_eggs: EasterEggs,
+    breakpoint: Breakpoint,
 };
 
 const appsDescriptions = {
@@ -18,6 +20,7 @@ const appsDescriptions = {
     simple: 'Ejemplo simple',
     easter_eggs: 'Encuéntralos todos',
     canvax: 'Dibjumenos algo',
+    breakpoint: 'Breakpoint',
 };
 
 export const getAppDescription = name => {

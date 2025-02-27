@@ -5,7 +5,10 @@ import { cn } from '@/modules/core/helpers/utils';
 export default function Frame({ className, children }) {
     return (
         <ClientOnly>
-            <div className={cn('max-w-[300px] max-h-[300px] overflow-hidden', className)}>
+            <div
+                data-layer='app-frame'
+                className={cn('max-h-[300px] overflow-hidden', className)}
+            >
                 {children}
             </div>
         </ClientOnly>

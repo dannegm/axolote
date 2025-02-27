@@ -262,6 +262,7 @@ export default function CardEditor() {
                     </Tabs>
 
                     <ResponsiveBox
+                        className='bg-blue-600'
                         defaultBreakpointName='mobile'
                         breakpoints={{
                             desktop: 362,

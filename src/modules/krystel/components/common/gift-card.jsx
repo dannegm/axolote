@@ -257,8 +257,10 @@ export default function GiftCard({
                             'text-md': isLongText,
                             'font-noto text-left text-[0.825rem] text-balance hyphens-auto leading-normal':
                                 letter,
-
                             'flex-1 w-full h-full block': configs?.fullscreen,
+
+                            'min-w-[calc(100%+80px)] -mx-10': configs?.fullwidth,
+                            'min-w-[calc(100%+48px)] -mx-6': configs?.fullwidth && letter,
                         },
                         theme?.text,
                         classNames?.text,
