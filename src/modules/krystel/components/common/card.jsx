@@ -25,7 +25,7 @@ export default function Card({
                 <div
                     data-layer='container'
                     className={cn(
-                        'flex-1 flex w-full rounded overflow-hidden bg-white text-gray-800 shadow-xl',
+                        'flex-1 flex w-full rounded bg-white text-gray-800 shadow-xl',
                         classNames?.container,
                         { 'h-auto': letter },
                     )}

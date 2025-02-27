@@ -289,8 +289,8 @@ export default function GiftCard({
                     <div
                         data-layer='date'
                         className={cn(
-                            'fixed bottom-0 text-xs text-black flex gap-1 items-center scale-75 bg-white py-1 px-2 rounded-full opacity-80',
-                            { 'relative bottom-auto scale-100 -ml-1': letter },
+                            'absolute bottom-0 transform translate-y-full text-xs text-black flex gap-1 items-center scale-75 bg-white py-1 px-2 rounded-full opacity-80',
+                            { 'relative bottom-auto scale-100 -ml-1 translate-y-0': letter },
                             theme?.date,
                             classNames?.date,
                         )}
