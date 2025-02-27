@@ -29,7 +29,7 @@ const rich = (text = '') => text.replaceAll('\n', '||');
 
 export default function CardEditor() {
     const router = useRouter();
-    const [mode, setMode] = useState('desktop');
+    const [mode, setMode] = useState('mobile');
     const [editorKey, setEditorKey] = useState(0);
 
     const [showCardViewport, setShowCardViewport] = useState(false);
@@ -262,6 +262,7 @@ export default function CardEditor() {
                     </Tabs>
 
                     <ResponsiveBox
+                        defaultBreakpointName='mobile'
                         breakpoints={{
                             desktop: 362,
                         }}
@@ -274,9 +275,7 @@ export default function CardEditor() {
                                             'absolute z-[500] top-2 left-1/2 transform -translate-x-1/2 flex gap-1 bg-black text-white px-3 py-1 rounded-full shadow-lg text-xs font-bold',
                                         )}
                                     >
-                                        <span className='block'>
-                                            {breakpoint === 'default' ? 'mobile' : breakpoint}
-                                        </span>
+                                        <span className='block'>{breakpoint}</span>
                                         <span className='block'>{`${size}px`}</span>
                                     </div>
                                 )}

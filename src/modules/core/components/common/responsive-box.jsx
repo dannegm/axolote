@@ -14,10 +14,12 @@ export default function ResponsiveBox({
     children,
     className = '',
     breakpoints = DEFAULT_BREAKPOINTS,
+    defaultBreakpointName = 'default',
     breakpointsClassNames = {},
+    onResize,
 }) {
     const $box = useRef(null);
-    const [breakpoint, setBreakpoint] = useState('default');
+    const [breakpoint, setBreakpoint] = useState(defaultBreakpointName);
     const [size, setSize] = useState('');
 
     useEffect(() => {
@@ -25,7 +27,7 @@ export default function ResponsiveBox({
 
         const observer = new ResizeObserver(([entry]) => {
             const width = entry.contentRect.width;
-            let matchedSize = 'default';
+            let matchedSize = defaultBreakpointName;
 
             for (const [key, value] of sortedBreakpoints) {
                 if (width >= value) {
@@ -37,6 +39,7 @@ export default function ResponsiveBox({
 
             setSize(width);
             setBreakpoint(matchedSize);
+            onResize?.({ breakpoint: matchedSize, size: width });
         });
 
         if ($box.current) observer.observe($box.current);
