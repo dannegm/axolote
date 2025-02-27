@@ -246,7 +246,7 @@ export default function CardEditor() {
 
                 <div
                     className={cn(
-                        'relative flex flex-col gap-2 pb-52 max-w-[384px] min-w-[326px] w-auto mx-auto',
+                        'relative flex flex-col gap-2 pb-52 max-w-[384px] min-w-[358px] w-auto mx-auto',
                     )}
                 >
                     <Tabs
@@ -262,7 +262,6 @@ export default function CardEditor() {
                     </Tabs>
 
                     <ResponsiveBox
-                        className='bg-blue-600'
                         defaultBreakpointName='mobile'
                         breakpoints={{
                             desktop: 362,
@@ -285,7 +284,7 @@ export default function CardEditor() {
                                     key={editorKey}
                                     className={cn({
                                         'min-w-[384px] w-auto': mode === 'desktop',
-                                        'w-full sm:w-[328px] sm:mx-auto': mode === 'mobile',
+                                        'w-full sm:w-[360px] sm:mx-auto': mode === 'mobile',
                                     })}
                                     classNames={{
                                         text: cn({
