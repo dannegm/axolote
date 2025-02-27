@@ -3,8 +3,11 @@
 import useSettings from '@/modules/core/hooks/use-settings';
 import { cn } from '@/modules/shadcn/lib/utils';
 import ClientOnly from './client-only';
+import { useState } from 'react';
+import useResize from '../../hooks/use-resize';
 
 export default function BreakpointIndicator({ position = 'bottom-right' }) {
+    const [size, setSize] = useState('');
     const [showIndicator] = useSettings('settings:show_breakpoint_indicator', false);
 
     const positions = {
@@ -20,12 +23,16 @@ export default function BreakpointIndicator({ position = 'bottom-right' }) {
 
     const positionClassName = positions[position] || positions['bottom-right'];
 
+    useResize(() => {
+        setSize(window.innerWidth);
+    });
+
     return (
         <ClientOnly>
             {showIndicator && (
                 <div
                     className={cn(
-                        'fixed z-50 bg-black text-white px-4 py-2 rounded-lg shadow-lg text-sm font-bold',
+                        'fixed z-[500] flex gap-1 bg-black text-white px-4 py-2 rounded-lg shadow-lg text-sm font-bold',
                         positionClassName,
                     )}
                 >
@@ -35,6 +42,8 @@ export default function BreakpointIndicator({ position = 'bottom-right' }) {
                     <span className='hidden lg:block xl:hidden'>LG</span>
                     <span className='hidden xl:block 2xl:hidden'>XL</span>
                     <span className='hidden 2xl:block'>2XL</span>
+                    <span className='block'>{`•`}</span>
+                    <span className='block'>{`${size}px`}</span>
                 </div>
             )}
         </ClientOnly>
