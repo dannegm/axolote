@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('@/modules/core/css/shadcn.css');
-@import url('@/modules/core/css/utils.css');
-@import url('@/modules/core/css/animations.css');
+@config "../../tailwind.config.mjs";
+
+@import url('../modules/core/css/shadcn.css');
+@import url('../modules/core/css/utils.css');
+@import url('../modules/core/css/animations.css');
 
 :root {
     --end-opacity: 1;

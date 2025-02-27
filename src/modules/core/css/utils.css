@@ -1,3 +1,5 @@
+@config "../../../../tailwind.config.mjs";
+
 .interpolate-size {
     interpolate-size: allow-keywords;
 }

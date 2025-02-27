@@ -1,3 +1,5 @@
+@config "../../../../tailwind.config.mjs";
+
 @keyframes fadeSlideUp {
     0% {
         opacity: 0;
