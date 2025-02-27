@@ -8,7 +8,8 @@ import { Asterisk, Clock3, icons } from 'lucide-react';
 import { cn } from '@/modules/core/helpers/utils';
 import Portal from '@/modules/core/components/common/portal';
 
-import { isElevenEleven, isThreeInTheMorning } from '@/modules/krystel/helpers/dates';
+import { getTheme } from '@/modules/krystel/helpers/themes';
+import { isElevenEleven, isFoolsDay, isThreeInTheMorning } from '@/modules/krystel/helpers/dates';
 import {
     extractConfigsAndContent,
     replaceWithLongestSentence,
@@ -28,6 +29,7 @@ import RichText from './rich-text';
 import Card from './card';
 
 export default function GiftCard({
+    className,
     classNames = {},
     quote = '...',
     icon = 'Badge',
@@ -62,6 +64,11 @@ export default function GiftCard({
         quote = '({icon:hidden}) <sticker::ufo>';
     }
 
+    const foolsDay = isFoolsDay();
+    if (isFoolsDay()) {
+        discover('fools_day');
+    }
+
     const generatedGreetings = useGreetings();
 
     const { configs, content } = extractConfigsAndContent(quote);
@@ -75,6 +82,10 @@ export default function GiftCard({
 
     const date = published_at ? new Date(published_at + 'Z') : new Date();
     const datePrefix = isBefore(date, new Date()) ? 'hace ' : 'dentro de ';
+
+    const theme = getTheme(configs?.theme);
+
+    console.log({ className, theme, classNames, configs });
 
     useEffect(() => {
         if (settings !== 'none') {
@@ -114,29 +125,41 @@ export default function GiftCard({
     return (
         <QuoteProvider quote={{ settings }}>
             <Card
+                className={cn(theme?.card, className, classNames?.card, {
+                    'rotate-180': foolsDay,
+                })}
                 border={configs?.border ? '' : border}
                 scheme={scheme}
                 letter={letter}
                 fullscreen={configs?.fullscreen}
                 frame={frame}
                 classNames={{
-                    border: cn({ 'bg-none': configs?.border }, configs?.border, classNames?.border),
+                    border: cn(
+                        { 'bg-none': configs?.border || theme?.border },
+                        theme?.border,
+                        classNames?.border,
+                        configs?.border,
+                    ),
+                    container: cn(theme?.container, classNames?.container),
                     content: cn(
-                        configs?.scheme,
                         {
                             'text-white [text-shadow:_1px_1px_8px_rgb(0_0_0_/_30%)]': frame,
                             'text-black': dark,
                         },
+                        theme?.container,
                         classNames?.content,
+                        configs?.scheme,
                     ),
-                    container: cn(classNames?.container, configs?.content),
                 }}
             >
-                {configs?.bg && (
+                {(configs?.bg || theme?.bg) && (
                     <Portal portalId='card-bg-portal'>
                         <div
+                            data-layer='bg'
                             className={cn(
                                 'fixed fade-in-custom inset-0 pointer-events-none transition-all duration-150',
+                                theme?.bg,
+                                classNames?.bg,
                                 configs?.bg,
                             )}
                         />
@@ -145,9 +168,12 @@ export default function GiftCard({
 
                 {!configs?.fullscreen && configs?.badge !== 'hidden' && firstAppearance && (
                     <div
+                        data-layer='badge'
                         className={cn(
                             'fade-in absolute top-2 right-2 flex items-center justify-center w-6 h-6 bg-pink-600 rounded-full',
                             { 'right-auto top-6 left-1/2 -ml-3 scale-75': letter },
+                            theme?.badge,
+                            classNames?.badge,
                         )}
                     >
                         <Asterisk
@@ -158,15 +184,27 @@ export default function GiftCard({
 
                 {!configs?.fullscreen && (
                     <div
-                        className={cn('flex flex-col items-center gap-8', {
-                            'w-full flex-row gap-2 justify-between mb-8': letter,
-                        })}
+                        data-layer='header'
+                        className={cn(
+                            'flex flex-col items-center gap-8',
+                            {
+                                'w-full flex-row gap-2 justify-between mb-8': letter,
+                            },
+                            theme?.header,
+                            classNames?.header,
+                        )}
                     >
                         {configs?.name !== 'hidden' && !uwu && (
                             <p
-                                className={cn('font-pacifico text-3xl text-center', {
-                                    'text-left text-xl': letter,
-                                })}
+                                data-layer='name'
+                                className={cn(
+                                    'font-pacifico text-3xl text-center',
+                                    {
+                                        'text-left text-xl': letter,
+                                    },
+                                    theme?.name,
+                                    classNames?.name,
+                                )}
                             >
                                 Krystel,
                             </p>
@@ -174,21 +212,37 @@ export default function GiftCard({
 
                         {configs?.name !== 'hidden' && uwu && (
                             <img
-                                className={cn('block h-24 -mb-8 md:-mb-4 -mt-10 md:-mt-12', {
-                                    'h-14 -mt-3 -ml-3 md:-mt-1': letter,
-                                })}
+                                data-layer='name'
+                                data-variant='uwu'
+                                className={cn(
+                                    'block h-24 -mb-8 md:-mb-4 -mt-10 md:-mt-12',
+                                    {
+                                        'h-14 -mt-3 -ml-3 md:-mt-1': letter,
+                                    },
+
+                                    theme?.nameUWU,
+                                    classNames?.nameUWU,
+                                )}
                                 src='/krystel-uwu.png'
                                 alt='Krystel'
                             />
                         )}
 
                         {configs?.icon !== 'hidden' && (
-                            <div className={cn('block')}>
+                            <div
+                                data-layer='icon'
+                                className={cn('block', theme?.icon, classNames?.icon)}
+                            >
                                 <LucideIcon
-                                    className={cn('text-current h-[56px] w-[56px]', {
-                                        'h-6 w-6': letter,
-                                        'drop-shadow-md': frame,
-                                    })}
+                                    className={cn(
+                                        'text-current h-[56px] w-[56px]',
+                                        {
+                                            'h-6 w-6': letter,
+                                            'drop-shadow-md': frame,
+                                        },
+                                        theme?.iconSVG,
+                                        classNames?.iconSVG,
+                                    )}
                                 />
                             </div>
                         )}
@@ -196,6 +250,7 @@ export default function GiftCard({
                 )}
 
                 <div
+                    data-layer='text'
                     className={cn(
                         'font-delius text-center text-xl font-medium leading-snug',
                         {
@@ -205,6 +260,7 @@ export default function GiftCard({
 
                             'flex-1 w-full h-full block': configs?.fullscreen,
                         },
+                        theme?.text,
                         classNames?.text,
                     )}
                 >
@@ -213,12 +269,15 @@ export default function GiftCard({
 
                 {!configs?.fullscreen && configs?.greetings !== 'hidden' && (
                     <p
+                        data-layer='greetings'
                         className={cn(
                             'font-pacifico text-xl text-center opacity-1 transition-all duration-300',
                             {
                                 'opacity-0 blur-sm': greetings === '...',
                                 'text-md mb-4 mt-4': letter,
                             },
+                            theme?.greetings,
+                            classNames?.greetings,
                         )}
                     >
                         {greetings}
@@ -227,9 +286,12 @@ export default function GiftCard({
 
                 {showDate && published_at && (
                     <div
+                        data-layer='date'
                         className={cn(
                             'fixed bottom-0 text-xs text-black flex gap-1 items-center scale-75 bg-white py-1 px-2 rounded-full opacity-80',
                             { 'relative bottom-auto scale-100 -ml-1': letter },
+                            theme?.date,
+                            classNames?.date,
                         )}
                         data-html2canvas-ignore
                     >

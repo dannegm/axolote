@@ -14,12 +14,14 @@ import { Switch } from '@/modules/shadcn/ui/switch';
 import { Textarea } from '@/modules/shadcn/ui/textarea';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shadcn/ui/tabs';
 import { DatePicker } from '@/modules/shadcn/ui/date-picker';
+import { Separator } from '@/modules/shadcn/ui/separator';
 
 import useCreateQuoteAction from '@/modules/krystel/hooks/use-create-quote-action';
 import GiftCard from '@/modules/krystel/components/common/gift-card';
 import { Label } from '@/modules/shadcn/ui/label';
 import { TimePicker } from '@/modules/shadcn/ui/time-picker';
 import { mergeDateAndTime } from '@/modules/core/helpers/dates';
+import ResponsiveBox from '@/modules/core/components/common/responsive-box';
 
 const loremIpsum = '████   ████   ██||███████   ██████||████   ██████';
 
@@ -27,7 +29,10 @@ const rich = (text = '') => text.replaceAll('\n', '||');
 
 export default function CardEditor() {
     const router = useRouter();
+    const [mode, setMode] = useState('desktop');
     const [editorKey, setEditorKey] = useState(0);
+
+    const [showCardViewport, setShowCardViewport] = useState(false);
 
     const [content, setContent] = useLocalStorage('editor:content', '');
 
@@ -140,33 +145,50 @@ export default function CardEditor() {
                                     />
                                 </TabsContent>
                                 <TabsContent value='advanced'>
-                                    <div className='flex flex-col gap-2'>
-                                        <div className='flex flex-row items-center justify-between'>
-                                            <Label htmlFor='includes-pushided-date'>
-                                                Published date
-                                            </Label>
-                                            <Switch
-                                                id='includes-pushided-date'
-                                                checked={includesPushidedDate}
-                                                onCheckedChange={() =>
-                                                    setIncludesPushidedDate(!includesPushidedDate)
-                                                }
-                                            />
+                                    <div className='flex flex-col gap-4'>
+                                        <div className='flex flex-col gap-2'>
+                                            <div className='flex flex-row items-center justify-between'>
+                                                <Label htmlFor='includes-pushided-date'>
+                                                    Published date
+                                                </Label>
+                                                <Switch
+                                                    id='includes-pushided-date'
+                                                    checked={includesPushidedDate}
+                                                    onCheckedChange={() =>
+                                                        setIncludesPushidedDate(
+                                                            !includesPushidedDate,
+                                                        )
+                                                    }
+                                                />
+                                            </div>
+
+                                            <div
+                                                className={cn('flex flex-row gap-2', {
+                                                    'opacity-60 pointer-events-none':
+                                                        !includesPushidedDate,
+                                                })}
+                                            >
+                                                <DatePicker
+                                                    date={publishedDate}
+                                                    onChange={setPublishedDate}
+                                                />
+                                                <TimePicker
+                                                    value={publishedTime}
+                                                    onChange={setPublishedTime}
+                                                />
+                                            </div>
                                         </div>
 
-                                        <div
-                                            className={cn('flex flex-row gap-2', {
-                                                'opacity-60 pointer-events-none':
-                                                    !includesPushidedDate,
-                                            })}
-                                        >
-                                            <DatePicker
-                                                date={publishedDate}
-                                                onChange={setPublishedDate}
-                                            />
-                                            <TimePicker
-                                                value={publishedTime}
-                                                onChange={setPublishedTime}
+                                        <Separator />
+
+                                        <div className='flex flex-row justify-between items-center'>
+                                            <Label htmlFor='show-card-viewport'>
+                                                Show card viewport
+                                            </Label>
+                                            <Switch
+                                                id='show-card-viewport'
+                                                checked={showCardViewport}
+                                                onCheckedChange={setShowCardViewport}
                                             />
                                         </div>
                                     </div>
@@ -224,19 +246,58 @@ export default function CardEditor() {
 
                 <div
                     className={cn(
-                        'relative flex flex-col items-center pb-52',
-                        'lg:w-96 lg:justify-center lg:mx-auto',
+                        'relative flex flex-col gap-2 pb-52 max-w-[384px] min-w-[360px] w-auto mx-auto',
                     )}
                 >
-                    <GiftCard
-                        key={editorKey}
-                        classNames={{
-                            text: cn({
-                                'text-gray-200 text-sm leading-6 whitespace-pre': !rich(content),
-                            }),
+                    <Tabs
+                        className='flex-1 hidden sm:block'
+                        defaultValue='desktop'
+                        value={mode}
+                        onValueChange={setMode}
+                    >
+                        <TabsList className='grid w-full grid-cols-2'>
+                            <TabsTrigger value='desktop'>Desktop</TabsTrigger>
+                            <TabsTrigger value='mobile'>Mobile</TabsTrigger>
+                        </TabsList>
+                    </Tabs>
+
+                    <ResponsiveBox
+                        breakpoints={{
+                            desktop: 362,
                         }}
-                        quote={rich(content) || loremIpsum}
-                    />
+                    >
+                        {({ breakpoint, size }) => (
+                            <div className='relative'>
+                                {showCardViewport && (
+                                    <div
+                                        className={cn(
+                                            'absolute z-[500] top-2 left-1/2 transform -translate-x-1/2 flex gap-1 bg-black text-white px-3 py-1 rounded-full shadow-lg text-xs font-bold',
+                                        )}
+                                    >
+                                        <span className='block'>
+                                            {breakpoint === 'default' ? 'mobile' : breakpoint}
+                                        </span>
+                                        <span className='block'>{`${size}px`}</span>
+                                    </div>
+                                )}
+
+                                <GiftCard
+                                    key={editorKey}
+                                    className={cn({
+                                        'min-w-[384px] w-auto': mode === 'desktop',
+                                        'w-[360px]': mode === 'mobile',
+                                    })}
+                                    classNames={{
+                                        text: cn({
+                                            'text-gray-200 text-sm leading-6 whitespace-pre':
+                                                !rich(content),
+                                        }),
+                                    }}
+                                    quote={rich(content) || loremIpsum}
+                                />
+                            </div>
+                        )}
+                    </ResponsiveBox>
                 </div>
             </div>
         </ClientOnly>

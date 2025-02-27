@@ -1,4 +1,12 @@
-import { format, isWithinInterval, setHours, setMinutes, setSeconds, addDays } from 'date-fns';
+import {
+    format,
+    isWithinInterval,
+    setHours,
+    setMinutes,
+    setSeconds,
+    addDays,
+    isSameDay,
+} from 'date-fns';
 
 export const isElevenEleven = () => {
     const currentTime = format(new Date(), 'hh:mm');
@@ -44,4 +52,11 @@ export const isBdaySeason = (today = new Date()) => {
     }
 
     return true;
+};
+
+export const isFoolsDay = (today = new Date()) => {
+    const aprilFools = new Date(today.getFullYear(), 3, 1);
+    const inocentes = new Date(today.getFullYear(), 11, 28);
+
+    return isSameDay(today, aprilFools) || isSameDay(today, inocentes);
 };
