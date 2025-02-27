@@ -145,7 +145,7 @@ export default function CardEditor() {
                                     />
                                 </TabsContent>
                                 <TabsContent value='advanced'>
-                                    <div className='flex flex-col gap-4'>
+                                    <div className='flex flex-col gap-4 pb-4'>
                                         <div className='flex flex-col gap-2'>
                                             <div className='flex flex-row items-center justify-between'>
                                                 <Label htmlFor='includes-pushided-date'>
