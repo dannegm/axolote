@@ -9,7 +9,7 @@ export default function Breakpoint() {
                 className='flex-center gap-1 w-full p-4 bg-black text-white text-center shadow-lg text-sm font-bold'
                 defaultBreakpointName='mobile'
                 breakpoints={{
-                    desktop: 362,
+                    desktop: 300,
                 }}
             >
                 {({ breakpoint, size }) => (
