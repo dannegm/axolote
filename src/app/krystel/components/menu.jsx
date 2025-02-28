@@ -20,11 +20,16 @@ const MenuItem = ({ as = 'link', primary, href, label, demo, children }) => {
     return (
         <Component className={cn('block w-24')} href={href}>
             {demo && (
-                <div className='absolute -translate-y-[4rem] fade-in-custom flex flex-col items-center gap-2 w-24 text-center'>
-                    <span className='px-2 py-1 bg-black text-white text-sm font-noto rounded-full drop-shadow'>
+                <div
+                    className={cn(
+                        'animate-in fade-in-0 duration-300 ease-in',
+                        'absolute -translate-y-[4rem] flex flex-col items-center gap-2 w-24 text-center',
+                    )}
+                >
+                    <span className='px-2 py-1 bg-black text-white text-sm font-noto rounded-full drop-shadow-xs'>
                         {label}
                     </span>
-                    <ArrowDown className='animate-bounce drop-shadow' strokeWidth={2} />
+                    <ArrowDown className='animate-bounce drop-shadow-xs' strokeWidth={2} />
                 </div>
             )}
             <div
@@ -93,7 +98,10 @@ export default function Menu() {
         <ClientOnly>
             {open && (
                 <div
-                    className='fixed z-max inset-0 cursor-pointer bg-black backdrop-blur-md end-opacity-[0.3] fade-in-custom'
+                    className={cn(
+                        'animate-in fade-in-0 duration-300 ease-in opacity-30',
+                        'fixed z-max inset-0 cursor-pointer bg-black backdrop-blur-md',
+                    )}
                     onClick={closeMenu}
                 />
             )}

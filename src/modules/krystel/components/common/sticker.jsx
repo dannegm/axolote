@@ -38,7 +38,7 @@ export default function Sticker({ id, type = 'inline' }) {
         inline: 'inline-block w-6 h-6 -mt-1 scale-110',
         badge: 'block w-24 h-24 mx-auto -mt-2 md:-mt-4',
         full: 'block w-44 h-44 mx-auto -mb-2',
-        preview: 'block bg-white rounded-md shadow-sm w-16 h-16 p-2',
+        preview: 'block bg-white rounded-md shadow-2xs w-16 h-16 p-2',
     };
 
     return <img src={src} alt={id} className={cn('object-contain', types[type], stickerStyles)} />;

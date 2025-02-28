@@ -136,7 +136,7 @@ export default function PostEditor() {
     const canCreate = content !== '' && !sendBlacklist.includes(selectedEditor);
 
     return (
-        <div className='flex flex-col gap-4 bg-slate-100 rounded-lg p-4 shadow'>
+        <div className='flex flex-col gap-4 bg-slate-100 rounded-lg p-4 shadow-2xs'>
             <div>
                 <Editor
                     key={selectedEditor}
@@ -173,14 +173,14 @@ export default function PostEditor() {
                 <div className='flex flex-row gap-1'>
                     {createPost.isPending ? (
                         <IconButton
-                            className='rounded-full bg-indigo-500 text-white shadow scale-110 hover:bg-indigo-700'
+                            className='rounded-full bg-indigo-500 text-white shadow-2xs scale-110 hover:bg-indigo-700'
                             disabled
                         >
                             <Loader2 className='animate-spin' />
                         </IconButton>
                     ) : (
                         <IconButton
-                            className='rounded-full bg-indigo-500 text-white shadow scale-125 hover:bg-indigo-700 active:scale-110'
+                            className='rounded-full bg-indigo-500 text-white shadow-2xs scale-125 hover:bg-indigo-700 active:scale-110'
                             disabled={!canCreate}
                             onClick={handleCreate}
                         >

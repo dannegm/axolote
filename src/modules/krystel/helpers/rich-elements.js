@@ -64,14 +64,14 @@ export const defaultElements = [
     {
         pattern: /```(.*?)```/g,
         parser: text => (
-            <pre className='block text-xs py-1 px-2 rounded-sm bg-slate-900 text-white'>{text}</pre>
+            <pre className='block text-xs py-1 px-2 rounded-xs bg-slate-900 text-white'>{text}</pre>
         ),
     },
     // Code
     {
         pattern: /`(.*?)`/g,
         parser: text => (
-            <code className='text-xs py-0.5 px-1 rounded-sm bg-pink-200 text-pink-600'>{text}</code>
+            <code className='text-xs py-0.5 px-1 rounded-xs bg-pink-200 text-pink-600'>{text}</code>
         ),
     },
     // Marked
@@ -273,14 +273,14 @@ export const buildPreviewElements = ({ preventReveal }) => [
     {
         pattern: /```(.*?)```/g,
         parser: text => (
-            <pre className='block text-sm py-1 px-2 rounded-sm bg-slate-900 text-white'>{text}</pre>
+            <pre className='block text-sm py-1 px-2 rounded-xs bg-slate-900 text-white'>{text}</pre>
         ),
     },
     // Code
     {
         pattern: /`(.*?)`/g,
         parser: text => (
-            <code className='text-sm py-0.5 px-1 rounded-sm bg-pink-200 text-pink-600s'>
+            <code className='text-sm py-0.5 px-1 rounded-xs bg-pink-200 text-pink-600s'>
                 {text}
             </code>
         ),
@@ -396,17 +396,23 @@ export const buildPreviewElements = ({ preventReveal }) => [
     // Button Actions with props
     {
         pattern: /<button::(.*?)\(\{(.*?)\}\)>(.*?)<\/button>/g,
-        parser: (action, args, label) => <ButtonActions label={label} />,
+        parser: (action, args, label) => (
+            <ButtonActions className='block w-fit px-2 py-1 text-xs' label={label} />
+        ),
     },
     // Button Actions with input
     {
         pattern: /<button::(.*?)\((.*?)\)>(.*?)<\/button>/g,
-        parser: (action, input, label) => <ButtonActions label={label} />,
+        parser: (action, input, label) => (
+            <ButtonActions className='block w-fit px-2 py-1 text-xs' label={label} />
+        ),
     },
     // Button Actions
     {
         pattern: /<button::(.*?)>(.*?)<\/button>/g,
-        parser: (action, label) => <ButtonActions label={label} />,
+        parser: (action, label) => (
+            <ButtonActions className='block w-fit px-2 py-1 text-xs' label={label} />
+        ),
     },
     // Apps with props
     {

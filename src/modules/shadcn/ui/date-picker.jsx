@@ -19,7 +19,7 @@ function DatePicker({ date, onChange }) {
                         !date && 'text-muted-foreground',
                     )}
                 >
-                    <CalendarIcon className='mr-2 h-4 w-4' />
+                    <CalendarIcon className='mr-2 size-4' />
                     {date ? format(date, 'MMM do, yyyy') : <span>Pick a date</span>}
                 </Button>
             </PopoverTrigger>

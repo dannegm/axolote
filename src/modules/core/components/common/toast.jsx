@@ -39,8 +39,8 @@ export default function Toast({
             className={cn([
                 'w-auto overflow-hidden bg-white rounded-full shadow-md transition-all duration-150 interpolate-size',
                 //
-                { 'toast-in': show },
-                { 'toast-out': !show || hidden },
+                { 'animate-toast-in': show },
+                { 'animate-toast-out': !show || hidden },
             ])}
         >
             <div className='w-[340px] flex flex-row justify-center items-center gap-4 p-2'>

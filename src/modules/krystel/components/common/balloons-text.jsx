@@ -84,9 +84,9 @@ export default function BalloonsText({ children }) {
 
             <span
                 className={cn(
-                    'absolute z-40 mx-auto flex w-fit box-content',
-                    'bg-gradient-to-b from-yellow-900 to-red-900 bg-clip-text blur-md brightness-150',
-                    'font-boogaloo font-extrabold text-transparent text-center text-[1.5rem]',
+                    'absolute z-10 mx-auto flex w-fit box-content',
+                    'text-white blur-xs scale-110',
+                    'font-boogaloo font-extrabold text-center text-[1.2em]',
                     'select-none',
                 )}
                 data-html2canvas-ignore
@@ -96,8 +96,8 @@ export default function BalloonsText({ children }) {
 
             <span
                 className={cn(
-                    'relative z-10 top-0 w-fit h-auto flex justify-center items-center',
-                    'font-boogaloo font-extrabold text-center text-[1.5rem]',
+                    'relative z-40 top-0 w-fit h-auto flex justify-center items-center',
+                    'font-boogaloo font-extrabold text-center text-[1.2em]',
                     'select-auto',
                 )}
             >

@@ -2,15 +2,17 @@
 
 # Define colors and shades
 colors=(
-  "red" "blue" "green" "yellow" "purple" "pink" "indigo" "teal" "orange" "cyan" "lime" "amber" "emerald" "rose" "sky" "violet" "fuchsia" "stone" "neutral" "zinc" "gray" "slate"
+  "red" "orange" "amber" "yellow" "lime" "green" "emerald" "teal" "cyan" "sky" "blue" "indigo" "violet" "purple" "fuchsia" "pink" "rose" "slate" "gray" "zinc" "neutral" "stone"
 )
 shades=(
-  "50" "100" "200" "300" "400" "500" "600" "700" "800" "900"
+  "50" "100" "200" "300" "400" "500" "600" "700" "800" "900" "950"
 )
-types=("bg" "text" "border" "ring" "outline" "accent" "placeholder" "divide" "ring-offset")
+types=(
+  "bg" "text" "decoration" "border" "outline" "accent" "shadow" "inset-shadow" "ring" "inset-ring" "accent" "caret" "fill" "stroke"
+)
 
 # Output file
-output_file="tailwindClasses.js"
+output_file="tailwind-classes.js"
 
 # Start writing to the output file
 echo "const classNames = {" > $output_file

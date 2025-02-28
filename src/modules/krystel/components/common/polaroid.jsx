@@ -49,7 +49,7 @@ export default function Polaroid({ url, description }) {
                 <div className='bg-slate-700 overflow-hidden'>
                     <img
                         className={cn(
-                            'object-cover w-28 aspect-[3/4] transition-all duration-1000',
+                            'object-cover w-28 aspect-3/4 transition-all duration-1000',
                             {
                                 'blur-2xl': hidden,
                             },

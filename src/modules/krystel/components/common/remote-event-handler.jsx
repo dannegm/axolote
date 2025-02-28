@@ -7,6 +7,7 @@ import ReactRain from 'react-rain-animation';
 import 'react-rain-animation/lib/style.css';
 
 import { useToast } from '@/modules/core/providers/toast-provider';
+import { cn } from '@/modules/core/helpers/utils';
 import useNtfy from '@/modules/core/hooks/use-ntfy';
 import useAudio from '@/modules/core/hooks/use-audio';
 import Portal from '@/modules/core/components/common/portal';
@@ -178,8 +179,19 @@ export default function RemoteEventHandler({ quote }) {
                         `
                         }
                     </style>
-                    <div className='fixed fade-in inset-0 pointer-events-none bg-slate-900 transition-all duration-150 backdrop-blur-lg opacity-50' />
-                    <div className='fixed fade-in inset-0 z-max pointer-events-none'>
+                    {/** TODO: Refactor: Abstract to a separate BG component */}
+                    <div
+                        className={cn(
+                            'animate-in fade-in-0 duration-150 ease-in opacity-50',
+                            'fixed inset-0 pointer-events-none bg-slate-900 transition-all backdrop-blur-lg',
+                        )}
+                    />
+                    <div
+                        className={cn(
+                            'animate-in fade-in-0 duration-300 ease-in opacity-100',
+                            'fixed inset-0 z-max pointer-events-none',
+                        )}
+                    >
                         <Snowfall {...snowFallConfig} />
                     </div>
                 </Portal>
@@ -187,7 +199,13 @@ export default function RemoteEventHandler({ quote }) {
             {toggles.raining && (
                 <Portal portalId='global-bg-portal'>
                     <Audio src='./sounds/raining.mp3' volume={0.25} fadeIn={1500} autoplay loop />
-                    <div className='fixed fade-in inset-0 z-max pointer-events-none bg-sky-800/30'>
+                    {/** TODO: Refactor: Abstract to a separate BG component */}
+                    <div
+                        className={cn(
+                            'animate-in fade-in-0 duration-300 ease-in opacity-50',
+                            'fixed inset-0 z-max pointer-events-none bg-sky-800/30',
+                        )}
+                    >
                         <ReactRain numDrops={500} />
                     </div>
                 </Portal>
