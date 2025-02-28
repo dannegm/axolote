@@ -46,11 +46,6 @@ const settingsList = {
         label: 'Includes Deleted Cards',
         defaultValue: false,
     },
-    'settings:posts:enable': {
-        key: 'settings:posts:enable',
-        label: 'Enable Posts Section',
-        defaultValue: false,
-    },
     'settings:posts:includes_deleted': {
         key: 'settings:posts:includes_deleted',
         label: 'Includes Deleted Posts',

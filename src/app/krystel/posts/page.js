@@ -1,8 +1,8 @@
 import Menu from '@/app/krystel/components/menu';
 import PageViewAction from '@/modules/krystel/components/common/page-view-action';
 import TrackAction from '@/modules/krystel/components/common/track-action';
-import PostsMiddleware from './components/posts-middleware';
 import ClientOnly from '@/modules/core/components/common/client-only';
+import PostsLoader from './components/posts-loader';
 
 export function generateMetadata() {
     return {
@@ -16,7 +16,7 @@ export default function Posts() {
             <Menu />
             <TrackAction />
             <PageViewAction page='posts' />
-            <PostsMiddleware />
+            <PostsLoader />
         </ClientOnly>
     );
 }
