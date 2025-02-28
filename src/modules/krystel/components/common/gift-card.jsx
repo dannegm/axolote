@@ -33,6 +33,7 @@ export default function GiftCard({
     classNames = {},
     quote = '...',
     icon = 'Badge',
+    bg = '',
     border = '',
     scheme = 'bg-white text-gray-600',
     settings = 'none',
@@ -152,12 +153,23 @@ export default function GiftCard({
                     ),
                 }}
             >
+                <Portal portalId='global-bg-portal'>
+                    <div
+                        className={cn(
+                            'animate-in fade-in-0 duration-[3s] ease-in opacity-50',
+                            'background fixed inset-0 bg-gray-100 bg-center bg-[length:50%] transition-all',
+                        )}
+                        style={{ backgroundImage: bg }}
+                    />
+                </Portal>
+
                 {(configs?.bg || theme?.bg) && (
                     <Portal portalId='card-bg-portal'>
                         <div
                             data-layer='bg'
                             className={cn(
-                                'fixed fade-in-custom inset-0 pointer-events-none transition-all duration-150',
+                                'animate-in fade-in-0 duration-150 ease-in opacity-100',
+                                'fixed inset-0 pointer-events-none transition-all',
                                 theme?.bg,
                                 classNames?.bg,
                                 configs?.bg,
@@ -170,7 +182,8 @@ export default function GiftCard({
                     <div
                         data-layer='badge'
                         className={cn(
-                            'fade-in absolute top-2 right-2 flex items-center justify-center w-6 h-6 bg-pink-600 rounded-full',
+                            'animate-in fade-in-0 duration-300 ease-in opacity-50',
+                            'absolute top-2 right-2 flex items-center justify-center w-6 h-6 bg-pink-600 rounded-full',
                             { 'right-auto top-6 left-1/2 -ml-3 scale-75': letter },
                             theme?.badge,
                             classNames?.badge,
@@ -272,7 +285,7 @@ export default function GiftCard({
                     <p
                         data-layer='greetings'
                         className={cn(
-                            'font-pacifico text-xl text-center opacity-1 transition-all duration-300',
+                            'font-pacifico text-xl text-center transition-all duration-300',
                             {
                                 'opacity-0 blur-xs': greetings === '...',
                                 'text-md mb-4 mt-4': letter,

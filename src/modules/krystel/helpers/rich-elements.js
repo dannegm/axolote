@@ -396,17 +396,23 @@ export const buildPreviewElements = ({ preventReveal }) => [
     // Button Actions with props
     {
         pattern: /<button::(.*?)\(\{(.*?)\}\)>(.*?)<\/button>/g,
-        parser: (action, args, label) => <ButtonActions label={label} />,
+        parser: (action, args, label) => (
+            <ButtonActions className='block w-fit px-2 py-1 text-xs' label={label} />
+        ),
     },
     // Button Actions with input
     {
         pattern: /<button::(.*?)\((.*?)\)>(.*?)<\/button>/g,
-        parser: (action, input, label) => <ButtonActions label={label} />,
+        parser: (action, input, label) => (
+            <ButtonActions className='block w-fit px-2 py-1 text-xs' label={label} />
+        ),
     },
     // Button Actions
     {
         pattern: /<button::(.*?)>(.*?)<\/button>/g,
-        parser: (action, label) => <ButtonActions label={label} />,
+        parser: (action, label) => (
+            <ButtonActions className='block w-fit px-2 py-1 text-xs' label={label} />
+        ),
     },
     // Apps with props
     {

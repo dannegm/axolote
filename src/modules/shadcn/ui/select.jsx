@@ -40,7 +40,7 @@ const SelectScrollUpButton = ({ ref, className, ...props }) => (
 );
 SelectScrollUpButton.displayName = SelectPrimitive.ScrollUpButton.displayName;
 
-const SelectScrollDownButton = ({ ref, className, ...props }, ref) => (
+const SelectScrollDownButton = ({ ref, className, ...props }) => (
     <SelectPrimitive.ScrollDownButton
         ref={ref}
         className={cn('flex cursor-default items-center justify-center py-1', className)}
@@ -108,7 +108,7 @@ const SelectItem = ({ ref, className, children, ...props }) => (
 );
 SelectItem.displayName = SelectPrimitive.Item.displayName;
 
-const SelectSeparator = (ref, { className, ...props }) => (
+const SelectSeparator = ({ ref, className, ...props }) => (
     <SelectPrimitive.Separator
         ref={ref}
         className={cn('-mx-1 my-1 h-px bg-neutral-100 dark:bg-neutral-800', className)}

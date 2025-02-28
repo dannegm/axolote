@@ -19,3 +19,12 @@
 @utility z-max {
     z-index: 999999;
 }
+
+@layer utilities {
+    .bg-img-blue-galaxy {
+        background-image: url(/backgrounds/blue-galaxy.jpg);
+    }
+    .bg-img-glitch {
+        background-image: url('/backgrounds/glitch.gif');
+    }
+}

@@ -11,7 +11,10 @@ export default function Card({
     frame,
 }) {
     return (
-        <div data-layer='animation' className='animfade-slide-up'>
+        <div
+            data-layer='animation'
+            className='animate-in fade-in-0 slide-in-from-bottom-6 duration-300 ease-in'
+        >
             <div
                 data-layer='border'
                 className={cn(

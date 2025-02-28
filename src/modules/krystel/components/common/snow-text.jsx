@@ -51,8 +51,18 @@ export default function SnowText({ children }) {
                     `
                     }
                 </style>
-                <div className='fixed fade-in inset-0 pointer-events-none bg-slate-900 transition-all duration-150 backdrop-blur-lg opacity-50' />
-                <div className='fixed fade-in inset-0 z-max pointer-events-none'>
+                <div
+                    className={cn(
+                        'animate-in fade-in-0 duration-150 ease-in opacity-50',
+                        'fixed inset-0 pointer-events-none bg-slate-900 transition-all duration-150 backdrop-blur-lg opacity-50',
+                    )}
+                />
+                <div
+                    className={cn(
+                        'animate-in fade-in-0 duration-300 ease-in opacity-100',
+                        'fixed inset-0 z-max pointer-events-none',
+                    )}
+                >
                     <Snowfall {...snowFallConfig} />
                 </div>
             </Portal>
@@ -63,7 +73,7 @@ export default function SnowText({ children }) {
                 className={cn(
                     'absolute z-40 mx-auto flex w-fit box-content',
                     'bg-linear-to-b from-sky-900 to-cyan-900 bg-clip-text blur-xs',
-                    'font-playwrite font-extrabold text-transparent text-center text-[1.05rem]',
+                    'font-playwrite font-extrabold text-transparent text-center text-[1em]',
                     'select-none',
                 )}
                 data-html2canvas-ignore
@@ -74,7 +84,7 @@ export default function SnowText({ children }) {
             <span
                 className={cn(
                     'relative z-10 top-0 w-fit h-auto flex justify-center items-center',
-                    'font-playwrite font-extrabold text-sky-600 text-center text-[1.05rem]',
+                    'font-playwrite font-extrabold text-sky-600 text-center text-[1em]',
                     'select-auto',
                 )}
             >

@@ -83,7 +83,12 @@ export default function GiftCardPreview({
                 >
                     <div className='absolute top-2 right-2 flex flex-row gap-1'>
                         {isFirstAppearance && (
-                            <div className='fade-in flex items-center justify-center gap-2 w-4 h-4 bg-pink-600 rounded-full'>
+                            <div
+                                className={cn(
+                                    'animate-in fade-in-0 duration-300 ease-in opacity-50',
+                                    'flex items-center justify-center gap-2 w-4 h-4 bg-pink-600 rounded-full',
+                                )}
+                            >
                                 <Asterisk size={16} className='text-white' />
                             </div>
                         )}

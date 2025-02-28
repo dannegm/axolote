@@ -17,6 +17,7 @@ import LikeButton from '@/modules/krystel/components/common/like-button';
 import JsonViewer from '@/modules/core/components/common/json-viewer';
 import CopyText from '@/modules/krystel/components/common/copy-text';
 import { useEffect } from 'react';
+import { cn } from '@/modules/core/helpers/utils';
 
 const getBaseUrl = () => window.location.origin + window.location.pathname;
 
@@ -57,15 +58,10 @@ export default function CardViewer({ code, data }) {
         <ClientOnly>
             <main className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
                 <SaveContainer
-                    className='-mt-4 px-5 py-10 md:px-10 md:py-20 transition-all'
+                    className='-mt-4 w-fit px-5 py-10 md:px-10 md:py-20 transition-all'
                     quote={quote}
                 >
                     <RemoteEventHandler quote={quote} />
-
-                    <div
-                        className='background fade-in-slow fixed inset-0 bg-gray-100 bg-center bg-[length:50%] opacity-50 transition-all'
-                        style={{ backgroundImage: quote.bg }}
-                    />
 
                     <div id='global-bg-portal' />
                     <div id='card-bg-portal' />

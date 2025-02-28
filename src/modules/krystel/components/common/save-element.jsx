@@ -38,14 +38,25 @@ export const SaveContainer = ({ className, children, quote, onPrepare, onSave })
     const handlePrepare = () => {
         const children = $container.current.querySelectorAll('*');
         children.forEach(child => {
-            const classesToRemove = ['fade-in', 'fade-in-slow', 'fade-slide-up'];
+            const classesToRemove = ['animate-in', 'animate-out'];
             child.classList.remove(...classesToRemove);
         });
+
+        const style = getComputedStyle($container?.current);
+        const paddingLeft = parseFloat(style.paddingLeft);
+        const paddingRight = parseFloat(style.paddingRight);
+        const contentWidth = $container?.current.clientWidth - paddingLeft - paddingRight;
+
+        document.querySelector('#global-bg-portal').style.width = `${contentWidth}px`;
+        document.querySelector('#card-bg-portal').style.width = `${contentWidth}px`;
 
         setTimeout(() => {
             playCamera();
             onPrepare?.($container);
             html2canvas($container.current, html2canvasOptions).then(handleSave);
+
+            document.querySelector('#global-bg-portal').style.width = 'auto';
+            document.querySelector('#card-bg-portal').style.width = 'auto';
         }, 300);
     };
 
