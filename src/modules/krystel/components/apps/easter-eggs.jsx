@@ -10,6 +10,7 @@ import Frame from './frame';
 import Button from '../common/button';
 
 export default function EasterEggs() {
+    const [allowClear] = useQueryState('allow-clear', parseAsBoolean.withDefault(false));
     const [revealed] = useQueryState('revealed', parseAsBoolean.withDefault(false));
     const { secrets, discover, clearSecrets } = useEasterEggs();
 
@@ -38,7 +39,7 @@ export default function EasterEggs() {
                     <li key={`egg:${item.id}`} className='flex flex-row gap-2'>
                         <div
                             className={cn(
-                                'block flex-none w-4 h-4 bg-indigo-100 box-border border border-indigo-300 rounded-md text-green-500 transition-all duration-150',
+                                'block flex-none w-4 h-4 bg-indigo-100 box-border border border-indigo-300 rounded-sm text-green-500 transition-all duration-150',
                                 {
                                     'bg-slate-100 border border-slate-300': !item.discovered,
                                 },
@@ -64,9 +65,11 @@ export default function EasterEggs() {
                 ))}
             </ul>
 
-            <Button className={cn('block w-fit text-sm px-4 py-2 mt-4')} onClick={clearSecrets}>
-                Comenzar de nuevo 🕵🏻‍♀️
-            </Button>
+            {allowClear && (
+                <Button className={cn('block w-fit text-sm px-4 py-2 mt-4')} onClick={clearSecrets}>
+                    Comenzar de nuevo 🕵🏻‍♀️
+                </Button>
+            )}
         </Frame>
     );
 }
