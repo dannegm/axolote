@@ -27,16 +27,14 @@ export default function Card({
             >
                 <div
                     data-layer='container'
-                    className={cn(
-                        'flex-1 flex w-full rounded bg-white text-gray-800 shadow-xl',
-                        classNames?.container,
-                        { 'h-auto': letter },
-                    )}
+                    className={cn('flex-1 flex w-full rounded-md', classNames?.container, {
+                        'h-auto': letter,
+                    })}
                 >
                     <div
                         data-layer='content'
                         className={cn(
-                            'flex-1 relative flex w-full h-full flex-col items-center gap-6 md:gap-8 justify-center p-10',
+                            'flex-1 relative flex w-full h-full rounded-md flex-col items-center gap-6 md:gap-8 justify-center p-10 shadow-xl',
                             scheme,
                             classNames?.content,
                             {
