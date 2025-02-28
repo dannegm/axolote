@@ -44,10 +44,12 @@ export default function PostsList({ data = [] }) {
                     <div className='flex flex-col flex-center gap-8 px-6 py-4'>
                         <h2 className='font-pacifico text-lg'>Aún no has publicado nada</h2>
                         <div className='px-10'>
-                            <RandomPicture
-                                className='block w-full rounded-2xl shadow-2xs'
-                                pictures={emptyPictures}
-                            />
+                            <div className='flex-1 block mx-auto w-full sm:w-[400px]'>
+                                <RandomPicture
+                                    className='block w-[400px] rounded-2xl shadow-2xs'
+                                    pictures={emptyPictures}
+                                />
+                            </div>
                         </div>
                         <p className='font-noto text-center text-sm text-slate-800'>
                             Podrías intentar compartiendo cualquier cosa que tengas en mente, o
