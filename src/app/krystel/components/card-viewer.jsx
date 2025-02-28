@@ -91,7 +91,7 @@ export default function CardViewer({ code, data }) {
                 </SaveContainer>
 
                 {debugMode && (
-                    <div className='min-w-80 max-w-full -mt-14 mb-16 p-2 overflow-hidden z-[100] flex flex-col gap-2 items-center'>
+                    <div className='min-w-80 max-w-full -mt-14 mb-16 p-2 overflow-hidden z-100 flex flex-col gap-2 items-center'>
                         <CopyText content={url}>{quote.settings}</CopyText>
                         <JsonViewer name='payload' data={quote} />
                     </div>

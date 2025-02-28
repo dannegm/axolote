@@ -274,7 +274,7 @@ export default function GiftCard({
                         className={cn(
                             'font-pacifico text-xl text-center opacity-1 transition-all duration-300',
                             {
-                                'opacity-0 blur-sm': greetings === '...',
+                                'opacity-0 blur-xs': greetings === '...',
                                 'text-md mb-4 mt-4': letter,
                             },
                             theme?.greetings,

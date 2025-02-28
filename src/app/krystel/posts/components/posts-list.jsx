@@ -45,7 +45,7 @@ export default function PostsList({ data = [] }) {
                         <h2 className='font-pacifico text-lg'>Aún no has publicado nada</h2>
                         <div className='px-10'>
                             <RandomPicture
-                                className='block w-full rounded-2xl shadow'
+                                className='block w-full rounded-2xl shadow-2xs'
                                 pictures={emptyPictures}
                             />
                         </div>

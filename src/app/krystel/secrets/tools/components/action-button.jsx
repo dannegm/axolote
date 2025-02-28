@@ -40,7 +40,7 @@ export default function ActionButton({
     return (
         <button
             className={cn(
-                'group relative z-0 flex-center w-full aspect-square overflow-hidden rounded-2xl bg-gradient-to-b transition-all duration-150 ease-in-out active:scale-95',
+                'group relative z-0 flex-center w-full aspect-square overflow-hidden rounded-2xl bg-linear-to-b transition-all duration-150 ease-in-out active:scale-95',
                 { 'scale-95': actionLoading },
                 gradientClassNames,
             )}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { forwardRef, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTimescape } from 'timescape/react';
 
 import { cn } from '@/modules/shadcn/lib/utils';
@@ -8,7 +8,7 @@ import { Input } from '@/modules/shadcn/ui/input';
 import { Clock3 } from 'lucide-react';
 
 const timePickerInputBase =
-    'font-medium text-sm p-1 inline tabular-nums h-fit border-none outline-none select-none content-box caret-transparent rounded-sm min-w-8 text-center transition-all duration-150 focus:bg-foreground/10 focus-visible:ring-0 focus-visible:outline-none';
+    'font-medium text-sm p-1 inline tabular-nums h-fit border-none outline-hidden select-none content-box caret-transparent rounded-xs min-w-8 text-center transition-all duration-150 focus:bg-foreground/10 focus-visible:ring-0 focus-visible:outline-hidden';
 const timePickerSeparatorBase = 'font-medium text-sm text-gray-400';
 
 const DEFAULTS = ['hours', 'minutes', 'am/pm'];
@@ -19,7 +19,7 @@ const INPUT_PLACEHOLDERS = {
     'am/pm': 'AM/PM',
 };
 
-const TimeGrid = forwardRef((props, ref) => {
+const TimeGrid = ({ ref, ...props }) => {
     const { format, className, timescape, placeholders } = props;
 
     const [meridiem, setMeridiem] = useState(timescape.getInputProps('am/pm').value || 'AM');
@@ -35,7 +35,7 @@ const TimeGrid = forwardRef((props, ref) => {
     return (
         <div
             className={cn(
-                'inline-flex items-center justify-center w-fit h-9 p-1 shadow',
+                'inline-flex items-center justify-center w-fit h-9 p-1 shadow-2xs',
                 className,
                 'bg-white border-input rounded-md gap-1 selection:bg-transparent selection:text-foreground',
             )}
@@ -43,7 +43,7 @@ const TimeGrid = forwardRef((props, ref) => {
             ref={ref}
         >
             <div className='block ml-2.5'>
-                <Clock3 className='h-4 w-4' />
+                <Clock3 className='size-4' />
             </div>
             {format.map((unit, index) => (
                 <React.Fragment key={unit}>
@@ -77,7 +77,7 @@ const TimeGrid = forwardRef((props, ref) => {
             ))}
         </div>
     );
-});
+};
 
 TimeGrid.displayName = 'TimeGrid';
 
@@ -86,7 +86,7 @@ const DEFAULT_TS_OPTIONS = {
     hour12: true,
 };
 
-const TimePicker = forwardRef((props, ref) => {
+const TimePicker = ({ ref, ...props }) => {
     const {
         value,
         format = DEFAULTS,
@@ -118,7 +118,7 @@ const TimePicker = forwardRef((props, ref) => {
             ref={ref}
         />
     );
-});
+};
 
 TimePicker.displayName = 'TimePicker';
 

@@ -66,7 +66,7 @@ export function WhatsAppAnalyzerForm({ onAnalysisComplete }) {
                     <div className='flex flex-row gap-2 p-2'>
                         <textarea
                             id='prompt'
-                            className='block w-full bg-transparent placeholder:text-gray-400 text-white outline-none resize-none'
+                            className='block w-full bg-transparent placeholder:text-gray-400 text-white outline-hidden resize-none'
                             placeholder='Escribe tu pregunta aquí...'
                             {...register('prompt', { required: true })}
                             disabled={thinking}
@@ -74,7 +74,7 @@ export function WhatsAppAnalyzerForm({ onAnalysisComplete }) {
 
                         <button
                             type='submit'
-                            className='flex items-center justify-center w-8 h-8 bg-white text-black rounded-full shadow-sm'
+                            className='flex items-center justify-center w-8 h-8 bg-white text-black rounded-full shadow-2xs'
                             disabled={thinking}
                         >
                             <SendHorizonal size='1.2rem' />
@@ -93,14 +93,14 @@ export function WhatsAppAnalyzerForm({ onAnalysisComplete }) {
                                 required
                             />
                             <button
-                                className='flex flex-row items-center gap-2 p-2 bg-white text-sm text-gray-900 rounded-md shadow-sm'
+                                className='flex flex-row items-center gap-2 p-2 bg-white text-sm text-gray-900 rounded-md shadow-2xs'
                                 onClick={() => $picker.current.click()}
                                 disabled={thinking}
                             >
                                 <FolderSearch size='1.2rem' />
                                 <span className='hidden md:block'>Explorar</span>
                             </button>
-                            <span className='hidden md:block flex-1 w-full bg-blue-800 px-2 py-0 text-sm rounded-sm'>
+                            <span className='hidden md:block flex-1 w-full bg-blue-800 px-2 py-0 text-sm rounded-xs'>
                                 {file?.name}
                             </span>
                         </div>

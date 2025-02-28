@@ -65,7 +65,7 @@ export default function LogItem({ item }) {
                     )}
                     {item.type === 'page_view' && (
                         <a href={pages[item.metadata?.page]?.link || '#'}>
-                            <div className='flex flex-row gap-2 p-2 items-center justify-start bg-white border-2 rounded-md shadow-sm'>
+                            <div className='flex flex-row gap-2 p-2 items-center justify-start bg-white border-2 rounded-md shadow-2xs'>
                                 {pages[item.metadata?.page]?.icon || defaultIcon}
                                 <span className='font-bold'>
                                     {pages[item.metadata?.page]?.label || 'Página desconocida'}

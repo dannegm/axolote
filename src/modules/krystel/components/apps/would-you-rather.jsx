@@ -45,7 +45,7 @@ export default function WouldYouRather({ a = 'esto', b = 'esto', _a, _b }) {
 
     return (
         <Frame className='flex flex-col gap-2'>
-            <div className='flex flex-col shadow'>
+            <div className='flex flex-col shadow-2xs'>
                 <div
                     className={cn(itemClassName, 'bg-red-500 rounded-t-xl', {
                         'h-auto p-4 border-b-2 border-b-red-600 opacity-100':

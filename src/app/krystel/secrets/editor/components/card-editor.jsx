@@ -86,7 +86,7 @@ export default function CardEditor() {
             <div className={cn('mt-4', 'lg:flex lg:flex-row lg:gap-4')}>
                 {$translucedButton?.current && (
                     <Button
-                        className='absolute z-[51] opacity-100 lg:hidden fade-in-custom duration-150'
+                        className='absolute z-51 opacity-100 lg:hidden fade-in-custom duration-150'
                         style={{ ...translucedButtonPosition }}
                         type='button'
                         size='icon'

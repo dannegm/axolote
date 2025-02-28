@@ -15,7 +15,7 @@ export default function Card({
             <div
                 data-layer='border'
                 className={cn(
-                    'gift-card flex w-full max-w-sm aspect-[3/4] p-6 bg-gray-200 rounded-lg shadow-xl transition-all duration-300 ease-in-out',
+                    'gift-card flex w-full max-w-sm aspect-3/4 p-6 bg-gray-200 rounded-lg shadow-xl transition-all duration-300 ease-in-out',
                     classNames?.border,
                     { 'max-w-none w-[360px] p-1 aspect-auto': letter },
                     className,

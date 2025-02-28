@@ -30,7 +30,7 @@ export function ChatDisplay({ chatContent }) {
     }, [chatContent, receiver]);
 
     return (
-        <div className='bg-gray-100 p-4 rounded-lg shadow overflow-y-auto h-[600px]'>
+        <div className='bg-gray-100 p-4 rounded-lg shadow-2xs overflow-y-auto h-[600px]'>
             <h2 className='text-xl font-bold mb-4'>Conversación</h2>
             <div className='flex flex-col space-y-4'>
                 {messages.map((message, index) => (

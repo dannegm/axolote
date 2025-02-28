@@ -53,7 +53,7 @@ export default function EasterEggs() {
                                 'font-delius text-pretty -mt-0.5 transition-all duration-150',
                                 {
                                     'line-through': item.discovered,
-                                    'blur-sm select-none': !item.discovered,
+                                    'blur-xs select-none': !item.discovered,
                                     'blur-none select-all': revealed,
                                 },
                             )}

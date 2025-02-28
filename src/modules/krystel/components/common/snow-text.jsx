@@ -62,7 +62,7 @@ export default function SnowText({ children }) {
             <span
                 className={cn(
                     'absolute z-40 mx-auto flex w-fit box-content',
-                    'bg-gradient-to-b from-sky-900 to-cyan-900 bg-clip-text blur-sm',
+                    'bg-linear-to-b from-sky-900 to-cyan-900 bg-clip-text blur-xs',
                     'font-playwrite font-extrabold text-transparent text-center text-[1.05rem]',
                     'select-none',
                 )}

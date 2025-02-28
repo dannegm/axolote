@@ -92,7 +92,7 @@ export default function SpotifyPlayer({ uri }) {
     return (
         <div className='block w-48 md:w-52 -mt-20 md:-mt-24 -mb-4 bg-zinc-900 text-white overflow-hidden rounded-lg shadow-lg font-sans'>
             {/* Album Art */}
-            <div className='relative aspect-square flex-grow p-3'>
+            <div className='relative aspect-square grow p-3'>
                 <div className='relative w-full h-full'>
                     <img
                         src={playerInfo.cover}
@@ -112,7 +112,7 @@ export default function SpotifyPlayer({ uri }) {
 
             {/* Player Info and Controls */}
             <div className='bg-zinc-800 p-3 gap-4 flex items-center justify-between'>
-                <div className='flex-grow text-left'>
+                <div className='grow text-left'>
                     <h3 className='font-semibold text-sm truncate'>{playerInfo.title}</h3>
                     <p className='text-xs text-zinc-400 truncate'>{playerInfo.artist}</p>
                 </div>

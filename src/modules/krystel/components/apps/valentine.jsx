@@ -141,14 +141,14 @@ export default function Valentine({}) {
                     <img className='block h-[100px]' src={slide.image} />
                     <div className='flex flex-row gap-2 justify-center'>
                         <button
-                            className='min-w-10 px-2 py-0.5 bg-cyan-500 text-white text-sm text-center rounded-full shadow-sm transition-all duration-150 active:scale-95'
+                            className='min-w-10 px-2 py-0.5 bg-cyan-500 text-white text-sm text-center rounded-full shadow-2xs transition-all duration-150 active:scale-95'
                             type='button'
                             onClick={handleNo}
                         >
                             {slide.noLabel || 'No'}
                         </button>
                         <button
-                            className='min-w-10 px-2 py-0.5 bg-rose-500 text-white text-sm text-center rounded-full shadow-sm transition-all duration-150 active:scale-95'
+                            className='min-w-10 px-2 py-0.5 bg-rose-500 text-white text-sm text-center rounded-full shadow-2xs transition-all duration-150 active:scale-95'
                             type='button'
                             onClick={handleYes}
                         >

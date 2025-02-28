@@ -45,8 +45,8 @@ export default function GiftCardPreview({
                 'relative overflow-hidden bg-gray-100 bg-center bg-[length:50%] p-2 rounded-md shadow-xl transition-all duration-150',
                 {
                     'bg-none': configs?.bg,
-                    'blur-sm select-none': hidden,
-                    'blur-none md:blur-sm md:hover:blur-none ring-4 md:ring-0 ring-slate-300 ring-offset-4 md:ring-offset-0 opacity-60 md:opacity-100':
+                    'blur-xs select-none': hidden,
+                    'blur-none md:blur-xs md:hover:blur-none ring-4 md:ring-0 ring-slate-300 ring-offset-4 md:ring-offset-0 opacity-60 md:opacity-100':
                         preview && hidden,
                     'blur-none md:blur-none ring-4 ring-red-600 ring-offset-4 opacity-60 md:ring-4 md:ring-red-600 md:ring-offset-4 md:opacity-60':
                         deleted,

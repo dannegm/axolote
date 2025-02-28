@@ -21,10 +21,10 @@ const MenuItem = ({ as = 'link', primary, href, label, demo, children }) => {
         <Component className={cn('block w-24')} href={href}>
             {demo && (
                 <div className='absolute -translate-y-[4rem] fade-in-custom flex flex-col items-center gap-2 w-24 text-center'>
-                    <span className='px-2 py-1 bg-black text-white text-sm font-noto rounded-full drop-shadow'>
+                    <span className='px-2 py-1 bg-black text-white text-sm font-noto rounded-full drop-shadow-xs'>
                         {label}
                     </span>
-                    <ArrowDown className='animate-bounce drop-shadow' strokeWidth={2} />
+                    <ArrowDown className='animate-bounce drop-shadow-xs' strokeWidth={2} />
                 </div>
             )}
             <div

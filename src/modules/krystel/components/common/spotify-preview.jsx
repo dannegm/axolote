@@ -81,7 +81,7 @@ export default function SpotifyPreview({ uri }) {
     return (
         <div className='flex gap-3 p-2 items-center bg-zinc-800 text-white overflow-hidden rounded-lg shadow-lg font-sans'>
             {/* Album Art */}
-            <div className='relative h-12 aspect-square flex-grow'>
+            <div className='relative h-12 aspect-square grow'>
                 <div className='relative w-full h-full'>
                     <img
                         src={playerInfo.cover}
@@ -93,7 +93,7 @@ export default function SpotifyPreview({ uri }) {
 
             {/* Player Info and Controls */}
             <div className='gap-4 flex items-center justify-between pr-4'>
-                <div className='flex-grow text-left'>
+                <div className='grow text-left'>
                     <h3 className='font-semibold text-sm truncate'>{playerInfo.title}</h3>
                     <p className='text-xs text-zinc-400 truncate'>{playerInfo.artist}</p>
                 </div>

@@ -85,7 +85,7 @@ export default function BalloonsText({ children }) {
             <span
                 className={cn(
                     'absolute z-40 mx-auto flex w-fit box-content',
-                    'bg-gradient-to-b from-yellow-900 to-red-900 bg-clip-text blur-md brightness-150',
+                    'bg-linear-to-b from-yellow-900 to-red-900 bg-clip-text blur-md brightness-150',
                     'font-boogaloo font-extrabold text-transparent text-center text-[1.5rem]',
                     'select-none',
                 )}

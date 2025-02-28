@@ -55,7 +55,7 @@ export default function Navbar({ classNames }) {
             <ClientEvents />
             <nav
                 className={cn(
-                    'sticky top-4 z-[100] flex flex-row gap-1 p-2 bg-black text-white rounded-md',
+                    'sticky top-4 z-100 flex flex-row gap-1 p-2 bg-black text-white rounded-md',
                     classNames?.container,
                 )}
             >

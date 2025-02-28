@@ -23,7 +23,7 @@ const Feeling = ({ className, classNames, color, active, icon, label, onClick })
     return (
         <button
             className={cn(
-                'relative flex flex-col items-center justify-center w-full aspect-square overflow-hidden bg-white text-white rounded-2xl shadow transition-all duration-150 ease-in-out scale-100 active:scale-95',
+                'relative flex flex-col items-center justify-center w-full aspect-square overflow-hidden bg-white text-white rounded-2xl shadow-2xs transition-all duration-150 ease-in-out scale-100 active:scale-95',
                 {
                     'shadow-xl scale-110': active,
                 },
@@ -35,14 +35,14 @@ const Feeling = ({ className, classNames, color, active, icon, label, onClick })
             <div
                 className={cn(
                     gradientClassNames,
-                    'absolute z-0 inset-0 bg-gradient-to-b transition-all duration-150 ease-in-out opacity-40',
+                    'absolute z-0 inset-0 bg-linear-to-b transition-all duration-150 ease-in-out opacity-40',
                     {
                         'opacity-100': active,
                     },
                     classNames?.background,
                 )}
             />
-            <span className={cn('relative z-10 text-[2rem] shadow-sm', classNames?.icon)}>
+            <span className={cn('relative z-10 text-[2rem] shadow-2xs', classNames?.icon)}>
                 {icon}
             </span>
             {label && (

@@ -41,8 +41,8 @@ export default function SpoilerText({ inPreview = false, preventReveal = false, 
     return (
         <span
             className={cn(
-                'cursor-pointer font-quicksand font-extrabold text-fuchsia-500 transition-all duration-500 rounded-md decoration-clone',
-                { 'bg-fuchsia-500 blur-sm select-none': hidden },
+                'cursor-pointer font-quicksand font-extrabold text-fuchsia-500 transition-all duration-500 rounded-md box-decoration-clone',
+                { 'bg-fuchsia-500 blur-xs select-none': hidden },
             )}
             onClick={toggleSpoiler}
         >

@@ -1,7 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 
-import plugin from 'tailwindcss/plugin';
-
 export default {
     darkMode: ['class'],
     mode: 'jit',
@@ -60,9 +58,6 @@ export default {
                     5: 'hsl(var(--chart-5))',
                 },
             },
-            zIndex: {
-                max: `${Number.MAX_SAFE_INTEGER}`,
-            },
             backgroundImage: {
                 'chromatic-wheel': 'conic-gradient(red, yellow, lime, cyan, blue, magenta, red)',
                 'img-blue-galaxy': 'url(/backgrounds/blue-galaxy.jpg)',
@@ -77,14 +72,4 @@ export default {
             },
         },
     },
-    plugins: [
-        plugin(function ({ matchUtilities, theme }) {
-            matchUtilities({
-                'end-opacity': value => ({
-                    '--end-opacity': value,
-                }),
-            });
-        }),
-        require('tailwindcss-animate'),
-    ],
 };

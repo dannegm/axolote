@@ -1,33 +1,29 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@config "../../tailwind.config.mjs";
+@layer utilities {
+    :root {
+        --end-opacity: 1;
+    }
 
-@import url('../modules/core/css/shadcn.css');
-@import url('../modules/core/css/utils.css');
-@import url('../modules/core/css/animations.css');
-
-:root {
-    --end-opacity: 1;
+    #tsparticles {
+        pointer-events: none;
+    }
 }
 
-html,
-body,
-#fonts {
-    height: 100%;
+@layer base {
+    html,
+    body,
+    #fonts {
+        height: 100%;
+    }
+
+    s {
+        font-style: italic;
+        text-decoration-thickness: 3px;
+        text-decoration-color: rgba(0 0 0 / 0.5);
+    }
 }
 
-s {
-    font-style: italic;
-    text-decoration-thickness: 3px;
-    text-decoration-color: rgba(0 0 0 / 0.5);
-}
-
-#tsparticles {
-    pointer-events: none;
-}
-
-
-
-@layer base {}
+@import '../modules/core/css/shadcn.css';
+@import '../modules/core/css/utils.css';
+@import '../modules/core/css/animations.css';
