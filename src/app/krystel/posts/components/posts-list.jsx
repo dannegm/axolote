@@ -46,7 +46,7 @@ export default function PostsList({ data = [] }) {
                         <div className='px-10'>
                             <div className='flex-1 block mx-auto w-full sm:w-[400px]'>
                                 <RandomPicture
-                                    className='block w-[400px] rounded-2xl shadow-2xs'
+                                    className='block w-[400px] rounded-2xl shadow-xs'
                                     pictures={emptyPictures}
                                 />
                             </div>
