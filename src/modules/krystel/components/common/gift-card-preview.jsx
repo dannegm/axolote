@@ -10,6 +10,7 @@ import { buildPreviewElements } from '@/modules/krystel/helpers/rich-elements';
 import { useFirstAppearanceAnom } from '@/modules/krystel/hooks/use-first-appearance';
 
 import RichText from './rich-text';
+import { pascalCase } from '@/modules/core/helpers/strings';
 
 export default function GiftCardPreview({
     className,
@@ -36,7 +37,7 @@ export default function GiftCardPreview({
     const frame = configs?.frame;
     const dark = configs?.dark;
     const LucideIcon =
-        configs?.icon === 'hidden' ? <></> : icons[configs?.icon || quoteSettings.icon];
+        configs?.icon === 'hidden' ? <></> : icons[pascalCase(configs?.icon || quoteSettings.icon)];
 
     const customElements = buildPreviewElements({ letter, preventReveal });
     const hasApp = /<app::/g.test(content);

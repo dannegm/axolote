@@ -27,6 +27,7 @@ import { useGreetings } from '@/modules/krystel/services/greetings';
 
 import RichText from './rich-text';
 import Card from './card';
+import { pascalCase } from '@/modules/core/helpers/strings';
 
 const secretDiscover = (discover, secrets = {}) => {
     Object.entries(secrets).forEach(([key, validator]) => {
@@ -102,7 +103,12 @@ export default function GiftCard({
     const frame = configs?.frame;
     const dark = configs?.dark;
     const showDate = configs?.date !== 'hidden';
-    const LucideIcon = configs?.icon !== 'hidden' ? icons[configs?.icon] || icons[icon] : <></>;
+    const LucideIcon =
+        configs?.icon !== 'hidden' ? (
+            icons[pascalCase(configs?.icon)] || icons[pascalCase(icon)]
+        ) : (
+            <></>
+        );
 
     const date = published_at ? new Date(published_at + 'Z') : new Date();
     const datePrefix = isBefore(date, new Date()) ? 'hace ' : 'dentro de ';
