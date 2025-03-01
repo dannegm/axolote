@@ -171,6 +171,7 @@ export default function PostEditor() {
                     <IconButton
                         className='bg-red-500 text-white hover:bg-red-700'
                         onClick={handleReset}
+                        disabled={!canCreate}
                     >
                         <Trash2 />
                     </IconButton>
