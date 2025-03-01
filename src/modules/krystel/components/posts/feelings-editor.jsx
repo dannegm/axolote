@@ -137,7 +137,7 @@ export default function FeelingsEditor({
 
                 <Feeling
                     className={cn(
-                        'w-10 h-10 text-black rounded-full shadow-none scale-100 active:scale-95',
+                        'w-10 h-10 text-white rounded-full shadow-none scale-100 active:scale-95',
                         classNames?.refresh,
                     )}
                     classNames={{
