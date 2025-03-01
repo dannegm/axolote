@@ -167,7 +167,7 @@ const FeelingItem = ({ item }) => {
                 bgClassName,
             )}
         >
-            {icon !== item.content && <span className='block h-16 pt-5 text-[4rem]'>{icon}</span>}
+            {icon !== item.content && <span className='block h-16 -mt-4 mb-2 text-[4rem]'>{icon}</span>}
             <span
                 className={cn(
                     'flex-1 block font-noto font-bold text-md text-white text-center opacity-90',
