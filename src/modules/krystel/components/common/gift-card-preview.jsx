@@ -48,7 +48,7 @@ export default function GiftCardPreview({
             className={cn(
                 'relative overflow-hidden bg-gray-100 bg-center bg-[length:50%] p-2 rounded-md shadow-xl transition-all duration-150',
                 {
-                    'bg-none': configs?.bg,
+                    'bg-none': configs?.bg || theme?.bg,
                     'blur-xs select-none': hidden && isFirstAppearance,
                     'blur-none md:blur-xs md:hover:blur-none ring-4 md:ring-0 ring-slate-300 ring-offset-4 md:ring-offset-0 opacity-60 md:opacity-100':
                         preview && hidden,
@@ -60,7 +60,7 @@ export default function GiftCardPreview({
             )}
             style={{ backgroundImage: configs?.bg ? '' : quoteSettings.bg }}
         >
-            {configs?.bg && (
+            {(configs?.bg || theme?.bg) && (
                 <div
                     className={cn(
                         'absolute z-0 inset-0 pointer-events-none',
@@ -73,11 +73,11 @@ export default function GiftCardPreview({
             <div
                 className={cn(
                     'relative z-10 bg-gray-200 rounded-lg p-1 shadow-xl',
-                    { 'bg-none': configs?.border },
+                    { 'bg-none': configs?.border || theme?.border },
                     configs?.border,
                     theme?.border,
                 )}
-                style={{ background: configs?.border ? '' : quoteSettings.border }}
+                style={{ background: configs?.border || theme?.border ? '' : quoteSettings.border }}
             >
                 <div
                     className={cn(
