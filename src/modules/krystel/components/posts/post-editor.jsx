@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
+import useSettings from '@/modules/core/hooks/use-settings';
 
 import SimpleEditor from './simple-editor';
 import EmergencyButton from './emergency-button';
@@ -93,6 +94,8 @@ const IconButton = ({ className, active, children, ...props }) => {
 };
 
 export default function PostEditor() {
+    const [skipActions] = useSettings('settings:skip_actions', false);
+
     const [selectedEditor, setSelectedEditor] = useState(editors.post.key);
     const [content, setContent] = useState('');
     const [context, setContext] = useState('');
@@ -122,6 +125,7 @@ export default function PostEditor() {
 
     const handleCreate = () => {
         const payload = {
+            skipActions,
             settings: settings.trim() || editors[selectedEditor].defaultSettings || null,
             context: context.trim() || editors[selectedEditor].defaultContext || null,
             content: content.trim() || editors[selectedEditor].defaultContent,
