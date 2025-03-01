@@ -1,8 +1,6 @@
 'use client';
-import { useState } from 'react';
 import Link from 'next/link';
 import { formatDistanceToNowStrict, format, isBefore } from 'date-fns';
-import { es as locale } from 'date-fns/locale';
 import { Clock3, ExternalLink, Eye } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
@@ -20,7 +18,7 @@ export default function CardItem({ item }) {
     const date = new Date(item.published_at + 'Z');
     const deleted = Boolean(item.deleted_at);
 
-    const datePrefix = isBefore(date, new Date()) ? 'hace ' : 'dentro de ';
+    const dateSuffix = isBefore(date, new Date()) ? ' ago' : ' ahead';
 
     return (
         <div
@@ -66,8 +64,8 @@ export default function CardItem({ item }) {
                 <div className='text-gray-500 flex gap-1 items-center text-xs'>
                     <Clock3 size='0.85rem' />
                     <span>
-                        {datePrefix + formatDistanceToNowStrict(date, { locale })} -{' '}
-                        {format(date, 'MMMM d, yyyy · h:mm aaa', { locale })}
+                        {formatDistanceToNowStrict(date) + dateSuffix} -{' '}
+                        {format(date, "MMM d, ''yy · HH:mm")}
                     </span>
                 </div>
 
