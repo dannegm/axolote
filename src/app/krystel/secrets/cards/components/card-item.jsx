@@ -65,7 +65,7 @@ export default function CardItem({ item }) {
                     <Clock3 size='0.85rem' />
                     <span>
                         {formatDistanceToNowStrict(date) + dateSuffix} -{' '}
-                        {format(date, "MMM d, ''yy · HH:mm")}
+                        {format(date, "MMM do, ''yy · HH:mm")}
                     </span>
                 </div>
 
