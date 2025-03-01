@@ -28,6 +28,21 @@ import { useGreetings } from '@/modules/krystel/services/greetings';
 import RichText from './rich-text';
 import Card from './card';
 
+const secretDiscover = (discover, secrets = {}) => {
+    Object.entries(secrets).forEach(([key, validator]) => {
+        if (validator) {
+            discover(key);
+        }
+    });
+};
+
+const conditionalQuote = (quote, maps) => {
+    return maps.reduce((q, { validator, mapper }) => {
+        if (!validator) return q;
+        return mapper?.(q);
+    }, quote);
+};
+
 export default function GiftCard({
     className,
     classNames = {},
@@ -47,32 +62,40 @@ export default function GiftCard({
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
 
-    if (!show) {
-        discover('hidden_card');
-    }
-
     useTrackAction();
     const postView = usePostAction({ action: 'view', settings });
     const postReadCompleteAction = usePostAction({ action: 'read_complete', settings });
 
-    if (isElevenEleven()) {
-        discover('eleven_eleven');
-        quote = '({icon:hidden}) <badge::pray>$$11:11$$ pide un deseo.';
-    }
-
-    if (isThreeInTheMorning()) {
-        discover('ufo_time');
-        quote = '({icon:hidden}) <sticker::ufo>';
-    }
-
+    const elevenEleven = isElevenEleven();
+    const threeInTheMorning = isThreeInTheMorning();
     const foolsDay = isFoolsDay();
-    if (isFoolsDay()) {
-        discover('fools_day');
-    }
+
+    secretDiscover(discover, {
+        hidden_card: !show,
+        eleven_eleven: elevenEleven,
+        ufo_time: threeInTheMorning,
+        fools_day: foolsDay,
+        uwu_mode: uwu,
+
+        secret_card: id === '128',
+        nyancat: id === '127',
+        locos: id === '163',
+    });
+
+    const preparedQuote = conditionalQuote(quote, [
+        {
+            validator: elevenEleven,
+            mapper: () => '({icon:hidden}) <badge::pray>$$11:11$$ pide un deseo.',
+        },
+        {
+            validator: threeInTheMorning,
+            mapper: () => '({icon:hidden}) <sticker::ufo>',
+        },
+    ]);
 
     const generatedGreetings = useGreetings();
 
-    const { configs, content } = extractConfigsAndContent(quote);
+    const { configs, content } = extractConfigsAndContent(preparedQuote);
     const isLongText = replaceWithLongestSentence(content).length > 120;
     const greetings = configs?.greetings || generatedGreetings;
     const letter = configs?.letter;
@@ -86,29 +109,11 @@ export default function GiftCard({
 
     const theme = getTheme(configs?.theme);
 
-    console.log({ className, theme, classNames, configs });
-
     useEffect(() => {
         if (settings !== 'none') {
             postView();
         }
     }, []);
-
-    useEffect(() => {
-        if (uwu) {
-            discover('uwu_mode');
-        }
-    }, [uwu]);
-
-    if (id === '128') {
-        discover('secret_card');
-    }
-    if (id === '127') {
-        discover('nyancat');
-    }
-    if (id === '163') {
-        discover('locos');
-    }
 
     useScrollPosition(
         {

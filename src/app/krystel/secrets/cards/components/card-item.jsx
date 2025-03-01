@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { formatDistanceToNowStrict, format, isBefore } from 'date-fns';
 import { es as locale } from 'date-fns/locale';
-import { Clock3, ExternalLink } from 'lucide-react';
+import { Clock3, ExternalLink, Eye } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import JsonViewer from '@/modules/core/components/common/json-viewer';
@@ -41,7 +41,10 @@ export default function CardItem({ item }) {
                 {deleted ? <RestoreCardButton id={item.id} /> : <DeleteCardButton id={item.id} />}
             </div>
 
-            <div className='flex-none w-full'>
+            <a
+                href={`/krystel?code=${code}`}
+                className='flex-none w-full transition-all duration-150 lg:hover:scale-105 active:scale-95'
+            >
                 <GiftCardPreview
                     quote={item.quote}
                     code={code}
@@ -49,13 +52,17 @@ export default function CardItem({ item }) {
                     deleted={deleted}
                     preview
                 />
-            </div>
+            </a>
 
             <div className='flex-none w-full'>
                 <JsonViewer name='payload' data={item} />
             </div>
 
-            <div className='flex flex-row gap-4 items-start justify-center w-full'>
+            <div className='flex flex-row gap-2 items-center w-full'>
+                <div className='flex gap-1 items-center text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full'>
+                    <Eye size='1rem' />
+                    {item.views}
+                </div>
                 <div className='text-gray-500 flex gap-1 items-center text-xs'>
                     <Clock3 size='0.85rem' />
                     <span>

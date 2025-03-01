@@ -1,7 +1,15 @@
 'use client';
 import { useState } from 'react';
 import { format, formatDistanceToNow } from 'date-fns';
-import { Clock3, ExternalLink, BookMarked, MessageSquareQuote, SquareDashed } from 'lucide-react';
+import {
+    Clock3,
+    ExternalLink,
+    BookMarked,
+    MessageSquareQuote,
+    SquareDashed,
+    FlaskConical,
+    Eye,
+} from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import Badge from '@/modules/core/components/tremor/badge';
@@ -22,6 +30,11 @@ const pages = {
         icon: <MessageSquareQuote />,
         label: 'Posts',
         link: '/krystel/posts',
+    },
+    test: {
+        icon: <FlaskConical />,
+        label: 'Test',
+        link: '/krystel/test',
     },
 };
 
@@ -61,7 +74,12 @@ export default function LogItem({ item }) {
                 </div>
                 <div className='flex-none w-full'>
                     {item.type !== 'page_view' && item.quote && (
-                        <GiftCardPreview quote={item.quote.quote} code={item.metadata?.code} />
+                        <a
+                            href={`/krystel?code=${item.metadata?.code}`}
+                            className='flex-none w-full transition-all duration-150 lg:hover:scale-105 active:scale-95'
+                        >
+                            <GiftCardPreview quote={item.quote.quote} code={item.metadata?.code} />
+                        </a>
                     )}
                     {item.type === 'page_view' && (
                         <a href={pages[item.metadata?.page]?.link || '#'}>
@@ -77,9 +95,20 @@ export default function LogItem({ item }) {
                 <div className='flex-none w-full'>
                     <JsonViewer name='payload' data={item} />
                 </div>
-                <div className='text-gray-500 flex gap-1 items-center'>
-                    <Clock3 size='0.85rem' />
-                    {formatDistanceToNow(date)} - {format(date, 'MMM do, yyyy · h:mm aaa')}
+
+                <div className='flex flex-row gap-2 items-center w-full'>
+                    {item?.quote?.views && (
+                        <div className='flex gap-1 items-center text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded-full'>
+                            <Eye size='1rem' />
+                            {item?.quote?.views}
+                        </div>
+                    )}
+                    <div className='text-gray-500 flex gap-1 items-center text-xs'>
+                        <Clock3 size='0.85rem' />
+                        <span>
+                            {formatDistanceToNow(date)} - {format(date, 'MMM do, yyyy · h:mm aaa')}
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>

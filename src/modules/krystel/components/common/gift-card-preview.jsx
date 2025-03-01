@@ -4,6 +4,7 @@ import { icons, Asterisk } from 'lucide-react';
 import { cn } from '@/modules/core/helpers/utils';
 
 import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
+import { getTheme } from '@/modules/krystel/helpers/themes';
 import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 import { buildPreviewElements } from '@/modules/krystel/helpers/rich-elements';
 import { useFirstAppearanceAnom } from '@/modules/krystel/hooks/use-first-appearance';
@@ -11,6 +12,7 @@ import { useFirstAppearanceAnom } from '@/modules/krystel/hooks/use-first-appear
 import RichText from './rich-text';
 
 export default function GiftCardPreview({
+    className,
     quote,
     code,
     hidden = false,
@@ -39,6 +41,8 @@ export default function GiftCardPreview({
     const customElements = buildPreviewElements({ letter, preventReveal });
     const hasApp = /<app::/g.test(content);
 
+    const theme = getTheme(configs?.theme);
+
     return (
         <div
             className={cn(
@@ -51,11 +55,19 @@ export default function GiftCardPreview({
                     'blur-none md:blur-none ring-4 ring-red-600 ring-offset-4 opacity-60 md:ring-4 md:ring-red-600 md:ring-offset-4 md:opacity-60':
                         deleted,
                 },
+                className,
+                theme?.card,
             )}
             style={{ backgroundImage: configs?.bg ? '' : quoteSettings.bg }}
         >
             {configs?.bg && (
-                <div className={cn('absolute z-0 inset-0 pointer-events-none', configs?.bg)} />
+                <div
+                    className={cn(
+                        'absolute z-0 inset-0 pointer-events-none',
+                        configs?.bg,
+                        theme?.bg,
+                    )}
+                />
             )}
 
             <div
@@ -63,6 +75,7 @@ export default function GiftCardPreview({
                     'relative z-10 bg-gray-200 rounded-lg p-1 shadow-xl',
                     { 'bg-none': configs?.border },
                     configs?.border,
+                    theme?.border,
                 )}
                 style={{ background: configs?.border ? '' : quoteSettings.border }}
             >
@@ -70,12 +83,13 @@ export default function GiftCardPreview({
                     className={cn(
                         'flex flex-row gap-2 items-start p-3 rounded',
                         quoteSettings.scheme,
-                        configs?.scheme,
                         {
                             'text-white [text-shadow:_1px_1px_8px_rgb(0_0_0_/_30%)] bg-center bg-cover':
                                 frame,
                             'text-black': dark,
                         },
+                        configs?.scheme,
+                        theme?.content,
                     )}
                     style={{
                         backgroundImage: `url(${frame})`,
@@ -87,6 +101,7 @@ export default function GiftCardPreview({
                                 className={cn(
                                     'animate-in fade-in-0 duration-300 ease-in opacity-50',
                                     'flex items-center justify-center gap-2 w-4 h-4 bg-pink-600 rounded-full',
+                                    theme?.badge,
                                 )}
                             >
                                 <Asterisk size={16} className='text-white' />
@@ -95,11 +110,12 @@ export default function GiftCardPreview({
                     </div>
 
                     {!configs?.fullscreen && configs?.icon !== 'hidden' && (
-                        <div>
+                        <div className={cn(theme?.icon)}>
                             <LucideIcon className='text-current' />
                         </div>
                     )}
-                    <div className={cn('mt-[2px] font-delius font-medium pr-4')}>
+
+                    <div className={cn('mt-[2px] font-delius font-medium pr-4', theme?.text)}>
                         <div
                             className={cn('block', {
                                 'overflow-hidden line-clamp-4 mask-gradient': letter && !hasApp,
@@ -109,7 +125,9 @@ export default function GiftCardPreview({
                         </div>
 
                         {greetings && greetings !== 'hidden' && (
-                            <div className='mt-2 font-pacifico'>{greetings}</div>
+                            <div className={cn('mt-2 font-pacifico', theme?.greetings)}>
+                                {greetings}
+                            </div>
                         )}
                     </div>
                 </div>
