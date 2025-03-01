@@ -167,7 +167,9 @@ const FeelingItem = ({ item }) => {
                 bgClassName,
             )}
         >
-            {icon !== item.content && <span className='block h-16 -mt-4 mb-2 text-[4rem]'>{icon}</span>}
+            {icon !== item.content && (
+                <span className='block h-16 -mt-4 mb-2 text-[4rem]'>{icon}</span>
+            )}
             <span
                 className={cn(
                     'flex-1 block font-noto font-bold text-md text-white text-center opacity-90',
@@ -225,7 +227,12 @@ export default function PostItem({ item }) {
 
     return (
         <div className='flex flex-col gap-2 items-start md:w-full py-4 border-t border-gray-200 text-sm first:border-none'>
-            <div className='flex flex-row gap-2'>
+            <div
+                className={cn('flex-1 w-full flex flex-row gap-2 pr-4', {
+                    'border-r-4 border-r-slate-200 pr-2': item.indev,
+                    'border-r-4 border-r-red-500 pr-2': item.deleted_at,
+                })}
+            >
                 <div
                     className={cn(
                         'flex-none flex-center w-8 h-8 bg-slate-200 text-slate-800 rounded-2xl',
