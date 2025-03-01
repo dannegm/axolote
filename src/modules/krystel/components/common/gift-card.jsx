@@ -134,7 +134,7 @@ export default function GiftCard({
                 className={cn(theme?.card, className, classNames?.card, {
                     'rotate-180': foolsDay,
                 })}
-                border={configs?.border ? '' : border}
+                border={configs?.border || theme?.border ? '' : border}
                 scheme={scheme}
                 letter={letter}
                 fullscreen={configs?.fullscreen}
@@ -152,7 +152,7 @@ export default function GiftCard({
                             'text-white [text-shadow:_1px_1px_8px_rgb(0_0_0_/_30%)]': frame,
                             'text-black': dark,
                         },
-                        theme?.container,
+                        theme?.content,
                         classNames?.content,
                         configs?.scheme,
                     ),
