@@ -1,6 +1,7 @@
 export const themplate = {
     bg: '',
     card: '',
+    animation: '',
     border: '',
     container: '',
     content: '',
@@ -17,6 +18,7 @@ export const themplate = {
 const debug = {
     bg: 'outline-pink-500 outline-dashed outline-1',
     card: 'outline-pink-500 outline-dashed outline-1',
+    animation: 'outline-pink-500 outline-dashed outline-1',
     border: 'outline-pink-500 outline-dashed outline-1',
     container: 'outline-pink-500 outline-dashed outline-1',
     content: 'outline-pink-500 outline-dashed outline-1',

@@ -146,6 +146,7 @@ export default function GiftCard({
                 fullscreen={configs?.fullscreen}
                 frame={frame}
                 classNames={{
+                    animation: theme?.animation,
                     border: cn(
                         { 'bg-none': configs?.border || theme?.border },
                         theme?.border,
@@ -166,6 +167,7 @@ export default function GiftCard({
             >
                 <Portal portalId='global-bg-portal'>
                     <div
+                        data-layer='bg'
                         className={cn(
                             'animate-in fade-in-0 duration-[3s] ease-in opacity-50',
                             'background fixed inset-0 bg-gray-100 bg-center bg-[length:50%] transition-all',
@@ -177,7 +179,7 @@ export default function GiftCard({
                 {(configs?.bg || theme?.bg) && (
                     <Portal portalId='card-bg-portal'>
                         <div
-                            data-layer='bg'
+                            data-layer='bg-custom'
                             className={cn(
                                 'animate-in fade-in-0 duration-150 ease-in opacity-100',
                                 'fixed inset-0 pointer-events-none transition-all',

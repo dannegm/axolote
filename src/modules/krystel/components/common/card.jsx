@@ -13,7 +13,10 @@ export default function Card({
     return (
         <div
             data-layer='animation'
-            className='animate-in fade-in-0 slide-in-from-bottom-6 duration-300 ease-in'
+            className={cn(
+                'animate-in fade-in-0 slide-in-from-bottom-6 duration-300 ease-in',
+                classNames?.animation,
+            )}
         >
             <div
                 data-layer='border'
