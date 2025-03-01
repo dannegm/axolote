@@ -81,7 +81,7 @@ export default function GiftCardPreview({
             >
                 <div
                     className={cn(
-                        'flex flex-row gap-2 items-start p-3 rounded',
+                        'flex flex-row gap-2 items-start p-3 rounded-md',
                         quoteSettings.scheme,
                         {
                             'text-white [text-shadow:_1px_1px_8px_rgb(0_0_0_/_30%)] bg-center bg-cover':
