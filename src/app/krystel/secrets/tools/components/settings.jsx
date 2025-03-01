@@ -46,6 +46,16 @@ const settingsList = {
         label: 'Includes Deleted Cards',
         defaultValue: false,
     },
+    'settings:posts:indev': {
+        key: 'settings:posts:indev',
+        label: 'Ponst In Development',
+        defaultValue: false,
+    },
+    'settings:posts:includes_indev': {
+        key: 'settings:posts:includes_indev',
+        label: 'Includes InDev Posts',
+        defaultValue: false,
+    },
     'settings:posts:includes_deleted': {
         key: 'settings:posts:includes_deleted',
         label: 'Includes Deleted Posts',

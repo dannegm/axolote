@@ -11,9 +11,11 @@ import PostsList from './posts-list';
 const BASE_URL = 'https://endpoints.hckr.mx/quotes';
 
 export default function PostsLoader() {
+    const [includesIndev] = useSettings('settings:posts:includes_indev', false);
     const [includesDeleted] = useSettings('settings:posts:includes_deleted', false);
 
     const includes = [];
+    if (includesIndev) includes.push('indev');
     if (includesDeleted) includes.push('deleted');
 
     return (

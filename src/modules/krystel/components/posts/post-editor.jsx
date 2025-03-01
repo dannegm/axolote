@@ -94,6 +94,7 @@ const IconButton = ({ className, active, children, ...props }) => {
 };
 
 export default function PostEditor() {
+    const [indev] = useSettings('settings:posts:indev', false);
     const [skipActions] = useSettings('settings:skip_actions', false);
 
     const [selectedEditor, setSelectedEditor] = useState(editors.post.key);
@@ -125,6 +126,7 @@ export default function PostEditor() {
 
     const handleCreate = () => {
         const payload = {
+            indev,
             skipActions,
             settings: settings.trim() || editors[selectedEditor].defaultSettings || null,
             context: context.trim() || editors[selectedEditor].defaultContext || null,
