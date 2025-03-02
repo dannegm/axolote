@@ -22,9 +22,9 @@ export default function DataLoader({
 
             return resp.json();
         },
-        refetchOnWindowFocus: realtime ? realtime : !preventRefetch,
-        refetchOnReconnect: realtime ? realtime : !preventRefetch,
-        refetchOnMount: realtime ? realtime : !preventRefetch,
+        refetchOnWindowFocus: realtime || !preventRefetch,
+        refetchOnReconnect: realtime || !preventRefetch,
+        refetchOnMount: realtime || !preventRefetch,
         refetchInterval: !realtime ? !preventRefetch : realtimeWindow,
         refetchIntervalInBackground: !preventRefetch,
     });
