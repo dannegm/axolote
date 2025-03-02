@@ -10,12 +10,10 @@ export default function CardEditorContent({ ref, className, content, setContent 
     const [pasted, setPasted] = useState(false);
 
     const selectAnimation = () => {
-        $text.current?.select?.();
         setTimeout(() => {
             setCopy(false);
             setPasted(false);
-            $text.current?.blur?.();
-        }, 100);
+        }, 200);
     };
 
     useImperativeHandle(ref, () => ({
@@ -24,10 +22,8 @@ export default function CardEditorContent({ ref, className, content, setContent 
             selectAnimation();
         },
         onPaste: () => {
-            setTimeout(() => {
-                setPasted(true);
-                selectAnimation();
-            }, 50);
+            setPasted(true);
+            selectAnimation();
         },
     }));
 
@@ -35,9 +31,9 @@ export default function CardEditorContent({ ref, className, content, setContent 
         <div ref={ref} className={cn(className)}>
             <Textarea
                 ref={$text}
-                className={cn('bg-white placeholder:text-gray-300 selection:bg-purple-200', {
-                    'selection:bg-cyan-300': copied,
-                    'selection:bg-emerald-300': pasted,
+                className={cn('bg-white placeholder:text-gray-300', {
+                    'bg-cyan-200': copied,
+                    'bg-emerald-200': pasted,
                 })}
                 placeholder='Cuéntale a Krys lo mucho que la amas.'
                 minRows={3}
