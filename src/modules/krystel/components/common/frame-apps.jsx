@@ -3,6 +3,7 @@ import Valentine from '../apps/valentine';
 import WouldYouRather from '../apps/would-you-rather';
 import EasterEggs from '../apps/easter-eggs';
 import Breakpoint from '../apps/breakpoint';
+import FlappyBird from '../apps/flappy-bird';
 
 const appsComponents = {
     default: () => <></>,
@@ -11,6 +12,7 @@ const appsComponents = {
     simple: Simple,
     easter_eggs: EasterEggs,
     breakpoint: Breakpoint,
+    flappybird: FlappyBird,
 };
 
 const appsDescriptions = {
@@ -21,6 +23,7 @@ const appsDescriptions = {
     easter_eggs: 'Encuéntralos todos',
     canvax: 'Dibjumenos algo',
     breakpoint: 'Breakpoint',
+    flappybird: 'Flappy Bird',
 };
 
 export const getAppDescription = name => {

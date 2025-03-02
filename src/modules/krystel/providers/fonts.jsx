@@ -15,6 +15,7 @@ import {
     Anton,
     Jersey_10,
     Boogaloo,
+    Micro_5,
 } from 'next/font/google';
 
 import { cn } from '@/modules/core/helpers/utils';
@@ -35,6 +36,7 @@ const dancingScript = Dancing_Script({ subsets: ['latin'], variable: '--font-dan
 const anton = Anton({ weight: '400', subsets: ['latin'], variable: '--font-anton' });
 const jersey10 = Jersey_10({ weight: '400', subsets: ['latin'], variable: '--font-jersey10' });
 const boogaloo = Boogaloo({ weight: '400', subsets: ['latin'], variable: '--font-boogaloo' });
+const micro5 = Micro_5({ weight: '400', subsets: ['latin'], variable: '--font-micro5' });
 
 export const fonts = {
     pacifico: pacifico.variable,
@@ -53,6 +55,7 @@ export const fonts = {
     anton: anton.variable,
     jersey10: jersey10.variable,
     boogaloo: boogaloo.variable,
+    micro5: micro5.variable,
 };
 
 const classNames = /* css */ `
@@ -72,6 +75,7 @@ const classNames = /* css */ `
 .font-anton { font-family: var(--font-anton); }
 .font-jersey10 { font-family: var(--font-jersey10); }
 .font-boogaloo { font-family: var(--font-boogaloo); }
+.font-micro5 { font-family: var(--font-micro5); }
 `;
 
 export default function Fonts({ children }) {

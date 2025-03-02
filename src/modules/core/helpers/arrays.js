@@ -21,6 +21,17 @@ export const randomPickWithMemory = (arr = []) => {
     };
 };
 
+export const probabilityPick = items => {
+    const probability = Math.random();
+    let cumulative = 0;
+    const shuffledItems = shuffle(items);
+    for (const [item, prob] of shuffledItems) {
+        cumulative += prob;
+        if (probability <= cumulative) return item;
+    }
+    return randomPick(items);
+};
+
 export const pickFromIndex = (arr = [], index = 0) => {
     if (Number.isNaN(index)) {
         return randomPick(arr);
