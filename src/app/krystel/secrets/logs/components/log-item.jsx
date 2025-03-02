@@ -38,7 +38,7 @@ const pages = {
     },
 };
 
-export default function LogItem({ item }) {
+export default function LogItem({ item, realtime }) {
     const [deleting, setDeleting] = useState(false);
     const date = new Date(item.created_at + 'Z');
 
@@ -48,6 +48,7 @@ export default function LogItem({ item }) {
                 'flex flex-col h-auto md:flex-row gap-4 lg:gap-8 py-4 border-t border-gray-200 text-sm transition-all duration-300 opacity-100 interpolate-size',
                 {
                     'opacity-0 h-0 overflow-hidden': deleting,
+                    'anim animate-in slide-in-from-top-32 duration-300': realtime,
                 },
             )}
         >

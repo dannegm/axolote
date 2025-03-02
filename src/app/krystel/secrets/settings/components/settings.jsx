@@ -14,9 +14,15 @@ const settingsList = {
         defaultValue: false,
         group: 'admin',
     },
-    'settings:show_logs': {
-        key: 'settings:show_logs',
+    'settings:logs:show': {
+        key: 'settings:logs:show',
         label: 'Show Logs',
+        defaultValue: false,
+        group: 'admin',
+    },
+    'settings:logs:realtime': {
+        key: 'settings:logs:realtime',
+        label: 'Realtime Logs',
         defaultValue: false,
         group: 'admin',
     },

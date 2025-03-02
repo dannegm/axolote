@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 export default function DataLoader({
     url,
@@ -7,6 +7,8 @@ export default function DataLoader({
     tags = [],
     loader = null,
     preventRefetch = false,
+    realtime = false,
+    realtimeWindow = 1000,
     onError,
     children = () => null,
 } = {}) {
@@ -20,10 +22,10 @@ export default function DataLoader({
 
             return resp.json();
         },
-        refetchOnWindowFocus: !preventRefetch,
-        refetchOnReconnect: !preventRefetch,
-        refetchOnMount: !preventRefetch,
-        refetchInterval: !preventRefetch,
+        refetchOnWindowFocus: realtime ? realtime : !preventRefetch,
+        refetchOnReconnect: realtime ? realtime : !preventRefetch,
+        refetchOnMount: realtime ? realtime : !preventRefetch,
+        refetchInterval: !realtime ? !preventRefetch : realtimeWindow,
         refetchIntervalInBackground: !preventRefetch,
     });
 

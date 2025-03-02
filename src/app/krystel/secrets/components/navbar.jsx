@@ -38,7 +38,7 @@ const NavLink = ({ className, href, active, children }) => {
 
 export default function Navbar({ classNames }) {
     const pathname = usePathname();
-    const [showLogs] = useSettings('settings:show_logs', false);
+    const [showLogs] = useSettings('settings:logs:show', false);
 
     const navItems = [];
 

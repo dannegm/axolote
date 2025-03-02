@@ -9,6 +9,11 @@
         height: 100%;
     }
 
+    button,
+    a {
+        cursor: pointer;
+    }
+
     s {
         font-style: italic;
         text-decoration-thickness: 3px;
