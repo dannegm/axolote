@@ -28,7 +28,7 @@ export default function ShineText({ children }) {
 
             <span
                 className={cn(
-                    'absolute z-40 mx-auto flex w-fit box-content',
+                    'absolute z-20 mx-auto flex w-fit box-content',
                     'bg-linear-to-r from-blue-500 via-teal-500 to-pink-500 bg-clip-text blur-xs',
                     'font-dosis font-extrabold text-transparent text-center text-[1em]',
                     'select-none',
@@ -39,7 +39,7 @@ export default function ShineText({ children }) {
             </span>
             <span
                 className={cn(
-                    'absolute z-50 mx-auto flex w-fit box-content',
+                    'absolute z-30 mx-auto flex w-fit box-content',
                     'bg-linear-to-r from-blue-500 to-pink-500 bg-clip-text',
                     'font-dosis font-extrabold text-transparent text-center text-[1em]',
                     'select-none',
