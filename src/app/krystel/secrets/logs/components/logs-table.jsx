@@ -28,12 +28,9 @@ export default function LogsTable({ data = [], onReload }) {
                 </div>
 
                 <div
-                    className={cn(
-                        'fixed z-50 bottom-4 right-4 transition-all duration-150 animate-in slide-in-from-right ',
-                        {
-                            'bottom-16': showBreakpointIndicator,
-                        },
-                    )}
+                    className={cn('fixed z-50 bottom-4 right-4 transition-all duration-150', {
+                        'bottom-16': showBreakpointIndicator,
+                    })}
                 >
                     <button
                         type='button'
