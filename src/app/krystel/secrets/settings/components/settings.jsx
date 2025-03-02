@@ -58,7 +58,7 @@ const settingsList = {
     },
     'settings:posts:indev': {
         key: 'settings:posts:indev',
-        label: 'Ponst In Development',
+        label: 'Post In Development',
         defaultValue: false,
         group: 'posts',
     },
