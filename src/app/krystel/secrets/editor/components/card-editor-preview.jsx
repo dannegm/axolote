@@ -61,6 +61,7 @@ export default function CardEditorPreview({ className, showCardViewport, editorK
                                     'text-gray-200 text-sm leading-6 whitespace-pre':
                                         !rich(content),
                                 }),
+                                bg: '-z-10',
                             }}
                             quote={rich(content) || loremIpsum}
                         />
