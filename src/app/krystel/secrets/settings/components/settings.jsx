@@ -1,75 +1,86 @@
 'use client';
+import { groupBy } from '@/modules/core/helpers/arrays';
 import { cn } from '@/modules/core/helpers/utils';
 import useSettingsList from '@/modules/core/hooks/use-settings-list';
 
 import { Label } from '@/modules/shadcn/ui/label';
 import { Switch } from '@/modules/shadcn/ui/switch';
+import { capitalize } from 'lodash';
 
 const settingsList = {
     'settings:show_secrets': {
         key: 'settings:show_secrets',
         label: 'Show Secrets',
         defaultValue: false,
+        group: 'admin',
     },
     'settings:show_logs': {
         key: 'settings:show_logs',
         label: 'Show Logs',
         defaultValue: false,
+        group: 'admin',
     },
     'settings:show_quick_settings': {
         key: 'settings:show_quick_settings',
         label: 'Show Quick Settings',
         defaultValue: false,
+        group: 'admin',
     },
     'settings:skip_actions': {
         key: 'settings:skip_actions',
         label: 'Skip Actions',
         defaultValue: false,
+        group: 'development',
     },
     'settings:debug_mode': {
         key: 'settings:debug_mode',
         label: 'Debug Mode',
         defaultValue: false,
+        group: 'development',
     },
     'settings:show_breakpoint_indicator': {
         key: 'settings:show_breakpoint_indicator',
         label: 'Show Breakpoint Indicator',
         defaultValue: false,
+        group: 'development',
     },
     'settings:cards:includes_future': {
         key: 'settings:cards:includes_future',
         label: 'Includes Future Cards',
         defaultValue: false,
+        group: 'cards',
     },
     'settings:cards:includes_deleted': {
         key: 'settings:cards:includes_deleted',
         label: 'Includes Deleted Cards',
         defaultValue: false,
+        group: 'cards',
     },
     'settings:posts:indev': {
         key: 'settings:posts:indev',
         label: 'Ponst In Development',
         defaultValue: false,
+        group: 'posts',
     },
     'settings:posts:includes_indev': {
         key: 'settings:posts:includes_indev',
         label: 'Includes InDev Posts',
         defaultValue: false,
+        group: 'posts',
     },
     'settings:posts:includes_deleted': {
         key: 'settings:posts:includes_deleted',
         label: 'Includes Deleted Posts',
         defaultValue: false,
+        group: 'posts',
     },
 };
 
 const SwitchOption = ({ id, label, checked, onCheckedChange }) => {
     return (
-        <div className={cn('flex flex-col gap-2 bg-gray-200 px-4 py-2 rounded-md mt-2')}>
-            <div className='flex flex-row justify-between items-center'>
-                <Label htmlFor={id}>{label}</Label>
-                <Switch id={id} checked={checked} onCheckedChange={onCheckedChange} />
-            </div>
+        <div className='flex flex-row justify-between items-center bg-gray-200 px-3 py-2 rounded-sm'>
+            <Label htmlFor={id}>{label}</Label>
+            <Switch id={id} checked={checked} onCheckedChange={onCheckedChange} />
         </div>
     );
 };
@@ -82,18 +93,28 @@ export default function Settings() {
 
     const { settings, update } = useSettingsList(initialSettings);
 
+    const settingsGroup = groupBy(Object.values(settingsList), item => item.group);
+
     return (
         <>
-            <h2 className='font-bold text-xl mt-4'>Settings</h2>
-            <div className={cn('flex flex-col gap-2')}>
-                {Object.values(settingsList).map(({ key, label }) => (
-                    <SwitchOption
-                        key={key}
-                        id={key}
-                        label={label}
-                        checked={settings[key]}
-                        onCheckedChange={value => update(key, value)}
-                    />
+            <h2 className='font-bold text-2xl'>Settings</h2>
+
+            <div className={cn('flex flex-col gap-4 mb-4')}>
+                {Object.entries(settingsGroup).map(([group, items]) => (
+                    <div key={`settings-group-${group}`} className={cn('flex flex-col gap-2')}>
+                        <h3 className='font-bold text-base mt-4'>{capitalize(group)}</h3>
+                        <div className={cn('flex flex-col gap-1')}>
+                            {items.map(({ key, label }) => (
+                                <SwitchOption
+                                    key={key}
+                                    id={key}
+                                    label={label}
+                                    checked={settings[key]}
+                                    onCheckedChange={value => update(key, value)}
+                                />
+                            ))}
+                        </div>
+                    </div>
                 ))}
             </div>
         </>

@@ -40,15 +40,16 @@ export default function Navbar({ classNames }) {
     const pathname = usePathname();
     const [showLogs] = useSettings('settings:show_logs', false);
 
-    const navItems = [
-        { name: 'Tools', href: '/krystel/secrets/tools' },
-        { name: 'Editor', href: '/krystel/secrets/editor' },
-        { name: 'Cards', href: '/krystel/secrets/cards' },
-    ];
+    const navItems = [];
+
+    navItems.push({ name: 'Cards', href: '/krystel/secrets/cards' });
+    navItems.push({ name: 'Tools', href: '/krystel/secrets/tools' });
 
     if (showLogs) {
-        navItems.unshift({ name: 'Logs', href: '/krystel/secrets/logs' });
+        navItems.push({ name: 'Logs', href: '/krystel/secrets/logs' });
     }
+
+    navItems.push({ name: 'Settings', href: '/krystel/secrets/settings' });
 
     return (
         <ClientOnly>

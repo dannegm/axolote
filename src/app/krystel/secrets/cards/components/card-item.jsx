@@ -23,7 +23,7 @@ export default function CardItem({ item }) {
     return (
         <div
             className={cn(
-                'flex flex-col h-auto gap-4 items-start w-full py-4 border-t border-gray-200 text-sm transition-all duration-150',
+                'flex flex-col h-auto gap-4 items-start w-full py-4 text-sm transition-all duration-150',
             )}
         >
             <div className='flex flex-row gap-4 items-start justify-center w-full'>

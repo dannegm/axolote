@@ -71,7 +71,7 @@ const MenuContent = ({ className }) => {
                 <div className='flex justify-center'>
                     <Link
                         className='px-3 py-1 bg-black text-white font-pacifico rounded-lg transition-all duration-150 hover:scale-105 active:scale-95'
-                        href='/krystel/secrets/tools'
+                        href='/krystel/secrets/cards'
                     >
                         Secrets.
                     </Link>

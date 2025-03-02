@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-import { Save, Loader2, CircleDashed, Circle, ChevronDown, X, RefreshCcw } from 'lucide-react';
+import { CircleDashed, Circle } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
@@ -10,15 +10,8 @@ import useClonePosition from '@/modules/core/hooks/use-clone-position';
 import ClientOnly from '@/modules/core/components/common/client-only';
 
 import { Button } from '@/modules/shadcn/ui/button';
-import { Switch } from '@/modules/shadcn/ui/switch';
-import { Textarea } from '@/modules/shadcn/ui/textarea';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shadcn/ui/tabs';
-import { DatePicker } from '@/modules/shadcn/ui/date-picker';
-import { Separator } from '@/modules/shadcn/ui/separator';
 
 import useCreateQuoteAction from '@/modules/krystel/hooks/use-create-quote-action';
-import { Label } from '@/modules/shadcn/ui/label';
-import { TimePicker } from '@/modules/shadcn/ui/time-picker';
 import { mergeDateAndTime } from '@/modules/core/helpers/dates';
 import CardEditorPreview from './card-editor-preview';
 import CardEditorPanel from './card-editor-panel';

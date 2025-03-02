@@ -1,9 +1,9 @@
 import ClientOnly from '@/modules/core/components/common/client-only';
-import ToolsGrid from './components/tools-grid';
+import Settings from './components/settings';
 
 export function generateMetadata() {
     return {
-        title: 'Krystel - Tools',
+        title: 'Krystel - Settings',
     };
 }
 
@@ -11,7 +11,7 @@ export default function Tools() {
     return (
         <ClientOnly>
             <div className='pt-4 pb-16'>
-                <ToolsGrid />
+                <Settings />
             </div>
         </ClientOnly>
     );

@@ -13,13 +13,8 @@ export default function QuickSettings({ classNames }) {
     if (!showQuickSettings) return null;
 
     return (
-        <div
-            className={cn(
-                'flex flex-col gap-2 bg-gray-200 px-4 py-2 rounded-md mt-2',
-                classNames?.container,
-            )}
-        >
-            <div className='flex flex-row justify-between items-center'>
+        <div className={cn('flex flex-col gap-2 mt-2', classNames?.container)}>
+            <div className='flex flex-row justify-between items-center bg-gray-200 px-3 py-2 rounded-md'>
                 <Label htmlFor='skip-actions'>Skip Actions</Label>
                 <Switch
                     id='skip-actions'

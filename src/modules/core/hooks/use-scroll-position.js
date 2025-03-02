@@ -1,24 +1,28 @@
 import { useEffect } from 'react';
 
-export default function useScrollPosition(
-    { onTop, onBottom, onScrollPosition, onScrollPercentage, tolerance = 0 },
-    deps = [],
-) {
+export default function useScrollPosition({ onTop, onBottom, onScroll, tolerance = 0 }, deps = []) {
     useEffect(() => {
         const handleScroll = () => {
             const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-            const positionPx = scrollTop;
-            const positionPercent = (scrollTop / (scrollHeight - clientHeight)) * 100;
+            const position = scrollTop;
+            const percent = (scrollTop / (scrollHeight - clientHeight)) * 100;
+            const viewportHeight = window.innerHeight;
 
-            onScrollPosition?.(positionPx);
-            onScrollPercentage?.(positionPercent);
+            onScroll?.({
+                position,
+                percent,
+                scrollTop,
+                scrollHeight,
+                clientHeight,
+                viewportHeight,
+            });
 
             if (scrollTop <= tolerance) {
-                onTop?.();
+                onTop?.({ scrollTop, scrollHeight, clientHeight });
             }
 
             if (scrollHeight - clientHeight - scrollTop <= tolerance) {
-                onBottom?.();
+                onBottom?.({ scrollTop, scrollHeight, clientHeight });
             }
         };
 
@@ -26,5 +30,5 @@ export default function useScrollPosition(
         handleScroll();
 
         return () => window.removeEventListener('scroll', handleScroll);
-    }, [onTop, onBottom, onScrollPosition, onScrollPercentage, tolerance, ...deps]);
+    }, [onTop, onBottom, onScroll, tolerance, ...deps]);
 }

@@ -48,3 +48,14 @@ export const randomSlice = (arr = [], size = 1) => {
 };
 
 export const unique = arr => [...new Set(arr)];
+
+export const groupBy = (elements = [], sentence) => {
+    return elements.reduce((groups, element) => {
+        const group = typeof sentence === 'function' ? sentence(element) : element[sentence];
+
+        groups[group] ??= [];
+        groups[group].push(element);
+
+        return groups;
+    }, {});
+};
