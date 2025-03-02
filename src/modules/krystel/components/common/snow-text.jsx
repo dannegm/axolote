@@ -35,7 +35,7 @@ export default function SnowText({ children }) {
     };
 
     return (
-        <div className='relative inline-flex items-center justify-center' onClick={handleClick}>
+        <div className='relative inline-flex items-center justify-center cursor-pointer' onClick={handleClick}>
             <Sparkles color='white' overflowPx={2} maxSize={2} />
 
             <Portal portalId='global-bg-portal'>

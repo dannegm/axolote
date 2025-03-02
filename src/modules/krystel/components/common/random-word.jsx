@@ -67,7 +67,7 @@ const defaultStyles = [
     `font-light text-yellow-600 font-playwrite`,
 ];
 
-export default function RandomWord({ className, words, styles = defaultStyles, interval = 120 }) {
+export default function RandomWord({ className, words, styles = defaultStyles, interval = 150 }) {
     const [currentWord, setCurrentWord] = useState('');
     const [currentStyle, setCurrentStyle] = useState('');
 
@@ -84,7 +84,7 @@ export default function RandomWord({ className, words, styles = defaultStyles, i
     }, [words, styles, interval]);
 
     return (
-        <span className={cn('h-4 inline-flex items-center', currentStyle, className)}>
+        <span className={cn('h-8 inline-flex items-center -my-2 px-1 bg-white', currentStyle, className)}>
             {currentWord}
         </span>
     );

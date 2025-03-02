@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import { randomPick } from '@/modules/core/helpers/arrays';
@@ -75,7 +75,7 @@ export default function BalloonsText({ children }) {
 
     return (
         <div
-            className='relative inline-flex items-center justify-center active:scale-95'
+            className='relative inline-flex items-center justify-center cursor-pointer active:scale-95'
             onClick={handleClick}
         >
             <Portal portalId='global-bg-portal'>

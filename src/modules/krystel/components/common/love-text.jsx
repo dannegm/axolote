@@ -19,7 +19,10 @@ export default function LoveText({ children }) {
     };
 
     return (
-        <span className='font-lora font-extrabold text-red-500' onClick={handleButtonClick}>
+        <span
+            className='font-lora font-extrabold text-red-500 cursor-pointer'
+            onClick={handleButtonClick}
+        >
             {children}
         </span>
     );
