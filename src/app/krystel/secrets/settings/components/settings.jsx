@@ -14,6 +14,12 @@ const settingsList = {
         defaultValue: false,
         group: 'admin',
     },
+    'settings:show_quick_settings': {
+        key: 'settings:show_quick_settings',
+        label: 'Show Quick Settings',
+        defaultValue: false,
+        group: 'admin',
+    },
     'settings:logs:show': {
         key: 'settings:logs:show',
         label: 'Show Logs',
@@ -23,12 +29,6 @@ const settingsList = {
     'settings:logs:realtime': {
         key: 'settings:logs:realtime',
         label: 'Realtime Logs',
-        defaultValue: false,
-        group: 'admin',
-    },
-    'settings:show_quick_settings': {
-        key: 'settings:show_quick_settings',
-        label: 'Show Quick Settings',
         defaultValue: false,
         group: 'admin',
     },
