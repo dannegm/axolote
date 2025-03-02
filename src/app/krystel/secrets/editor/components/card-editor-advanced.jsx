@@ -18,6 +18,8 @@ export default function CardEditorAdvanced({
     setPublishedTime,
     showCardViewport,
     setShowCardViewport,
+    pasteReplace,
+    setPasteReplace,
 }) {
     return (
         <div className={cn('flex flex-col gap-4 pb-4', className)}>
@@ -49,6 +51,17 @@ export default function CardEditorAdvanced({
                     id='show-card-viewport'
                     checked={showCardViewport}
                     onCheckedChange={setShowCardViewport}
+                />
+            </div>
+
+            <Separator />
+
+            <div className='flex flex-row justify-between items-center'>
+                <Label htmlFor='replace-on-paste'>Peplace on paste</Label>
+                <Switch
+                    id='replace-on-paste'
+                    checked={pasteReplace}
+                    onCheckedChange={setPasteReplace}
                 />
             </div>
         </div>

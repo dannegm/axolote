@@ -24,9 +24,13 @@ export default function CardEditorPanel({
     setPublishedTime,
     showCardViewport,
     setShowCardViewport,
+    pasteReplace,
+    setPasteReplace,
     onForceUpdate,
     onReset,
     onSubmit,
+    onPaste,
+    onCopy,
 }) {
     const [expanded, setExpanded] = useState(true);
 
@@ -73,6 +77,8 @@ export default function CardEditorPanel({
                                 setPublishedTime={setPublishedTime}
                                 showCardViewport={showCardViewport}
                                 setShowCardViewport={setShowCardViewport}
+                                pasteReplace={pasteReplace}
+                                setPasteReplace={setPasteReplace}
                             />
                         </TabsContent>
                     </Tabs>
@@ -82,11 +88,14 @@ export default function CardEditorPanel({
                     $translucedButton={$translucedButton}
                     isPending={isPending}
                     canSave={canSave}
+                    pasteReplace={pasteReplace}
                     expanded={expanded}
                     setExpanded={setExpanded}
                     onForceUpdate={onForceUpdate}
                     onReset={onReset}
                     onSubmit={onSubmit}
+                    onPaste={onPaste}
+                    onCopy={onCopy}
                 />
             </div>
         </div>

@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useCopyToClipboard } from '@uidotdev/usehooks';
 
 import { CircleDashed, Circle } from 'lucide-react';
 
@@ -18,9 +19,11 @@ import CardEditorPanel from './card-editor-panel';
 
 export default function CardEditor() {
     const router = useRouter();
-    const [editorKey, setEditorKey] = useState(0);
+    const [, copyToClipboard] = useCopyToClipboard();
 
+    const [editorKey, setEditorKey] = useState(0);
     const [showCardViewport, setShowCardViewport] = useState(false);
+    const [pasteReplace, setPasteReplace] = useLocalStorage('editor:paste_replace', true);
 
     const [content, setContent] = useLocalStorage('editor:content', '');
 
@@ -71,6 +74,19 @@ export default function CardEditor() {
         setEditorKey(prevKey => prevKey + 1);
     };
 
+    const handlePaste = async () => {
+        const clipboardText = await navigator.clipboard.readText();
+        if (pasteReplace) {
+            setContent(clipboardText);
+        } else {
+            setContent(text => text + clipboardText);
+        }
+    };
+
+    const handleCopy = () => {
+        copyToClipboard(content);
+    };
+
     return (
         <ClientOnly>
             <div id='global-bg-portal' />
@@ -107,9 +123,13 @@ export default function CardEditor() {
                     setPublishedTime={setPublishedTime}
                     showCardViewport={showCardViewport}
                     setShowCardViewport={setShowCardViewport}
+                    pasteReplace={pasteReplace}
+                    setPasteReplace={setPasteReplace}
                     onForceUpdate={handleForceUpdate}
                     onReset={handleReset}
                     onSubmit={handleSubmit}
+                    onPaste={handlePaste}
+                    onCopy={handleCopy}
                 />
 
                 <CardEditorPreview
