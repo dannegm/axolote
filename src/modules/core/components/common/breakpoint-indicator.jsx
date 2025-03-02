@@ -1,10 +1,12 @@
 'use client';
 
+import { useState } from 'react';
+
 import useSettings from '@/modules/core/hooks/use-settings';
+import useResize from '@/modules/core/hooks/use-resize';
+
 import { cn } from '@/modules/shadcn/lib/utils';
 import ClientOnly from './client-only';
-import { useState } from 'react';
-import useResize from '../../hooks/use-resize';
 
 export default function BreakpointIndicator({ position = 'bottom-right' }) {
     const [size, setSize] = useState('');

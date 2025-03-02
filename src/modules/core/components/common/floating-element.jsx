@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import useScrollPosition from '../../hooks/use-scroll-position';
-import { cn } from '../../helpers/utils';
+import { cn } from '@/modules/core/helpers/utils';
+import useScrollPosition from '@/modules/core/hooks/use-scroll-position';
 
 export default function FloatingElement({
     staticElement,
