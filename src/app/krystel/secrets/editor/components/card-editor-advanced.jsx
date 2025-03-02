@@ -57,7 +57,7 @@ export default function CardEditorAdvanced({
             <Separator />
 
             <div className='flex flex-row justify-between items-center'>
-                <Label htmlFor='replace-on-paste'>Peplace on paste</Label>
+                <Label htmlFor='replace-on-paste'>Replace on paste</Label>
                 <Switch
                     id='replace-on-paste'
                     checked={pasteReplace}

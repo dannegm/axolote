@@ -76,12 +76,12 @@ export default function CardEditorActions({
             {isPending ? (
                 <Button type='button' disabled>
                     <Loader2 className='animate-spin' />
-                    <span class='hidden sm:block'> Guardando</span>
+                    <span className='hidden sm:block'> Guardando</span>
                 </Button>
             ) : (
                 <Button type='button' disabled={!canSave} onClick={onSubmit}>
                     <Save />
-                    <span class='hidden sm:block'> Guardar</span>
+                    <span className='hidden sm:block'> Guardar</span>
                 </Button>
             )}
         </div>

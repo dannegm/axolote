@@ -10,6 +10,7 @@ import CardEditorActions from './card-editor-actions';
 
 export default function CardEditorPanel({
     className,
+    $content,
     $translucedButton,
     transluced,
     isPending,
@@ -65,7 +66,11 @@ export default function CardEditorPanel({
                             <TabsTrigger value='advanced'>Advanced</TabsTrigger>
                         </TabsList>
                         <TabsContent value='content'>
-                            <CardEditorContent content={content} setContent={setContent} />
+                            <CardEditorContent
+                                ref={$content}
+                                content={content}
+                                setContent={setContent}
+                            />
                         </TabsContent>
                         <TabsContent value='advanced'>
                             <CardEditorAdvanced

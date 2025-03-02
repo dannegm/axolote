@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 
@@ -20,6 +20,8 @@ import CardEditorPanel from './card-editor-panel';
 export default function CardEditor() {
     const router = useRouter();
     const [, copyToClipboard] = useCopyToClipboard();
+
+    const $content = useRef();
 
     const [editorKey, setEditorKey] = useState(0);
     const [showCardViewport, setShowCardViewport] = useState(false);
@@ -81,10 +83,12 @@ export default function CardEditor() {
         } else {
             setContent(text => text + clipboardText);
         }
+        $content.current?.onPaste?.();
     };
 
     const handleCopy = () => {
         copyToClipboard(content);
+        $content.current?.onCopy?.();
     };
 
     return (
@@ -109,6 +113,7 @@ export default function CardEditor() {
                 )}
 
                 <CardEditorPanel
+                    $content={$content}
                     $translucedButton={$translucedButton}
                     transluced={transluced}
                     isPending={createQuote.isPending}
