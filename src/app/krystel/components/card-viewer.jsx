@@ -18,6 +18,7 @@ import JsonViewer from '@/modules/core/components/common/json-viewer';
 import CopyText from '@/modules/krystel/components/common/copy-text';
 import { useEffect } from 'react';
 import { cn } from '@/modules/core/helpers/utils';
+import GiftCardPreview from '@/modules/krystel/components/common/gift-card-preview';
 
 const getBaseUrl = () => window.location.origin + window.location.pathname;
 
@@ -57,6 +58,12 @@ export default function CardViewer({ code, data }) {
     return (
         <ClientOnly>
             <main className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
+                {debugMode && (
+                    <div className='max-w-[398px] w-full mt-12 mb-2 md:-mb-12'>
+                        <GiftCardPreview quote={quote.quote} code={quote.settings} preview />
+                    </div>
+                )}
+
                 <SaveContainer
                     className='-mt-4 w-fit px-5 py-10 md:px-10 md:py-20 transition-all'
                     quote={quote}

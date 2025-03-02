@@ -12,7 +12,7 @@ import Polaroid from '@/modules/krystel/components/common/polaroid';
 import SpotifyPlayer from '@/modules/krystel/components/common/spotify-player';
 import SpotifyPreview from '@/modules/krystel/components/common/spotify-preview';
 import SnowText from '@/modules/krystel/components/common/snow-text';
-import RandomWord from '@/modules/krystel/components/common/random-word';
+import RandomWord, { RandomWorldPreview } from '@/modules/krystel/components/common/random-word';
 import FancySeparator from '@/modules/krystel/components/common/fancy-separator';
 import QuoteText from '@/modules/krystel/components/common/quote-text';
 import BalloonsText from '@/modules/krystel/components/common/balloons-text';
@@ -301,11 +301,7 @@ export const buildPreviewElements = ({ preventReveal }) => [
     {
         pattern: /<words::([^>]+)>/g,
         parser: match => {
-            return (
-                <span className='font-oswald font-bold text-indigo-700'>
-                    {match.split('|').join(', ')}
-                </span>
-            );
+            return <RandomWorldPreview words={match.split('|')} />;
         },
     },
     // Icon

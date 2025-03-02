@@ -67,13 +67,13 @@ const classNames = /* css */ `
 .font-oswald { font-family: var(--font-oswald); }
 .font-playfair { font-family: var(--font-playfair); }
 .font-lora { font-family: var(--font-lora); }
-.font-quicksand { font-family: var(--font-quicksand); }
+.font-quicksand { font-family: var(--font-quicksand); font-size: 0.9em; }
 .font-bebasNeue { font-family: var(--font-bebasNeue); }
 .font-macondo { font-family: var(--font-macondo); }
 .font-dosis { font-family: var(--font-dosis); }
-.font-dancingScript { font-family: var(--font-dancingScript); }
-.font-anton { font-family: var(--font-anton); }
-.font-jersey10 { font-family: var(--font-jersey10); }
+.font-dancingScript { font-family: var(--font-dancingScript); font-size: 1.5em; }
+.font-anton { font-family: var(--font-anton); font-size: 0.9em; }
+.font-jersey10 { font-family: var(--font-jersey10); font-size: 1.2em; }
 .font-boogaloo { font-family: var(--font-boogaloo); }
 .font-micro5 { font-family: var(--font-micro5); }
 `;

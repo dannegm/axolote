@@ -1,7 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import { cn } from '@/modules/core/helpers/utils';
+import { randomPick } from '@/modules/core/helpers/arrays';
 
 const defaultStyles = [
     `italic text-blue-600 font-light font-roboto uppercase`,
@@ -67,14 +68,40 @@ const defaultStyles = [
     `font-light text-yellow-600 font-playwrite`,
 ];
 
+const baseClassNames = 'inline-flex items-center bg-white decoration-2';
+
+export const RandomWorldPreview = ({ className, words = [], styles = defaultStyles }) => {
+    return (
+        <>
+            {words.map((word, index, arr) => {
+                const randomStyle = randomPick(styles);
+                return (
+                    <Fragment key={`random-world-preview-${word}-${index}-${arr.length}`}>
+                        <span
+                            className={cn(
+                                baseClassNames,
+                                'h-6 -my-1 mr-1 px-0.5 ',
+                                randomStyle,
+                                className,
+                            )}
+                        >
+                            {word}
+                        </span>
+                    </Fragment>
+                );
+            })}
+        </>
+    );
+};
+
 export default function RandomWord({ className, words, styles = defaultStyles, interval = 150 }) {
     const [currentWord, setCurrentWord] = useState('');
     const [currentStyle, setCurrentStyle] = useState('');
 
     useEffect(() => {
         const timer = setInterval(() => {
-            const randomWord = words[Math.floor(Math.random() * words.length)];
-            const randomStyle = styles[Math.floor(Math.random() * styles.length)];
+            const randomWord = randomPick(words);
+            const randomStyle = randomPick(styles);
 
             setCurrentWord(randomWord);
             setCurrentStyle(randomStyle);
@@ -84,7 +111,7 @@ export default function RandomWord({ className, words, styles = defaultStyles, i
     }, [words, styles, interval]);
 
     return (
-        <span className={cn('h-8 inline-flex items-center -my-2 px-1 bg-white', currentStyle, className)}>
+        <span className={cn(baseClassNames, 'h-8 -my-2 px-1 ', currentStyle, className)}>
             {currentWord}
         </span>
     );
