@@ -16,6 +16,7 @@ import useCreateQuoteAction from '@/modules/krystel/hooks/use-create-quote-actio
 import { mergeDateAndTime } from '@/modules/core/helpers/dates';
 import CardEditorPreview from './card-editor-preview';
 import CardEditorPanel from './card-editor-panel';
+import ResponsiveBox from '@/modules/core/components/common/responsive-box';
 
 export default function CardEditor() {
     const router = useRouter();
@@ -96,53 +97,55 @@ export default function CardEditor() {
             <div id='global-bg-portal' />
             <div id='card-bg-portal' />
 
-            <div className={cn('mt-4', 'lg:flex lg:flex-row lg:gap-4')}>
-                {$translucedButton?.current && (
-                    <Button
-                        className={cn(
-                            'animate-in fade-in-0 duration-75 ease-in',
-                            'absolute z-51 opacity-100 lg:hidden',
-                        )}
-                        style={{ ...translucedButtonPosition }}
-                        type='button'
-                        size='icon'
-                        onClick={() => setTransluced(!transluced)}
-                    >
-                        {transluced ? <Circle /> : <CircleDashed />}
-                    </Button>
-                )}
+            <ResponsiveBox defaultBreakpointName='mobile' breakpoints={{ desktop: 720 }}>
+                <div className={cn('mt-4', 'lg:flex lg:flex-row lg:gap-4')}>
+                    {$translucedButton?.current && (
+                        <Button
+                            className={cn(
+                                'animate-in fade-in-0 duration-75 ease-in',
+                                'absolute z-51 opacity-100 lg:hidden',
+                            )}
+                            style={{ ...translucedButtonPosition }}
+                            type='button'
+                            size='icon'
+                            onClick={() => setTransluced(!transluced)}
+                        >
+                            {transluced ? <Circle /> : <CircleDashed />}
+                        </Button>
+                    )}
 
-                <CardEditorPanel
-                    $content={$content}
-                    $translucedButton={$translucedButton}
-                    transluced={transluced}
-                    isPending={createQuote.isPending}
-                    canSave={canSave}
-                    content={content}
-                    setContent={setContent}
-                    includesPushidedDate={includesPushidedDate}
-                    setIncludesPushidedDate={setIncludesPushidedDate}
-                    publishedDate={publishedDate}
-                    setPublishedDate={setPublishedDate}
-                    publishedTime={publishedTime}
-                    setPublishedTime={setPublishedTime}
-                    showCardViewport={showCardViewport}
-                    setShowCardViewport={setShowCardViewport}
-                    pasteReplace={pasteReplace}
-                    setPasteReplace={setPasteReplace}
-                    onForceUpdate={handleForceUpdate}
-                    onReset={handleReset}
-                    onSubmit={handleSubmit}
-                    onPaste={handlePaste}
-                    onCopy={handleCopy}
-                />
+                    <CardEditorPanel
+                        $content={$content}
+                        $translucedButton={$translucedButton}
+                        transluced={transluced}
+                        isPending={createQuote.isPending}
+                        canSave={canSave}
+                        content={content}
+                        setContent={setContent}
+                        includesPushidedDate={includesPushidedDate}
+                        setIncludesPushidedDate={setIncludesPushidedDate}
+                        publishedDate={publishedDate}
+                        setPublishedDate={setPublishedDate}
+                        publishedTime={publishedTime}
+                        setPublishedTime={setPublishedTime}
+                        showCardViewport={showCardViewport}
+                        setShowCardViewport={setShowCardViewport}
+                        pasteReplace={pasteReplace}
+                        setPasteReplace={setPasteReplace}
+                        onForceUpdate={handleForceUpdate}
+                        onReset={handleReset}
+                        onSubmit={handleSubmit}
+                        onPaste={handlePaste}
+                        onCopy={handleCopy}
+                    />
 
-                <CardEditorPreview
-                    showCardViewport={showCardViewport}
-                    editorKey={editorKey}
-                    content={content}
-                />
-            </div>
+                    <CardEditorPreview
+                        showCardViewport={showCardViewport}
+                        editorKey={editorKey}
+                        content={content}
+                    />
+                </div>
+            </ResponsiveBox>
         </ClientOnly>
     );
 }

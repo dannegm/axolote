@@ -40,7 +40,7 @@ export default function CardEditorPanel({
             className={cn(
                 'flex-1 border-gray-300 bg-gray-100 transition-all duration-150',
                 'fixed z-50 left-0 bottom-0 w-full border-t shadow-[0px_-2px_24px_4px_rgba(0,_0,_0,_0.1)]',
-                'lg:relative lg:left-auto lg:bottom-auto lg:h-auto lg:max-h-fit lg:border lg:rounded-md lg:shadow-none',
+                'lg:sticky lg:top-20 lg:left-auto lg:bottom-auto lg:h-auto lg:max-h-fit lg:border lg:rounded-md lg:shadow-none',
                 { 'opacity-30 blur-[2px] pointer-events-none': transluced },
                 className,
             )}

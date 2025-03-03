@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useEffect, useState, isValidElement } from 'react';
+import { useRef, useEffect, useState, isValidElement, createContext, useContext } from 'react';
 import { cn } from '@/modules/core/helpers/utils';
 
 const DEFAULT_BREAKPOINTS = {
@@ -8,6 +8,15 @@ const DEFAULT_BREAKPOINTS = {
     md: 768,
     lg: 1024,
     xl: 1280,
+};
+
+const ResponsiveContext = createContext({
+    breakpoint: 'deafult',
+    size: 0,
+});
+
+export const useResponsiveBox = () => {
+    return useContext(ResponsiveContext);
 };
 
 export default function ResponsiveBox({
@@ -47,8 +56,10 @@ export default function ResponsiveBox({
     }, [breakpoints]);
 
     return (
-        <div ref={$box} className={cn(className, breakpointsClassNames[breakpoint] || '')}>
-            {isValidElement(children) ? children : children({ breakpoint, size })}
-        </div>
+        <ResponsiveContext.Provider value={{ breakpoint, size }}>
+            <div ref={$box} className={cn(className, breakpointsClassNames[breakpoint] || '')}>
+                {isValidElement(children) ? children : children({ breakpoint, size })}
+            </div>
+        </ResponsiveContext.Provider>
     );
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { useResponsiveBox } from '@/modules/core/components/common/responsive-box';
 import { cn } from '@/modules/core/helpers/utils';
 import { Textarea } from '@/modules/shadcn/ui/textarea';
 import { useEffect, useImperativeHandle, useRef, useState } from 'react';
@@ -8,6 +9,8 @@ export default function CardEditorContent({ ref, className, content, setContent 
     const $text = useRef();
     const [copied, setCopy] = useState(false);
     const [pasted, setPasted] = useState(false);
+
+    const { breakpoint, size } = useResponsiveBox();
 
     const selectAnimation = () => {
         setTimeout(() => {
@@ -37,7 +40,7 @@ export default function CardEditorContent({ ref, className, content, setContent 
                 })}
                 placeholder='Cuéntale a Krys lo mucho que la amas.'
                 minRows={3}
-                maxRows={8}
+                maxRows={breakpoint === 'desktop' ? 22 : 8}
                 value={content}
                 onChange={ev => setContent(ev.target.value)}
             />
