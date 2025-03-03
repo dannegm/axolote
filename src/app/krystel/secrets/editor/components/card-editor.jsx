@@ -1,5 +1,5 @@
 'use client';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 
@@ -25,8 +25,12 @@ export default function CardEditor() {
     const $content = useRef();
 
     const [editorKey, setEditorKey] = useState(0);
-    const [showCardViewport, setShowCardViewport] = useState(false);
+    const [showCardViewport, setShowCardViewport] = useLocalStorage(
+        'editor:show_card_viewport',
+        false,
+    );
     const [pasteReplace, setPasteReplace] = useLocalStorage('editor:paste_replace', true);
+    const [autoScroll, setAutoScroll] = useLocalStorage('editor:auto_scroll', false);
 
     const [content, setContent] = useLocalStorage('editor:content', '');
 
@@ -92,6 +96,12 @@ export default function CardEditor() {
         $content.current?.onCopy?.();
     };
 
+    useEffect(() => {
+        if (autoScroll) {
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+    }, [content]);
+
     return (
         <ClientOnly>
             <div id='global-bg-portal' />
@@ -132,6 +142,8 @@ export default function CardEditor() {
                         setShowCardViewport={setShowCardViewport}
                         pasteReplace={pasteReplace}
                         setPasteReplace={setPasteReplace}
+                        autoScroll={autoScroll}
+                        setAutoScroll={setAutoScroll}
                         onForceUpdate={handleForceUpdate}
                         onReset={handleReset}
                         onSubmit={handleSubmit}

@@ -27,6 +27,8 @@ export default function CardEditorPanel({
     setShowCardViewport,
     pasteReplace,
     setPasteReplace,
+    autoScroll,
+    setAutoScroll,
     onForceUpdate,
     onReset,
     onSubmit,
@@ -84,6 +86,8 @@ export default function CardEditorPanel({
                                 setShowCardViewport={setShowCardViewport}
                                 pasteReplace={pasteReplace}
                                 setPasteReplace={setPasteReplace}
+                                autoScroll={autoScroll}
+                                setAutoScroll={setAutoScroll}
                             />
                         </TabsContent>
                     </Tabs>

@@ -10,12 +10,15 @@ const CLIENT_ID = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
 
 const parseSpotifyUri = uri => {
+    const regex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+    if (!regex.test(uri)) return { trackId: null };
+
     const url = new URL(uri);
-    const [, type, trackId] = url.pathname.split('/');
+    const parts = url.pathname.split('/');
 
     return {
-        type,
-        trackId,
+        type: parts.at(-2),
+        trackId: parts.at(-1),
     };
 };
 

@@ -20,6 +20,8 @@ export default function CardEditorAdvanced({
     setShowCardViewport,
     pasteReplace,
     setPasteReplace,
+    autoScroll,
+    setAutoScroll,
 }) {
     return (
         <div className={cn('flex flex-col gap-4 pb-4', className)}>
@@ -63,6 +65,13 @@ export default function CardEditorAdvanced({
                     checked={pasteReplace}
                     onCheckedChange={setPasteReplace}
                 />
+            </div>
+
+            <Separator />
+
+            <div className='flex flex-row justify-between items-center'>
+                <Label htmlFor='auto-scroll'>Auto scroll</Label>
+                <Switch id='auto-scroll' checked={autoScroll} onCheckedChange={setAutoScroll} />
             </div>
         </div>
     );
