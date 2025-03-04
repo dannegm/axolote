@@ -21,34 +21,44 @@ import { Button } from '@/modules/shadcn/ui/button';
 import CardEditorPreview from './card-editor-preview';
 import CardEditorPanel from './card-editor-panel';
 import CardEditorDrafts from './card-editor-drafts';
+import { buildConfigs } from '@/modules/krystel/helpers/strings';
 
 export default function CardEditor() {
+    // Hooks
     const router = useRouter();
+    const { saveDraft } = useDrafts('editor:drafts');
 
+    // Refs
     const $content = useRef();
+    const $configs = useRef();
+    const [$translucedButton, translucedButtonPosition] = useClonePosition();
 
+    // Managers
     const [editorKey, setEditorKey] = useState(0);
     const [draftsOpen, setDraftsOpen] = useState(false);
+    const [transluced, setTransluced] = useState(false);
 
+    // Settings
     const [showCardViewport, setShowCardViewport] = useLocalStorage(
         'editor:show_card_viewport',
         false,
     );
     const [pasteReplace, setPasteReplace] = useLocalStorage('editor:paste_replace', true);
     const [autoScroll, setAutoScroll] = useLocalStorage('editor:auto_scroll', false);
-    const [content, setContent] = useLocalStorage('editor:content', '');
 
-    const { saveDraft } = useDrafts('editor:drafts');
+    // Content
+    const [content, setContent] = useLocalStorage('editor:content', '');
+    const [configs, setConfigs] = useLocalStorage('editor:configs', {});
+
+    const composedContent = buildConfigs(configs) + content;
+    const canReset = composedContent !== '';
+    const canSave = content !== '';
 
     const [includesPushidedDate, setIncludesPushidedDate] = useState(false);
     const [publishedDate, setPublishedDate] = useState(new Date());
     const [publishedTime, setPublishedTime] = useState(new Date());
 
-    const [$translucedButton, translucedButtonPosition] = useClonePosition();
-    const [transluced, setTransluced] = useState(false);
-
-    const canSave = content !== '';
-
+    // Logic
     const createQuote = useCreateQuoteAction({
         onSuccess: () => {
             router.push('/krystel/secrets/cards');
@@ -62,11 +72,14 @@ export default function CardEditor() {
         return content.replaceAll('\n', '\n||').replaceAll('})\n||', '})\n');
     };
 
+    // Handlers
     const handleReset = () => {
         setContent('');
+        setConfigs({});
         setIncludesPushidedDate(false);
         setPublishedDate(new Date());
         setPublishedTime(new Date());
+        $configs?.current?.reload?.();
     };
 
     const handleSubmit = () => {
@@ -84,7 +97,7 @@ export default function CardEditor() {
     };
 
     const handleSaveDraft = () => {
-        saveDraft(content);
+        saveDraft(composedContent);
         handleReset();
     };
 
@@ -92,6 +105,7 @@ export default function CardEditor() {
         setEditorKey(prevKey => prevKey + 1);
     };
 
+    // Other Hooks
     useEffect(() => {
         if (autoScroll) {
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
@@ -103,7 +117,13 @@ export default function CardEditor() {
             <div id='global-bg-portal' />
             <div id='card-bg-portal' />
 
-            <CardEditorDrafts open={draftsOpen} setOpen={setDraftsOpen} setContent={setContent} />
+            <CardEditorDrafts
+                $configs={$configs}
+                open={draftsOpen}
+                setOpen={setDraftsOpen}
+                setConfigs={setConfigs}
+                setContent={setContent}
+            />
 
             <ResponsiveBox defaultBreakpointName='mobile' breakpoints={{ desktop: 720 }}>
                 <div className={cn('mt-4', 'lg:flex lg:flex-row lg:gap-4')}>
@@ -124,12 +144,16 @@ export default function CardEditor() {
 
                     <CardEditorPanel
                         $content={$content}
+                        $configs={$configs}
                         $translucedButton={$translucedButton}
                         transluced={transluced}
                         isPending={createQuote.isPending}
                         canSave={canSave}
+                        canReset={canReset}
                         content={content}
                         setContent={setContent}
+                        configs={configs}
+                        setConfigs={setConfigs}
                         includesPushidedDate={includesPushidedDate}
                         setIncludesPushidedDate={setIncludesPushidedDate}
                         publishedDate={publishedDate}
@@ -152,7 +176,7 @@ export default function CardEditor() {
                     <CardEditorPreview
                         showCardViewport={showCardViewport}
                         editorKey={editorKey}
-                        content={content}
+                        content={composedContent}
                     />
                 </div>
             </ResponsiveBox>

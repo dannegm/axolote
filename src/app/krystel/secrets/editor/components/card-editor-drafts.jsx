@@ -16,8 +16,9 @@ import {
     DrawerTitle,
 } from '@/modules/shadcn/ui/drawer';
 import { cn } from '@/modules/core/helpers/utils';
+import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 
-export default function CardEditorDrafts({ open, setOpen, setContent }) {
+export default function CardEditorDrafts({ $configs, open, setOpen, setConfigs, setContent }) {
     const { drafts, pickDraft, removeDraft, clearDrafts } = useDrafts('editor:drafts');
 
     const handleDiscard = (ev, id) => {
@@ -28,7 +29,12 @@ export default function CardEditorDrafts({ open, setOpen, setContent }) {
 
     const handleSelectDraft = id => {
         const draft = pickDraft(id);
-        setContent(draft.content);
+        const { configs, content } = extractConfigsAndContent(draft.content);
+
+        setConfigs(configs);
+        setContent(content);
+
+        $configs?.current?.reload?.();
         setOpen(false);
     };
 

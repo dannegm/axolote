@@ -10,6 +10,7 @@ export default function CardEditorActions({
     $translucedButton,
     isPending,
     canSave,
+    canReset,
     expanded,
     setExpanded,
     onForceUpdate,
@@ -44,7 +45,7 @@ export default function CardEditorActions({
                 type='button'
                 size='icon'
                 variant='secondary'
-                disabled={!canSave}
+                disabled={!canReset}
                 onClick={onReset}
             >
                 <Trash2
@@ -54,9 +55,9 @@ export default function CardEditorActions({
                 />
             </Button>
 
-            <Button type='button' variant='secondary' disabled={!canSave} onClick={onDraft}>
+            <Button type='button' variant='secondary' disabled={!canReset} onClick={onDraft}>
                 <Save />
-                <span className='hidden sm:block'> Borrador</span>
+                <span className='hidden sm:block'> Draft</span>
             </Button>
 
             {isPending ? (

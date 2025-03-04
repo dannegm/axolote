@@ -7,16 +7,21 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/modules/shadcn/ui/ta
 import CardEditorContent from './cart-editor-content';
 import CardEditorAdvanced from './card-editor-advanced';
 import CardEditorActions from './card-editor-actions';
+import CardEditorConfigs from './card-editor-configs';
 
 export default function CardEditorPanel({
     className,
     $content,
+    $configs,
     $translucedButton,
     transluced,
     isPending,
     canSave,
+    canReset,
     content,
     setContent,
+    configs,
+    setConfigs,
     includesPushidedDate,
     setIncludesPushidedDate,
     publishedDate,
@@ -62,9 +67,10 @@ export default function CardEditorPanel({
                         },
                     )}
                 >
-                    <Tabs defaultValue='content'>
-                        <TabsList className='grid w-full grid-cols-2'>
+                    <Tabs defaultValue='configs'>
+                        <TabsList className='grid w-full grid-cols-3'>
                             <TabsTrigger value='content'>Content</TabsTrigger>
+                            <TabsTrigger value='configs'>Configs</TabsTrigger>
                             <TabsTrigger value='advanced'>Advanced</TabsTrigger>
                         </TabsList>
                         <TabsContent value='content'>
@@ -75,6 +81,15 @@ export default function CardEditorPanel({
                                 setDraftsOpen={setDraftsOpen}
                             />
                         </TabsContent>
+
+                        <TabsContent value='configs'>
+                            <CardEditorConfigs
+                                ref={$configs}
+                                configs={configs}
+                                setConfigs={setConfigs}
+                            />
+                        </TabsContent>
+
                         <TabsContent value='advanced'>
                             <CardEditorAdvanced
                                 includesPushidedDate={includesPushidedDate}
@@ -98,6 +113,7 @@ export default function CardEditorPanel({
                     $translucedButton={$translucedButton}
                     isPending={isPending}
                     canSave={canSave}
+                    canReset={canReset}
                     expanded={expanded}
                     setExpanded={setExpanded}
                     onForceUpdate={onForceUpdate}

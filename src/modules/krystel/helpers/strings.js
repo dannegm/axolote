@@ -48,3 +48,23 @@ export const extractConfigsAndContent = (text = '') => {
         content: text,
     };
 };
+
+export const buildConfigs = (configs, trimmed = false) => {
+    const results = Object.entries(configs)
+        .filter(([key, value]) => value)
+        .filter(([key, value]) => value !== 'default')
+        .filter(([key, value]) => value !== 'random')
+        .map(([key, value]) => {
+            if (typeof value === 'boolean' && value) {
+                return `${key}`;
+            }
+            if (typeof value === 'boolean' && !value) {
+                return '';
+            }
+            return `${key}:${value}`;
+        })
+        .join('|');
+
+    if (trimmed) return results;
+    return `({${results}})`;
+};
