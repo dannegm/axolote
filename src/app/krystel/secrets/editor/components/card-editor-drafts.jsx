@@ -38,7 +38,7 @@ export default function CardEditorDrafts({ open, setOpen, setContent }) {
                 <div
                     className={cn(
                         'absolute top-[52px] left-1/2 transform -translate-1/2 z-100',
-                        'mx-4 sm:mx-auto sm:w-full sm:max-w-[460px]',
+                        'w-[calc(100%-32px)] sm:max-w-[460px]',
                         'bg-white',
                     )}
                 >
