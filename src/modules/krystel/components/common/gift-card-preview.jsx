@@ -12,24 +12,35 @@ import { useFirstAppearanceAnom } from '@/modules/krystel/hooks/use-first-appear
 import RichText from './rich-text';
 import { pascalCase } from '@/modules/core/helpers/strings';
 
+const isValidCode = code => {
+    const validCode = /^\d+:\d+:\d+:\d+:\d+$/;
+    return validCode.test(code);
+};
+
+const getQuoteSettings = code => {
+    if (!isValidCode(code) || !code) {
+        return getRandomQuote();
+    }
+
+    const [, ...settings] = code.split(':');
+    return quoteFromSettings(settings.join(':'));
+};
+
 export default function GiftCardPreview({
     className,
+    classNames,
     quote,
     code,
     hidden = false,
     preview = false,
     deleted = false,
     preventReveal = false,
+    onClick,
 }) {
-    let quoteSettings = getRandomQuote();
+    const quoteSettings = getQuoteSettings(code);
 
     const [id] = code?.split(':') || [null];
     const isFirstAppearance = useFirstAppearanceAnom(id);
-
-    if (code) {
-        const [, ...settings] = code.split(':');
-        quoteSettings = quoteFromSettings(settings.join(':'));
-    }
 
     const { configs, content } = extractConfigsAndContent(quote);
     const greetings = configs?.greetings || '';
@@ -42,7 +53,8 @@ export default function GiftCardPreview({
     const customElements = buildPreviewElements({ letter, preventReveal });
     const hasApp = /<app::/g.test(content);
 
-    const theme = getTheme(configs?.theme);
+    const defaultTheme = !isValidCode() ? getTheme(code) : null;
+    const theme = defaultTheme || getTheme(configs?.theme);
 
     return (
         <div
@@ -58,15 +70,18 @@ export default function GiftCardPreview({
                 },
                 className,
                 theme?.card,
+                classNames?.card,
             )}
             style={{ backgroundImage: configs?.bg ? '' : quoteSettings.bg }}
+            onClick={onClick}
         >
-            {(configs?.bg || theme?.bg) && (
+            {(configs?.bg || theme?.bg || classNames?.bg) && (
                 <div
                     className={cn(
                         'absolute z-0 inset-0 pointer-events-none',
                         configs?.bg,
                         theme?.bg,
+                        classNames?.bg,
                     )}
                 />
             )}
@@ -77,6 +92,7 @@ export default function GiftCardPreview({
                     { 'bg-none': configs?.border || theme?.border },
                     configs?.border,
                     theme?.border,
+                    classNames?.border,
                 )}
                 style={{ background: configs?.border || theme?.border ? '' : quoteSettings.border }}
             >
@@ -91,6 +107,7 @@ export default function GiftCardPreview({
                         },
                         configs?.scheme,
                         theme?.content,
+                        classNames?.content,
                     )}
                     style={{
                         backgroundImage: `url(${frame})`,
@@ -116,7 +133,13 @@ export default function GiftCardPreview({
                         </div>
                     )}
 
-                    <div className={cn('mt-[2px] font-delius font-medium pr-4', theme?.text)}>
+                    <div
+                        className={cn(
+                            'mt-[2px] font-delius font-medium pr-4',
+                            theme?.text,
+                            classNames?.text,
+                        )}
+                    >
                         <div
                             className={cn('block', {
                                 'overflow-hidden line-clamp-4 mask-gradient': letter && !hasApp,

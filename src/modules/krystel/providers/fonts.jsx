@@ -1,3 +1,4 @@
+'use client';
 import {
     Pacifico,
     Delius,
@@ -19,6 +20,7 @@ import {
 } from 'next/font/google';
 
 import { cn } from '@/modules/core/helpers/utils';
+import { useEffect } from 'react';
 
 const pacifico = Pacifico({ weight: '400', subsets: ['latin'], variable: '--font-pacifico' });
 const delius = Delius({ weight: '400', subsets: ['latin'], variable: '--font-delius' });
@@ -71,7 +73,7 @@ const classNames = /* css */ `
 .font-bebasNeue { font-family: var(--font-bebasNeue); }
 .font-macondo { font-family: var(--font-macondo); }
 .font-dosis { font-family: var(--font-dosis); }
-.font-dancingScript { font-family: var(--font-dancingScript); font-size: 1.5em; }
+.font-dancingScript { font-family: var(--font-dancingScript); font-size: 1.1em; }
 .font-anton { font-family: var(--font-anton); font-size: 0.9em; }
 .font-jersey10 { font-family: var(--font-jersey10); font-size: 1.2em; }
 .font-boogaloo { font-family: var(--font-boogaloo); }
@@ -79,12 +81,16 @@ const classNames = /* css */ `
 `;
 
 export default function Fonts({ children }) {
-    return (
-        <>
-            <style>{classNames}</style>
-            <div id='fonts' className={cn(...Object.values(fonts), 'antialiased')}>
-                {children}
-            </div>
-        </>
-    );
+    useEffect(() => {
+        const stylesContent = `<style>${classNames}</style>`;
+        document.body.insertAdjacentHTML('afterbegin', stylesContent);
+
+        const classList = cn(...Object.values(fonts), 'antialiased').split(' ');
+        document.body.classList.add(...classList);
+
+        return () => {
+            document.body.classList.remove(...classList);
+        };
+    }, []);
+    return <>{children}</>;
 }

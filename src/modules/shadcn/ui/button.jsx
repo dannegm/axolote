@@ -19,6 +19,12 @@ const buttonVariants = cva(
                     'bg-neutral-200 text-neutral-900 shadow-2xs hover:bg-neutral-200/80 dark:bg-neutral-800 dark:text-neutral-50 dark:hover:bg-neutral-800/80',
                 ghost: 'hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50',
                 link: 'text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50',
+
+                // Toolbar
+                toolbarButton:
+                    'h-9 px-3 bg-zinc-100 dark:bg-zinc-800 rounded-lg flex items-center gap-2 text-sm text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors [&_svg]:size-4 [&_svg]:text-zinc-500',
+                toolbarAction:
+                    'h-9 w-9 flex items-center justify-center rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors [&_svg]:size-4 [&_svg]:text-zinc-500',
             },
             size: {
                 default: 'h-9 px-4 py-2',

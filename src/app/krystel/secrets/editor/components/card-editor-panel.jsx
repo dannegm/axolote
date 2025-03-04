@@ -29,11 +29,11 @@ export default function CardEditorPanel({
     setPasteReplace,
     autoScroll,
     setAutoScroll,
+    setDraftsOpen,
     onForceUpdate,
     onReset,
     onSubmit,
-    onPaste,
-    onCopy,
+    onDraft,
 }) {
     const [expanded, setExpanded] = useState(true);
 
@@ -72,6 +72,7 @@ export default function CardEditorPanel({
                                 ref={$content}
                                 content={content}
                                 setContent={setContent}
+                                setDraftsOpen={setDraftsOpen}
                             />
                         </TabsContent>
                         <TabsContent value='advanced'>
@@ -97,14 +98,12 @@ export default function CardEditorPanel({
                     $translucedButton={$translucedButton}
                     isPending={isPending}
                     canSave={canSave}
-                    pasteReplace={pasteReplace}
                     expanded={expanded}
                     setExpanded={setExpanded}
                     onForceUpdate={onForceUpdate}
                     onReset={onReset}
                     onSubmit={onSubmit}
-                    onPaste={onPaste}
-                    onCopy={onCopy}
+                    onDraft={onDraft}
                 />
             </div>
         </div>

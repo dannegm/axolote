@@ -1,14 +1,5 @@
 'use client';
-import {
-    Save,
-    Loader2,
-    ChevronDown,
-    X,
-    RefreshCcw,
-    Clipboard,
-    Copy,
-    ClipboardPlus,
-} from 'lucide-react';
+import { Save, Loader2, ChevronDown, RefreshCcw, Trash2 } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 
@@ -20,13 +11,11 @@ export default function CardEditorActions({
     isPending,
     canSave,
     expanded,
-    pasteReplace,
     setExpanded,
     onForceUpdate,
     onReset,
     onSubmit,
-    onPaste,
-    onCopy,
+    onDraft,
 }) {
     return (
         <div className={cn('flex flex-row gap-1 sm:gap-2', className)}>
@@ -49,28 +38,25 @@ export default function CardEditorActions({
                 <RefreshCcw />
             </Button>
 
-            <Button type='button' size='icon' variant='secondary' onClick={onPaste}>
-                {pasteReplace ? <Clipboard /> : <ClipboardPlus />}
-            </Button>
-
-            <Button type='button' size='icon' variant='secondary' onClick={onCopy}>
-                <Copy />
-            </Button>
-
             <div className='flex-1' />
 
             <Button
                 type='button'
                 size='icon'
-                variant='destructive'
+                variant='secondary'
                 disabled={!canSave}
                 onClick={onReset}
             >
-                <X
+                <Trash2
                     className={cn('transition-all duration-150', {
                         'rotate-180': !expanded,
                     })}
                 />
+            </Button>
+
+            <Button type='button' variant='secondary' disabled={!canSave} onClick={onDraft}>
+                <Save />
+                <span className='hidden sm:block'> Borrador</span>
             </Button>
 
             {isPending ? (

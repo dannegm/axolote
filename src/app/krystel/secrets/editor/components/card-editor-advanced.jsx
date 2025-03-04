@@ -1,10 +1,10 @@
 'use client';
 import { cn } from '@/modules/core/helpers/utils';
 
+import { Button } from '@/modules/shadcn/ui/button';
 import { Switch } from '@/modules/shadcn/ui/switch';
 import { DatePicker } from '@/modules/shadcn/ui/date-picker';
 import { Separator } from '@/modules/shadcn/ui/separator';
-
 import { Label } from '@/modules/shadcn/ui/label';
 import { TimePicker } from '@/modules/shadcn/ui/time-picker';
 
@@ -44,9 +44,7 @@ export default function CardEditorAdvanced({
                     <TimePicker value={publishedTime} onChange={setPublishedTime} />
                 </div>
             </div>
-
             <Separator />
-
             <div className='flex flex-row justify-between items-center'>
                 <Label htmlFor='show-card-viewport'>Show card viewport</Label>
                 <Switch
@@ -55,9 +53,7 @@ export default function CardEditorAdvanced({
                     onCheckedChange={setShowCardViewport}
                 />
             </div>
-
             <Separator />
-
             <div className='flex flex-row justify-between items-center'>
                 <Label htmlFor='replace-on-paste'>Replace on paste</Label>
                 <Switch
@@ -66,9 +62,7 @@ export default function CardEditorAdvanced({
                     onCheckedChange={setPasteReplace}
                 />
             </div>
-
             <Separator />
-
             <div className='flex flex-row justify-between items-center'>
                 <Label htmlFor='auto-scroll'>Auto scroll</Label>
                 <Switch id='auto-scroll' checked={autoScroll} onCheckedChange={setAutoScroll} />

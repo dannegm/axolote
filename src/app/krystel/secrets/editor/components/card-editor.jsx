@@ -1,38 +1,44 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useCopyToClipboard } from '@uidotdev/usehooks';
 
 import { CircleDashed, Circle } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
+import { mergeDateAndTime } from '@/modules/core/helpers/dates';
+
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import useClonePosition from '@/modules/core/hooks/use-clone-position';
+import useDrafts from '@/modules/core/hooks/use-drafts';
+
 import ClientOnly from '@/modules/core/components/common/client-only';
+import ResponsiveBox from '@/modules/core/components/common/responsive-box';
+
+import useCreateQuoteAction from '@/modules/krystel/hooks/use-create-quote-action';
 
 import { Button } from '@/modules/shadcn/ui/button';
 
-import useCreateQuoteAction from '@/modules/krystel/hooks/use-create-quote-action';
-import { mergeDateAndTime } from '@/modules/core/helpers/dates';
 import CardEditorPreview from './card-editor-preview';
 import CardEditorPanel from './card-editor-panel';
-import ResponsiveBox from '@/modules/core/components/common/responsive-box';
+import CardEditorDrafts from './card-editor-drafts';
 
 export default function CardEditor() {
     const router = useRouter();
-    const [, copyToClipboard] = useCopyToClipboard();
 
     const $content = useRef();
 
     const [editorKey, setEditorKey] = useState(0);
+    const [draftsOpen, setDraftsOpen] = useState(false);
+
     const [showCardViewport, setShowCardViewport] = useLocalStorage(
         'editor:show_card_viewport',
         false,
     );
     const [pasteReplace, setPasteReplace] = useLocalStorage('editor:paste_replace', true);
     const [autoScroll, setAutoScroll] = useLocalStorage('editor:auto_scroll', false);
-
     const [content, setContent] = useLocalStorage('editor:content', '');
+
+    const { saveDraft } = useDrafts('editor:drafts');
 
     const [includesPushidedDate, setIncludesPushidedDate] = useState(false);
     const [publishedDate, setPublishedDate] = useState(new Date());
@@ -77,23 +83,13 @@ export default function CardEditor() {
         });
     };
 
+    const handleSaveDraft = () => {
+        saveDraft(content);
+        handleReset();
+    };
+
     const handleForceUpdate = () => {
         setEditorKey(prevKey => prevKey + 1);
-    };
-
-    const handlePaste = async () => {
-        const clipboardText = await navigator.clipboard.readText();
-        if (pasteReplace) {
-            setContent(clipboardText);
-        } else {
-            setContent(text => text + clipboardText);
-        }
-        $content.current?.onPaste?.();
-    };
-
-    const handleCopy = () => {
-        copyToClipboard(content);
-        $content.current?.onCopy?.();
     };
 
     useEffect(() => {
@@ -106,6 +102,8 @@ export default function CardEditor() {
         <ClientOnly>
             <div id='global-bg-portal' />
             <div id='card-bg-portal' />
+
+            <CardEditorDrafts open={draftsOpen} setOpen={setDraftsOpen} setContent={setContent} />
 
             <ResponsiveBox defaultBreakpointName='mobile' breakpoints={{ desktop: 720 }}>
                 <div className={cn('mt-4', 'lg:flex lg:flex-row lg:gap-4')}>
@@ -144,11 +142,11 @@ export default function CardEditor() {
                         setPasteReplace={setPasteReplace}
                         autoScroll={autoScroll}
                         setAutoScroll={setAutoScroll}
+                        setDraftsOpen={setDraftsOpen}
                         onForceUpdate={handleForceUpdate}
                         onReset={handleReset}
                         onSubmit={handleSubmit}
-                        onPaste={handlePaste}
-                        onCopy={handleCopy}
+                        onDraft={handleSaveDraft}
                     />
 
                     <CardEditorPreview

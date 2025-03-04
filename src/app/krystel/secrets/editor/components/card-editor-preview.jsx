@@ -42,7 +42,7 @@ export default function CardEditorPreview({ className, showCardViewport, editorK
                         {showCardViewport && (
                             <div
                                 className={cn(
-                                    'absolute z-500 top-2 left-1/2 transform -translate-x-1/2 flex gap-1 bg-black text-white px-3 py-1 rounded-full shadow-lg text-xs font-bold',
+                                    'absolute z-50 top-2 left-1/2 transform -translate-x-1/2 flex gap-1 bg-black text-white px-3 py-1 rounded-full shadow-lg text-xs font-bold',
                                 )}
                             >
                                 <span className='block'>{breakpoint}</span>
