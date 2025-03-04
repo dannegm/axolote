@@ -200,6 +200,7 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
                         </Button>
                         <IconPicker
                             triggerPlaceholder='Custom'
+                            value={icon !== 'hidden' && icon !== 'random' ? icon : undefined}
                             className={cn({
                                 'ring-2 ring-blue-500': icon !== 'hidden' && icon !== 'random',
                             })}
