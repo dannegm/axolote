@@ -67,7 +67,7 @@ export default function CardEditorPanel({
                         },
                     )}
                 >
-                    <Tabs defaultValue='configs'>
+                    <Tabs defaultValue='content'>
                         <TabsList className='grid w-full grid-cols-3'>
                             <TabsTrigger value='content'>Content</TabsTrigger>
                             <TabsTrigger value='configs'>Configs</TabsTrigger>

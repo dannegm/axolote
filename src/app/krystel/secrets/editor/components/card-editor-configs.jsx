@@ -116,7 +116,7 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
     return (
         <ScrollArea
             className={cn(
-                'w-[calc(100%+32px)] h-auto max-h-[400px] overflow-scroll -mx-4 px-4 pb-4',
+                'w-[calc(100%+32px)] h-auto max-h-[320px] sm:max-h-[400px] overflow-scroll -mx-4 px-4 pb-4',
                 className,
             )}
             type='always'
