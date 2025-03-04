@@ -27,6 +27,8 @@ import {
 import { themes } from '@/modules/krystel/helpers/themes';
 import { useGreetings } from '@/modules/krystel/services/greetings';
 
+const tailwindSuggestions = tailwind;
+
 const classNamesToArray = (classNames = '') => {
     if (!classNames) return [];
     return classNames
@@ -273,11 +275,12 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
                         <TagInput
                             placeholder='Add classes'
                             delimiterList={[' ', ',', ';']}
+                            delimiter=' '
                             tags={bg}
                             setTags={setBg}
-                            autocompleteOptions={tailwind}
+                            autocompleteOptions={tailwindSuggestions}
                             allowAutocomplete
-                            addTagsOnBlur
+                            addOnPaste
                         />
                     </div>
                 </div>
@@ -293,11 +296,12 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
                         <TagInput
                             placeholder='Add classes'
                             delimiterList={[' ', ',', ';']}
+                            delimiter=' '
                             tags={border}
                             setTags={setBorder}
-                            autocompleteOptions={tailwind}
+                            autocompleteOptions={tailwindSuggestions}
                             allowAutocomplete
-                            addTagsOnBlur
+                            addOnPaste
                         />
                     </div>
                 </div>
@@ -313,11 +317,12 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
                         <TagInput
                             placeholder='Add classes'
                             delimiterList={[' ', ',', ';']}
+                            delimiter=' '
                             tags={scheme}
                             setTags={setScheme}
-                            autocompleteOptions={tailwind}
+                            autocompleteOptions={tailwindSuggestions}
                             allowAutocomplete
-                            addTagsOnBlur
+                            addOnPaste
                         />
                     </div>
                 </div>

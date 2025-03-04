@@ -1,13 +1,17 @@
-import { format, formatDistanceToNow } from 'date-fns';
+import { format } from 'date-fns';
 import { Trash2, Save, Clock3 } from 'lucide-react';
 
+import { cn } from '@/modules/core/helpers/utils';
 import useDrafts from '@/modules/core/hooks/use-drafts';
+
+import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 import GiftCardPreview from '@/modules/krystel/components/common/gift-card-preview';
 
 import { Button } from '@/modules/shadcn/ui/button';
 import { ScrollArea } from '@/modules/shadcn/ui/scroll-area';
 import { Separator } from '@/modules/shadcn/ui/separator';
 import { Alert, AlertDescription, AlertTitle } from '@/modules/shadcn/ui/alert';
+
 import {
     Drawer,
     DrawerContent,
@@ -15,8 +19,6 @@ import {
     DrawerHeader,
     DrawerTitle,
 } from '@/modules/shadcn/ui/drawer';
-import { cn } from '@/modules/core/helpers/utils';
-import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 
 export default function CardEditorDrafts({ $configs, open, setOpen, setConfigs, setContent }) {
     const { drafts, pickDraft, removeDraft, clearDrafts } = useDrafts('editor:drafts');
