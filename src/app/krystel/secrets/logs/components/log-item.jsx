@@ -79,7 +79,11 @@ export default function LogItem({ item, realtime }) {
                             href={`/krystel?code=${item.metadata?.code}`}
                             className='flex-none w-full transition-all duration-150 lg:hover:scale-105 active:scale-95'
                         >
-                            <GiftCardPreview quote={item.quote.quote} code={item.metadata?.code} />
+                            <GiftCardPreview
+                                quote={item.quote.quote}
+                                code={item.metadata?.code}
+                                preview
+                            />
                         </a>
                     )}
                     {item.type === 'page_view' && (

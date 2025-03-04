@@ -18,8 +18,19 @@ const isValidCode = code => {
 };
 
 const getQuoteSettings = code => {
-    if (!isValidCode(code) || !code) {
+    if (!code) {
         return getRandomQuote();
+    }
+
+    if (!isValidCode(code)) {
+        const theme = getTheme(code);
+        return {
+            settings: '0:0:0:0:0',
+            icon: 'badge',
+            border: theme?.border,
+            bg: theme?.bg,
+            scheme: theme?.content,
+        };
     }
 
     const [, ...settings] = code.split(':');
@@ -52,12 +63,11 @@ export default function GiftCardPreview({
 
     const customElements = buildPreviewElements({ letter, preventReveal });
     const hasApp = /<app::/g.test(content);
-
-    const defaultTheme = !isValidCode() ? getTheme(code) : null;
-    const theme = defaultTheme || getTheme(configs?.theme);
+    const theme = getTheme(configs?.theme);
 
     return (
         <div
+            data-layer='card'
             className={cn(
                 'relative overflow-hidden bg-gray-100 bg-center bg-[length:50%] p-2 rounded-md shadow-xl transition-all duration-150',
                 {
@@ -77,6 +87,7 @@ export default function GiftCardPreview({
         >
             {(configs?.bg || theme?.bg || classNames?.bg) && (
                 <div
+                    data-layer='bg'
                     className={cn(
                         'absolute z-0 inset-0 pointer-events-none',
                         configs?.bg,
@@ -87,6 +98,7 @@ export default function GiftCardPreview({
             )}
 
             <div
+                data-layer='border'
                 className={cn(
                     'relative z-10 bg-gray-200 rounded-lg p-1 shadow-xl',
                     { 'bg-none': configs?.border || theme?.border },
@@ -97,6 +109,7 @@ export default function GiftCardPreview({
                 style={{ background: configs?.border || theme?.border ? '' : quoteSettings.border }}
             >
                 <div
+                    data-layer='content'
                     className={cn(
                         'flex flex-row gap-2 items-start p-3 rounded-md',
                         quoteSettings.scheme,
@@ -114,8 +127,9 @@ export default function GiftCardPreview({
                     }}
                 >
                     <div className='absolute top-2 right-2 flex flex-row gap-1'>
-                        {isFirstAppearance && (
+                        {!preview && isFirstAppearance && (
                             <div
+                                data-layer='badge'
                                 className={cn(
                                     'animate-in fade-in-0 duration-300 ease-in opacity-50',
                                     'flex items-center justify-center gap-2 w-4 h-4 bg-pink-600 rounded-full',
@@ -128,12 +142,13 @@ export default function GiftCardPreview({
                     </div>
 
                     {!configs?.fullscreen && configs?.icon !== 'hidden' && (
-                        <div className={cn(theme?.icon)}>
+                        <div data-layer='icon' className={cn(theme?.icon)}>
                             <LucideIcon className='text-current' />
                         </div>
                     )}
 
                     <div
+                        data-layer='text'
                         className={cn(
                             'mt-[2px] font-delius font-medium pr-4',
                             theme?.text,
@@ -141,6 +156,7 @@ export default function GiftCardPreview({
                         )}
                     >
                         <div
+                            data-layer='text-wrapper'
                             className={cn('block', {
                                 'overflow-hidden line-clamp-4 mask-gradient': letter && !hasApp,
                             })}
@@ -149,7 +165,10 @@ export default function GiftCardPreview({
                         </div>
 
                         {greetings && greetings !== 'hidden' && (
-                            <div className={cn('mt-2 font-pacifico', theme?.greetings)}>
+                            <div
+                                data-layer='greetings'
+                                className={cn('mt-2 font-pacifico', theme?.greetings)}
+                            >
                                 {greetings}
                             </div>
                         )}
