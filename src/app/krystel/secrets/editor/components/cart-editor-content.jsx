@@ -47,12 +47,13 @@ export default function CardEditorContent({
 
     const handlePaste = text => {
         const { configs, content } = extractConfigsAndContent(text);
+        const safeContent = content.replaceAll('||', '');
 
         if (pasteReplace) {
             setConfigs(configs);
-            setContent(content);
+            setContent(safeContent);
         } else {
-            setContent(prev => prev + content);
+            setContent(prev => prev + safeContent);
         }
 
         setPasted(true);

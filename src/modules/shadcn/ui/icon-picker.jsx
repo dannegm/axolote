@@ -12,6 +12,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '@/modules/shadcn/ui/tooltip';
+import { pascalCase } from '@/modules/core/helpers/strings';
 
 const ICON_BUTTONS = Object.keys(icons).map(icon => ({
     icon: icon,
@@ -92,8 +93,8 @@ const IconPicker = ({
                     <Button variant='outline' className={className}>
                         {value || selectedIcon ? (
                             <>
-                                <Icon name={value || selectedIcon} />
-                                {showIconName && <span>{value || selectedIcon}</span>}
+                                <Icon name={pascalCase(value || selectedIcon)} />
+                                {showIconName && <span>{pascalCase(value || selectedIcon)}</span>}
                             </>
                         ) : (
                             triggerPlaceholder
