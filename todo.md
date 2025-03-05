@@ -38,7 +38,7 @@
     -   [ ] Degradados
     -   [ ] Gifs
     -   [ ] Por clima
--   [ ] Un componente para apps
+-   [x] Un componente para apps
     -   [x] Propuesta de san valentin
     -   [x] Una lista de todos los easter eggs
     -   [x] Un qué prefieres? Que me notifique, tipo, votaciones
@@ -71,24 +71,24 @@
 
 -   [x] Editor
 
-    -   [ ] Añadir pestañas (Contenido, Diseño, Avanzado)
-    -   [ ] Contenido
+    -   [x] Añadir pestañas (Contenido, Diseño, Avanzado)
+    -   [x] Contenido
         -   [ ] Añadir botones WYSIWYG
         -   [ ] Añadir opción de subir fotos
         -   [ ] Selector de stickers
         -   [ ] Opción de subir sticker
         -   [ ] Selector de efectos
-    -   [ ] Diseño
-        -   [ ] Selector de iconos
-        -   [ ] Selector de fondos
-        -   [ ] Selector de bordes
-        -   [ ] Selector de schemes
-    -   [ ] Avanzado
-        -   [ ] Es una carta
-        -   [ ] Es un frame
-        -   [ ] Ocultar fecha
-        -   [ ] Seleccionar fecha de publicación
-        -   [ ] Personalizar saludo
+    -   [x] Diseño
+        -   [x] Selector de iconos
+        -   [x] Selector de fondos
+        -   [x] Selector de bordes
+        -   [x] Selector de schemes
+    -   [x] Avanzado
+        -   [x] Es una carta
+        -   [x] Es un frame
+        -   [x] Ocultar fecha
+        -   [x] Seleccionar fecha de publicación
+        -   [x] Personalizar saludo
 
 -   [x] Easter eggs
     -   [x] 11:11
@@ -101,9 +101,9 @@
     -   [x] El mayor secreto (Encontrar el panel)
     -   [x] Tarjeta que describe los easter eggs
     -   [ ] Que pase algo cuando se pique el boton de like 100 veces
-    -   [ ] Que pase algo al entrar justo el día de mi cumpleaños
+    -   [x] Que pase algo al entrar justo el día de mi cumpleaños
     -   [ ] Que pase algo al entrar el día de el cumpleaños de ella
     -   [ ] Que pase algo al entrar durante 5 días seguidos
     -   [ ] Haber pasado un mes sin entrar
-    -   [ ] Leer una historia
-    -   [ ] Presionar el botón de emergencia
+    -   [x] Leer una historia
+    -   [x] Presionar el botón de emergencia

@@ -1,4 +1,4 @@
-import { trim } from 'lodash';
+import { merge, trim } from 'lodash';
 
 export const replaceWithLongestSentence = text => {
     const regex = /<words::([^>]+)>/g;
@@ -42,6 +42,11 @@ export const buildConfigs = (configs = {}, trimmed = false) => {
 export const extractConfigs = (configsText = null) => {
     if (!configsText) return null;
 
+    const regex = /^\(\{(.*?)\}\)/;
+    if (regex.test(configsText)) {
+        configsText = configsText.match(regex)[1];
+    }
+
     return configsText
         .trim()
         .split('|')
@@ -73,4 +78,14 @@ export const extractConfigsAndContent = (text = '') => {
         configs: null,
         content: text,
     };
+};
+
+export const mergeConfigs = (source, text) => {
+    const { configs, content } = extractConfigsAndContent(text);
+    const sourceCondifs = extractConfigs(source);
+
+    const mergedConfigs = merge(sourceCondifs, configs);
+    const preparedConfids = buildConfigs(mergedConfigs);
+
+    return `${preparedConfids} ${content}`;
 };

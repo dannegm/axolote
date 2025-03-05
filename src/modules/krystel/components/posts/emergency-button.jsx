@@ -5,10 +5,14 @@ import { Siren } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import { useToast } from '@/modules/core/providers/toast-provider';
-import usePanicButton from '../../hooks/use-panic-button';
+
+import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
+import usePanicButton from '@/modules/krystel/hooks/use-panic-button';
 
 export default function EmergencyButton({ triggerCreate }) {
     const { showToast } = useToast();
+    const { discover } = useEasterEggs();
+
     const [emergency, setEmegency] = useState(false);
     const [playBeep] = useSound('/sounds/smooth-beep.mp3');
 
@@ -26,6 +30,7 @@ export default function EmergencyButton({ triggerCreate }) {
         setEmegency(true);
         triggerCreate();
         playBeep();
+        discover('panic_button');
     };
 
     return (

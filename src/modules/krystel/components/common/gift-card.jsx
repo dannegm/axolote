@@ -9,9 +9,15 @@ import { cn } from '@/modules/core/helpers/utils';
 import Portal from '@/modules/core/components/common/portal';
 
 import { getTheme } from '@/modules/krystel/helpers/themes';
-import { isElevenEleven, isFoolsDay, isThreeInTheMorning } from '@/modules/krystel/helpers/dates';
+import {
+    isElevenEleven,
+    isFoolsDay,
+    isThreeInTheMorning,
+    isWomenDay,
+} from '@/modules/krystel/helpers/dates';
 import {
     extractConfigsAndContent,
+    mergeConfigs,
     replaceWithLongestSentence,
 } from '@/modules/krystel/helpers/strings';
 
@@ -28,6 +34,7 @@ import { useGreetings } from '@/modules/krystel/services/greetings';
 import RichText from './rich-text';
 import Card from './card';
 import { pascalCase } from '@/modules/core/helpers/strings';
+import useHasElapsedTime from '@/modules/core/hooks/use-has-elapsed-time';
 
 const secretDiscover = (discover, secrets = {}) => {
     Object.entries(secrets).forEach(([key, validator]) => {
@@ -70,6 +77,8 @@ export default function GiftCard({
     const elevenEleven = isElevenEleven();
     const threeInTheMorning = isThreeInTheMorning();
     const foolsDay = isFoolsDay();
+    const womenDay = isWomenDay();
+    const monthHasBeenPassed = useHasElapsedTime('record:last_visit', 30 * 24 * 60 * 60 * 1000);
 
     secretDiscover(discover, {
         hidden_card: !show,
@@ -77,6 +86,7 @@ export default function GiftCard({
         ufo_time: threeInTheMorning,
         fools_day: foolsDay,
         uwu_mode: uwu,
+        long_long_time: monthHasBeenPassed,
 
         secret_card: id === '128',
         nyancat: id === '127',
@@ -91,6 +101,11 @@ export default function GiftCard({
         {
             validator: threeInTheMorning,
             mapper: () => '({icon:hidden}) <sticker::ufo>',
+        },
+        {
+            validator: womenDay,
+            mapper: () =>
+                mergeConfigs('({bg:bg-purple-300 mix-blend-overlay|border:bg-purple-500})', quote),
         },
     ]);
 

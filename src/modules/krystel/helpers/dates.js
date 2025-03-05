@@ -60,3 +60,8 @@ export const isFoolsDay = (today = new Date()) => {
 
     return isSameDay(today, aprilFools) || isSameDay(today, inocentes);
 };
+
+export const isWomenDay = (today = new Date()) => {
+    const womenDay = new Date(today.getFullYear(), 2, 8);
+    return isSameDay(today, womenDay);
+};

@@ -9,7 +9,7 @@ const easterEggs = [
     { id: 'secret_card', description: 'Encontraste la carta más secreta de todas' },
     { id: 'hidden_card', description: 'Ahora ya sabes cómo ver cartitas ocultas' },
     { id: 'balloons', description: '¿Te divertiste reventado los globos?' },
-    { id: 'valentin', description: 'Sabía que sí querías ser mi san valentín' },
+    { id: 'valentin', description: 'Sabía que sí querías ser mi san valentín <3' },
     { id: 'nyancat', description: 'Nya nya nya nya' },
     { id: 'locos', description: 'Pero esta noche estas loca como yo..' },
     { id: 'tldr', description: 'No pensé que fueras a leerlo todo' },
@@ -17,6 +17,15 @@ const easterEggs = [
     { id: 'wyr', description: 'La vida está llena de decisiones difíciles' },
     { id: 'eggs_hacked', description: 'Oye!. Eso es hacer trampa...' },
     { id: 'fools_day', description: 'ɐɥɐɥɐɥ :ꓷ ¿sǝʌǝɹ ןɐ ɐʇsǝ opoʇ ǝnb ɹoԀ?' },
+    {
+        id: 'long_long_time',
+        description: 'Ha pasado tiempo desde la última vez que viniste por aquí, te extrañaba.',
+    },
+    {
+        id: 'panic_button',
+        description:
+            'Espero que hayas presionado ese botón sólo por curiosidad y no por una emergencia real.',
+    },
 ];
 
 export default function useEasterEggs() {
