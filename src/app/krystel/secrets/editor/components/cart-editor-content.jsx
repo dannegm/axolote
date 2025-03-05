@@ -6,14 +6,28 @@ import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { Clipboard, Copy, ClipboardPlus } from 'lucide-react';
 
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
-
 import { useResponsiveBox } from '@/modules/core/components/common/responsive-box';
+import { buildConfigs, extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
+
 import { cn } from '@/modules/core/helpers/utils';
 import { Textarea } from '@/modules/shadcn/ui/textarea';
-
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/modules/shadcn/ui/tooltip';
 import { Toolbar, ToolbarButton, ToolbarAction, ToolbarSpacer } from '@/modules/shadcn/ui/toolbar';
 
-export default function CardEditorContent({ ref, className, content, setContent, setDraftsOpen }) {
+export default function CardEditorContent({
+    ref,
+    className,
+    configs,
+    content,
+    setConfigs,
+    setContent,
+    setDraftsOpen,
+}) {
     const $text = useRef();
     const [, copyToClipboard] = useCopyToClipboard();
 
@@ -31,20 +45,36 @@ export default function CardEditorContent({ ref, className, content, setContent,
         }, 200);
     };
 
-    const handlePaste = async () => {
-        const clipboardText = await navigator.clipboard.readText();
+    const handlePaste = text => {
+        const { configs, content } = extractConfigsAndContent(text);
+
         if (pasteReplace) {
-            setContent(clipboardText);
+            setConfigs(configs);
+            setContent(content);
         } else {
-            setContent(text => text + clipboardText);
+            setContent(prev => prev + content);
         }
 
         setPasted(true);
         selectAnimation();
     };
 
+    const handleInputPaste = event => {
+        event.preventDefault();
+        const clipboardText = event.clipboardData.getData('text');
+        handlePaste(clipboardText);
+    };
+
+    const handleButtonPaste = async () => {
+        const clipboardText = await navigator.clipboard.readText();
+        handlePaste(clipboardText);
+    };
+
     const handleCopy = () => {
-        copyToClipboard(content);
+        const configsEncoded = buildConfigs(configs);
+        const composedContent = `${configsEncoded} ${content}`.trim();
+
+        copyToClipboard(composedContent);
         setCopy(true);
         selectAnimation();
     };
@@ -52,13 +82,31 @@ export default function CardEditorContent({ ref, className, content, setContent,
     return (
         <div ref={ref} className={cn('flex flex-col gap-2', className)}>
             <Toolbar>
-                <ToolbarAction onClick={handlePaste}>
-                    {pasteReplace ? <Clipboard /> : <ClipboardPlus />}
-                </ToolbarAction>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <ToolbarAction onClick={handleButtonPaste}>
+                                {pasteReplace ? <Clipboard /> : <ClipboardPlus />}
+                            </ToolbarAction>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            {pasteReplace ? <p>Paste and replace</p> : <p>Simple paste</p>}
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
 
-                <ToolbarAction onClick={handleCopy}>
-                    <Copy />
-                </ToolbarAction>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <ToolbarAction onClick={handleCopy}>
+                                <Copy />
+                            </ToolbarAction>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Copy with configs</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
 
                 <ToolbarSpacer />
 
@@ -76,6 +124,7 @@ export default function CardEditorContent({ ref, className, content, setContent,
                 maxRows={breakpoint === 'desktop' ? 20 : 8}
                 value={content}
                 onChange={ev => setContent(ev.target.value)}
+                onPaste={handleInputPaste}
             />
         </div>
     );

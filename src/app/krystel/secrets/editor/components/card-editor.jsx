@@ -79,12 +79,12 @@ export default function CardEditor() {
         setIncludesPushidedDate(false);
         setPublishedDate(new Date());
         setPublishedTime(new Date());
-        $configs?.current?.reload?.();
+        $configs?.current?.reload?.({});
     };
 
     const handleSubmit = () => {
         if (!canSave) return;
-        const preparedContent = prepare(content);
+        const preparedContent = prepare(composedContent);
         const publishedAt = includesPushidedDate
             ? mergeDateAndTime(publishedDate, publishedTime)
             : new Date();

@@ -16,6 +16,29 @@ export const replaceWithLongestSentence = text => {
     return text;
 };
 
+export const buildConfigs = (configs = {}, trimmed = false) => {
+    if (!configs) return '';
+    if (!Object.entries(configs).length) return '';
+    const results = Object.entries(configs)
+        .filter(([key, value]) => value)
+        .filter(([key, value]) => value !== 'default')
+        .filter(([key, value]) => value !== 'random')
+        .map(([key, value]) => {
+            if (typeof value === 'boolean' && value) {
+                return `${key}`;
+            }
+            if (typeof value === 'boolean' && !value) {
+                return '';
+            }
+            return `${key}:${value}`;
+        })
+        .join('|');
+
+    if (!results) return '';
+    if (trimmed) return results;
+    return `({${results}})`;
+};
+
 export const extractConfigs = (configsText = null) => {
     if (!configsText) return null;
 
@@ -36,35 +59,18 @@ export const extractConfigsAndContent = (text = '') => {
 
     if (match) {
         const configs = extractConfigs(match[1]);
+        const configsRaw = buildConfigs(configs);
         const content = trim(text.slice(match[0].length), '||').trim();
         return {
+            configsRaw,
             configs,
             content,
         };
     }
 
     return {
+        configsRaw: '',
         configs: null,
         content: text,
     };
-};
-
-export const buildConfigs = (configs, trimmed = false) => {
-    const results = Object.entries(configs)
-        .filter(([key, value]) => value)
-        .filter(([key, value]) => value !== 'default')
-        .filter(([key, value]) => value !== 'random')
-        .map(([key, value]) => {
-            if (typeof value === 'boolean' && value) {
-                return `${key}`;
-            }
-            if (typeof value === 'boolean' && !value) {
-                return '';
-            }
-            return `${key}:${value}`;
-        })
-        .join('|');
-
-    if (trimmed) return results;
-    return `({${results}})`;
 };

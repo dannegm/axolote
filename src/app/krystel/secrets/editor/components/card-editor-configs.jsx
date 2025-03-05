@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useImperativeHandle, useState } from 'react';
+import { useEffect, useImperativeHandle, useState, useCallback } from 'react';
 import { capitalize } from 'lodash';
 import { Shuffle, SquareDashed } from 'lucide-react';
 
@@ -40,6 +40,17 @@ const classNamesToArray = (classNames = '') => {
         }));
 };
 
+const useNextTick = (fn, deps = []) => {
+    return useCallback(
+        (...args) => {
+            return new Promise(resolve => {
+                setTimeout(() => resolve(fn(...args)), 1000);
+            });
+        },
+        [fn, ...deps],
+    );
+};
+
 export default function CardEditorConfigs({ ref, className, configs, setConfigs }) {
     const greetingsPlaceholder = useGreetings();
 
@@ -53,7 +64,6 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
     const [bg, setBg] = useState([]);
     const [border, setBorder] = useState([]);
     const [scheme, setScheme] = useState([]);
-    const [name, setName] = useState(true);
     const [date, setDate] = useState(true);
 
     const [greetings, setGreetings] = useState('');
@@ -71,7 +81,6 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
             bg: bg.map(i => i.text).join(' '),
             border: border.map(i => i.text).join(' '),
             scheme: scheme.map(i => i.text).join(' '),
-            name: name ? 'default' : 'hidden',
             date: date ? 'default' : 'hidden',
             greetings: !greetingsShow ? 'hidden' : greetings === '' ? 'random' : greetings,
         };
@@ -89,28 +98,27 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
         bg,
         border,
         scheme,
-        name,
         date,
     ]);
 
-    const reload = () => {
-        setLetter(configs?.letter);
-        setFullscreen(configs?.fullscreen);
-        setFullwidth(configs?.fullwidth);
-        setTheme(configs?.theme || 'default');
-        setIcon(configs?.icon || 'random');
-        setFrame(configs?.frame);
-        setDark(configs?.dark);
-        setBg(classNamesToArray(configs?.bg));
-        setBorder(classNamesToArray(configs?.border));
-        setScheme(classNamesToArray(configs?.scheme));
-        setName(configs?.name);
-        setDate(configs?.date);
-        setGreetings(configs?.greetings);
-        setGreetingsShow(configs?.greetings !== 'hidden');
+    const reload = (confs = configs) => {
+        setLetter(confs?.letter);
+        setFullscreen(confs?.fullscreen);
+        setFullwidth(confs?.fullwidth);
+        setTheme(confs?.theme || 'default');
+        setIcon(confs?.icon || 'random');
+        setFrame(confs?.frame);
+        setDark(confs?.dark);
+        setBg(classNamesToArray(confs?.bg));
+        setBorder(classNamesToArray(confs?.border));
+        setScheme(classNamesToArray(confs?.scheme));
+        setDate(Boolean(confs?.date === undefined || confs?.date !== 'hidden'));
+        setGreetings(confs?.greetings);
+        setGreetingsShow(confs?.greetings !== 'hidden');
     };
 
     useImperativeHandle(ref, () => ({ reload }));
+
     useEffect(() => {
         reload();
     }, []);
@@ -157,7 +165,7 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
                 <div className='flex flex-row justify-between items-center'>
                     <Label htmlFor='configs:theme'>Theme</Label>
 
-                    <Select defaultValue={theme} onValueChange={setTheme}>
+                    <Select value={theme} onValueChange={setTheme}>
                         <SelectTrigger className='w-[140px] bg-white'>
                             <SelectValue placeholder='Default theme' />
                         </SelectTrigger>
@@ -325,13 +333,6 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
                             addOnPaste
                         />
                     </div>
-                </div>
-
-                {/* Name */}
-                <Separator />
-                <div className='flex flex-row justify-between items-center'>
-                    <Label htmlFor='configs:name'>Show Name</Label>
-                    <Switch id='configs:name' checked={name} onCheckedChange={setName} />
                 </div>
 
                 {/* Date */}

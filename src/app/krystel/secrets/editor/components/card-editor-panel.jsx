@@ -77,7 +77,9 @@ export default function CardEditorPanel({
                             <CardEditorContent
                                 ref={$content}
                                 content={content}
+                                configs={configs}
                                 setContent={setContent}
+                                setConfigs={setConfigs}
                                 setDraftsOpen={setDraftsOpen}
                             />
                         </TabsContent>

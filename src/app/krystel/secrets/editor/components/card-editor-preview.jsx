@@ -4,13 +4,22 @@ import { cn } from '@/modules/core/helpers/utils';
 import { Tabs, TabsList, TabsTrigger } from '@/modules/shadcn/ui/tabs';
 import GiftCard from '@/modules/krystel/components/common/gift-card';
 import ResponsiveBox from '@/modules/core/components/common/responsive-box';
+import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 
 const loremIpsum = '████   ████   ██||███████   ██████||████   ██████';
 
-const rich = (text = '') => text.replaceAll('\n', '||');
+const rich = (text = '') => {
+    const { configsRaw, content } = extractConfigsAndContent(text);
+    return {
+        hasContent: content.trim() !== '',
+        composedContent: configsRaw + content.replaceAll('\n', '||'),
+        configsRaw,
+    };
+};
 
 export default function CardEditorPreview({ className, showCardViewport, editorKey, content }) {
     const [mode, setMode] = useState('mobile');
+    const richContent = rich(content);
 
     return (
         <div
@@ -59,11 +68,15 @@ export default function CardEditorPreview({ className, showCardViewport, editorK
                             classNames={{
                                 text: cn({
                                     'text-gray-200 text-sm leading-6 whitespace-pre':
-                                        !rich(content),
+                                        !richContent.hasContent,
                                 }),
                                 bg: '-z-10',
                             }}
-                            quote={rich(content) || loremIpsum}
+                            quote={
+                                richContent.hasContent
+                                    ? richContent.composedContent
+                                    : richContent.configsRaw + loremIpsum
+                            }
                         />
                     </div>
                 )}
