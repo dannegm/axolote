@@ -65,6 +65,7 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
     const [border, setBorder] = useState([]);
     const [scheme, setScheme] = useState([]);
     const [date, setDate] = useState(true);
+    const [target, setTarget] = useState('');
 
     const [greetings, setGreetings] = useState('');
     const [greetingsShow, setGreetingsShow] = useState(true);
@@ -78,6 +79,7 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
             icon,
             frame,
             dark,
+            target,
             bg: bg.map(i => i.text).join(' '),
             border: border.map(i => i.text).join(' '),
             scheme: scheme.map(i => i.text).join(' '),
@@ -99,6 +101,7 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
         border,
         scheme,
         date,
+        target,
     ]);
 
     const reload = (confs = configs) => {
@@ -115,6 +118,7 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
         setDate(Boolean(confs?.date === undefined || confs?.date !== 'hidden'));
         setGreetings(confs?.greetings);
         setGreetingsShow(confs?.greetings !== 'hidden');
+        setTarget(confs?.target);
     };
 
     useImperativeHandle(ref, () => ({ reload }));
@@ -158,6 +162,13 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
                         checked={fullwidth}
                         onCheckedChange={setFullwidth}
                     />
+                </div>
+
+                {/* Date */}
+                <Separator />
+                <div className='flex flex-row justify-between items-center'>
+                    <Label htmlFor='configs:date'>Show Date</Label>
+                    <Switch id='configs:date' checked={date} onCheckedChange={setDate} />
                 </div>
 
                 {/* Theme */}
@@ -238,6 +249,23 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
                             defaultValue={greetings}
                             disabled={!greetingsShow}
                             onChange={ev => setGreetings(ev.target.value)}
+                        />
+                    </div>
+                </div>
+
+                {/* Target */}
+                <Separator />
+                <div className='flex flex-col gap-2'>
+                    <div className='flex flex-row items-center justify-between'>
+                        <Label htmlFor='configs:target'>Target</Label>
+                    </div>
+
+                    <div className={cn('flex flex-row gap-2')}>
+                        <Input
+                            className='bg-white'
+                            placeholder='http://...'
+                            defaultValue={target}
+                            onChange={ev => setTarget(ev.target.value)}
                         />
                     </div>
                 </div>
@@ -333,13 +361,6 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
                             addOnPaste
                         />
                     </div>
-                </div>
-
-                {/* Date */}
-                <Separator />
-                <div className='flex flex-row justify-between items-center'>
-                    <Label htmlFor='configs:date'>Show Date</Label>
-                    <Switch id='configs:date' checked={date} onCheckedChange={setDate} />
                 </div>
             </div>
         </ScrollArea>
