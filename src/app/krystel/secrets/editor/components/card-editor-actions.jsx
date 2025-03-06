@@ -48,11 +48,7 @@ export default function CardEditorActions({
                 disabled={!canReset}
                 onClick={onReset}
             >
-                <Trash2
-                    className={cn('transition-all duration-150', {
-                        'rotate-180': !expanded,
-                    })}
-                />
+                <Trash2 className={cn('transition-all duration-150')} />
             </Button>
 
             <Button type='button' variant='secondary' disabled={!canReset} onClick={onDraft}>
