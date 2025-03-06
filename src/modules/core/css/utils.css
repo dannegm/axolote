@@ -1,3 +1,8 @@
+:root {
+    --shadow-upsidedown: 0 -20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)),
+        0 -8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+}
+
 @utility all-unset {
     all: unset;
 }
@@ -33,6 +38,10 @@
     }
     .bg-img-pink-clouds {
         background-image: url('/frames/a0738d2429d5119d441a7a8a9310dd00.jpg');
+    }
+
+    .bg-chromatic-wheel {
+        background-image: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);
     }
 
     .bg-playground {

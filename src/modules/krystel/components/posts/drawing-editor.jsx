@@ -93,7 +93,7 @@ const ColorPicker = ({ className, direction, position, colors = [], color, onSel
                 {() => (
                     <Button
                         icon={
-                            <Circle className='bg-conic/decreasing from-violet-700 via-lime-300 to-violet-700' />
+                            <Circle className='bg-chromatic-wheel' />
                         }
                     />
                 )}

@@ -6,17 +6,27 @@ export default function useHasElapsedTime(
     key = 'record:last_record',
     duration = 24 * 60 * 60 * 1000,
 ) {
-    const [lastRecord, setLastRecord] = useLocalStorage(key, new Date());
+    const [lastRecord, setLastRecord] = useLocalStorage(key, null);
     const [hasElapsed, setHasElapsed] = useState(false);
 
     useEffect(() => {
-        const now = new Date();
-        const lastTime = new Date(lastRecord);
-        if (differenceInMilliseconds(now, lastTime) >= duration) {
-            setHasElapsed(true);
-            setLastRecord(now);
-        } else {
-            setHasElapsed(false);
+        if (!lastRecord) {
+            setLastRecord(new Date().toISOString());
+        }
+    }, [lastRecord]);
+
+    useEffect(() => {
+        if (lastRecord) {
+            const now = new Date();
+            const lastTime = new Date(lastRecord);
+            console.log(lastTime);
+
+            if (differenceInMilliseconds(now, lastTime) >= duration) {
+                setHasElapsed(true);
+                setLastRecord(now);
+            } else {
+                setHasElapsed(false);
+            }
         }
     }, [lastRecord, duration]);
 

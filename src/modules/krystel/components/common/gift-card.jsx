@@ -35,18 +35,20 @@ import RichText from './rich-text';
 import Card from './card';
 import { pascalCase } from '@/modules/core/helpers/strings';
 import useHasElapsedTime from '@/modules/core/hooks/use-has-elapsed-time';
+import useSettings from '@/modules/core/hooks/use-settings';
 
 const secretDiscover = (discover, secrets = {}) => {
-    Object.entries(secrets).forEach(([key, validator]) => {
-        if (validator) {
+    Object.entries(secrets).forEach(([key, condition]) => {
+        if (condition) {
             discover(key);
         }
     });
 };
 
 const conditionalQuote = (quote, maps) => {
-    return maps.reduce((q, { validator, mapper }) => {
-        if (!validator) return q;
+    const reverseMaps = [...maps].reverse();
+    return reverseMaps.reduce((q, { condition, mapper }) => {
+        if (!condition) return q;
         return mapper?.(q);
     }, quote);
 };
@@ -66,6 +68,10 @@ export default function GiftCard({
     const [uwu] = useQueryState('uwu', parseAsBoolean.withDefault(false));
 
     const { discover } = useEasterEggs();
+    const [ignoreConditionalQuotes] = useSettings(
+        'settings:cards:ignore_conditional_quotes',
+        false,
+    );
 
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
@@ -95,17 +101,29 @@ export default function GiftCard({
 
     const preparedQuote = conditionalQuote(quote, [
         {
-            validator: elevenEleven,
+            condition: ignoreConditionalQuotes,
+            mapper: () => quote,
+        },
+        {
+            condition: elevenEleven,
             mapper: () => '({icon:hidden}) <badge::pray>$$11:11$$ pide un deseo.',
         },
         {
-            validator: threeInTheMorning,
+            condition: threeInTheMorning,
             mapper: () => '({icon:hidden}) <sticker::ufo>',
         },
         {
-            validator: womenDay,
+            condition: womenDay,
             mapper: () =>
                 mergeConfigs('({bg:bg-purple-300 mix-blend-overlay|border:bg-purple-500})', quote),
+        },
+        {
+            condition: foolsDay,
+            mapper: () =>
+                mergeConfigs(
+                    '({border:bg-chromatic-wheel shadow-(--shadow-upsidedown) rotate-180})',
+                    quote,
+                ),
         },
     ]);
 
@@ -152,9 +170,7 @@ export default function GiftCard({
     return (
         <QuoteProvider quote={{ settings }}>
             <Card
-                className={cn(theme?.card, className, classNames?.card, {
-                    'rotate-180': foolsDay,
-                })}
+                className={cn(theme?.card, className, classNames?.card)}
                 border={configs?.border || theme?.border ? '' : border}
                 scheme={scheme}
                 letter={letter}

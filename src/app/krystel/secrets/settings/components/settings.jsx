@@ -8,6 +8,7 @@ import { Switch } from '@/modules/shadcn/ui/switch';
 import { capitalize } from 'lodash';
 
 const settingsList = {
+    // Admin
     'settings:show_secrets': {
         key: 'settings:show_secrets',
         label: 'Show Secrets',
@@ -32,6 +33,8 @@ const settingsList = {
         defaultValue: false,
         group: 'admin',
     },
+
+    // Development
     'settings:skip_actions': {
         key: 'settings:skip_actions',
         label: 'Skip Actions',
@@ -50,6 +53,14 @@ const settingsList = {
         defaultValue: false,
         group: 'development',
     },
+
+    // Cards
+    'settings:cards:ignore_conditional_quotes': {
+        key: 'settings:cards:ignore_conditional_quotes',
+        label: 'Ignore Conditional Quotes',
+        defaultValue: false,
+        group: 'cards',
+    },
     'settings:cards:includes_future': {
         key: 'settings:cards:includes_future',
         label: 'Includes Future Cards',
@@ -62,6 +73,8 @@ const settingsList = {
         defaultValue: false,
         group: 'cards',
     },
+
+    // Posts
     'settings:posts:indev': {
         key: 'settings:posts:indev',
         label: 'Post In Development',
