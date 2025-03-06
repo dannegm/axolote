@@ -1,8 +1,11 @@
-import { RefreshCcw } from 'lucide-react';
+import { useEffect } from 'react';
 import { parseAsString, useQueryState } from 'nuqs';
+
+import { RefreshCcw } from 'lucide-react';
 
 import useSettings from '@/modules/core/hooks/use-settings';
 import ClientOnly from '@/modules/core/components/common/client-only';
+import JsonViewer from '@/modules/core/components/common/json-viewer';
 
 import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
@@ -14,10 +17,7 @@ import GiftCard from '@/modules/krystel/components/common/gift-card';
 import Button from '@/modules/krystel/components/common/button';
 import ShareButton from '@/modules/krystel/components/common/share-button';
 import LikeButton from '@/modules/krystel/components/common/like-button';
-import JsonViewer from '@/modules/core/components/common/json-viewer';
 import CopyText from '@/modules/krystel/components/common/copy-text';
-import { useEffect } from 'react';
-import { cn } from '@/modules/core/helpers/utils';
 import GiftCardPreview from '@/modules/krystel/components/common/gift-card-preview';
 
 const getBaseUrl = () => window.location.origin + window.location.pathname;
