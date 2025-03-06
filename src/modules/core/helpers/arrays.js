@@ -54,6 +54,12 @@ export const removeItemById = (arr = [], id) => {
     return arr.filter(item => item.id !== id);
 };
 
+export const removeItemAtIndex = (arr, index) => {
+    const element = arr.at(index);
+    const deletedIndex = arr.indexOf(element);
+    return [...arr.slice(0, deletedIndex), ...arr.slice(deletedIndex + 1)];
+};
+
 export const randomSlice = (arr = [], size = 1) => {
     return [...shuffle(arr)].slice(0, size);
 };

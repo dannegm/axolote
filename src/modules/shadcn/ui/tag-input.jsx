@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as PrimitiveEmblor from 'emblor';
 import Fuse from 'fuse.js';
 
 import { cn } from '@/modules/shadcn/lib/utils';
-import { Badge } from '@/modules/shadcn/ui/badge';
-import { Popover, PopoverContent, PopoverTrigger } from '@/modules/shadcn/ui/popover';
+import { Button } from '@/modules/shadcn/ui/button';
 
 export function TagInput({
     className,
@@ -23,6 +22,8 @@ export function TagInput({
     const [activeTagIndex, setActiveTagIndex] = useState();
     const [input, setInput] = useState('');
     const [results, setResults] = useState([]);
+
+    const [increment, setIncrement] = useState(0);
 
     const $input = useRef();
     const $fuse = useRef();
@@ -44,8 +45,24 @@ export function TagInput({
             text: item,
         });
 
+        setIncrement(i => i + 1);
         setTags(newTags);
         setResults([]);
+
+        setTimeout(() => {
+            $input.current?.focus?.();
+        }, 100);
+    };
+
+    const handleButtonKeyDown = (e, index) => {
+        if (e.key === 'ArrowRight') {
+            const next = document.querySelector(`[data-index="${index + 1}"]`);
+            if (next) next.focus();
+        }
+        if (e.key === 'ArrowLeft') {
+            const prev = document.querySelector(`[data-index="${index - 1}"]`);
+            if (prev) prev.focus();
+        }
     };
 
     useEffect(() => {
@@ -63,10 +80,32 @@ export function TagInput({
         }
     }, [input, allowAutocomplete]);
 
+    useEffect(() => {
+        const handleInputKeyDown = e => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                const next = document.querySelector(`[data-index="0"]`);
+                if (next) next.focus();
+            }
+
+            if ((e.metaKey || e.ctrlKey) && e.key === 'Backspace') {
+                e.preventDefault();
+                setTags([]);
+            }
+        };
+
+        $input.current?.addEventListener('keydown', handleInputKeyDown);
+
+        return () => {
+            $input.current?.removeEventListener('keydown', handleInputKeyDown);
+        };
+    }, [increment, $input.current]);
+
     return (
         <div className={cn('relative flex-1 inline-block', className)}>
             <PrimitiveEmblor.TagInput
-                ref={$input}
+                key={`primitive-tag-input-${increment}`}
+                inputProps={{ ref: $input }}
                 styleClasses={{
                     inlineTagsContainer: cn(
                         'border-input rounded-md bg-background shadow-sm shadow-black/5 transition-shadow focus-within:border-ring focus-within:outline-none focus-within:ring-[3px] focus-within:ring-ring/20 p-1 gap-1',
@@ -100,18 +139,21 @@ export function TagInput({
             {Boolean(results.length) && (
                 <div
                     className={cn(
-                        'absolute z-50 flex flex-row flex-wrap gap-1 p-2 mt-1 rounded-md border border-neutral-200 bg-white text-neutral-950 shadow-md outline-hidden ',
+                        'absolute z-50 flex flex-row flex-wrap gap-1 p-2 mt-1 rounded-md border border-neutral-200 bg-white text-neutral-950 shadow-md outline-hidden',
                     )}
                 >
-                    {results.map(tag => (
-                        <Badge
+                    {results.map((tag, index) => (
+                        <Button
                             key={`tag-suggestion-${tag.item}-${tag.refIndex}`}
+                            data-index={index}
                             className='cursor-pointer'
                             variant='outline'
+                            size='badge'
                             onClick={() => handleAcceptSuggestion(tag.item)}
+                            onKeyDown={e => handleButtonKeyDown(e, index)}
                         >
                             {tag.item}
-                        </Badge>
+                        </Button>
                     ))}
                 </div>
             )}
