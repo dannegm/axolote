@@ -39,7 +39,7 @@ export default function PostItemMenu({ className, item }) {
                 <DropdownMenuContent className='w-56 z-[70]' align='end'>
                     <DropdownMenuLabel>Post Actions</DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onSelect={handleDelete}>
+                    <DropdownMenuItem disabled={item.deleted_at} onSelect={handleDelete}>
                         <Delete /> Delete
                     </DropdownMenuItem>
                     <DropdownMenuItem onSelect={handleDestroy}>
