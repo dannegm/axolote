@@ -1,18 +1,33 @@
 'use client';
-import * as React from 'react';
+import { icons } from 'lucide-react';
 import { useState, useMemo, useEffect } from 'react';
-import { Popover, PopoverContent, PopoverTrigger } from '@/modules/shadcn/ui/popover';
+
+import { pascalCase } from '@/modules/core/helpers/strings';
+
+import { cn } from '@/modules/shadcn/lib/utils';
+
 import { Button } from '@/modules/shadcn/ui/button';
 import { Input } from '@/modules/shadcn/ui/input';
-import { cn } from '@/modules/shadcn/lib/utils';
-import { icons } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@/modules/shadcn/ui/popover';
+
+import {
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+} from '@/modules/shadcn/ui/drawer';
+
 import {
     Tooltip,
     TooltipContent,
     TooltipProvider,
     TooltipTrigger,
 } from '@/modules/shadcn/ui/tooltip';
-import { pascalCase } from '@/modules/core/helpers/strings';
+import useMediaQuery from '@/modules/core/hooks/use-media-query';
 
 const ICON_BUTTONS = Object.keys(icons).map(icon => ({
     icon: icon,
@@ -31,6 +46,7 @@ const IconPicker = ({
     children,
     showIconName = false,
     searchable = true,
+    drawerTitle = 'Select an icon',
     searchPlaceholder = 'Search for an icon...',
     triggerPlaceholder = 'Select an icon',
     iconsList = ICON_BUTTONS,
@@ -38,6 +54,8 @@ const IconPicker = ({
 }) => {
     const [selectedIcon, setSelectedIcon] = useState(defaultValue);
     const [isOpen, setIsOpen] = useState(defaultOpen || false);
+
+    const isDesktop = useMediaQuery('(min-width: 1024px)');
 
     const handleValueChange = icon => {
         if (value === undefined) {
@@ -86,9 +104,75 @@ const IconPicker = ({
         }
     };
 
+    if (isDesktop) {
+        return (
+            <Popover open={open ?? isOpen} onOpenChange={handleOpenChange}>
+                <PopoverTrigger ref={ref} asChild {...props}>
+                    {children || (
+                        <Button variant='outline' className={className}>
+                            {value || selectedIcon ? (
+                                <>
+                                    <Icon name={pascalCase(value || selectedIcon)} />
+                                    {showIconName && (
+                                        <span>{pascalCase(value || selectedIcon)}</span>
+                                    )}
+                                </>
+                            ) : (
+                                triggerPlaceholder
+                            )}
+                        </Button>
+                    )}
+                </PopoverTrigger>
+                <PopoverContent className='w-64 p-2' align='end'>
+                    {searchable && (
+                        <Input
+                            placeholder={searchPlaceholder}
+                            value={search}
+                            onChange={e => setSearch(e.target.value)}
+                            className='mb-2'
+                        />
+                    )}
+                    <div
+                        className='grid grid-cols-4 gap-2 max-h-60 overflow-auto'
+                        onScroll={handleScroll}
+                    >
+                        {displayedIcons.map(({ icon }) => (
+                            <TooltipProvider key={icon}>
+                                <Tooltip>
+                                    <TooltipTrigger
+                                        className={cn(
+                                            'p-2 rounded-md border hover:bg-foreground/10 transition',
+                                            'flex items-center justify-center',
+                                        )}
+                                        onClick={() => {
+                                            handleValueChange(icon);
+                                            setIsOpen(false);
+                                            setDisplayCount(36);
+                                            setSearch('');
+                                        }}
+                                    >
+                                        <Icon name={icon} />
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>{icon}</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
+                        ))}
+                        {filteredIcons.length === 0 && (
+                            <div className='text-center text-gray-500 col-span-4'>
+                                No icon found
+                            </div>
+                        )}
+                    </div>
+                </PopoverContent>
+            </Popover>
+        );
+    }
+
     return (
-        <Popover open={open ?? isOpen} onOpenChange={handleOpenChange}>
-            <PopoverTrigger ref={ref} asChild {...props}>
+        <Drawer open={open ?? isOpen} onOpenChange={handleOpenChange}>
+            <DrawerTrigger ref={ref} asChild {...props}>
                 {children || (
                     <Button variant='outline' className={className}>
                         {value || selectedIcon ? (
@@ -101,49 +185,58 @@ const IconPicker = ({
                         )}
                     </Button>
                 )}
-            </PopoverTrigger>
-            <PopoverContent className='w-64 p-2'>
-                {searchable && (
-                    <Input
-                        placeholder={searchPlaceholder}
-                        value={search}
-                        onChange={e => setSearch(e.target.value)}
-                        className='mb-2'
-                    />
-                )}
-                <div
-                    className='grid grid-cols-4 gap-2 max-h-60 overflow-auto'
-                    onScroll={handleScroll}
-                >
-                    {displayedIcons.map(({ icon }) => (
-                        <TooltipProvider key={icon}>
-                            <Tooltip>
-                                <TooltipTrigger
-                                    className={cn(
-                                        'p-2 rounded-md border hover:bg-foreground/10 transition',
-                                        'flex items-center justify-center',
-                                    )}
-                                    onClick={() => {
-                                        handleValueChange(icon);
-                                        setIsOpen(false);
-                                        setDisplayCount(36);
-                                        setSearch('');
-                                    }}
-                                >
-                                    <Icon name={icon} />
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>{icon}</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
-                    ))}
-                    {filteredIcons.length === 0 && (
-                        <div className='text-center text-gray-500 col-span-4'>No icon found</div>
-                    )}
+            </DrawerTrigger>
+            <DrawerContent>
+                <div className='mx-4 sm:mx-auto sm:w-full sm:max-w-[460px] mb-16'>
+                    <DrawerHeader>
+                        <DrawerTitle>{drawerTitle}</DrawerTitle>
+                    </DrawerHeader>
+                    <div className='mx-4'>
+                        {searchable && (
+                            <Input
+                                placeholder={searchPlaceholder}
+                                value={search}
+                                onChange={e => setSearch(e.target.value)}
+                                className='mb-2'
+                            />
+                        )}
+                        <div
+                            className='grid grid-cols-4 gap-2 max-h-60 overflow-auto'
+                            onScroll={handleScroll}
+                        >
+                            {displayedIcons.map(({ icon }) => (
+                                <TooltipProvider key={icon}>
+                                    <Tooltip>
+                                        <TooltipTrigger
+                                            className={cn(
+                                                'p-2 rounded-md border hover:bg-foreground/10 transition',
+                                                'flex items-center justify-center',
+                                            )}
+                                            onClick={() => {
+                                                handleValueChange(icon);
+                                                setIsOpen(false);
+                                                setDisplayCount(36);
+                                                setSearch('');
+                                            }}
+                                        >
+                                            <Icon name={icon} />
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <p>{icon}</p>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>
+                            ))}
+                            {filteredIcons.length === 0 && (
+                                <div className='text-center text-gray-500 col-span-4'>
+                                    No icon found
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 </div>
-            </PopoverContent>
-        </Popover>
+            </DrawerContent>
+        </Drawer>
     );
 };
 IconPicker.displayName = 'IconPicker';

@@ -1,13 +1,16 @@
 'use client';
 
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { BadgePlus } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import useSettings from '@/modules/core/hooks/use-settings';
+import useSettingsList from '@/modules/core/hooks/use-settings-list';
 
 import { Label } from '@/modules/shadcn/ui/label';
 import { Switch } from '@/modules/shadcn/ui/switch';
-import useSettingsList from '@/modules/core/hooks/use-settings-list';
+import { Button } from '@/modules/shadcn/ui/button';
 
 const settingsList = {
     'settings:skip_actions': {
@@ -48,16 +51,25 @@ export default function QuickSettings({ classNames }) {
     if (!showQuickSettings) return null;
 
     return (
-        <div className={cn('flex flex-row gap-1 mt-2', classNames?.container)}>
-            {settingsItems.map(({ key, label }) => (
-                <SwitchOption
-                    key={key}
-                    id={key}
-                    label={label}
-                    checked={settings[key]}
-                    onCheckedChange={value => update(key, value)}
-                />
-            ))}
+        <div className='flex flex-col gap-2'>
+            <div className={cn('flex flex-row gap-1 mt-2', classNames?.container)}>
+                {settingsItems.map(({ key, label }) => (
+                    <SwitchOption
+                        key={key}
+                        id={key}
+                        label={label}
+                        checked={settings[key]}
+                        onCheckedChange={value => update(key, value)}
+                    />
+                ))}
+            </div>
+            <div className='w-full'>
+                <Button className='w-full' size='lg' asChild>
+                    <Link href='/krystel/secrets/editor'>
+                        <BadgePlus /> Crear nueva tarjeta
+                    </Link>
+                </Button>
+            </div>
         </div>
     );
 }
