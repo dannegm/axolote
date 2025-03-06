@@ -63,13 +63,16 @@ export default function QuickSettings({ classNames }) {
                     />
                 ))}
             </div>
-            <div className='w-full'>
-                <Button className='w-full' size='lg' asChild>
-                    <Link href='/krystel/secrets/editor'>
-                        <BadgePlus /> Crear nueva tarjeta
-                    </Link>
-                </Button>
-            </div>
+
+            {pathname !== '/krystel/secrets/editor' && (
+                <div className='w-full'>
+                    <Button className='w-full' size='lg' asChild>
+                        <Link href='/krystel/secrets/editor'>
+                            <BadgePlus /> Crear nueva tarjeta
+                        </Link>
+                    </Button>
+                </div>
+            )}
         </div>
     );
 }
