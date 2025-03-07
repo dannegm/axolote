@@ -61,10 +61,8 @@ export default function CardEditor() {
     // Logic
     const createQuote = useCreateQuoteAction({
         onSuccess: () => {
+            handleReset();
             router.push('/krystel/secrets/cards');
-            setContent('');
-            setPublishedDate(new Date());
-            setPublishedTime(new Date());
         },
     });
 
