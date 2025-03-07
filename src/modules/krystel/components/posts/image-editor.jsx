@@ -137,7 +137,7 @@ export default function ImageEditor({ content, setContent, props }) {
 
             <div
                 className={cn(
-                    'absolute z-20 bottom-8 left-1/2 transofrm -translate-x-1/2 flex flex-col gap-2',
+                    'absolute z-20 bottom-8 left-1/2 transofrm -translate-x-1/2 flex flex-col gap-2 min-w-[200px]',
                     {
                         'bottom-1/2 translate-y-1/2': !preview,
                     },
