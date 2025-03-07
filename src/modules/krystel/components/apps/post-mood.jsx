@@ -13,7 +13,7 @@ export default function PostMood({ q }) {
                     <FeelingsEditor
                         content={content}
                         setContent={setContent}
-                        className='bg-white/40 p-2 rounded-2xl shadow-lg'
+                        className='bg-white/40 p-2 rounded-2xl shadow-lg w-[234px]'
                         classNames={{
                             container: 'grid-cols-3!',
                         }}
