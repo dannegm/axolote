@@ -201,7 +201,7 @@ export default function GiftCard({
                         data-layer='bg'
                         className={cn(
                             'animate-in fade-in-0 duration-[3s] ease-in opacity-50',
-                            'fixed inset-0 pointer-events-none bg-gray-100 bg-center transition-all',
+                            'fixed inset-0 pointer-events-none bg-gray-100 bg-center bg-[length:50%] transition-all',
                             classNames?.bg,
                         )}
                         style={{ backgroundImage: bg }}
