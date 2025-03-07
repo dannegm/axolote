@@ -1,14 +1,14 @@
 'use client';
-import { format, formatDistanceToNow } from 'date-fns';
+import { format } from 'date-fns';
 import { RefreshCcw } from 'lucide-react';
 
 import { cn } from '@/modules/shadcn/lib/utils';
 import useSettings from '@/modules/core/hooks/use-settings';
 
 import ClientOnly from '@/modules/core/components/common/client-only';
-import LogItem from './log-item';
+import LogsList from './logs-list';
 
-export default function LogsTable({ data = [], onReload }) {
+export default function LogsMain({ data = [], onReload }) {
     const [logsRealtime] = useSettings('settings:logs:realtime', false);
     const [showBreakpointIndicator] = useSettings('settings:show_breakpoint_indicator', false);
     if (!data || !data?.length) return null;
@@ -41,9 +41,7 @@ export default function LogsTable({ data = [], onReload }) {
                     </button>
                 </div>
 
-                {data?.map(item => (
-                    <LogItem key={`log-item-${item.id}`} item={item} realtime={logsRealtime} />
-                ))}
+                <LogsList data={data} logsRealtime={logsRealtime} />
             </div>
         </ClientOnly>
     );

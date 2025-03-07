@@ -1,4 +1,4 @@
-import QuotesLoader from './components/quotes-loader';
+import LogsLoader from './components/logs-loader';
 
 export function generateMetadata() {
     return {
@@ -7,5 +7,5 @@ export function generateMetadata() {
 }
 
 export default function Logs() {
-    return <QuotesLoader />;
+    return <LogsLoader />;
 }

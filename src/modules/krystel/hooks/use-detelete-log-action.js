@@ -6,7 +6,7 @@ export default function useDeleteLogAction() {
     const queryClient = useQueryClient();
     const mutation = useMutation({
         mutationFn: deleteLogAction,
-        onSettled: () => queryClient.invalidateQueries({ queryKey: ['quotes'] }),
+        onSettled: () => queryClient.invalidateQueries({ queryKey: ['actions'] }),
     });
 
     return logId => {

@@ -6,7 +6,7 @@ export default function useClearLogsAction() {
     const queryClient = useQueryClient();
     const mutation = useMutation({
         mutationFn: clearLogsAction,
-        onSettled: () => queryClient.invalidateQueries({ queryKey: ['quotes'] }),
+        onSettled: () => queryClient.invalidateQueries({ queryKey: ['actions'] }),
     });
 
     return () => {
