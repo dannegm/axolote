@@ -115,13 +115,13 @@ export default function GiftCard({
         {
             condition: womenDay,
             mapper: () =>
-                mergeConfigs('({bg:bg-purple-300 mix-blend-overlay|border:bg-purple-500})', quote),
+                mergeConfigs('({bg:bg-purple-300 mix-blend-overlay|border:bg-wave-purple})', quote),
         },
         {
             condition: foolsDay,
             mapper: () =>
                 mergeConfigs(
-                    '({border:bg-chromatic-wheel shadow-(--shadow-upsidedown) rotate-180})',
+                    '({schema:shadow-(--shadow-upsidedown)|border:shadow-(--shadow-upsidedown) rotate-180 overflow-hidden before:absolute before:-inset-1/2 before:block before:chromatic-wheel before:animate-spin before:duration-[5s]})',
                     quote,
                 ),
         },
@@ -201,7 +201,7 @@ export default function GiftCard({
                         data-layer='bg'
                         className={cn(
                             'animate-in fade-in-0 duration-[3s] ease-in opacity-50',
-                            'fixed inset-0 pointer-events-none bg-gray-100 bg-center bg-[length:50%] transition-all',
+                            'fixed inset-0 pointer-events-none bg-gray-100 bg-center transition-all',
                             classNames?.bg,
                         )}
                         style={{ backgroundImage: bg }}
