@@ -64,7 +64,7 @@ export default function FeelingsEditor({
     classNames,
     context,
     content,
-    props = {},
+    props,
     setContent,
     setContext,
 }) {
@@ -120,13 +120,13 @@ export default function FeelingsEditor({
                         className={cn(
                             className,
                             {
-                                hidden: index >= 7,
-                                'sm:flex': index < 11,
-                                'lg:flex': index < 15,
+                                hidden: index >= (props?.feelingsCount || 7),
+                                'sm:flex': index < (props?.feelingsCount || 11),
+                                'lg:flex': index < (props?.feelingsCount || 15),
                             },
                             classNames?.icon,
-                            classNames?.iconClassNames,
                         )}
+                        classNames={classNames?.iconClassNames}
                         color={color}
                         icon={icon}
                         label={label}

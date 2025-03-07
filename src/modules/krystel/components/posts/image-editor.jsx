@@ -165,8 +165,8 @@ export default function ImageEditor({ content, setContent, props }) {
                             props?.classNames?.inputDescription,
                         )}
                         placeholder='Añade una descripción'
-                        minRows={2}
-                        maxRows={4}
+                        minRows={props?.minRows || 2}
+                        maxRows={props?.maxRows || 4}
                         value={description}
                         onChange={ev => setDescription(ev.target.value)}
                     />

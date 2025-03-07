@@ -19,7 +19,10 @@ import BalloonsText from '@/modules/krystel/components/common/balloons-text';
 import Button from '@/modules/krystel/components/common/button';
 
 import { BalloonsTextSimple } from '@/modules/krystel/components/common/balloons-text';
-import FrameApps, { getAppDescription } from '@/modules/krystel/components/common/frame-apps';
+import FrameApps, {
+    getAppDescription,
+    getAppIcon,
+} from '@/modules/krystel/components/common/frame-apps';
 import ButtonActions from '../components/common/button-actions';
 
 export const defaultElements = [
@@ -415,10 +418,11 @@ export const buildPreviewElements = ({ preventReveal }) => [
         pattern: /<app::(.*?)\(\{(.*?)\}\)>/g,
         parser: (name, args) => {
             const props = extractConfigs(args);
+            const Icon = getAppIcon(name);
             return (
                 <div className='flex flex-row gap-2 bg-black text-white shadow-md rounded-md p-3 pr-4'>
                     <div>
-                        <Box />
+                        <Icon />
                     </div>
                     <div className='flex flex-col gap-1 font-noto mt-0.5 text-[1rem]'>
                         <span>{getAppDescription(name)}</span>
@@ -444,37 +448,43 @@ export const buildPreviewElements = ({ preventReveal }) => [
     // Apps with input
     {
         pattern: /<app::(.*?)\((.*?)\)>/g,
-        parser: (name, input) => (
-            <div className='flex flex-row gap-2 bg-black text-white shadow-md rounded-md p-3 pr-4'>
-                <div>
-                    <Box />
+        parser: (name, input) => {
+            const Icon = getAppIcon(name);
+            return (
+                <div className='flex flex-row gap-2 bg-black text-white shadow-md rounded-md p-3 pr-4'>
+                    <div>
+                        <Icon />
+                    </div>
+                    <div className='flex flex-col gap-1 font-noto mt-0.5 text-[1rem]'>
+                        <span>{getAppDescription(name)}</span>
+                        {!input.startsWith('_') && (
+                            <span className='text-xs text-gray-300'>{input}</span>
+                        )}
+                    </div>
                 </div>
-                <div className='flex flex-col gap-1 font-noto mt-0.5 text-[1rem]'>
-                    <span>{getAppDescription(name)}</span>
-                    {!input.startsWith('_') && (
-                        <span className='text-xs text-gray-300'>{input}</span>
-                    )}
-                </div>
-            </div>
-        ),
+            );
+        },
     },
     // Apps
     {
         pattern: /<app::(.*?)>/g,
-        parser: name => (
-            <div
-                className={cn(
-                    'flex flex-row gap-2 bg-black text-white shadow-md rounded-md p-3 pr-4',
-                )}
-            >
-                <div>
-                    <Box />
+        parser: name => {
+            const Icon = getAppIcon(name);
+            return (
+                <div
+                    className={cn(
+                        'flex flex-row gap-2 bg-black text-white shadow-md rounded-md p-3 pr-4',
+                    )}
+                >
+                    <div>
+                        <Icon />
+                    </div>
+                    <span className={cn('font-noto mt-0.5 text-[1rem]')}>
+                        {getAppDescription(name)}
+                    </span>
                 </div>
-                <span className={cn('font-noto mt-0.5 text-[1rem]')}>
-                    {getAppDescription(name)}
-                </span>
-            </div>
-        ),
+            );
+        },
     },
 ];
 

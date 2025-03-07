@@ -13,14 +13,13 @@ import {
 
 import { cn } from '@/modules/core/helpers/utils';
 import useSettings from '@/modules/core/hooks/use-settings';
+import useCreatePostAction from '@/modules/krystel/hooks/use-create-post-action';
 
 import SimpleEditor from './simple-editor';
 import EmergencyButton from './emergency-button';
 import FeelingsEditor from './feelings-editor';
 import DrawingEditor from './drawing-editor';
 import ImageEditor from './image-editor';
-
-import useCreatePostAction from '../../hooks/use-create-post-action';
 
 const editors = {
     post: {

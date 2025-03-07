@@ -61,9 +61,11 @@ export default function CardEditorContent({
     };
 
     const handleInputPaste = event => {
-        event.preventDefault();
-        const clipboardText = event.clipboardData.getData('text');
-        handlePaste(clipboardText);
+        if (pasteReplace) {
+            event.preventDefault();
+            const clipboardText = event.clipboardData.getData('text');
+            handlePaste(clipboardText);
+        }
     };
 
     const handleButtonPaste = async () => {

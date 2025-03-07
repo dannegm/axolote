@@ -90,13 +90,7 @@ const ColorPicker = ({ className, direction, position, colors = [], color, onSel
     return (
         <ToolBar className={className} direction={direction} position={position}>
             <ShadcnColorPicker color={color} onSelect={handlePickerSelect}>
-                {() => (
-                    <Button
-                        icon={
-                            <Circle className='bg-chromatic-wheel' />
-                        }
-                    />
-                )}
+                {() => <Button icon={<Circle className='bg-chromatic-wheel' />} />}
             </ShadcnColorPicker>
 
             {!shiftedColors.includes(color) && (
@@ -205,7 +199,7 @@ export default function DrawingEditor({ content, props, setContent, setSettings 
             ref={$container}
             className={cn(
                 'relative flex-1 m-h-[296px] w-full h-full rounded-lg overflow-hidden shadow-2xs',
-                props.className,
+                props?.className,
             )}
         >
             <ToolBar position='top-left'>
