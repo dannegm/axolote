@@ -4,11 +4,9 @@
 
 @layer base {
     html,
-    body,
-    #fonts {
+    body {
         height: 100%;
     }
-
     button,
     a {
         cursor: pointer;

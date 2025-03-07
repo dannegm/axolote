@@ -3,6 +3,18 @@ import KrystelLayout from '@/modules/krystel/components/layout/krystel-layout';
 
 export const metadata = {
     title: 'Krystel',
+    appleWebApp: {
+        statusBarStyle: 'black-translucent',
+    },
+    robots: {
+        index: false,
+        follow: false,
+        nocache: true,
+        googleBot: {
+            index: false,
+            follow: false,
+        },
+    },
 };
 
 export const viewport = {
