@@ -46,6 +46,7 @@
 
     .bg-chromatic-wheel {
         background-image: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);
+        background-image: conic-gradient(in hsl longer hue, red 0 0);
     }
 
     .bg-radial-purple {
