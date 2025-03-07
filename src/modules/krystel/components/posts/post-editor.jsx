@@ -1,7 +1,6 @@
 'use client';
 import { useState } from 'react';
 import {
-    CassetteTape,
     HandHeart,
     Image,
     Loader2,
@@ -17,9 +16,11 @@ import useSettings from '@/modules/core/hooks/use-settings';
 
 import SimpleEditor from './simple-editor';
 import EmergencyButton from './emergency-button';
-import useCreatePostAction from '../../hooks/use-create-post-action';
 import FeelingsEditor from './feelings-editor';
 import DrawingEditor from './drawing-editor';
+import ImageEditor from './image-editor';
+
+import useCreatePostAction from '../../hooks/use-create-post-action';
 
 const editors = {
     post: {
@@ -34,12 +35,8 @@ const editors = {
     image: {
         key: 'image',
         icon: Image,
-        component: SimpleEditor,
-    },
-    audio: {
-        key: 'audio',
-        icon: CassetteTape,
-        component: SimpleEditor,
+        component: ImageEditor,
+        enabled: true,
     },
     drawing: {
         key: 'drawing',
@@ -156,6 +153,7 @@ export default function PostEditor() {
                     triggerCreate={handleCreate}
                 />
             </div>
+
             <div className='flex flex-row justify-between items-center'>
                 <div className='flex flex-row gap-1 items-center'>
                     {Object.values(editors).map(item => (

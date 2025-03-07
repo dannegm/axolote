@@ -7,15 +7,11 @@ import { ReactSketchCanvas } from 'react-sketch-canvas';
 
 import {
     Clock3,
-    CassetteTape,
     HandHeart,
     Image,
-    Loader2,
     MessageSquareHeart,
     PenTool,
-    SendHorizonal,
     Siren,
-    Trash2,
     Download,
     PlayCircle,
 } from 'lucide-react';
@@ -192,6 +188,30 @@ const EmergencyItem = ({ item }) => {
     );
 };
 
+const ImageItem = ({ item }) => {
+    const content = JSON.parse(item.content) || null;
+    if (!content?.url) return null;
+    return (
+        <div className='flex-1 flex flex-col gap-2'>
+            <figure
+                className={cn(
+                    'max-w-[75vw] w-auto overflow-hidden rounded-lg rounded-tl-none shadow-sm',
+                    {
+                        'rounded-l-none': content?.description,
+                    },
+                )}
+            >
+                <img className='w-full' src={content?.url} alt={content?.description} />
+            </figure>
+            {content?.description && (
+                <figcaption className='flex-none w-fit max-w-full px-4 py-2 text-pretty bg-neutral-200 rounded-xl rounded-tl-none'>
+                    {content?.description}
+                </figcaption>
+            )}
+        </div>
+    );
+};
+
 const elements = {
     post: {
         key: 'post',
@@ -216,6 +236,12 @@ const elements = {
         icon: Siren,
         iconClassName: 'bg-red-600 text-white',
         component: EmergencyItem,
+    },
+    image: {
+        key: 'image',
+        icon: Image,
+        iconClassName: 'bg-cyan-600 text-white',
+        component: ImageItem,
     },
 };
 

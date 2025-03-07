@@ -45,6 +45,10 @@
         background-image: url('/frames/a0738d2429d5119d441a7a8a9310dd00.jpg');
     }
 
+    .bg-img-gradient-blue {
+        background-image: url('/backgrounds/gradient-blue.png');
+    }
+
     .bg-chromatic-wheel {
         background-image: conic-gradient(red, yellow, lime, cyan, blue, magenta, red);
         background-image: conic-gradient(in hsl longer hue, red 0 0);
