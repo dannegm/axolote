@@ -6,6 +6,10 @@ import { es as locale } from 'date-fns/locale';
 import { Asterisk, Clock3, icons } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
+import { pascalCase } from '@/modules/core/helpers/strings';
+import useScrollPosition from '@/modules/core/hooks/use-scroll-position';
+import useHasElapsedTime from '@/modules/core/hooks/use-has-elapsed-time';
+import useSettings from '@/modules/core/hooks/use-settings';
 import Portal from '@/modules/core/components/common/portal';
 
 import { getTheme } from '@/modules/krystel/helpers/themes';
@@ -21,8 +25,6 @@ import {
     replaceWithLongestSentence,
 } from '@/modules/krystel/helpers/strings';
 
-import useScrollPosition from '@/modules/core/hooks/use-scroll-position';
-
 import QuoteProvider from '@/modules/krystel/providers/quote-provider';
 
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
@@ -33,9 +35,6 @@ import { useGreetings } from '@/modules/krystel/services/greetings';
 
 import RichText from './rich-text';
 import Card from './card';
-import { pascalCase } from '@/modules/core/helpers/strings';
-import useHasElapsedTime from '@/modules/core/hooks/use-has-elapsed-time';
-import useSettings from '@/modules/core/hooks/use-settings';
 
 const secretDiscover = (discover, secrets = {}) => {
     Object.entries(secrets).forEach(([key, condition]) => {
@@ -72,6 +71,8 @@ export default function GiftCard({
         'settings:cards:ignore_conditional_quotes',
         false,
     );
+
+    const [skipFoolsDay] = useSettings('settings:cards:skip_fools_day', false);
 
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
@@ -113,12 +114,15 @@ export default function GiftCard({
             mapper: () => '({icon:hidden}) <sticker::ufo>',
         },
         {
-            condition: womenDay,
+            condition: !skipFoolsDay && womenDay,
             mapper: () =>
-                mergeConfigs('({bg:bg-purple-300 mix-blend-overlay|border:bg-wave-purple})', quote),
+                mergeConfigs(
+                    '({bg:bg-purple-300 mix-blend-overlay|border:bg-wave-purple|scheme:bg-purple-100 text-purple-800})',
+                    quote,
+                ),
         },
         {
-            condition: foolsDay,
+            condition: !skipFoolsDay && foolsDay,
             mapper: () =>
                 mergeConfigs(
                     '({schema:shadow-(--shadow-upsidedown)|border:shadow-(--shadow-upsidedown) rotate-180 overflow-hidden before:absolute before:-inset-1/2 before:block before:chromatic-wheel before:animate-spin before:duration-[5s]})',
@@ -200,7 +204,7 @@ export default function GiftCard({
                     <div
                         data-layer='bg'
                         className={cn(
-                            'animate-in fade-in-0 duration-[3s] ease-in opacity-50',
+                            'animate-in fade-in-0 duration-[1.5s] ease-in opacity-50',
                             'fixed inset-0 pointer-events-none bg-gray-100 bg-center bg-[length:50%] transition-all',
                             classNames?.bg,
                         )}

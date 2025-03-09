@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import { randomPick } from '@/modules/core/helpers/arrays';
@@ -67,10 +67,6 @@ export default function BalloonsText({ children }) {
         pauseSound(true);
         setShowBalloons(false);
         postBalloonsComplete();
-
-        setTimeout(() => {
-            window.location.href = '/krystel?code=128:6:23:20:2';
-        }, 1500);
     };
 
     return (

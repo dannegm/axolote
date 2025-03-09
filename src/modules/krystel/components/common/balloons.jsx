@@ -92,7 +92,7 @@ const StyledBalloon = styled.div`
     animation: ${props => balloonsUpAnimation(props.animate)} ease-in-out
         ${props => (props.animate.loop ? 'infinite' : '1')};
     animation-duration: ${props => `${props.animate.duration}s`};
-    animation-delay: ${props => `${props.animate.delay}s`};
+    animation-delay: ${props => `${props.animate.delay}`};
     animation-play-state: running;
 
     &::before {
@@ -151,7 +151,7 @@ const Balloon = ({ colors = defaultColors, loop, onPop }) => {
 
     const color = randomPick(colors);
     const left = random(20, 80);
-    const delay = random(0, 5);
+    const delay = random(0, 5000);
     const duration = 5 + random(1, 5);
 
     const popBalloon = event => {
