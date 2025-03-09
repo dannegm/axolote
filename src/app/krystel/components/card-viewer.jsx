@@ -65,7 +65,13 @@ export default function CardViewer({ code, data }) {
     return (
         <ClientOnly>
             <main className='flex min-h-full flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
-                <CardViewerMenu className='absolute top-4 right-4 z-50' item={data} />
+                <CardViewerMenu
+                    className={cn('absolute bottom-4 z-[9999999]', {
+                        'right-4': actionsDirection === 'ltr',
+                        'left-4': actionsDirection === 'rtl',
+                    })}
+                    item={data}
+                />
 
                 {!data?.show && (
                     <div className='fixed z-50 top-0 left-0 right-0 h-2 bg-sky-500 shadow-sm' />

@@ -8,9 +8,10 @@ import useResize from '@/modules/core/hooks/use-resize';
 import { cn } from '@/modules/shadcn/lib/utils';
 import ClientOnly from './client-only';
 
-export default function BreakpointIndicator({ position = 'bottom-right' }) {
+export default function BreakpointIndicator({ position = undefined }) {
     const [size, setSize] = useState('');
     const [showIndicator] = useSettings('settings:show_breakpoint_indicator', false);
+    const [actionsDirection] = useSettings('viewer:actions_direction', 'ltr');
 
     const positions = {
         'top-left': 'top-4 left-4',
@@ -23,7 +24,8 @@ export default function BreakpointIndicator({ position = 'bottom-right' }) {
         'middle-right': 'right-4 top-1/2 transform -translate-y-1/2',
     };
 
-    const positionClassName = positions[position] || positions['bottom-right'];
+    const autoPosition = actionsDirection === 'ltr' ? 'bottom-left' : 'bottom-right';
+    const positionClassName = position ? positions?.[position] : positions[autoPosition];
 
     useResize(() => {
         setSize(window.innerWidth);

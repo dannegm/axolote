@@ -98,6 +98,8 @@ export default function CardViewerMenu({ className, item }) {
     const settingsGroup = groupBy(filteredSettingsList, item => item.group);
 
     //* Setup
+
+    const align = actionsDirection === 'ltr' ? 'end' : 'start';
     const deleted = isDeleted(item);
     const show = item?.show;
 
@@ -131,12 +133,12 @@ export default function CardViewerMenu({ className, item }) {
         <div className={cn(className)}>
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                    <Button className='bg-transparent border-none' variant='outline' size='icon'>
+                    <Button variant='outline' size='icon'>
                         <Bolt />
                     </Button>
                 </DropdownMenuTrigger>
 
-                <DropdownMenuContent className='w-56 z-[70]' align='end'>
+                <DropdownMenuContent className='w-56 z-[70]' align={align}>
                     <DropdownMenuLabel>General</DropdownMenuLabel>
 
                     <DropdownMenuItem direction='col' onSelect={handleActionDirectionSelect}>

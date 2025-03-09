@@ -11,6 +11,8 @@ import LogsList from './logs-list';
 export default function LogsMain({ data = [], onReload }) {
     const [logsRealtime] = useSettings('settings:logs:realtime', false);
     const [showBreakpointIndicator] = useSettings('settings:show_breakpoint_indicator', false);
+    const [actionsDirection] = useSettings('viewer:actions_direction', 'ltr');
+
     if (!data || !data?.length) return null;
 
     return (
@@ -28,9 +30,14 @@ export default function LogsMain({ data = [], onReload }) {
                 </div>
 
                 <div
-                    className={cn('fixed z-50 bottom-4 right-4 transition-all duration-150', {
-                        'bottom-16': showBreakpointIndicator,
-                    })}
+                    className={cn(
+                        'fixed z-50 bottom-4 right-4 transition-all duration-150 animate-in',
+                        {
+                            'bottom-16': showBreakpointIndicator,
+                            'right-4 slide-in-from-right': actionsDirection === 'rtl',
+                            'left-4 slide-in-from-left': actionsDirection === 'ltr',
+                        },
+                    )}
                 >
                     <button
                         type='button'

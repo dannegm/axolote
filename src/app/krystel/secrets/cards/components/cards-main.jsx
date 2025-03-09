@@ -10,14 +10,17 @@ import CardsList from './cards-list';
 
 export default function CardsMain({ data = [] }) {
     const [showBreakpointIndicator] = useSettings('settings:show_breakpoint_indicator', false);
+    const [actionsDirection] = useSettings('viewer:actions_direction', 'ltr');
     return (
         <ClientOnly>
             <div className='grid grid-flow-row pb-16'>
                 <div
                     className={cn(
-                        'fixed z-50 bottom-4 right-4 transition-all duration-150 animate-in slide-in-from-right ',
+                        'fixed z-50 bottom-4 transition-all duration-150 animate-in',
                         {
                             'bottom-16': showBreakpointIndicator,
+                            'right-4 slide-in-from-right': actionsDirection === 'rtl',
+                            'left-4 slide-in-from-left': actionsDirection === 'ltr',
                         },
                     )}
                 >
