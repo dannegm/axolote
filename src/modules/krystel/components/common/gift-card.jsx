@@ -114,7 +114,7 @@ export default function GiftCard({
             mapper: () => '({icon:hidden}) <sticker::ufo>',
         },
         {
-            condition: !skipFoolsDay && womenDay,
+            condition: womenDay,
             mapper: () =>
                 mergeConfigs(
                     '({bg:bg-purple-300 mix-blend-overlay|border:bg-wave-purple|scheme:bg-purple-100 text-purple-800})',
