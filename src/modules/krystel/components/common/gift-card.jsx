@@ -72,7 +72,8 @@ export default function GiftCard({
         false,
     );
 
-    const [skipFoolsDay] = useSettings('settings:cards:skip_fools_day', false);
+    const [skipWomenDay] = useSettings('specials:skip_women_day', false);
+    const [skipFoolsDay] = useSettings('specials:skip_fools_day', false);
 
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
@@ -114,7 +115,7 @@ export default function GiftCard({
             mapper: () => '({icon:hidden}) <sticker::ufo>',
         },
         {
-            condition: womenDay,
+            condition: !skipWomenDay && womenDay,
             mapper: () =>
                 mergeConfigs(
                     '({bg:bg-purple-300 mix-blend-overlay|border:bg-wave-purple|scheme:bg-purple-100 text-purple-800})',

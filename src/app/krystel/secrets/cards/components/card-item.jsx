@@ -6,17 +6,18 @@ import { Clock3, ExternalLink, Eye } from 'lucide-react';
 import { cn } from '@/modules/core/helpers/utils';
 import JsonViewer from '@/modules/core/components/common/json-viewer';
 
+import { isDeleted } from '@/modules/krystel/helpers/utils';
 import { getRandomSettings } from '@/modules/krystel/services/quotes';
 import GiftCardPreview from '@/modules/krystel/components/common/gift-card-preview';
 
 import ToggleCardButton from './toggle-card-switch';
-import DeleteCardButton from './delete-card-button';
-import RestoreCardButton from './restore-card-button';
+import CardItemMenu from './card-item-menu';
 
 export default function CardItem({ item }) {
     const code = `${item.id}:${getRandomSettings()}`;
     const date = new Date(item.published_at + 'Z');
-    const deleted = Boolean(item.deleted_at);
+    const deleted = isDeleted(item);
+    const upcomming = new Date() < date;
 
     const dateSuffix = isBefore(date, new Date()) ? ' ago' : ' ahead';
 
@@ -36,7 +37,7 @@ export default function CardItem({ item }) {
                 </Link>
 
                 <div className='flex-1' />
-                {deleted ? <RestoreCardButton id={item.id} /> : <DeleteCardButton id={item.id} />}
+                <CardItemMenu item={item} />
             </div>
 
             <a
@@ -48,6 +49,7 @@ export default function CardItem({ item }) {
                     code={code}
                     hidden={!item.show}
                     deleted={deleted}
+                    upcoming={upcomming}
                     preview
                 />
             </a>

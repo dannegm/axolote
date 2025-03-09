@@ -6,7 +6,10 @@ export default function useToggleQuoteAction() {
     const queryClient = useQueryClient();
     const mutation = useMutation({
         mutationFn: toggleQuoteAction,
-        onSettled: () => queryClient.invalidateQueries({ queryKey: ['cards'] }),
+        onSettled: () => {
+            queryClient.invalidateQueries({ queryKey: ['cards'] });
+            queryClient.invalidateQueries({ queryKey: ['quotes'] });
+        },
     });
 
     return mutation;

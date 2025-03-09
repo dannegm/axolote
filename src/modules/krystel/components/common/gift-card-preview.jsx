@@ -45,6 +45,7 @@ export default function GiftCardPreview({
     hidden = false,
     preview = false,
     deleted = false,
+    upcoming = false,
     preventReveal = false,
     onClick,
 }) {
@@ -72,10 +73,12 @@ export default function GiftCardPreview({
                 'relative overflow-hidden bg-gray-100 bg-center bg-[length:50%] p-2 rounded-md shadow-xl transition-all duration-150',
                 {
                     'bg-none': configs?.bg || theme?.bg,
-                    'blur-xs select-none': hidden && isFirstAppearance,
-                    'blur-none md:blur-xs md:hover:blur-none ring-4 md:ring-0 ring-slate-300 ring-offset-4 md:ring-offset-0 opacity-60 md:opacity-100':
+                    'blur-xs select-none': hidden,
+                    'blur-none outline-2 outline-dashed outline-slate-300 outline-offset-6 opacity-60 hover:opacity-100':
                         preview && hidden,
-                    'blur-none md:blur-none ring-4 ring-red-600 ring-offset-4 opacity-60 md:ring-4 md:ring-red-600 md:ring-offset-4 md:opacity-60':
+                    'blur-none outline-2 outline-dashed outline-sky-600 outline-offset-6 opacity-60 hover:opacity-100':
+                        upcoming,
+                    'blur-none outline-2 outline-red-600 outline-offset-6 opacity-60 hover:opacity-100':
                         deleted,
                 },
                 className,

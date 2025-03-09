@@ -1,11 +1,11 @@
 'use client';
-import { groupBy } from '@/modules/core/helpers/arrays';
+import { capitalize } from 'lodash';
 import { cn } from '@/modules/core/helpers/utils';
+import { groupBy } from '@/modules/core/helpers/arrays';
 import useSettingsList from '@/modules/core/hooks/use-settings-list';
 
 import { Label } from '@/modules/shadcn/ui/label';
 import { Switch } from '@/modules/shadcn/ui/switch';
-import { capitalize } from 'lodash';
 
 const settingsList = {
     // Admin
