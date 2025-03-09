@@ -154,7 +154,7 @@ export default function CardViewerMenu({ className, item }) {
                             )}
                         </DropdownMenuItemWrapper>
                         <DropdownMenuItemDescription>
-                            Intercambia la dirección de los botones
+                            Intercambia la dirección de los botones.
                         </DropdownMenuItemDescription>
                     </DropdownMenuItem>
 

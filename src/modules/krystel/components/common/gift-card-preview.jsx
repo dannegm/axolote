@@ -74,12 +74,12 @@ export default function GiftCardPreview({
                 {
                     'bg-none': configs?.bg || theme?.bg,
                     'blur-xs select-none': hidden,
-                    'blur-none outline-2 outline-dashed outline-slate-300 outline-offset-6 opacity-60 hover:opacity-100':
-                        preview && hidden,
-                    'blur-none outline-2 outline-dashed outline-sky-600 outline-offset-6 opacity-60 hover:opacity-100':
+                    'blur-none outline-2 outline-slate-300 outline-offset-6': preview && hidden,
+                    'blur-none outline-2 outline-sky-600 outline-offset-6 opacity-70 hover:opacity-100':
                         upcoming,
-                    'blur-none outline-2 outline-red-600 outline-offset-6 opacity-60 hover:opacity-100':
+                    'blur-none outline-2 outline-red-600 outline-offset-6 opacity-70 hover:opacity-100':
                         deleted,
+                    'outline-dashed opacity-50! hover:opacity-100': preview && hidden,
                 },
                 className,
                 theme?.card,
