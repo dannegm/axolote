@@ -6,13 +6,13 @@ import GiftCard from '@/modules/krystel/components/common/gift-card';
 import ResponsiveBox from '@/modules/core/components/common/responsive-box';
 import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 
-const loremIpsum = '████   ████   ██||███████   ██████||████   ██████';
+const loremIpsum = '████   ████   ██\n███████   ██████\n████   ██████';
 
 const rich = (text = '') => {
     const { configsRaw, content } = extractConfigsAndContent(text);
     return {
         hasContent: content.trim() !== '',
-        composedContent: configsRaw + content.replaceAll('\n', '||'),
+        composedContent: configsRaw + content,
         configsRaw,
     };
 };

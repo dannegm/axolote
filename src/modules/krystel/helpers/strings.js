@@ -65,7 +65,7 @@ export const extractConfigsAndContent = (text = '') => {
     if (match) {
         const configs = extractConfigs(match[1]);
         const configsRaw = buildConfigs(configs);
-        const content = trim(text.slice(match[0].length), '||').trim();
+        const content = trim(text.slice(match[0].length), '\n').trim();
         return {
             configsRaw,
             configs,

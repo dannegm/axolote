@@ -67,7 +67,7 @@ export default function CardEditor() {
     });
 
     const prepare = content => {
-        return content.replaceAll('\n', '\n||').replaceAll('})\n||', '})\n');
+        return content;
     };
 
     // Handlers
