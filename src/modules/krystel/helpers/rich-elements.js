@@ -50,6 +50,7 @@ export const defaultElements = [
     { pattern: /ºº(.*?)ºº/g, parser: text => <BalloonsText>{text}</BalloonsText> },
     // Breakline
     { pattern: /\n/g, parser: () => <br /> },
+    { pattern: /\|\|/g, parser: () => <br /> },
     // Separator with icon
     { pattern: /---\s?(.*?)\s?---/g, parser: icon => <FancySeparator icon={icon} /> },
     // Separator normal
@@ -259,6 +260,7 @@ export const buildPreviewElements = ({ preventReveal }) => [
     },
     // Breakline
     { pattern: /\n/g, parser: () => <br /> },
+    { pattern: /\|\|/g, parser: () => <br /> },
     // Separator with icon
     { pattern: /---\s?(.*?)\s?---/g, parser: icon => <FancySeparator icon={icon} /> },
     // Separator normal
@@ -501,6 +503,7 @@ export const stripedElements = [
     { pattern: /\$\@(.*?)\@\$/g, parser: text => text },
     { pattern: /\ºº(.*?)ºº/g, parser: text => text },
     { pattern: /\n/g, parser: () => ' ¬ ' },
+    { pattern: /\|\|/g, parser: () => <br /> },
     { pattern: /---\s?(.*?)\s?---/g, parser: icon => `\n-- [${icon}] --\n` },
     { pattern: /---/g, parser: () => '\n---\n' },
     { pattern: /\*\/(.*?)\/\*/g, parser: text => text },
