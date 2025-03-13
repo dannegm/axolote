@@ -3,5 +3,5 @@ export const isDeleted = item => {
         return false;
     }
 
-    return new Date(item?.deleted_at + 'z') < new Date();
+    return new Date(item?.deleted_at + 'Z') < new Date();
 };
