@@ -63,7 +63,7 @@ const borderPatterns = [
     '/patterns/border/18.webp',
     '/patterns/border/19.webp',
     '/patterns/border/20.webp',
-    '/patterns/border/21.png',
+    '/patterns/border/21.webp',
     '/patterns/border/22.webp',
     '/patterns/border/23.webp',
     '/patterns/border/24.webp',
