@@ -1,10 +1,19 @@
 'use client';
 import { Fragment } from 'react';
-import { capitalize } from 'lodash';
-import { ArrowLeftToLine, ArrowRightToLine, Bolt, Delete, Eye, EyeOff, Undo2 } from 'lucide-react';
+import {
+    ArrowLeftToLine,
+    ArrowRightToLine,
+    Delete,
+    Eye,
+    EyeOff,
+    Settings,
+    Undo2,
+} from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import { groupBy } from '@/modules/core/helpers/arrays';
+import { capCase } from '@/modules/core/helpers/strings';
+
 import useSettingsList from '@/modules/core/hooks/use-settings-list';
 import useSettings from '@/modules/core/hooks/use-settings';
 
@@ -136,7 +145,7 @@ export default function CardViewerMenu({ className, item }) {
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button variant='outline' size='icon'>
-                        <Bolt />
+                        <Settings />
                     </Button>
                 </DropdownMenuTrigger>
 
@@ -208,7 +217,7 @@ export default function CardViewerMenu({ className, item }) {
                     {Object.entries(settingsGroup).map(([group, items]) => (
                         <Fragment key={`settings-group-${group}`}>
                             <DropdownMenuSeparator />
-                            <DropdownMenuLabel>{capitalize(group)}</DropdownMenuLabel>
+                            <DropdownMenuLabel>{capCase(group)}</DropdownMenuLabel>
                             {items.map(({ key, label }) => (
                                 <DropdownMenuCheckboxItem
                                     key={key}
