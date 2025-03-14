@@ -34,6 +34,10 @@
     background-image: conic-gradient(in hsl longer hue, red 0 0);
 }
 
+@utility aqua-gradient {
+    background: radial-gradient(ellipse at top left, #000000, #1a8b9d, #b2d430);
+}
+
 @layer utilities {
     .bg-img-blue-galaxy {
         background-image: url(/backgrounds/blue-galaxy.jpg);

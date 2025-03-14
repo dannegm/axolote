@@ -44,11 +44,32 @@ const dark = {
     content: 'bg-neutral-800 text-white',
 };
 
+const deepPurple = {
+    bg: 'bg-purple-300 mix-blend-overlay',
+    border: 'bg-wave-purple',
+    content: 'bg-purple-100 text-purple-800',
+};
+
+const fools = {
+    border: 'relative shadow-(--shadow-upsidedown) overflow-hidden before:absolute before:-inset-[200%] before:block before:chromatic-wheel before:animate-spin before:duration-[5s]',
+    content: 'shadow-(--shadow-upsidedown)',
+};
+
+const rounded = {
+    border: 'relative rounded-full group-[:has(.letter)]:rounded-[32px] group-[:has(.fullscreen)]:rounded-[48px] overflow-hidden before:absolute before:-inset-[200%] before:block before:aqua-gradient before:animate-spin before:duration-[5s]',
+    content:
+        'rounded-full group-[:has(.letter)]:rounded-[28px] group-[:has(.fullscreen)]:rounded-[32px]',
+    date: '[&_.long]:hidden [&_.short]:inline group-[:has(.letter)]:[&_.long]:inline group-[:has(.letter)]:[&_.short]:hidden',
+};
+
 export const themes = {
     // ...
     debug,
     white,
     dark,
+    deepPurple,
+    fools,
+    rounded,
 };
 
 export const getTheme = (theme = '') => {

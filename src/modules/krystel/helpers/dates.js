@@ -65,3 +65,8 @@ export const isWomenDay = (today = new Date()) => {
     const womenDay = new Date(today.getFullYear(), 2, 8);
     return isSameDay(today, womenDay);
 };
+
+export const isRoundedDay = (today = new Date()) => {
+    const roundedDay = new Date(today.getFullYear(), 2, 14);
+    return isSameDay(today, roundedDay);
+};

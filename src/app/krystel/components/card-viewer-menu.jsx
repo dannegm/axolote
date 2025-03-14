@@ -8,7 +8,7 @@ import { groupBy } from '@/modules/core/helpers/arrays';
 import useSettingsList from '@/modules/core/hooks/use-settings-list';
 import useSettings from '@/modules/core/hooks/use-settings';
 
-import { isFoolsDay, isWomenDay } from '@/modules/krystel/helpers/dates';
+import { isFoolsDay, isRoundedDay, isWomenDay } from '@/modules/krystel/helpers/dates';
 import { isDeleted } from '@/modules/krystel/helpers/utils';
 import useDeleteQuoteAction from '@/modules/krystel/hooks/use-delete-quote-action';
 import useRestoreQuoteAction from '@/modules/krystel/hooks/use-restore-quote-action';
@@ -74,6 +74,7 @@ export default function CardViewerMenu({ className, item }) {
 
     const [skipWomenDay, setSkipWomenDay] = useSettings('specials:skip_women_day', false);
     const [skipFoolsDay, setSkipFoolsDay] = useSettings('specials:skip_fools_day', false);
+    const [skipRoundedDay, setSkipRoundedDay] = useSettings('specials:skip_rounded_day', false);
 
     //* Admin Settings
     const initialSettings = Object.values(settingsList).reduce((acc, { key, defaultValue }) => {
@@ -109,6 +110,7 @@ export default function CardViewerMenu({ className, item }) {
 
     const foolsDay = isFoolsDay();
     const womenDay = isWomenDay();
+    const roundedDay = isRoundedDay();
 
     //* Handlers
 
@@ -183,6 +185,21 @@ export default function CardViewerMenu({ className, item }) {
                                 <span>
                                     Desactivar{' '}
                                     <span className='font-semibold text-orange-500'>#FoolsDay</span>
+                                </span>
+                            </DropdownMenuCheckboxItem>
+                        </>
+                    )}
+
+                    {roundedDay && (
+                        <>
+                            <DropdownMenuSeparator />
+                            <DropdownMenuCheckboxItem
+                                checked={skipRoundedDay}
+                                onCheckedChange={setSkipRoundedDay}
+                            >
+                                <span>
+                                    Desactivar{' '}
+                                    <span className='font-semibold text-orange-500'>#PiDay</span>
                                 </span>
                             </DropdownMenuCheckboxItem>
                         </>

@@ -1,9 +1,9 @@
 'use client';
 import { useEffect, useImperativeHandle, useState, useCallback } from 'react';
-import { capitalize } from 'lodash';
 import { Shuffle, SquareDashed } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
+import { capCase } from '@/modules/core/helpers/strings';
 import { tailwind } from '@/modules/core/helpers/tailwind';
 
 import { Label } from '@/modules/shadcn/ui/label';
@@ -182,10 +182,10 @@ export default function CardEditorConfigs({ ref, className, configs, setConfigs 
                         </SelectTrigger>
                         <SelectContent>
                             <SelectGroup>
-                                <SelectItem value='default'>{capitalize('default')}</SelectItem>
+                                <SelectItem value='default'>{capCase('default')}</SelectItem>
                                 {Object.keys(themes).map(theme => (
                                     <SelectItem key={`configs:theme-item-${theme}`} value={theme}>
-                                        {capitalize(theme)}
+                                        {capCase(theme)}
                                     </SelectItem>
                                 ))}
                             </SelectGroup>

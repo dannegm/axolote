@@ -1,7 +1,7 @@
 'use client';
 import { useEffect } from 'react';
 import { useQueryState, parseAsBoolean } from 'nuqs';
-import { formatDistanceToNow, isBefore } from 'date-fns';
+import { formatDistanceToNow, formatDistanceToNowStrict, isBefore } from 'date-fns';
 import { es as locale } from 'date-fns/locale';
 import { Asterisk, Clock3, icons } from 'lucide-react';
 
@@ -16,6 +16,7 @@ import { getTheme } from '@/modules/krystel/helpers/themes';
 import {
     isElevenEleven,
     isFoolsDay,
+    isRoundedDay,
     isThreeInTheMorning,
     isWomenDay,
 } from '@/modules/krystel/helpers/dates';
@@ -74,6 +75,7 @@ export default function GiftCard({
 
     const [skipWomenDay] = useSettings('specials:skip_women_day', false);
     const [skipFoolsDay] = useSettings('specials:skip_fools_day', false);
+    const [skipRoundedDay] = useSettings('specials:skip_rounded_day', false);
 
     const [id] = settings.split(':');
     const firstAppearance = useFirstAppearance(id);
@@ -86,6 +88,7 @@ export default function GiftCard({
     const threeInTheMorning = isThreeInTheMorning();
     const foolsDay = isFoolsDay();
     const womenDay = isWomenDay();
+    const roundedDay = isRoundedDay();
     const monthHasBeenPassed = useHasElapsedTime('record:last_visit', 30 * 24 * 60 * 60 * 1000);
 
     secretDiscover(discover, {
@@ -116,19 +119,15 @@ export default function GiftCard({
         },
         {
             condition: !skipWomenDay && womenDay,
-            mapper: () =>
-                mergeConfigs(
-                    '({bg:bg-purple-300 mix-blend-overlay|border:bg-wave-purple|scheme:bg-purple-100 text-purple-800})',
-                    quote,
-                ),
+            mapper: () => mergeConfigs('({theme:deepPurple})', quote),
         },
         {
             condition: !skipFoolsDay && foolsDay,
-            mapper: () =>
-                mergeConfigs(
-                    '({schema:shadow-(--shadow-upsidedown)|border:shadow-(--shadow-upsidedown) rotate-180 overflow-hidden before:absolute before:-inset-1/2 before:block before:chromatic-wheel before:animate-spin before:duration-[5s]})',
-                    quote,
-                ),
+            mapper: () => mergeConfigs('({theme:fools|border:rotate-180})', quote),
+        },
+        {
+            condition: !skipRoundedDay && roundedDay,
+            mapper: () => mergeConfigs('({theme:rounded})', quote),
         },
     ]);
 
@@ -360,7 +359,12 @@ export default function GiftCard({
                         data-html2canvas-ignore
                     >
                         <Clock3 size='0.80rem' />
-                        {datePrefix + formatDistanceToNow(date, { locale })}
+                        <span className='long'>
+                            {datePrefix + formatDistanceToNow(date, { locale })}
+                        </span>
+                        <span className='hidden short'>
+                            {formatDistanceToNowStrict(date, { locale })}
+                        </span>
                     </div>
                 )}
             </Card>

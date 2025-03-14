@@ -14,8 +14,10 @@ export default function Card({
         <div
             data-layer='animation'
             className={cn(
+                'group',
                 'animate-in fade-in-0 slide-in-from-bottom-6 duration-300 ease-in',
                 classNames?.animation,
+                { letter: letter, fullscreen: fullscreen },
             )}
         >
             <div
