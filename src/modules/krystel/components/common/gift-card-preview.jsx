@@ -1,5 +1,5 @@
 'use client';
-import { icons, Asterisk } from 'lucide-react';
+import { icons, Asterisk, NotebookPen } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 
@@ -70,7 +70,7 @@ export default function GiftCardPreview({
         <div
             data-layer='card'
             className={cn(
-                'relative overflow-hidden bg-gray-100 bg-center bg-[length:50%] p-2 rounded-md shadow-xl transition-all duration-150',
+                'relative  bg-gray-100 bg-center bg-[length:50%] p-2 rounded-md shadow-xl transition-all duration-150',
                 {
                     'bg-none': configs?.bg || theme?.bg,
                     'blur-xs select-none': hidden,
@@ -92,7 +92,7 @@ export default function GiftCardPreview({
                 <div
                     data-layer='bg'
                     className={cn(
-                        'absolute z-0 inset-0 pointer-events-none',
+                        'absolute z-0 inset-0 pointer-events-none rounded-md overflow-hidden',
                         configs?.bg,
                         theme?.bg,
                         classNames?.bg,
@@ -100,10 +100,23 @@ export default function GiftCardPreview({
                 />
             )}
 
+            {configs?.letter && (
+                <div
+                    data-layer='letter-badge'
+                    className={cn(
+                        'absolute z-20 -left-1 top-6 bg-indigo-200 text-indigo-400 w-6 h-6 rounded-xs shadow-sm',
+                        'flex items-center justify-center [&_svg]:size-4',
+                        theme?.badge,
+                    )}
+                >
+                    <NotebookPen />
+                </div>
+            )}
+
             <div
                 data-layer='border'
                 className={cn(
-                    'relative z-10 bg-gray-200 rounded-lg p-1 shadow-xl',
+                    'relative z-10 bg-gray-200 rounded-lg p-1 shadow-xl overflow-hidden',
                     { 'bg-none': configs?.border || theme?.border },
                     configs?.border,
                     theme?.border,
@@ -130,16 +143,16 @@ export default function GiftCardPreview({
                     }}
                 >
                     <div className='absolute top-2 right-2 flex flex-row gap-1'>
-                        {!preview && isFirstAppearance && (
+                        {isFirstAppearance && (
                             <div
                                 data-layer='badge'
                                 className={cn(
                                     'animate-in fade-in-0 duration-300 ease-in opacity-50',
-                                    'flex items-center justify-center gap-2 w-4 h-4 bg-pink-600 rounded-full',
+                                    'flex items-center justify-center gap-2 size-4 bg-pink-600 rounded-full [&_svg]:size-4 [&_svg]:text-white',
                                     theme?.badge,
                                 )}
                             >
-                                <Asterisk size={16} className='text-white' />
+                                <Asterisk />
                             </div>
                         )}
                     </div>
