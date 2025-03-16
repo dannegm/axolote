@@ -44,7 +44,7 @@
     }
     .bg-img-deep-space {
         background-image: url('/frames/IMG_4515.jpeg');
-        background-position: center bottom;
+        background-position: center;
         background-size: cover;
     }
     .bg-img-glitch {
