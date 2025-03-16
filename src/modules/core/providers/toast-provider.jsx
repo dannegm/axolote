@@ -2,6 +2,7 @@
 import { createContext, useContext, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { removeItemById, updateItemById } from '../helpers/arrays';
+import useDebouncedCallback from '../hooks/use-debounced-callback';
 
 const ToastHostContext = createContext();
 
@@ -22,31 +23,34 @@ export default function ToastProvider({ children }) {
         }, ANIMATION_DURATION);
     };
 
-    const showToast = ({
-        content,
-        onAccept = undefined,
-        onCancel = undefined,
-        duration = 3000,
-        persist = false,
-    }) => {
-        const payload = {
-            id: nanoid(),
+    const showToast = useDebouncedCallback(
+        ({
             content,
-            duration,
-            persist,
-            onAccept,
-            onCancel,
-            hidden: false,
-        };
+            onAccept = undefined,
+            onCancel = undefined,
+            duration = 3000,
+            persist = false,
+        }) => {
+            const payload = {
+                id: nanoid(),
+                content,
+                duration,
+                persist,
+                onAccept,
+                onCancel,
+                hidden: false,
+            };
 
-        setToastCollection(collection => [...collection, payload]);
+            setToastCollection(collection => [...collection, payload]);
 
-        if (!persist) {
-            setTimeout(() => {
-                hideToast(payload.id);
-            }, duration);
-        }
-    };
+            if (!persist) {
+                setTimeout(() => {
+                    hideToast(payload.id);
+                }, duration);
+            }
+        },
+        200,
+    );
 
     const handleAccept = id => {
         const payload = toastCollection.find(t => t.id === id);

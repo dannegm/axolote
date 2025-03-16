@@ -1,15 +1,22 @@
 import { useState, useEffect } from 'react';
 import { differenceInMilliseconds } from 'date-fns';
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
+import useEffectOnce from './use-effect-once';
+
+export const ElapsedTime = {
+    UNINITIALIZED: 'UNINITIALIZED',
+    PASSED: 'PASSED',
+    WAITING: 'WAITING',
+};
 
 export default function useHasElapsedTime(
     key = 'record:last_record',
     duration = 24 * 60 * 60 * 1000,
 ) {
-    const [lastRecord, setLastRecord] = useLocalStorage(key, null);
-    const [hasElapsed, setHasElapsed] = useState(false);
+    const [lastRecord, setLastRecord, setSilentLastRecord] = useLocalStorage(key, null);
+    const [hasElapsed, setHasElapsed] = useState(ElapsedTime.UNINITIALIZED);
 
-    useEffect(() => {
+    useEffectOnce(() => {
         if (!lastRecord) {
             setLastRecord(new Date().toISOString());
         }
@@ -19,13 +26,12 @@ export default function useHasElapsedTime(
         if (lastRecord) {
             const now = new Date();
             const lastTime = new Date(lastRecord);
-            console.log(lastTime);
 
             if (differenceInMilliseconds(now, lastTime) >= duration) {
-                setHasElapsed(true);
-                setLastRecord(now);
+                setHasElapsed(ElapsedTime.PASSED);
+                setSilentLastRecord(now.toISOString());
             } else {
-                setHasElapsed(false);
+                setHasElapsed(ElapsedTime.WAITING);
             }
         }
     }, [lastRecord, duration]);

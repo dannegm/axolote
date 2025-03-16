@@ -30,8 +30,6 @@ export default function CardEditorPanel({
     setPublishedTime,
     showCardViewport,
     setShowCardViewport,
-    pasteReplace,
-    setPasteReplace,
     autoScroll,
     setAutoScroll,
     setDraftsOpen,
@@ -102,8 +100,6 @@ export default function CardEditorPanel({
                                 setPublishedTime={setPublishedTime}
                                 showCardViewport={showCardViewport}
                                 setShowCardViewport={setShowCardViewport}
-                                pasteReplace={pasteReplace}
-                                setPasteReplace={setPasteReplace}
                                 autoScroll={autoScroll}
                                 setAutoScroll={setAutoScroll}
                             />

@@ -10,6 +10,9 @@ import {
     PenTool,
     Proportions,
     Split,
+    ScrollText,
+    BookHeart,
+    ScanHeart,
 } from 'lucide-react';
 
 import Simple from '../apps/simple';
@@ -22,6 +25,8 @@ import PostSimple from '../apps/post-simple';
 import PostMood from '../apps/post-mood';
 import PostDrawing from '../apps/post-drawing';
 import PostImage from '../apps/post-image';
+import AllReasonsLove from '../apps/all-reasons-love';
+import ReasonsLove from '../apps/reasons-love';
 
 const appsComponents = {
     default: () => <></>,
@@ -31,6 +36,8 @@ const appsComponents = {
     easter_eggs: EasterEggs,
     breakpoint: Breakpoint,
     flappybird: FlappyBird,
+    reasons_love_all: AllReasonsLove,
+    reasons_love: ReasonsLove,
 
     // Posts
     'post-simple': PostSimple,
@@ -47,6 +54,8 @@ const appsDescriptions = {
     easter_eggs: 'Encuéntralos todos',
     breakpoint: 'Breakpoint',
     flappybird: 'Flappy Bird',
+    reasons_love_all: 'Todas las #100Reasons por las que te quiero tanto.',
+    reasons_love: '#100Reasons por las que te quiero tanto.',
 
     // Posts
     'post-simple': 'Cuéntame qué estás pensando',
@@ -63,6 +72,8 @@ const appsIcons = {
     easter_eggs: Award,
     breakpoint: Proportions,
     flappybird: Gamepad2,
+    reasons_love_all: ScrollText,
+    reasons_love: ScanHeart,
 
     // Posts
     'post-simple': MessageSquareHeart,

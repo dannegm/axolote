@@ -25,6 +25,13 @@ export default function useLocalStorage(key, initialValue) {
         } catch (error) {}
     };
 
+    const setSilentValue = value => {
+        try {
+            const valueToStore = value instanceof Function ? value(storedValue) : value;
+            localStorage.setItem(key, JSON.stringify(valueToStore));
+        } catch (error) {}
+    };
+
     useEffect(() => {
         if (typeof window === 'undefined') return;
 
@@ -54,5 +61,5 @@ export default function useLocalStorage(key, initialValue) {
         };
     }, [key]);
 
-    return [storedValue, setValue];
+    return [storedValue, setValue, setSilentValue];
 }

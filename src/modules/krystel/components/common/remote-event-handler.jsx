@@ -104,7 +104,7 @@ export default function RemoteEventHandler({ quote }) {
         pauseParySound();
 
         setTimeout(() => {
-            window.location.href = '/krystel?code=128:6:23:20:2';
+            window.location.href = '/krystel?code=128:*:*:*:*';
         }, 1500);
     };
 

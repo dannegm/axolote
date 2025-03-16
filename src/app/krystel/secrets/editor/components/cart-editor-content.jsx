@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 
-import { Clipboard, Copy, ClipboardPlus } from 'lucide-react';
+import { Clipboard, Copy, ClipboardPlus, ClipboardPen } from 'lucide-react';
 
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import { useResponsiveBox } from '@/modules/core/components/common/responsive-box';
@@ -31,8 +31,6 @@ export default function CardEditorContent({
     const $text = useRef();
     const [, copyToClipboard] = useCopyToClipboard();
 
-    const [pasteReplace] = useLocalStorage('editor:paste_replace', true);
-
     const [copied, setCopy] = useState(false);
     const [pasted, setPasted] = useState(false);
 
@@ -45,32 +43,32 @@ export default function CardEditorContent({
         }, 200);
     };
 
-    const handlePaste = text => {
-        const { configs, content } = extractConfigsAndContent(text);
+    const handleButtonPasteReplace = async () => {
+        const clipboardText = await navigator.clipboard.readText();
+        const { configs, content } = extractConfigsAndContent(clipboardText);
         const safeContent = content;
 
-        if (pasteReplace) {
-            setConfigs(configs);
-            setContent(safeContent);
-        } else {
-            setContent(prev => prev + safeContent);
-        }
+        setConfigs(configs);
+        setContent(safeContent);
 
         setPasted(true);
         selectAnimation();
     };
 
-    const handleInputPaste = event => {
-        if (pasteReplace) {
-            event.preventDefault();
-            const clipboardText = event.clipboardData.getData('text');
-            handlePaste(clipboardText);
-        }
-    };
-
-    const handleButtonPaste = async () => {
+    const handleButtonPasteSimple = async () => {
         const clipboardText = await navigator.clipboard.readText();
-        handlePaste(clipboardText);
+
+        const textarea = $text.current;
+
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const newText = content.substring(0, start) + clipboardText + content.substring(end);
+
+        setContent(newText);
+
+        setTimeout(() => {
+            textarea.selectionStart = textarea.selectionEnd = start + clipboardText.length;
+        }, 0);
     };
 
     const handleCopy = () => {
@@ -88,12 +86,25 @@ export default function CardEditorContent({
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <ToolbarAction onClick={handleButtonPaste}>
-                                {pasteReplace ? <Clipboard /> : <ClipboardPlus />}
+                            <ToolbarAction onClick={handleButtonPasteReplace}>
+                                <ClipboardPen />
                             </ToolbarAction>
                         </TooltipTrigger>
                         <TooltipContent>
-                            {pasteReplace ? <p>Paste and replace</p> : <p>Simple paste</p>}
+                            <p>Paste and replace</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <ToolbarAction onClick={handleButtonPasteSimple}>
+                                <Clipboard />
+                            </ToolbarAction>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Simple paste</p>
                         </TooltipContent>
                     </Tooltip>
                 </TooltipProvider>
@@ -127,7 +138,6 @@ export default function CardEditorContent({
                 maxRows={breakpoint === 'desktop' ? 20 : 8}
                 value={content}
                 onChange={ev => setContent(ev.target.value)}
-                onPaste={handleInputPaste}
             />
         </div>
     );

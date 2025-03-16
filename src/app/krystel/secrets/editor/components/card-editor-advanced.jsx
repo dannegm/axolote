@@ -1,7 +1,6 @@
 'use client';
 import { cn } from '@/modules/core/helpers/utils';
 
-import { Button } from '@/modules/shadcn/ui/button';
 import { Switch } from '@/modules/shadcn/ui/switch';
 import { DatePicker } from '@/modules/shadcn/ui/date-picker';
 import { Separator } from '@/modules/shadcn/ui/separator';
@@ -18,8 +17,6 @@ export default function CardEditorAdvanced({
     setPublishedTime,
     showCardViewport,
     setShowCardViewport,
-    pasteReplace,
-    setPasteReplace,
     autoScroll,
     setAutoScroll,
 }) {
@@ -51,15 +48,6 @@ export default function CardEditorAdvanced({
                     id='show-card-viewport'
                     checked={showCardViewport}
                     onCheckedChange={setShowCardViewport}
-                />
-            </div>
-            <Separator />
-            <div className='flex flex-row justify-between items-center'>
-                <Label htmlFor='replace-on-paste'>Replace on paste</Label>
-                <Switch
-                    id='replace-on-paste'
-                    checked={pasteReplace}
-                    onCheckedChange={setPasteReplace}
                 />
             </div>
             <Separator />

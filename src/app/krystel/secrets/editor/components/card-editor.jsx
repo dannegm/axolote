@@ -43,7 +43,6 @@ export default function CardEditor() {
         'editor:show_card_viewport',
         false,
     );
-    const [pasteReplace, setPasteReplace] = useLocalStorage('editor:paste_replace', true);
     const [autoScroll, setAutoScroll] = useLocalStorage('editor:auto_scroll', false);
 
     // Content
@@ -160,8 +159,6 @@ export default function CardEditor() {
                         setPublishedTime={setPublishedTime}
                         showCardViewport={showCardViewport}
                         setShowCardViewport={setShowCardViewport}
-                        pasteReplace={pasteReplace}
-                        setPasteReplace={setPasteReplace}
                         autoScroll={autoScroll}
                         setAutoScroll={setAutoScroll}
                         setDraftsOpen={setDraftsOpen}

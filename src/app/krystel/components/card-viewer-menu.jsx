@@ -3,9 +3,12 @@ import { Fragment } from 'react';
 import {
     ArrowLeftToLine,
     ArrowRightToLine,
+    Award,
+    Badge,
     Delete,
     Eye,
     EyeOff,
+    ScrollText,
     Settings,
     Undo2,
 } from 'lucide-react';
@@ -167,6 +170,20 @@ export default function CardViewerMenu({ className, item }) {
                         <DropdownMenuItemDescription>
                             Intercambia la dirección de los botones.
                         </DropdownMenuItemDescription>
+                    </DropdownMenuItem>
+
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                        <a href='/krystel?code=172:*:*:*:*'>
+                            <Award />
+                            Easter Eggs
+                        </a>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                        <a href='/krystel?code=230:*:*:*:*'>
+                            <ScrollText />
+                            <span className='font-mono font-bold text-rose-500'>#100Reasons</span>
+                        </a>
                     </DropdownMenuItem>
 
                     {womenDay && (

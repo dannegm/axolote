@@ -8,7 +8,7 @@ import { Asterisk, Clock3, icons } from 'lucide-react';
 import { cn } from '@/modules/core/helpers/utils';
 import { pascalCase } from '@/modules/core/helpers/strings';
 import useScrollPosition from '@/modules/core/hooks/use-scroll-position';
-import useHasElapsedTime from '@/modules/core/hooks/use-has-elapsed-time';
+import useHasElapsedTime, { ElapsedTime } from '@/modules/core/hooks/use-has-elapsed-time';
 import useSettings from '@/modules/core/hooks/use-settings';
 import Portal from '@/modules/core/components/common/portal';
 
@@ -97,7 +97,7 @@ export default function GiftCard({
         ufo_time: threeInTheMorning,
         fools_day: foolsDay,
         uwu_mode: uwu,
-        long_long_time: monthHasBeenPassed,
+        long_long_time: monthHasBeenPassed === ElapsedTime.PASSED,
 
         secret_card: id === '128',
         nyancat: id === '127',

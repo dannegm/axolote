@@ -119,7 +119,7 @@ export const getRandomSettings = () => {
 };
 
 export const quoteFromSettings = settings => {
-    const [icon, border, bg, schema] = settings.split(':');
+    const [icon = '*', border = '*', bg = '*', schema = '*'] = settings.split(':');
 
     return {
         settings,

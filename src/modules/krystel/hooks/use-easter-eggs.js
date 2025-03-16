@@ -26,6 +26,15 @@ const easterEggs = [
         description:
             'Espero que hayas presionado ese botón sólo por curiosidad y no por una emergencia real.',
     },
+    {
+        id: 'reasons_all',
+        description: 'Ahora tienes 100 razones del por qué te quiero tanto.',
+    },
+    {
+        id: 'reasons_hacked',
+        description:
+            'Esas ansias tuyas de querer leer todas esas 100 razones de una sola vez haha.',
+    },
 ];
 
 export default function useEasterEggs() {

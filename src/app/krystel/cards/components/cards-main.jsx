@@ -3,12 +3,14 @@ import { useQueryState, parseAsBoolean } from 'nuqs';
 import ClientOnly from '@/modules/core/components/common/client-only';
 import CardItem from './card-item';
 import CardsList from './cards-list';
+import ToastHost from '@/modules/core/components/common/toast-host';
 
 export default function CardsMain({ data = [] }) {
     const [uwu] = useQueryState('uwu', parseAsBoolean.withDefault(false));
 
     return (
         <ClientOnly>
+            <ToastHost />
             <main className='px-4 md:p-0 max-w-[640px] w-full md:w-3/4 lg:w-4/6 xl:w-1/2 mx-auto border-t-8 border-gray-300'>
                 <div className='flex flex-col gap-2 text-center my-6'>
                     {!uwu ? (

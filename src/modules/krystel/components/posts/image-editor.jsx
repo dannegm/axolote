@@ -37,7 +37,6 @@ export default function ImageEditor({ content, setContent, props }) {
         }
 
         const { data } = $storage.getPublicUrl(fileName);
-        console.log(data);
         setUrl(data?.publicUrl);
         setPreview(data?.publicUrl);
     };

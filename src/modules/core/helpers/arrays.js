@@ -33,6 +33,10 @@ export const probabilityPick = items => {
 };
 
 export const pickFromIndex = (arr = [], index = 0) => {
+    if (index === '#') {
+        return randomPick(arr);
+    }
+
     if (Number.isNaN(index)) {
         return randomPick(arr);
     }

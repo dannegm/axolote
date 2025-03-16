@@ -1,0 +1,139 @@
+'use client';
+import { useEffect } from 'react';
+import { useQueryState, parseAsBoolean } from 'nuqs';
+import { Check } from 'lucide-react';
+
+import { cn } from '@/modules/core/helpers/utils';
+import useReasonsLove from '@/modules/krystel/hooks/use-reasons-love';
+
+import Frame from './frame';
+import Button from '../common/button';
+import { useLocalStorage } from '@uidotdev/usehooks';
+import RandomWord from '../common/random-word';
+import useHasElapsedTime, { ElapsedTime } from '@/modules/core/hooks/use-has-elapsed-time';
+import { useToast } from '@/modules/core/providers/toast-provider';
+import useEasterEggs from '../../hooks/use-easter-eggs';
+
+const COOLDOWN_TIME = 10 * 60 * 1000;
+
+export default function ReasonsLove() {
+    const { discover, getStats, clearReasons } = useReasonsLove();
+    const { total } = getStats();
+
+    const [started, setStarted] = useLocalStorage('reasons:started', false);
+    const [finished, setFinished] = useLocalStorage('reasons:finished', false);
+    const [currentReason, setCurrentReason] = useLocalStorage('reasons:current', 0);
+
+    const cooldown = useHasElapsedTime('reasons:cooldown', COOLDOWN_TIME);
+    const { discover: discoverSecret } = useEasterEggs();
+
+    const { showToast } = useToast();
+
+    const handleStart = () => {
+        setStarted(true);
+        setFinished(false);
+        setCurrentReason(1);
+    };
+
+    const handleReset = () => {
+        setStarted(false);
+        setFinished(false);
+        setCurrentReason(0);
+        clearReasons();
+    };
+
+    useEffect(() => {
+        if (started && cooldown === ElapsedTime.PASSED) {
+            setCurrentReason(+currentReason + 1);
+        }
+
+        if (started && !finished && cooldown === ElapsedTime.WAITING) {
+            discoverSecret('reasons_hacked');
+            showToast({
+                content: 'Espera un poco antes de la siguiente',
+            });
+        }
+    }, [cooldown]);
+
+    useEffect(() => {
+        if (currentReason > total) {
+            setFinished(true);
+            discoverSecret('reasons_all');
+        }
+    }, [currentReason, total]);
+
+    return (
+        <Frame className='max-h-auto flex flex-col flex-center gap-2'>
+            <p className='text-pretty text-sm'>
+                <span className='font-mono font-bold text-rose-500'>#100Reasons</span>
+            </p>
+            {!started && (
+                <div className='flex flex-col flex-center gap-2' data-step='first'>
+                    <p className='text-sm'>
+                        Cada que encuentres esta tarjeta también encontrarás una de las{' '}
+                        <span className='text-purple-600 font-bold italic'>100 razones</span> por
+                        las que
+                    </p>
+                    <p className='flex flex-row gap-1 text-sm'>
+                        <RandomWord
+                            words={[
+                                'te quiero',
+                                'me gustas',
+                                'te amo',
+                                'me encantas',
+                                'te admiro',
+                                'te deseo',
+                                'te extraño',
+                                'te necesito',
+                            ]}
+                        />
+                        <RandomWord
+                            words={[
+                                'tanto',
+                                'demasiado',
+                                'infinitamente',
+                                'a montones',
+                                'por siempre',
+                                'sin mesuras',
+                                'sin importar nada',
+                            ]}
+                        />
+                    </p>
+                    <Button
+                        className={cn('block w-fit text-sm px-4 py-2 mt-4')}
+                        onClick={handleStart}
+                    >
+                        Estoy lista ✨
+                    </Button>
+                </div>
+            )}
+
+            {started && !finished && (
+                <div className='flex flex-col flex-center gap-2' data-step='reason'>
+                    <p className='font-mono text-base font-bold italic'>
+                        Razón <span>#{currentReason}</span>
+                    </p>
+                    <p className='px-2 py-3 text-base bg-pink-100 leading-4 border border-pink-300 rounded-lg'>
+                        {discover(`r:${currentReason}`)?.description}
+                    </p>
+                </div>
+            )}
+
+            {finished && (
+                <div className='flex flex-col flex-center gap-2' data-step='finish'>
+                    <p className='text-sm'>Ahora sabes el por qué de lo mucho que te quiero.</p>
+                    <p className='text-xs'>
+                        Si quieres volver a leerlas una por una solamente pica el botón de abajo o
+                        busca la tarjeta con la lista completa.
+                    </p>
+                    <Button
+                        className={cn('block w-fit text-sm px-4 py-2 mt-4')}
+                        onClick={handleReset}
+                    >
+                        Comenzar de nuevo ✨
+                    </Button>
+                </div>
+            )}
+        </Frame>
+    );
+}

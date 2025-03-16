@@ -10,7 +10,7 @@ export const Toolbar = ({ className, children }) => {
                 'bg-white dark:bg-zinc-900',
                 'border border-zinc-200 dark:border-zinc-800',
                 'rounded-md',
-                'flex items-center gap-2 p-1',
+                'flex items-center gap-1 p-1',
                 className,
             )}
         >
