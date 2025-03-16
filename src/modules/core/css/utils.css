@@ -42,6 +42,9 @@
     .bg-img-blue-galaxy {
         background-image: url(/backgrounds/blue-galaxy.jpg);
     }
+    .bg-img-deep-space {
+        background-image: url('/frames/IMG_4515.jpeg');
+    }
     .bg-img-glitch {
         background-image: url('/backgrounds/glitch.gif');
     }
