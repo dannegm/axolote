@@ -1,20 +1,20 @@
 'use client';
 import { useEffect } from 'react';
-import { useQueryState, parseAsBoolean } from 'nuqs';
-import { Check } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
+import { useToast } from '@/modules/core/providers/toast-provider';
+import useHasElapsedTime, { ElapsedTime } from '@/modules/core/hooks/use-has-elapsed-time';
+import useLocalStorage from '@/modules/core/hooks/use-local-storage';
+import { useQuote } from '@/modules/krystel/providers/quote-provider';
+import usePostAction from '@/modules/krystel/hooks/use-post-action';
 import useReasonsLove from '@/modules/krystel/hooks/use-reasons-love';
+import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
 
 import Frame from './frame';
 import Button from '../common/button';
-import { useLocalStorage } from '@uidotdev/usehooks';
 import RandomWord from '../common/random-word';
-import useHasElapsedTime, { ElapsedTime } from '@/modules/core/hooks/use-has-elapsed-time';
-import { useToast } from '@/modules/core/providers/toast-provider';
-import useEasterEggs from '../../hooks/use-easter-eggs';
 
-const COOLDOWN_TIME = 10 * 60 * 1000;
+const COOLDOWN_TIME = 1000; // 10 * 60 * 1000;
 
 export default function ReasonsLove() {
     const { discover, getStats, clearReasons } = useReasonsLove();
@@ -28,11 +28,27 @@ export default function ReasonsLove() {
     const { discover: discoverSecret } = useEasterEggs();
 
     const { showToast } = useToast();
+    const quote = useQuote();
+
+    const startedAction = usePostAction({
+        action: 'Start Discovering Reasons',
+        settings: quote?.settings,
+    });
+    const finishedAction = usePostAction({
+        action: 'All Reasons Discovered',
+        settings: quote?.settings,
+    });
+
+    const discoverAction = usePostAction({
+        action: `Reason ${currentReason + 1}`,
+        settings: quote?.settings,
+    });
 
     const handleStart = () => {
         setStarted(true);
         setFinished(false);
         setCurrentReason(1);
+        startedAction();
     };
 
     const handleReset = () => {
@@ -43,8 +59,9 @@ export default function ReasonsLove() {
     };
 
     useEffect(() => {
-        if (started && cooldown === ElapsedTime.PASSED) {
+        if (started && currentReason < total && cooldown === ElapsedTime.PASSED) {
             setCurrentReason(+currentReason + 1);
+            discoverAction();
         }
 
         if (started && !finished && cooldown === ElapsedTime.WAITING) {
@@ -59,6 +76,7 @@ export default function ReasonsLove() {
         if (currentReason > total) {
             setFinished(true);
             discoverSecret('reasons_all');
+            finishedAction();
         }
     }, [currentReason, total]);
 
