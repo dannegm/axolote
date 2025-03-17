@@ -14,7 +14,7 @@ import Frame from './frame';
 import Button from '../common/button';
 import RandomWord from '../common/random-word';
 
-const COOLDOWN_TIME = 1000; // 10 * 60 * 1000;
+const COOLDOWN_TIME = 10 * 60 * 1000;
 
 export default function ReasonsLove() {
     const { discover, getStats, clearReasons } = useReasonsLove();
@@ -59,7 +59,7 @@ export default function ReasonsLove() {
     };
 
     useEffect(() => {
-        if (started && currentReason < total && cooldown === ElapsedTime.PASSED) {
+        if (started && currentReason <= total && cooldown === ElapsedTime.PASSED) {
             setCurrentReason(+currentReason + 1);
             discoverAction();
         }
@@ -81,7 +81,7 @@ export default function ReasonsLove() {
     }, [currentReason, total]);
 
     return (
-        <Frame className='max-h-auto flex flex-col flex-center gap-2'>
+        <Frame className='max-h-auto flex flex-col flex-center gap-1 -mt-2 -mb-4'>
             <p className='text-pretty text-sm'>
                 <span className='font-mono font-bold text-rose-500'>#100Reasons</span>
             </p>

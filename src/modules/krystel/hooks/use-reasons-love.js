@@ -2,184 +2,248 @@
 import { useState, useEffect } from 'react';
 
 const reasonsList = [
-    { id: 'r:1', description: 'Porque cuando está cerca, todo se siente más fácil.' },
-    { id: 'r:2', description: 'Porque su risa tiene el efecto de un buen café en la mañana.' },
-    { id: 'r:3', description: 'Porque cuando habla, realmente quiero escucharla.' },
-    { id: 'r:4', description: 'Porque aunque no diga nada, su presencia llena el espacio.' },
-    { id: 'r:5', description: 'Porque con ella no necesito fingir ser alguien más.' },
-    { id: 'r:6', description: 'Porque su existencia hace que los días sean menos grises.' },
-    { id: 'r:7', description: 'Porque simplemente verla me cambia el humor.' },
-    { id: 'r:8', description: 'Porque es alguien que no se encuentra dos veces en la vida.' },
-    { id: 'r:9', description: 'Porque su forma de ver el mundo me hace querer verlo igual.' },
-    { id: 'r:10', description: 'Porque a su lado, hasta los silencios son cómodos.' },
-    { id: 'r:11', description: 'Porque me hace querer ser mejor.' },
-    { id: 'r:12', description: 'Porque cuando la miro, a veces me falta el aire.' },
-    { id: 'r:13', description: 'Porque me ha demostrado que la conexión real existe.' },
-    { id: 'r:14', description: 'Porque aunque no esté cerca, de alguna forma sigue presente.' },
-    { id: 'r:15', description: 'Porque suena cursi, pero su esencia es un imán para mí.' },
-    { id: 'r:16', description: 'Porque sabe cómo hablarme y cuándo callar.' },
-    { id: 'r:17', description: 'Porque me deja verla tal y como es, sin máscaras.' },
+    { id: 'r:1', description: 'Porque tu compañía es tan cálida cuando estoy a tu lado.' },
+    { id: 'r:2', description: 'Porque aún sigo sintiendo nervios cuando estoy a punto de verte.' },
+    { id: 'r:3', description: 'Porque siempre provocas en mí una gran ternura.' },
     {
-        id: 'r:18',
-        description: 'Porque sus defectos no opacan sus virtudes, las hacen más reales.',
+        id: 'r:4',
+        description: 'Porque fue por ti que aprendí lo que se siente estar vivo nuevamente.',
     },
-    { id: 'r:19', description: 'Porque en mis recuerdos más felices, ella está ahí.' },
     {
-        id: 'r:20',
-        description: 'Porque cuando pienso en el futuro, inevitablemente la imagino en él.',
+        id: 'r:5',
+        description: 'Porque no existe ni un segundo en mi mente en el que deje de pensarte.',
     },
-    { id: 'r:21', description: 'Porque su voz es un refugio.' },
-    { id: 'r:22', description: 'Porque cuando sonríe de verdad, el mundo se pausa un segundo.' },
-    { id: 'r:23', description: 'Porque sus ojos dicen más de lo que ella misma se permite decir.' },
-    { id: 'r:24', description: 'Porque hasta en sus enojos tiene un encanto que no entiendo.' },
+    { id: 'r:6', description: 'Porque te has convertido en mi mundo entero.' },
+    { id: 'r:7', description: 'Por esa mirada que me mata y me da vida al mismo tiempo.' },
+    {
+        id: 'r:8',
+        description:
+            'Porque me encanta verte tan pensativa, sumergida en tu propio mundo de ideas.',
+    },
+    { id: 'r:9', description: 'Por toda la bondad que siempre llevas dentro de ti.' },
+    { id: 'r:10', description: 'Porque siempre me emociona poder hacer planes juntos.' },
+    {
+        id: 'r:11',
+        description:
+            'Porque eres lo primero en lo que pienso al despertar cada mañana (o a cualquier hora que despierte haha).',
+    },
+    { id: 'r:12', description: 'Por lo entregada que eres a ti misma.' },
+    {
+        id: 'r:13',
+        description:
+            'Porque aún cuando decidiste alejarte de mí, me sigues buscando para compartirme tu día a día.',
+    },
+    { id: 'r:14', description: 'Porque yo sé que me piensas tanto como yo te pienso a ti.' },
+    {
+        id: 'r:15',
+        description: 'Por esa mancha en tu rostro que brilla con el sol cuando no te maquillas.',
+    },
+    {
+        id: 'r:16',
+        description: 'Por lo increíblemente tierna que te ves cuando cierras tus ojitos.',
+    },
+    {
+        id: 'r:17',
+        description:
+            'Por todas las ambiciones que tienes y que yo sé que luchas día a día por conseguir, a pesar de lo complicado que puede ser.',
+    },
+    { id: 'r:18', description: 'Por tu exquisito gusto por todo lo aesthetic.' },
+    { id: 'r:19', description: 'Por ese lado artístico que te caracteriza.' },
+    { id: 'r:20', description: 'Por poder compartir juntos la pasión por el buen cine.' },
+    {
+        id: 'r:21',
+        description: 'Porque no conozco otra persona en este mundo tan bella como lo eres tú.',
+    },
+    { id: 'r:22', description: 'Por toda la confianza que desde siempre has depositado en mí.' },
+    { id: 'r:23', description: 'Porque simplemente hablar contigo me alegra el resto del día.' },
+    { id: 'r:24', description: 'Porque vuelvo a enamorarme de ti cada que te escucho reír.' },
     {
         id: 'r:25',
-        description: 'Porque me gusta cómo se mueve, como si cada paso tuviera intención.',
+        description:
+            'Porque aunque lo intentemos, sabes que no podemos estar lejos el uno del otro.',
     },
-    { id: 'r:26', description: 'Porque su inteligencia es tan atractiva como su sonrisa.' },
+    { id: 'r:26', description: 'Porque mis días son más tristes cuando no estás tú.' },
     {
         id: 'r:27',
-        description: 'Porque cuando me reta, me dan más ganas de ganar… o de perder ante ella.',
+        description:
+            'Porque podría estarte escuchando hablar por horas, fascinado con todo lo que tienes que decir.',
     },
-    { id: 'r:28', description: 'Porque hasta sus manías me parecen interesantes.' },
-    { id: 'r:29', description: 'Porque me descubro a mí mismo pensando en ella sin darme cuenta.' },
-    { id: 'r:30', description: 'Porque es la única persona con la que nunca me canso de hablar.' },
-    { id: 'r:31', description: 'Porque no se deja vencer fácil.' },
-    { id: 'r:32', description: 'Porque su mente es un laberinto en el que me perdería con gusto.' },
-    { id: 'r:33', description: 'Porque no cualquiera tiene la fuerza que ella tiene.' },
-    { id: 'r:34', description: 'Porque si algo se propone, tarde o temprano lo consigue.' },
+    { id: 'r:28', description: 'Porque eres muy cozy haha.' },
+    { id: 'r:29', description: 'Porque me hielo cada que dices mi nombre.' },
     {
-        id: 'r:35',
-        description: 'Porque su forma de pensar me hace cuestionar mis propias creencias.',
+        id: 'r:30',
+        description: 'Porque eres tan desesperada que no te tienes ni paciencia a ti misma.',
     },
     {
-        id: 'r:36',
-        description: 'Porque no se conforma con lo que la vida le da, siempre quiere más.',
+        id: 'r:31',
+        description: 'Por ese carácter e imponencia tan fuerte que llevas siempre por fuera.',
     },
+    {
+        id: 'r:32',
+        description:
+            'Pero también porque me has permitido conocer esa fragilidad y ternura que llevas dentro.',
+    },
+    { id: 'r:33', description: 'Por lo impulsiva que eres.' },
+    { id: 'r:34', description: 'Por toda tu locura.' },
+    { id: 'r:35', description: 'Por toda tu cordura.' },
+    { id: 'r:36', description: 'Por todos tus defectos.' },
     {
         id: 'r:37',
-        description: 'Porque me demuestra que se puede ser fuerte sin perder la ternura.',
+        description: 'Porque esa impulsividad y esa locura me arrastraron hasta enamorarme de ti.',
     },
-    { id: 'r:38', description: 'Porque sabe lo que vale y no deja que nadie la haga dudarlo.' },
+    { id: 'r:38', description: 'Porque es imposible no amar hasta el más mínimo cabello tuyo.' },
+    { id: 'r:39', description: 'Por todos los recuerdos que hemos construido juntos.' },
     {
-        id: 'r:39',
-        description: 'Porque tiene un carácter que se respeta, pero no impone con miedo.',
+        id: 'r:40',
+        description: 'Por todos los momentos que aún quisiera poder vivir algún día contigo.',
     },
-    { id: 'r:40', description: 'Porque no necesita atención, pero cuando la tiene, la aprovecha.' },
-    { id: 'r:41', description: 'Porque su piel debe sentirse como la mejor de las caricias.' },
-    {
-        id: 'r:42',
-        description: 'Porque hay algo en su manera de mirarme que despierta todo en mí.',
-    },
-    { id: 'r:43', description: 'Porque cuando está cerca, la distancia es una tortura.' },
-    { id: 'r:44', description: 'Porque sus labios parecen tener todas las respuestas.' },
-    {
-        id: 'r:45',
-        description: 'Porque su presencia tiene el poder de hacerme olvidar cualquier otra cosa.',
-    },
+    { id: 'r:41', description: 'Porque tú también has aprendido a aceptar mis defectos.' },
+    { id: 'r:42', description: 'Porque sigo aprendiendo muchas cosas cada día gracias a ti.' },
+    { id: 'r:43', description: 'Por toda la locura que tú provocas en mí.' },
+    { id: 'r:44', description: 'Porque también me ayudas a mantenerme cuerdo.' },
+    { id: 'r:45', description: 'Porque me has cambiado en maneras que ni siquiera sabes.' },
     {
         id: 'r:46',
-        description: 'Porque cuando me toca, aunque sea por accidente, se queda el recuerdo.',
+        description:
+            'Porque eres la única que me haría arriesgar la vida en medio de una guerrilla solo por la ilusión de poder verte.',
     },
     {
         id: 'r:47',
-        description: 'Porque la idea de tenerla entre mis brazos es demasiado perfecta.',
+        description: 'Porque sabes que me has hecho hacer cosas que parecían imposibles, posibles.',
     },
-    { id: 'r:48', description: 'Porque a veces la deseo incluso cuando no está presente.' },
+    { id: 'r:48', description: 'Porque eres un motor que me mantiene funcionando.' },
     {
         id: 'r:49',
-        description: 'Porque cuando habla, hay momentos en que solo quiero callarla con un beso.',
+        description: 'Porque me haces descubrir cosas de mí que ni yo mismo sabía de mí.',
     },
     {
         id: 'r:50',
-        description: 'Porque nunca había sentido algo tan físico y tan emocional a la vez.',
+        description:
+            'Porque es tan sencillo haber encontrado ya 50 cosas que amo de ti y aún me quedan muchas más por decir.',
     },
-    { id: 'r:51', description: 'Porque sin ella, algo me falta.' },
+    { id: 'r:51', description: 'Porque contigo puedo ser yo mismo.' },
+    { id: 'r:52', description: 'Porque me gustaría tenerte aquí a mi lado ahora mismo.' },
+    { id: 'r:53', description: 'Porque cuando imagino mi futuro, tú estás en él.' },
+    { id: 'r:54', description: 'Por todas las cosas que he soñado contigo.' },
     {
-        id: 'r:52',
-        description: 'Porque es la única persona con la que puedo hablar de cualquier cosa.',
+        id: 'r:55',
+        description:
+            'Porque el sueño que una vez tuve de poder verte en persona por fin lo hemos cumplido.',
     },
-    { id: 'r:53', description: 'Porque su ausencia pesa más de lo que quiero admitir.' },
-    { id: 'r:54', description: 'Porque cuando tengo un mal día, su voz lo mejora todo.' },
-    { id: 'r:55', description: 'Porque me hace sentir entendido sin siquiera intentarlo.' },
-    { id: 'r:56', description: 'Porque sin ella, mi mundo sería un poco más aburrido.' },
-    { id: 'r:57', description: 'Porque la vida sin alguien como ella no tiene el mismo brillo.' },
-    { id: 'r:58', description: 'Porque es mi equilibrio, incluso cuando no lo sabe.' },
+    {
+        id: 'r:56',
+        description:
+            'Porque cuando te conocí, lejos de decepcionarme, pude maravillarme más con todo lo que eres tú.',
+    },
+    { id: 'r:57', description: 'Porque sigo buscando excusas para poder verte.' },
+    {
+        id: 'r:58',
+        description:
+            'Porque 7 horas de viaje son insignificantes cuando sé que me estás esperando allá.',
+    },
     {
         id: 'r:59',
-        description: 'Porque cuando estoy con ella, todo lo demás parece importar menos.',
-    },
-    { id: 'r:60', description: 'Porque es una de las pocas personas que realmente me importan.' },
-    { id: 'r:61', description: 'Porque con ella los días malos se vuelven soportables.' },
-    { id: 'r:62', description: 'Porque cuando se ríe de verdad, no hay mejor sonido.' },
-    { id: 'r:63', description: 'Porque me gusta sorprenderla y verla reaccionar.' },
-    {
-        id: 'r:64',
-        description: 'Porque me hace sentir que, aunque el mundo sea un desastre, todo está bien.',
-    },
-    {
-        id: 'r:65',
-        description: 'Porque su presencia es como una canción favorita que nunca cansa.',
-    },
-    { id: 'r:66', description: 'Porque hablar con ella es una de mis cosas favoritas en la vida.' },
-    { id: 'r:67', description: 'Porque cuando se divierte, parece una niña otra vez.' },
-    { id: 'r:68', description: 'Porque en sus ojos siempre hay una chispa de algo especial.' },
-    { id: 'r:69', description: 'Porque su felicidad, de alguna forma, se vuelve mía también.' },
-    { id: 'r:70', description: 'Porque no hay nadie como ella.' },
-    { id: 'r:71', description: 'Porque su esencia no se puede replicar.' },
-    {
-        id: 'r:72',
-        description: 'Porque no hay otra persona que me haga sentir lo que ella me hace sentir.',
-    },
-    { id: 'r:73', description: 'Porque me ha cambiado de maneras que ni ella sabe.' },
-    { id: 'r:74', description: 'Porque es de esas personas que solo aparecen una vez en la vida.' },
-    { id: 'r:75', description: 'Porque tiene algo que nadie más tiene.' },
-    { id: 'r:76', description: 'Porque aunque intente explicarlo, no hay suficientes palabras.' },
-    {
-        id: 'r:77',
-        description: 'Porque incluso en sus momentos más simples, sigue siendo extraordinaria.',
-    },
-    { id: 'r:78', description: 'Porque es un misterio que nunca quiero dejar de descubrir.' },
-    { id: 'r:79', description: 'Porque su mera existencia es un regalo.' },
-    {
-        id: 'r:80',
         description:
-            'Porque si tuviera que elegir a alguien para quedarme en cualquier escenario de la vida, sería ella.',
-    },
-    { id: 'r:81', description: 'Porque no hay un solo día en que no piense en ella.' },
-    { id: 'r:82', description: 'Porque cada vez que la veo, es como si la viera por primera vez.' },
-    { id: 'r:83', description: 'Porque cuando me habla, el mundo se reduce a su voz.' },
-    { id: 'r:84', description: 'Porque la quiero sin razón y con todas las razones a la vez.' },
-    { id: 'r:85', description: 'Porque su nombre resuena en mi mente más de lo que debería.' },
-    { id: 'r:86', description: 'Porque su forma de ser es un imán para mi corazón.' },
-    { id: 'r:87', description: 'Porque no importa cuántas veces la vea, siempre quiero más.' },
-    {
-        id: 'r:88',
-        description: 'Porque a veces ni entiendo por qué me gusta tanto, pero me gusta.',
+            'Por esa explosión que siento en el corazón cuando puedo volver a verte de nuevo.',
     },
     {
-        id: 'r:89',
+        id: 'r:60',
+        description: 'Porque siempre estoy contando los días para poder volver a verte.',
+    },
+    { id: 'r:61', description: 'Porque escuchar tu voz de nuevo me da mil años de vida.' },
+    { id: 'r:62', description: 'Porque puedo perderme en tu mirada tan fácilmente.' },
+    { id: 'r:63', description: 'Porque puedo quedar hipnotizado viendo tus labios solamente.' },
+    { id: 'r:64', description: 'Porque quedo sedado con el aroma de tu cabello.' },
+    { id: 'r:65', description: 'Por todas las fotos tuyas que siempre me mandas.' },
+    { id: 'r:66', description: 'Porque tu mente es tan atractiva como tu físico.' },
+    { id: 'r:67', description: 'Porque hasta tus manías me parecen interesantes.' },
+    {
+        id: 'r:68',
         description:
-            'Porque su existencia es una prueba de que la belleza y la inteligencia pueden ir de la mano.',
+            'Porque tu mente es un laberinto en el que quisiera perderme y no salir nunca.',
     },
-    { id: 'r:90', description: 'Porque es lo más cercano a la perfección que conozco.' },
-    { id: 'r:91', description: 'Porque ningún otro nombre suena igual.' },
-    { id: 'r:92', description: 'Porque ningún otro rostro me deja sin palabras como el suyo.' },
-    { id: 'r:93', description: 'Porque su energía es única.' },
-    { id: 'r:94', description: 'Porque no quiero conocer a nadie más que pueda reemplazarla.' },
+    {
+        id: 'r:69',
+        description:
+            'Por todas esas veces que me he descubierto a mí mismo pensando en ti sin darme cuenta.',
+    },
+    { id: 'r:70', description: 'Por todos los suspiros que me provocas.' },
+    {
+        id: 'r:71',
+        description: 'Porque eres la única persona con la que podría hablar de cualquier cosa.',
+    },
+    { id: 'r:72', description: 'Porque amo el caos de nuestras mentes juntas.' },
+    {
+        id: 'r:73',
+        description: 'Porque incluso en los momentos más simples, sigues siendo extraordinaria.',
+    },
+    { id: 'r:74', description: 'Porque eres mi caos favorito.' },
+    { id: 'r:75', description: 'Porque ya no quiero conocer a nadie más que no seas tú.' },
+    {
+        id: 'r:76',
+        description:
+            'Porque te elegiría una y mil veces. Y si no existieras, seguro te inventaría.',
+    },
+    { id: 'r:77', description: 'Porque simplemente no puedo explicar por qué me gustas tanto.' },
+    { id: 'r:78', description: 'Porque eres tan hermosa.' },
+    { id: 'r:79', description: 'Porque tu piel es tan perfecta.' },
+    { id: 'r:80', description: 'Porque he memorizado cada uno de tus lunares.' },
+    {
+        id: 'r:81',
+        description: 'Porque quisiera seguir explorando tu cuerpo en busca de más lunares.',
+    },
+    {
+        id: 'r:82',
+        description: 'Porque un pequeño roce con tu piel se siente como la mejor de las caricias.',
+    },
+    { id: 'r:83', description: 'Porque a veces cuando hablas sólo quisiera callarte con un beso.' },
+    { id: 'r:84', description: 'Porque la sola idea de pensar en tus labios me enloquece tanto.' },
+    {
+        id: 'r:85',
+        description: 'Porque quisiera tenerte en mis brazos ahora mismo y nunca poder soltarte.',
+    },
+    {
+        id: 'r:86',
+        description: 'Porque me gusta el calor que irradia tu cuerpo cuando estás tan cerca mío.',
+    },
+    {
+        id: 'r:87',
+        description:
+            'Porque me gustaría poder conocer esa Krystel tierna, amorosa y coqueta de la que siempre me hablas.',
+    },
+    { id: 'r:88', description: 'Porque deseo tanto que te convirtieras en mi día a día.' },
+    { id: 'r:89', description: 'Porque simplemente te deseo tanto.' },
+    { id: 'r:90', description: 'Porque tú eres la mayor de mis pasiones.' },
+    { id: 'r:91', description: 'Porque tienes un cuerpo tan increíble.' },
+    { id: 'r:92', description: 'Porque extraño tanto el poder estar contigo.' },
+    {
+        id: 'r:93',
+        description: 'Porque a veces sólo necesito tenerte desnuda en mis brazos una última vez.',
+    },
+    {
+        id: 'r:94',
+        description:
+            'Porque contigo no solamente es sexo, es aire, es amor, son ganas de vivir, son ganas de detener el tiempo.',
+    },
     {
         id: 'r:95',
-        description: 'Porque incluso con todos sus defectos, sigue siendo perfecta para mí.',
+        description: 'Porque si fuera el fin del mundo, sólo quisiera poder estar contigo.',
+    },
+    { id: 'r:96', description: 'Porque eres mi fortaleza y mi debilidad a la vez.' },
+    {
+        id: 'r:97',
+        description:
+            'Porque eres la única persona que podría hacerme escribir una lista de 100 razones.',
+    },
+    { id: 'r:98', description: 'Porque podrían ser mil razones más.' },
+    {
+        id: 'r:99',
+        description: 'Porque a veces ni yo mismo puedo explicarme del por qué te amo tanto.',
     },
     {
-        id: 'r:96',
-        description:
-            'Porque es la única persona que podría hacerme escribir una lista de 100 razones.',
+        id: 'r:100',
+        description: 'Porque sí, porque a veces ni siquiera hacen falta explicaciones.',
     },
-    { id: 'r:97', description: 'Porque me hace sentir vivo.' },
-    { id: 'r:98', description: 'Porque es mi caos favorito.' },
-    { id: 'r:99', description: 'Porque si tuviera que empezar de cero, la volvería a elegir.' },
-    { id: 'r:100', description: 'Porque sí' },
 ];
 
 export default function useReasonsLove() {
