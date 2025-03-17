@@ -7,8 +7,10 @@ export default function MousePerspectiveCard({ children, className = '' }) {
 
     const calculateRotationFromMouse = ev => {
         if (!boundingRef.current) return;
-
         const { left, top, width, height } = boundingRef.current;
+
+        if (height >= 640) return;
+
         const x = ev.clientX - left;
         const y = ev.clientY - top;
 
@@ -41,7 +43,7 @@ export default function MousePerspectiveCard({ children, className = '' }) {
             <div className='absolute inset-0 pointer-events-none'>
                 <Sparkles color='teal' />
             </div>
-            <div className='flare pointer-events-none absolute inset-0 group-hover:bg-[radial-gradient(at_var(--x)_var(--y),rgba(255,255,255,0.3)_20%,transparent_80%)]' />
+            <div className='flare pointer-events-none absolute inset-0 group-hover:bg-[radial-gradient(at_var(--x)_var(--y),rgba(255,255,255,0.15)_20%,transparent_60%)]' />
         </div>
     );
 }

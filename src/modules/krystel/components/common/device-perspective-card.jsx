@@ -1,10 +1,12 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Sparkles from 'react-sparkle';
 import { SparklesIcon } from 'lucide-react';
 import { clamp } from '@/modules/core/helpers/maths';
 
 export default function DevicePerspectiveCard({ children, className = '' }) {
+    const boundingRef = useRef(null);
+
     const [permissionGranted, setPermissionGranted] = useState(false);
 
     const requestPermission = async () => {
@@ -33,6 +35,9 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
 
     useEffect(() => {
         const handleOrientation = event => {
+            const { height } = boundingRef.current;
+            if (height >= 640) return;
+
             const gamma = event.gamma || 0; // Tilt left/right
             const beta = event.beta || 0; // Tilt front/back
 
@@ -54,10 +59,13 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
         return () => {
             window.removeEventListener('deviceorientation', handleOrientation);
         };
-    }, [permissionGranted]);
+    }, [permissionGranted, boundingRef]);
 
     return (
         <div
+            ref={el => {
+                if (el) boundingRef.current = el.getBoundingClientRect();
+            }}
             className={`wrapper relative transition-transform ease-out ${className}`}
             style={{
                 transform: 'rotateY(var(--x-rotation)) rotateY(var(--y-rotation))',
