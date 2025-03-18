@@ -131,12 +131,10 @@ export default function ReasonsLove() {
             {started && !finished && (
                 <div className='flex flex-col flex-center gap-2' data-step='reason'>
                     <PaperNote>
-                        <p className='text-lg font-bold'>
+                        <p className='font-bold'>
                             Razón <span>#{currentReason}</span>
                         </p>
-                        <p className='text-lg leading-4'>
-                            {discover(`r:${currentReason}`)?.description}
-                        </p>
+                        <p>{discover(`r:${currentReason}`)?.description}</p>
                     </PaperNote>
                 </div>
             )}

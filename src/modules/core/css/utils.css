@@ -3,6 +3,15 @@
         0 -8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
 }
 
+@custom-variant adjacents (&::before, &::after);
+
+@variant adjacents {
+    &::before,
+    &::after {
+        content: '';
+    }
+}
+
 @utility all-unset {
     all: unset;
 }
