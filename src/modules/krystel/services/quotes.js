@@ -121,13 +121,20 @@ export const getRandomSettings = () => {
 export const quoteFromSettings = settings => {
     const [icon = '*', border = '*', bg = '*', schema = '*'] = settings.split(':');
 
-    return {
-        settings,
-        icon: pickFromIndex(icons, icon),
-        border: `url(${pickFromIndex(borderPatterns, border)})`,
-        bg: `url(${pickFromIndex(bgPatterns, bg)})`,
-        scheme: pickFromIndex(colorSchemes, schema),
+    const iconIndex = icon !== '*' ? icon : randomIndex(icons);
+    const borderIndex = border !== '*' ? border : randomIndex(borderPatterns);
+    const bgIndex = bg !== '*' ? bg : randomIndex(bgPatterns);
+    const schemeIndex = schema !== '*' ? schema : randomIndex(colorSchemes);
+
+    const payload = {
+        settings: `${iconIndex}:${borderIndex}:${bgIndex}:${schemeIndex}`,
+        icon: pickFromIndex(icons, iconIndex),
+        border: `url(${pickFromIndex(borderPatterns, borderIndex)})`,
+        bg: `url(${pickFromIndex(bgPatterns, bgIndex)})`,
+        scheme: pickFromIndex(colorSchemes, schemeIndex),
     };
+
+    return payload;
 };
 
 export const getRandomQuote = () => {

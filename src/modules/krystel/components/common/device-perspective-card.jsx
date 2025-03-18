@@ -66,10 +66,11 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
             ref={el => {
                 if (el) boundingRef.current = el.getBoundingClientRect();
             }}
-            className={`wrapper relative transition-transform ease-out ${className}`}
-            style={{
-                transform: 'rotateY(var(--x-rotation)) rotateY(var(--y-rotation))',
-            }}
+            className={cn(
+                'wrapper relative transition-transform ease-out',
+                'rotate-x-(--x-rotation) rotate-y-(--y-rotation)',
+                className,
+            )}
         >
             {children}
             {permissionGranted && (

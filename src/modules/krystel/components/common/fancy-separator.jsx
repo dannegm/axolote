@@ -1,10 +1,11 @@
+import { pascalCase } from '@/modules/core/helpers/strings';
 import { cn } from '@/modules/core/helpers/utils';
 import { icons } from 'lucide-react';
 
-const defaultIcon = 'Feather';
+const defaultIcon = 'feather';
 
 export default function FancySeparator({ className, icon = defaultIcon }) {
-    const LucideIcon = icons[icon] || icons[defaultIcon];
+    const LucideIcon = icons[pascalCase(icon)] || icons[pascalCase(defaultIcon)];
     return (
         <div
             className={cn(

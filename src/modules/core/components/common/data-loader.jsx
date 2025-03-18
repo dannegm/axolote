@@ -31,7 +31,6 @@ export default function DataLoader({
 
     useEffect(() => {
         if (!isFetching && error) {
-            console.log({ isFetching, error });
             onError?.(error);
         }
     }, [isFetching, error]);

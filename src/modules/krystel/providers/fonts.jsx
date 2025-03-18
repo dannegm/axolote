@@ -17,6 +17,7 @@ import {
     Jersey_10,
     Boogaloo,
     Micro_5,
+    Caveat,
 } from 'next/font/google';
 
 import { cn } from '@/modules/core/helpers/utils';
@@ -39,6 +40,7 @@ const anton = Anton({ weight: '400', subsets: ['latin'], variable: '--font-anton
 const jersey10 = Jersey_10({ weight: '400', subsets: ['latin'], variable: '--font-jersey10' });
 const boogaloo = Boogaloo({ weight: '400', subsets: ['latin'], variable: '--font-boogaloo' });
 const micro5 = Micro_5({ weight: '400', subsets: ['latin'], variable: '--font-micro5' });
+const caveat = Caveat({ weight: '400', subsets: ['latin'], variable: '--font-caveat' });
 
 export const fonts = {
     pacifico: pacifico.variable,
@@ -58,6 +60,7 @@ export const fonts = {
     jersey10: jersey10.variable,
     boogaloo: boogaloo.variable,
     micro5: micro5.variable,
+    caveat: caveat.variable,
 };
 
 const classNames = /* css */ `
@@ -78,6 +81,7 @@ const classNames = /* css */ `
 .font-jersey10 { font-family: var(--font-jersey10); font-size: 1.2em; }
 .font-boogaloo { font-family: var(--font-boogaloo); }
 .font-micro5 { font-family: var(--font-micro5); }
+.font-caveat { font-family: var(--font-caveat); }
 `;
 
 export default function Fonts({ children }) {

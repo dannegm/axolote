@@ -1,15 +1,17 @@
 'use client';
-import { useRef } from 'react';
+import { cn } from '@/modules/core/helpers/utils';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Sparkles from 'react-sparkle';
 
 export default function MousePerspectiveCard({ children, className = '' }) {
-    const boundingRef = useRef(null);
+    const $bounding = useRef(null);
+    const [allowPerspective, setAllowPerspective] = useState(null);
 
     const calculateRotationFromMouse = ev => {
-        if (!boundingRef.current) return;
-        const { left, top, width, height } = boundingRef.current;
+        if (!$bounding.current) return;
+        const { left, top, width, height } = $bounding.current;
 
-        if (height >= 640) return;
+        if (!allowPerspective) return;
 
         const x = ev.clientX - left;
         const y = ev.clientY - top;
@@ -31,12 +33,24 @@ export default function MousePerspectiveCard({ children, className = '' }) {
         element.style.setProperty('--y', `${yPercentage * 100}%`);
     };
 
+    const perspectiveStyles =
+        'hover:rotate-x-(--x-rotation) hover:rotate-y-(--y-rotation) hover:scale-[1.02]';
+
+    useEffect(() => {
+        const { height } = $bounding.current;
+        setAllowPerspective(height <= 640);
+    }, [$bounding.current]);
+
     return (
         <div
             ref={el => {
-                if (el) boundingRef.current = el.getBoundingClientRect();
+                if (el) $bounding.current = el.getBoundingClientRect();
             }}
-            className={`wrapper group relative transition-transform ease-out hover:[transform:rotateX(var(--x-rotation))_rotateY(var(--y-rotation))_scale(1.02)] ${className}`}
+            className={cn(
+                'h-auto wrapper group relative transition-transform ease-out',
+                { [perspectiveStyles]: allowPerspective },
+                className,
+            )}
             onMouseMove={calculateRotationFromMouse}
         >
             {children}

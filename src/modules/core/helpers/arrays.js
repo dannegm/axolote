@@ -33,7 +33,7 @@ export const probabilityPick = items => {
 };
 
 export const pickFromIndex = (arr = [], index = 0) => {
-    if (index === '#') {
+    if (index === '*') {
         return randomPick(arr);
     }
 
@@ -52,6 +52,11 @@ export const sequence = size => Array.from(Array(size), (_, index) => index);
 
 export const updateItemById = (arr = [], id, key, newValue) => {
     return arr.map(item => (item.id === id ? { ...item, [key]: newValue } : item));
+};
+
+export const removeItem = (arr = [], toRemove) => {
+    const remover = item => item !== toRemove;
+    return arr.filter(item => remover);
 };
 
 export const removeItemById = (arr = [], id) => {
@@ -80,3 +85,5 @@ export const groupBy = (elements = [], sentence) => {
         return groups;
     }, {});
 };
+
+export const reverse = (arr = []) => [...arr].reverse();

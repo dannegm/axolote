@@ -173,6 +173,33 @@ export default function GiftCard({
 
     return (
         <QuoteProvider quote={{ settings }}>
+            <Portal portalId='global-bg-portal'>
+                <div
+                    data-layer='bg'
+                    className={cn(
+                        'animate-in fade-in-0 duration-[1.5s] ease-in opacity-50',
+                        'fixed inset-0 pointer-events-none bg-gray-100 bg-center bg-[length:50%] transition-all',
+                        classNames?.bg,
+                    )}
+                    style={{ backgroundImage: bg }}
+                />
+            </Portal>
+
+            {(configs?.bg || theme?.bg) && (
+                <Portal portalId='card-bg-portal'>
+                    <div
+                        data-layer='bg-custom'
+                        className={cn(
+                            'animate-in fade-in-0 duration-150 ease-in opacity-100',
+                            'fixed inset-0 pointer-events-none transition-all',
+                            theme?.bg,
+                            classNames?.bg,
+                            configs?.bg,
+                        )}
+                    />
+                </Portal>
+            )}
+
             <Card
                 className={cn(theme?.card, className, classNames?.card)}
                 border={configs?.border || theme?.border ? '' : border}
@@ -200,33 +227,6 @@ export default function GiftCard({
                     ),
                 }}
             >
-                <Portal portalId='global-bg-portal'>
-                    <div
-                        data-layer='bg'
-                        className={cn(
-                            'animate-in fade-in-0 duration-[1.5s] ease-in opacity-50',
-                            'fixed inset-0 pointer-events-none bg-gray-100 bg-center bg-[length:50%] transition-all',
-                            classNames?.bg,
-                        )}
-                        style={{ backgroundImage: bg }}
-                    />
-                </Portal>
-
-                {(configs?.bg || theme?.bg) && (
-                    <Portal portalId='card-bg-portal'>
-                        <div
-                            data-layer='bg-custom'
-                            className={cn(
-                                'animate-in fade-in-0 duration-150 ease-in opacity-100',
-                                'fixed inset-0 pointer-events-none transition-all',
-                                theme?.bg,
-                                classNames?.bg,
-                                configs?.bg,
-                            )}
-                        />
-                    </Portal>
-                )}
-
                 {!configs?.fullscreen && configs?.badge !== 'hidden' && firstAppearance && (
                     <div
                         data-layer='badge'
@@ -245,17 +245,7 @@ export default function GiftCard({
                 )}
 
                 {!configs?.fullscreen && (
-                    <div
-                        data-layer='header'
-                        className={cn(
-                            'flex flex-col items-center gap-8',
-                            {
-                                'w-full flex-row gap-2 justify-between mb-8': letter,
-                            },
-                            theme?.header,
-                            classNames?.header,
-                        )}
-                    >
+                    <>
                         {configs?.name !== 'hidden' && !uwu && (
                             <p
                                 data-layer='name'
@@ -308,7 +298,7 @@ export default function GiftCard({
                                 />
                             </div>
                         )}
-                    </div>
+                    </>
                 )}
 
                 <div

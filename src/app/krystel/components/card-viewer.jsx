@@ -57,7 +57,7 @@ export default function CardViewer({ code, data }) {
     const deleted = isDeleted(data);
 
     useEffect(() => {
-        if (!code) {
+        if (!code || code.includes('*:*:*:*')) {
             setCodeQuery(quote.settings);
         }
     }, [code, quote]);

@@ -10,6 +10,8 @@ import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
 
 import Frame from './frame';
 import Button from '../common/button';
+import FancySeparator from '../common/fancy-separator';
+import { reverse } from '@/modules/core/helpers/arrays';
 
 export default function AllReasonsLove() {
     const [allowClear] = useQueryState('allow-clear', parseAsBoolean.withDefault(false));
@@ -18,6 +20,11 @@ export default function AllReasonsLove() {
 
     const { reasons, clearReasons, getStats } = useReasonsLove();
     const { discovered, total, allDiscovered } = getStats();
+
+    const discoveredReasons = reverse(
+        reasons.filter(i => i.discovered).map((i, ix) => ({ ...i, index: ix + 1 })),
+    );
+    const hiddenReasons = reasons.filter(i => !i.discovered);
 
     const [, setStarted] = useLocalStorage('reasons:started', false);
     const [, setFinished] = useLocalStorage('reasons:finished', false);
@@ -53,38 +60,66 @@ export default function AllReasonsLove() {
                 </span>
             </p>
 
-            <ul className='flex flex-col gap-1'>
-                {reasons.map((item, index) => (
-                    <li key={`reason:${item.id}`} className='flex flex-row gap-2'>
-                        <div
-                            className={cn(
-                                'block flex-none w-4 h-4 bg-indigo-100 box-border border border-indigo-300 rounded-sm text-green-500 transition-all duration-150',
-                                {
-                                    'bg-slate-100 border border-slate-300': !item.discovered,
-                                },
-                            )}
-                        >
-                            {item.discovered && (
+            {Boolean(discoveredReasons.length) && (
+                <ul className='flex flex-col gap-2 mt-4'>
+                    {discoveredReasons.map((item, index) => (
+                        <li key={`reason:${item.id}`} className='flex flex-row gap-2'>
+                            <div
+                                className={cn(
+                                    'block flex-none w-4 h-4 bg-indigo-100 box-border border border-indigo-300 rounded-sm text-green-500',
+                                )}
+                            >
                                 <Check className='-mt-[6px] -ml-[1px]' strokeWidth={3} />
-                            )}
-                        </div>
-                        <span
-                            className={cn(
-                                'font-delius text-pretty -mt-0.5 transition-all duration-150',
-                                {
-                                    'blur-xs select-none': !item.discovered,
-                                    'blur-none select-all': revealed,
-                                },
-                            )}
-                        >
-                            <span className='mr-1 font-mono font-bold text-rose-500'>
-                                #{index + 1}
+                            </div>
+                            <span className={cn('font-delius text-balance leading-4')}>
+                                <span className='mr-1 font-mono font-bold text-rose-500'>
+                                    #{item.index}
+                                </span>
+                                {item.description}
                             </span>
-                            {item.description}
-                        </span>
-                    </li>
-                ))}
-            </ul>
+                        </li>
+                    ))}
+                </ul>
+            )}
+
+            {Boolean(hiddenReasons.length) && (
+                <>
+                    <FancySeparator icon='lock' />
+                    <ul className='flex flex-col gap-2'>
+                        {hiddenReasons.map((item, index, arr) => (
+                            <li key={`reason:${item.id}`} className='flex flex-row gap-2'>
+                                <div
+                                    className={cn(
+                                        'block flex-none w-4 h-4 bg-indigo-100 box-border border border-indigo-300 rounded-sm text-green-500 transition-all duration-150',
+                                        {
+                                            'bg-slate-100 border border-slate-300':
+                                                !item.discovered,
+                                        },
+                                    )}
+                                >
+                                    {item.discovered && (
+                                        <Check className='-mt-[6px] -ml-[1px]' strokeWidth={3} />
+                                    )}
+                                </div>
+                                <span
+                                    className={cn(
+                                        'font-delius text-balance leading-4 transition-all duration-150',
+                                        {
+                                            'blur-xs select-none': !item.discovered,
+                                            'blur-none select-all': revealed,
+                                        },
+                                    )}
+                                >
+                                    <span className='mr-1 font-mono font-bold text-rose-500'>
+                                        #{arr.length - index}
+                                    </span>
+                                    {item.description}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                </>
+            )}
 
             {(allowClear || allDiscovered) && (
                 <Button className={cn('block w-fit text-sm px-4 py-2 mt-4')} onClick={handleReset}>

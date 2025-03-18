@@ -7,6 +7,7 @@ import Loader from '@/modules/core/components/common/loader';
 
 import CardViewer from './card-viewer';
 import { buildQueryParams } from '@/modules/core/helpers/utils';
+import { memo } from 'react';
 
 const BASE_URL = 'https://endpoints.hckr.mx/quotes';
 
@@ -18,6 +19,8 @@ const extractQuoteId = code => {
     const [quoteId] = code.split(':');
     return quoteId;
 };
+
+const MemoCardViewer = memo(CardViewer);
 
 export default function QuoteLoader() {
     const [code] = useQueryState('code', parseAsString.withDefault(''));
@@ -44,7 +47,7 @@ export default function QuoteLoader() {
             onError={handleError}
             preventRefetch
         >
-            {data => <CardViewer code={code} data={data} />}
+            {data => <MemoCardViewer code={code} data={data} />}
         </DataLoader>
     );
 }
