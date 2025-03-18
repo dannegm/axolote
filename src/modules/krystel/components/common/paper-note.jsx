@@ -92,7 +92,7 @@ function PaperNote({ className, color, tape, children }) {
                     '--paper-color-text': paperColorText,
                 }}
                 className={cn(
-                    'relative flex flex-col flex-center gap-2 min-w-[200px] max-w-[280px] px-4 py-6',
+                    'relative flex flex-col flex-center gap-2 min-w-[200px] max-w-[280px] w-max px-4 py-6',
                     'font-caveat text-(--paper-color-text) text-xl text-center leading-4 shadow-sm',
                     'bg-(--paper-color) bg-linear-to-br/srgb from-(--paper-color-dark) to-30% to-transparent',
                     'adjacents:absolute adjacents:inset-0 adjacents:opacity-75 adjacents:mix-blend-overlay',
