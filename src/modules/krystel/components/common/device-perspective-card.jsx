@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import Sparkles from 'react-sparkle';
 import { SparklesIcon } from 'lucide-react';
 import { clamp } from '@/modules/core/helpers/maths';
+import { cn } from '@/modules/core/helpers/utils';
 
 export default function DevicePerspectiveCard({ children, className = '' }) {
     const boundingRef = useRef(null);
