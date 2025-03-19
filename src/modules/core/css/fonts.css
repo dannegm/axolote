@@ -1,0 +1,20 @@
+@theme {
+    --font-pacifico: 'Pacifico', cursive;
+    --font-delius: 'Delius', cursive;
+    --font-roboto: 'Roboto', sans-serif;
+    --font-noto: 'Noto Sans', sans-serif;
+    --font-playwrite: 'Playwrite MX', cursive;
+    --font-oswald: 'Oswald', sans-serif;
+    --font-playfair: 'Playfair Display', serif;
+    --font-lora: 'Lora', serif;
+    --font-quicksand: 'Quicksand', sans-serif;
+    --font-bebasNeue: 'Bebas Neue', sans-serif;
+    --font-macondo: 'Macondo', cursive;
+    --font-dosis: 'Dosis', sans-serif;
+    --font-dancingScript: 'Dancing Script', cursive;
+    --font-anton: 'Anton', sans-serif;
+    --font-jersey10: 'Jersey 10', sans-serif;
+    --font-boogaloo: 'Boogaloo', sans-serif;
+    --font-micro5: 'Micro 5', sans-serif;
+    --font-caveat: 'Caveat', cursive;
+}
