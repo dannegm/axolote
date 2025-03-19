@@ -9,6 +9,7 @@ export default function Card({
     letter,
     fullscreen,
     frame,
+    dark,
 }) {
     return (
         <div
@@ -17,7 +18,7 @@ export default function Card({
                 'group relative',
                 'animate-in fade-in-0 slide-in-from-bottom-6 duration-300 ease-in',
                 classNames?.animation,
-                { letter: letter, fullscreen: fullscreen },
+                { letter, fullscreen, frame, dark },
             )}
         >
             <div

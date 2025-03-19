@@ -62,6 +62,12 @@
     .bg-img-pink-clouds {
         background-image: url('/frames/a0738d2429d5119d441a7a8a9310dd00.jpg');
     }
+    .bg-img-sliding-stars {
+        background-image: url('/backgrounds/sliding-stars.gif');
+    }
+    .bg-img-starry-clouds {
+        background-image: url('/backgrounds/starry-clouds.gif');
+    }
 
     .bg-img-gradient-blue {
         background-image: url('/backgrounds/gradient-blue.png');
