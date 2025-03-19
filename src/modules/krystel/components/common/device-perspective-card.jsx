@@ -68,7 +68,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
                 if (el) boundingRef.current = el.getBoundingClientRect();
             }}
             className={cn(
-                'wrapper relative transition-transform ease-out',
+                'group wrapper relative transition-transform ease-out',
                 'rotate-x-(--x-rotation) rotate-y-(--y-rotation)',
                 className,
             )}
@@ -85,7 +85,7 @@ export default function DevicePerspectiveCard({ children, className = '' }) {
             {!permissionGranted && (
                 <button
                     onClick={requestPermission}
-                    className='group absolute bottom-8 right-8 z-50'
+                    className='group absolute bottom-8 right-8 z-50 group-has-[.letter]:mb-0.5 group-has-[.letter]:bottom-6 group-has-[.letter]:right-6'
                 >
                     <div
                         className='relative block bg-cyan-300 text-cyan-800 text-sm py-1 px-2 font-delius rounded-full shadow-lg group-hover:shadow-xl group-active:shadow-md group-active:scale-95'

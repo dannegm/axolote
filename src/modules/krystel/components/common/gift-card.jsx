@@ -284,7 +284,7 @@ export default function GiftCard({
                             <div
                                 data-layer='icon'
                                 className={cn('block', theme?.icon, classNames?.icon, {
-                                    'absolute top-6 right-4 mt-0.5 mr-1.5': letter,
+                                    'absolute top-6 right-4 mt-px mr-1.5': letter,
                                 })}
                             >
                                 <LucideIcon
@@ -309,7 +309,7 @@ export default function GiftCard({
                         'font-delius text-center text-xl font-medium leading-snug',
                         {
                             'text-md': isLongText,
-                            'w-full font-noto text-left text-[0.825rem] text-balance hyphens-auto leading-normal':
+                            'w-full mt-12 font-noto text-left text-[0.825rem] text-balance hyphens-auto leading-normal':
                                 letter,
                             'flex-1 w-full h-full block': configs?.fullscreen,
                             'min-w-[calc(100%+80px)] -mx-10': configs?.fullwidth,
