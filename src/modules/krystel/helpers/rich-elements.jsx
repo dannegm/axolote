@@ -16,13 +16,14 @@ import FancySeparator from '@/modules/krystel/components/common/fancy-separator'
 import QuoteText from '@/modules/krystel/components/common/quote-text';
 import BalloonsText from '@/modules/krystel/components/common/balloons-text';
 import Button from '@/modules/krystel/components/common/button';
-
+import ButtonActions from '@/modules/krystel/components/common/button-actions';
 import { BalloonsTextSimple } from '@/modules/krystel/components/common/balloons-text';
+
 import FrameApps, {
     getAppDescription,
     getAppIcon,
 } from '@/modules/krystel/components/common/frame-apps';
-import ButtonActions from '@/modules/krystel/components/common/button-actions';
+import PaperNote from '../components/common/paper-note';
 
 export const defaultElements = [
     // Strikethrough
@@ -89,6 +90,11 @@ export const defaultElements = [
         pattern: /<quote::(.*?)>(.*?)<\/quote>/g,
         parser: (author, text) => <QuoteText author={author}>{text}</QuoteText>,
     },
+    // Paper Note
+    {
+        pattern: /<paper>(.*?)<\/paper>/g,
+        parser: text => <PaperNote className='mx-auto'>{text}</PaperNote>,
+    },
     // Random word
     { pattern: /<words::([^>]+)>/g, parser: match => <RandomWord words={match.split('|')} /> },
     // Icon
@@ -143,6 +149,10 @@ export const defaultElements = [
     {
         pattern: /<spotify::(.*?)>/g,
         parser: uri => <SpotifyPlayer uri={uri} />,
+    },
+    {
+        pattern: /<spotify-inline::(.*?)>/g,
+        parser: uri => <SpotifyPreview uri={uri} />,
     },
     // Sticker Full
     {
@@ -301,6 +311,11 @@ export const buildPreviewElements = ({ preventReveal }) => [
         pattern: /<quote::(.*?)>(.*?)<\/quote>/g,
         parser: (author, text) => <QuoteText author={author}>{text}</QuoteText>,
     },
+    // Paper Note
+    {
+        pattern: /<paper>(.*?)<\/paper>/g,
+        parser: text => <PaperNote className='mx-auto'>{text}</PaperNote>,
+    },
     // Random word
     {
         pattern: /<words::([^>]+)>/g,
@@ -376,6 +391,10 @@ export const buildPreviewElements = ({ preventReveal }) => [
     // Spotify Player
     {
         pattern: /<spotify::(.*?)>/g,
+        parser: uri => <SpotifyPreview uri={uri} />,
+    },
+    {
+        pattern: /<spotify-inline::(.*?)>/g,
         parser: uri => <SpotifyPreview uri={uri} />,
     },
     // Sticker Full
@@ -514,6 +533,8 @@ export const stripedElements = [
         pattern: /<quote::(.*?)>(.*?)<\/quote>/g,
         parser: (author, text) => `\n> ${text}\n>${author}\n`,
     },
+    // Paper Note
+    { pattern: /<paper>(.*?)<\/paper>/g, parser: text => `\n> ${text}\n` },
     { pattern: /<words::([^>]+)>/g, parser: match => match.split('|').join(', ') },
     { pattern: /<icon::(.*?)>/g, parser: name => `[${name}]` },
     { pattern: /<link::(.*?)>(.*?)<\/link>/g, parser: (url, label) => `[${label}](${url})` },
@@ -526,6 +547,7 @@ export const stripedElements = [
     },
     { pattern: /<polaroid::(.*?)>/g, parser: url => `!(${url})` },
     { pattern: /<spotify::(.*?)>/g, parser: uri => uri },
+    { pattern: /<spotify-inline::(.*?)>/g, parser: uri => uri },
     { pattern: /<sticker::(.*?)>/g, parser: id => `[${id}]` },
     { pattern: /<badge::(.*?)>/g, parser: id => `[${id}]` },
     { pattern: /\[\[(.*?)\]\]/g, parser: id => `[${id}]` },

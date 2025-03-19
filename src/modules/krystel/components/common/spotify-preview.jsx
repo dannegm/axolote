@@ -5,12 +5,15 @@ const CLIENT_ID = import.meta.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
 
 const parseSpotifyUri = uri => {
+    const regex = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i;
+    if (!regex.test(uri)) return { trackId: null };
+
     const url = new URL(uri);
-    const [, type, trackId] = url.pathname.split('/');
+    const parts = url.pathname.split('/');
 
     return {
-        type,
-        trackId,
+        type: parts.at(-2),
+        trackId: parts.at(-1),
     };
 };
 
@@ -78,9 +81,9 @@ export default function SpotifyPreview({ uri }) {
     };
 
     return (
-        <div className='flex gap-3 p-2 items-center bg-zinc-800 text-white overflow-hidden rounded-lg shadow-lg font-sans'>
+        <div className='w-min flex gap-3 p-2 items-center bg-zinc-800 text-white overflow-hidden rounded-lg shadow-lg font-sans'>
             {/* Album Art */}
-            <div className='relative h-12 aspect-square grow'>
+            <div className='relative size-12 aspect-square'>
                 <div className='relative w-full h-full'>
                     <img
                         src={playerInfo.cover}
@@ -91,8 +94,8 @@ export default function SpotifyPreview({ uri }) {
             </div>
 
             {/* Player Info and Controls */}
-            <div className='gap-4 flex items-center justify-between pr-4'>
-                <div className='grow text-left'>
+            <div className='flex-1 gap-4 flex items-center justify-between pr-4'>
+                <div className='text-left'>
                     <h3 className='font-semibold text-sm truncate'>{playerInfo.title}</h3>
                     <p className='text-xs text-zinc-400 truncate'>{playerInfo.artist}</p>
                 </div>

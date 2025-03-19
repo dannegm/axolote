@@ -75,7 +75,7 @@ function PaperNote({ className, color, tape, children }) {
         <div
             data-layer='shadow'
             className={cn(
-                'relative isolate adjacents:absolute adjacents:bottom-3 adjacents:w-24 adjacents:h-2.5 adjacents:-z-1 adjacents:shadow-[0_5px_14px_rgba(0,0,0,.7)]',
+                'relative min-w-[200px] max-w-[280px] w-max adjacents:absolute adjacents:bottom-3 adjacents:w-24 adjacents:h-2.5 adjacents:-z-1 adjacents:shadow-[0_5px_14px_rgba(0,0,0,.7)]',
                 'before:left-4 before:-skew-3 before:-rotate-3',
                 'after:right-4 after:skew-3 after:rotate-3',
                 className,
@@ -92,7 +92,7 @@ function PaperNote({ className, color, tape, children }) {
                     '--paper-color-text': paperColorText,
                 }}
                 className={cn(
-                    'relative flex flex-col flex-center gap-2 min-w-[200px] max-w-[280px] w-max px-4 py-6',
+                    'relative flex flex-col flex-center gap-2 px-4 py-6',
                     'font-caveat text-(--paper-color-text) text-xl text-center leading-4 shadow-sm',
                     'bg-(--paper-color) bg-linear-to-br/srgb from-(--paper-color-dark) to-30% to-transparent',
                     'adjacents:absolute adjacents:inset-0 adjacents:opacity-75 adjacents:mix-blend-overlay',
