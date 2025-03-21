@@ -83,13 +83,6 @@ export default function ReasonsLove() {
 
     return (
         <Frame className='max-h-auto flex flex-col flex-center gap-4'>
-            <CircularTimeout
-                className='absolute z-10 bottom-4 left-4 size-4 opacity-50 text-gray-400 -scale-y-100 -rotate-90'
-                size='2rem'
-                weight='4'
-                timeout={COOLDOWN_TIME}
-            />
-
             <p className='text-pretty text-base'>
                 <span className='font-mono font-bold text-rose-500'>#100Reasons</span>
             </p>
@@ -137,6 +130,13 @@ export default function ReasonsLove() {
 
             {started && !finished && (
                 <div className='flex flex-col flex-center gap-2' data-step='reason'>
+                    <CircularTimeout
+                        className='absolute z-10 bottom-4 left-4 size-4 opacity-50 text-gray-400 -scale-y-100 -rotate-90'
+                        size='2rem'
+                        weight='4'
+                        timeout={COOLDOWN_TIME}
+                    />
+
                     <PaperNote>
                         <p className='font-bold'>
                             Razón <span>#{currentReason}</span>
