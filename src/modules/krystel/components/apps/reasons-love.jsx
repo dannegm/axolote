@@ -14,7 +14,7 @@ import Button from '../common/button';
 import RandomWord from '../common/random-word';
 import PaperNote from '../common/paper-note';
 
-const COOLDOWN_TIME = 0;
+const COOLDOWN_TIME = 15 * 1000;
 
 export default function ReasonsLove() {
     const { discover, getStats, clearReasons } = useReasonsLove();
