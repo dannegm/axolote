@@ -40,7 +40,7 @@ export const Tapes = {
 const TopTape = ({ className, ...props }) => (
     <div
         className={cn(
-            'absolute h-4 -top-1.5 left-1/2 transform -translate-x-1/2 pointer-events-none',
+            'absolute z-20 h-4 -top-1.5 left-1/2 transform -translate-x-1/2 pointer-events-none',
             'bg-(--tape-color) opacity-50',
             'border-x border-dotted border-x-(--tape-edge-color)',
             className,
@@ -52,7 +52,7 @@ const TopTape = ({ className, ...props }) => (
 const CrossTape = ({ className, ...props }) => (
     <div
         className={cn(
-            'absolute inset-0 pointer-events-none',
+            'absolute z-20 inset-0 pointer-events-none',
             'adjacents:absolute adjacents:w-12 adjacents:h-4 adjacents:bg-(--tape-color) adjacents:opacity-50 adjacents:border-x adjacents:border-x-(--tape-edge-color) adjacents:border-dashed adjacents:origin-center',
             className,
         )}
@@ -75,7 +75,7 @@ function PaperNote({ className, color, tape, children }) {
         <div
             data-layer='shadow'
             className={cn(
-                'relative min-w-[200px] max-w-[280px] w-max adjacents:absolute adjacents:bottom-3 adjacents:w-24 adjacents:h-2.5 adjacents:-z-1 adjacents:shadow-[0_5px_14px_rgba(0,0,0,.7)]',
+                'relative min-w-[200px] adjacents:absolute adjacents:bottom-3 adjacents:w-24 adjacents:h-2.5 adjacents:z-0 adjacents:shadow-[0_5px_14px_rgba(0,0,0,.7)]',
                 'before:left-4 before:-skew-3 before:-rotate-3',
                 'after:right-4 after:skew-3 after:rotate-3',
                 className,
@@ -92,7 +92,7 @@ function PaperNote({ className, color, tape, children }) {
                     '--paper-color-text': paperColorText,
                 }}
                 className={cn(
-                    'relative flex flex-col flex-center gap-2 px-4 py-6',
+                    'relative z-10 flex flex-col flex-center gap-2 px-4 py-6',
                     'font-caveat text-(--paper-color-text) text-xl text-center leading-4 shadow-sm',
                     'bg-(--paper-color) bg-linear-to-br/srgb from-(--paper-color-dark) to-30% to-transparent',
                     'adjacents:absolute adjacents:inset-0 adjacents:opacity-75 adjacents:mix-blend-overlay',
