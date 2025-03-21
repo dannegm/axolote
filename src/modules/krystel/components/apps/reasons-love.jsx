@@ -13,8 +13,9 @@ import Frame from './frame';
 import Button from '../common/button';
 import RandomWord from '../common/random-word';
 import PaperNote from '../common/paper-note';
+import CircularTimeout from '@/modules/core/components/common/circular-timeout';
 
-const COOLDOWN_TIME = 15 * 1000;
+const COOLDOWN_TIME = 10 * 1000;
 
 export default function ReasonsLove() {
     const { discover, getStats, clearReasons } = useReasonsLove();
@@ -82,6 +83,13 @@ export default function ReasonsLove() {
 
     return (
         <Frame className='max-h-auto flex flex-col flex-center gap-4'>
+            <CircularTimeout
+                className='absolute z-10 bottom-4 left-4 size-4 opacity-50 text-gray-400 -scale-y-100 -rotate-90'
+                size='2rem'
+                weight='4'
+                timeout={COOLDOWN_TIME}
+            />
+
             <p className='text-pretty text-base'>
                 <span className='font-mono font-bold text-rose-500'>#100Reasons</span>
             </p>
