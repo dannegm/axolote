@@ -391,11 +391,11 @@ export const buildPreviewElements = ({ preventReveal }) => [
     // Spotify Player
     {
         pattern: /<spotify::(.*?)>/g,
-        parser: uri => <SpotifyPreview uri={uri} />,
+        parser: uri => <SpotifyPreview uri={uri} preview />,
     },
     {
         pattern: /<spotify-inline::(.*?)>/g,
-        parser: uri => <SpotifyPreview uri={uri} />,
+        parser: uri => <SpotifyPreview uri={uri} preview />,
     },
     // Sticker Full
     {

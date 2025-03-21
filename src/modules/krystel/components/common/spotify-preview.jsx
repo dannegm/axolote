@@ -1,5 +1,9 @@
+import { cn } from '@/modules/core/helpers/utils';
 import { useQuery } from '@tanstack/react-query';
 import base64 from 'base-64';
+
+import { useQuote } from '@/modules/krystel/providers/quote-provider';
+import usePostAction from '@/modules/krystel/hooks/use-post-action';
 
 const CLIENT_ID = import.meta.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID;
 const CLIENT_SECRET = import.meta.env.NEXT_PUBLIC_SPOTIFY_CLIENT_SECRET;
@@ -68,7 +72,10 @@ const useGetTrackInfo = trackId => {
     };
 };
 
-export default function SpotifyPreview({ uri }) {
+export default function SpotifyPreview({ uri, preview }) {
+    const quote = useQuote();
+    const postPlay = usePostAction({ action: 'play', settings: quote?.settings });
+
     const { trackId } = parseSpotifyUri(uri);
     const { data } = useGetTrackInfo(trackId);
 
@@ -80,8 +87,28 @@ export default function SpotifyPreview({ uri }) {
         externalUrl: `${data?.external_urls.spotify || '#'}?si=axolote`, //
     };
 
+    const handlePlay = () => {
+        postPlay();
+    };
+
+    const Wrapper = ({ href, className, onClick, children }) => {
+        if (preview) {
+            return <div className={cn(className)}>{children}</div>;
+        }
+
+        return (
+            <a href={href} className={cn(className)} target='_blank' onClick={onClick}>
+                {children}
+            </a>
+        );
+    };
+
     return (
-        <div className='w-min flex gap-3 p-2 items-center bg-zinc-800 text-white overflow-hidden rounded-lg shadow-lg font-sans'>
+        <Wrapper
+            href={playerInfo.externalUrl}
+            className='w-min flex gap-3 p-2 items-center bg-zinc-800 text-white overflow-hidden rounded-lg shadow-lg font-sans'
+            onClick={handlePlay}
+        >
             {/* Album Art */}
             <div className='relative size-12 aspect-square'>
                 <div className='relative w-full h-full'>
@@ -100,6 +127,6 @@ export default function SpotifyPreview({ uri }) {
                     <p className='text-xs text-zinc-400 truncate'>{playerInfo.artist}</p>
                 </div>
             </div>
-        </div>
+        </Wrapper>
     );
 }

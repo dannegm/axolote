@@ -64,6 +64,7 @@
     }
     .bg-img-sliding-stars {
         background-image: url('/backgrounds/sliding-stars.gif');
+        background-position: center;
     }
     .bg-img-starry-clouds {
         background-image: url('/backgrounds/starry-clouds.gif');

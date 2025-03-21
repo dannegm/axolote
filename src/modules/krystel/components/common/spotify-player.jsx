@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import base64 from 'base-64';
 import { Play, ExternalLink } from 'lucide-react';
+import base64 from 'base-64';
 
 import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
