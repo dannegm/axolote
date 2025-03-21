@@ -95,6 +95,14 @@ export const defaultElements = [
         pattern: /<paper>(.*?)<\/paper>/g,
         parser: text => <PaperNote className='mx-auto'>{text}</PaperNote>,
     },
+    {
+        pattern: /<paper::(.*?)>(.*?)<\/paper>/g,
+        parser: (color, text) => (
+            <PaperNote className='mx-auto' color={color}>
+                {text}
+            </PaperNote>
+        ),
+    },
     // Random word
     { pattern: /<words::([^>]+)>/g, parser: match => <RandomWord words={match.split('|')} /> },
     // Icon
@@ -316,6 +324,14 @@ export const buildPreviewElements = ({ preventReveal }) => [
         pattern: /<paper>(.*?)<\/paper>/g,
         parser: text => <PaperNote className='mx-auto'>{text}</PaperNote>,
     },
+    {
+        pattern: /<paper::(.*?)>(.*?)<\/paper>/g,
+        parser: (color, text) => (
+            <PaperNote className='mx-auto' color={color}>
+                {text}
+            </PaperNote>
+        ),
+    },
     // Random word
     {
         pattern: /<words::([^>]+)>/g,
@@ -533,8 +549,8 @@ export const stripedElements = [
         pattern: /<quote::(.*?)>(.*?)<\/quote>/g,
         parser: (author, text) => `\n> ${text}\n>${author}\n`,
     },
-    // Paper Note
     { pattern: /<paper>(.*?)<\/paper>/g, parser: text => `\n> ${text}\n` },
+    { pattern: /<paper::(.*?)>(.*?)<\/paper>/g, parser: (_, text) => `\n> ${text}\n` },
     { pattern: /<words::([^>]+)>/g, parser: match => match.split('|').join(', ') },
     { pattern: /<icon::(.*?)>/g, parser: name => `[${name}]` },
     { pattern: /<link::(.*?)>(.*?)<\/link>/g, parser: (url, label) => `[${label}](${url})` },
