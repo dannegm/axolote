@@ -15,7 +15,7 @@ import RandomWord from '../common/random-word';
 import PaperNote from '../common/paper-note';
 import CircularTimeout from '@/modules/core/components/common/circular-timeout';
 
-const COOLDOWN_TIME = 10 * 1000;
+const COOLDOWN_TIME = 1;
 
 export default function ReasonsLove() {
     const { discover, getStats, clearReasons } = useReasonsLove();

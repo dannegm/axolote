@@ -25,7 +25,6 @@ const colorsKeys = [
     'zinc',
     'neutral',
     'stone',
-    'white',
 ];
 
 export const Tapes = {
