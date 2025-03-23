@@ -25,7 +25,7 @@ const useSetter = (setter, value) => {
 
 const defaultIntensity = {
     snow: {
-        snowflakeCount: 320,
+        snowflakeCount: 220,
         speed: [0.5, 2.5],
         wind: [-0.5, 0.5],
         radius: [1.5, 3.5],
