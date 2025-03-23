@@ -4,7 +4,7 @@
 }
 
 @custom-variant adjacents (&::before, &::after);
-@custom-variant iphone (@media only screen and (max-width: 812px) and (device-width: 375px) and (device-pixel-ratio: 3));
+@custom-variant iphone (@media only screen and (max-width: 812px) and (device-width: 375px));
 
 @variant adjacents {
     &::before,
