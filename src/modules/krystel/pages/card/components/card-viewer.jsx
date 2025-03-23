@@ -65,8 +65,7 @@ export default function CardViewer({ code, data }) {
     useRemoteEventHandler();
 
     return (
-        <main className='relative z-0 flex min-h-screen iphone:min-h-[calc(100vh-2rem)] sm:min-h-screen flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
-            <div className='hidden iphone:block fixed top-0 w-full h-2 z-max bg-green-500 shadow-2xl' />
+        <main className='relative z-0 flex min-h-[calc(100vh-2rem)] sm:min-h-screen flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
             <CardViewerMenu
                 className={cn('fixed bottom-4 z-[999]', {
                     'right-4': actionsDirection === 'ltr',
