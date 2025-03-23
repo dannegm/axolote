@@ -15,6 +15,7 @@ export default function ToastProvider({ children }) {
     const [toastCollection, setToastCollection] = useState([]);
 
     const hideToast = id => {
+        if (!id) return;
         setToastCollection(collection => updateItemById(collection, id, 'hidden', true));
 
         setTimeout(() => {
@@ -29,6 +30,7 @@ export default function ToastProvider({ children }) {
             onCancel = undefined,
             duration = 3000,
             persist = false,
+            onPayload,
         }) => {
             const payload = {
                 id: nanoid(),
@@ -41,6 +43,7 @@ export default function ToastProvider({ children }) {
             };
 
             setToastCollection(collection => [...collection, payload]);
+            onPayload?.(payload);
 
             if (!persist) {
                 setTimeout(() => {
@@ -65,7 +68,7 @@ export default function ToastProvider({ children }) {
 
     return (
         <ToastHostContext.Provider
-            value={{ toastCollection, handleAccept, handleCancel, showToast }}
+            value={{ toastCollection, handleAccept, handleCancel, showToast, hideToast }}
         >
             {children}
         </ToastHostContext.Provider>

@@ -172,7 +172,7 @@ export default function GiftCard({
 
     return (
         <QuoteProvider quote={{ settings }}>
-            <Portal portalId='global-bg-portal'>
+            <Portal portalId='card-bg-portal'>
                 <div
                     data-layer='bg'
                     className={cn(
@@ -185,7 +185,7 @@ export default function GiftCard({
             </Portal>
 
             {(configs?.bg || theme?.bg) && (
-                <Portal portalId='card-bg-portal'>
+                <Portal portalId='custom-bg-portal'>
                     <div
                         data-layer='bg-custom'
                         className={cn(
@@ -200,7 +200,7 @@ export default function GiftCard({
             )}
 
             <Card
-                className={cn(theme?.card, className, classNames?.card)}
+                className={cn('gift-card', theme?.card, className, classNames?.card)}
                 border={configs?.border || theme?.border ? '' : border}
                 scheme={scheme}
                 letter={letter}

@@ -27,6 +27,7 @@ export default function useAudio({
     }, []);
 
     const play = () => {
+        if (!$audio?.current) return;
         if (fadeIn > 0) {
             let currentStep = 0;
             const steps = fadeIn / 10;
@@ -44,6 +45,7 @@ export default function useAudio({
     };
 
     const pauseStop = stop => {
+        if (!$audio?.current) return;
         if (stop) {
             $audio.current.currentTime = 0;
         }
@@ -51,6 +53,7 @@ export default function useAudio({
     };
 
     const pause = (stop = false) => {
+        if (!$audio?.current) return;
         if (fadeOut > 0) {
             let currentStep = 0;
             const steps = fadeOut / 10;

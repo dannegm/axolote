@@ -1,14 +1,9 @@
-import { useState } from 'react';
-
 import { cn } from '@/modules/core/helpers/utils';
 import { randomPick } from '@/modules/core/helpers/arrays';
-import useAudio from '@/modules/core/hooks/use-audio';
-import Portal from '@/modules/core/components/common/portal';
-
 import { useQuote } from '@/modules/krystel/providers/quote-provider';
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 
-import Balloons from './balloons';
+import { useOverlays } from '@/modules/krystel/providers/overlays-provider';
 
 const colors = [
     'text-red-500',
@@ -31,41 +26,19 @@ export const BalloonsTextSimple = ({ children }) => {
 };
 
 export default function BalloonsText({ children }) {
-    const [showBalloons, setShowBalloons] = useState(false);
-
-    const [playSound, pauseSound] = useAudio({
-        src: './sounds/little-happy-tune.mp3',
-        volume: 0.3,
-        fadeIn: 1500,
-        fadeOut: 1500,
-        loop: true,
-    });
+    const { summonBalloons } = useOverlays();
 
     const quote = useQuote();
 
-    const postBalloonsComplete = usePostAction({
+    const postBalloons = usePostAction({
         action: 'balloons',
-        settings: quote.settings,
-    });
-
-    const postBalloonsStart = usePostAction({
-        action: 'balloons-start',
         settings: quote.settings,
     });
 
     const handleClick = ev => {
         ev.preventDefault();
-        if (!showBalloons) {
-            setShowBalloons(true);
-            postBalloonsStart();
-            playSound();
-        }
-    };
-
-    const handleBalloonsComplete = () => {
-        pauseSound(true);
-        setShowBalloons(false);
-        postBalloonsComplete();
+        summonBalloons();
+        postBalloons();
     };
 
     return (
@@ -73,10 +46,6 @@ export default function BalloonsText({ children }) {
             className='relative inline-flex items-center justify-center cursor-pointer active:scale-95'
             onClick={handleClick}
         >
-            <Portal portalId='global-bg-portal'>
-                {showBalloons && <Balloons count={6} onPopAll={handleBalloonsComplete} loop />}
-            </Portal>
-
             <span
                 className={cn(
                     'absolute z-10 mx-auto flex w-fit box-content',

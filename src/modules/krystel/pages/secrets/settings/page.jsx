@@ -1,4 +1,3 @@
-import ClientOnly from '@/modules/core/components/common/client-only';
 import SecretsLayout from '@/modules/krystel/components/layout/secrets-layout';
 import Settings from './components/settings';
 

@@ -40,3 +40,39 @@
         }
     }
 }
+
+@theme {
+    --thunder-on: --alpha(var(--color-sky-900) / 30%);
+    --thunder-off: var(--color-sky-50);
+    --animate-thunder: thunder 6s infinite;
+
+    @keyframes thunder {
+        0% {
+            background-color: var(--thunder-on);
+        }
+        9% {
+            background-color: var(--thunder-on);
+        }
+        10% {
+            background-color: var(--thunder-off);
+        }
+        10.5% {
+            background-color: var(--thunder-on);
+        }
+        80% {
+            background-color: var(--thunder-on);
+        }
+        82% {
+            background-color: var(--thunder-off);
+        }
+        83% {
+            background-color: var(--thunder-on);
+        }
+        83.5% {
+            background-color: var(--thunder-off);
+        }
+        100% {
+            background-color: var(--thunder-on);
+        }
+    }
+}

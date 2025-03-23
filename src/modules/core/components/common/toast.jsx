@@ -36,7 +36,7 @@ export default function Toast({
     return (
         <div
             className={cn([
-                'w-auto overflow-hidden bg-white rounded-full shadow-md transition-all duration-150 interpolate-size',
+                'w-auto overflow-hidden bg-white rounded-full shadow-md transition-all duration-150 interpolate-size pointer-events-auto',
                 //
                 { 'animate-toast-in': show },
                 { 'animate-toast-out': !show || hidden },

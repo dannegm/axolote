@@ -5,15 +5,15 @@ import { RefreshCcw } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
 import useSettings from '@/modules/core/hooks/use-settings';
-import ClientOnly from '@/modules/core/components/common/client-only';
 import JsonViewer from '@/modules/core/components/common/json-viewer';
 
 import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
 import { isDeleted } from '@/modules/krystel/helpers/utils';
 
+import useRemoteEventHandler from '@/modules/krystel/hooks/use-remote-event-handler';
+
 import { SaveContainer, SaveButton } from '@/modules/krystel/components/common/save-element';
-import RemoteEventHandler from '@/modules/krystel/components/common/remote-event-handler';
 import PerspectiveCard from '@/modules/krystel/components/common/perspective-card';
 import GiftCard from '@/modules/krystel/components/common/gift-card';
 import Button from '@/modules/krystel/components/common/button';
@@ -62,8 +62,10 @@ export default function CardViewer({ code, data }) {
         }
     }, [code, quote]);
 
+    useRemoteEventHandler();
+
     return (
-        <main className='flex min-h-[calc(100vh-2rem)] flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
+        <main className='relative z-0 flex min-h-screen flex-col items-center justify-center p-4 bg-gray-100 bg-center overflow-hidden'>
             <CardViewerMenu
                 className={cn('fixed bottom-4 z-[999]', {
                     'right-4': actionsDirection === 'ltr',
@@ -90,18 +92,26 @@ export default function CardViewer({ code, data }) {
                 className='-mt-4 w-fit px-5 py-10 md:px-10 md:py-20 transition-all'
                 quote={quote}
             >
-                <RemoteEventHandler quote={quote} />
+                <div
+                    id='card-bg-portal'
+                    className='background fixed inset-0 z-10 transition-all duration-300'
+                />
+                <div
+                    id='custom-bg-portal'
+                    className='background fixed inset-0 z-20 transition-all duration-300'
+                />
+                <div
+                    id='global-bg-portal'
+                    className='fixed inset-0 z-30 transition-all duration-300'
+                />
 
-                <div id='global-bg-portal' />
-                <div id='card-bg-portal' />
-
-                <PerspectiveCard>
+                <PerspectiveCard className='relative z-50'>
                     <GiftCard {...quote} />
                 </PerspectiveCard>
 
                 <div
                     className={cn(
-                        'relative z-10 flex flex-row justify-center items-center m-4 gap-4',
+                        'relative z-50 flex flex-row justify-center items-center m-4 gap-4',
                         {
                             'flex-row-reverse': actionsDirection === 'ltr',
                         },

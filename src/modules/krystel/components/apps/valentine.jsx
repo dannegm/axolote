@@ -92,21 +92,12 @@ export default function Valentine({}) {
 
     const { discover } = useEasterEggs();
 
-    const [playSound, pauseSound] = useAudio({
-        src: '/sounds/little-happy-tune.mp3',
-        volume: 0.3,
-        fadeIn: 1500,
-        fadeOut: 1500,
-        loop: true,
-    });
-
     const quote = useQuote();
     const postSaidYes = usePostAction({ action: 'said_yes', settings: quote?.settings });
 
     const handleYes = () => {
         setSlide(finalSlide);
         setSaidYes(true);
-        playSound();
         postSaidYes();
         discover('valentin');
     };
@@ -117,18 +108,10 @@ export default function Valentine({}) {
         setSaidYes(false);
     };
 
-    const handleBalloonsComplete = () => {
-        pauseSound();
-    };
-
     return (
         <Frame className='bg-white px-2 py-4 rounded-2xl shadow-md'>
             {saidYes && (
                 <div className='flex flex-col gap-4 items-center'>
-                    <Portal portalId='global-bg-portal'>
-                        <Balloons count={6} onPopAll={handleBalloonsComplete} loop />
-                    </Portal>
-
                     <img className='block h-[100px]' src={slide.image} />
                     <div className='text-[1rem] font-bold text-balance px-2'>{slide.question}</div>
                 </div>
