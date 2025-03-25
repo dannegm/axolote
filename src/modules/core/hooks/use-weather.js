@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { buildQueryParams } from '@/modules/core/helpers/utils';
 
 const HOSTNAME = 'http://api.weatherstack.com';
+const API_KEY = import.meta.env.NEXT_PUBLIC_WEATHERSTACK_KEY;
 
 const RAINING_CODES = [
     176, 293, 296, 299, 302, 305, 308, 311, 314, 353, 356, 359, 386, 389, 185, 263, 266, 281, 284,
@@ -67,7 +68,7 @@ const INTENSITIES = [
 
 const currentWeatherQuery = async () => {
     const queryParams = buildQueryParams({
-        access_key: '888dbec5afca658735994db63738ca2d',
+        access_key: API_KEY,
         query: 'fetch:ip',
         units: 'm',
     });
