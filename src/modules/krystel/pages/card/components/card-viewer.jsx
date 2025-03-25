@@ -7,6 +7,8 @@ import { cn } from '@/modules/core/helpers/utils';
 import useSettings from '@/modules/core/hooks/use-settings';
 import JsonViewer from '@/modules/core/components/common/json-viewer';
 
+import { useOverlays } from '@/modules/krystel/providers/overlays-provider';
+
 import { extractConfigsAndContent } from '@/modules/krystel/helpers/strings';
 import { getRandomQuote, quoteFromSettings } from '@/modules/krystel/services/quotes';
 import { isDeleted } from '@/modules/krystel/helpers/utils';
@@ -46,6 +48,9 @@ const buildQuoteSettings = ({ code, data }) => {
 export default function CardViewer({ code, data }) {
     const [debugMode] = useSettings('settings:debug_mode', false);
     const [actionsDirection] = useSettings('viewer:actions_direction', 'ltr');
+    const [allowWeather, setAllowWeather] = useSettings('weather:allow', true);
+
+    const { weather } = useOverlays();
 
     const [, setCodeQuery] = useQueryState('code', parseAsString.withDefault(code));
 
@@ -66,13 +71,25 @@ export default function CardViewer({ code, data }) {
 
     return (
         <main className='relative z-0 min-h-[calc(100vh-6rem)] sm:min-h-screen flex flex-col flex-center p-4 bg-gray-100 bg-center overflow-hidden'>
-            <CardViewerMenu
-                className={cn('fixed bottom-4 z-[999]', {
-                    'right-4': actionsDirection === 'ltr',
+            <div
+                data-layer='options'
+                className={cn('fixed bottom-4 z-[999] flex flex-center flex-row gap-2', {
+                    'right-4 flex-row-reverse': actionsDirection === 'ltr',
                     'left-4': actionsDirection === 'rtl',
                 })}
-                item={data}
-            />
+            >
+                <CardViewerMenu item={data} />
+
+                {weather && weather?.id !== 'clear' && (
+                    <Button
+                        className={cn('h-8 px-4 gap-2 [&_svg]:size-4 text-sm', { 'opacity-50': !allowWeather })}
+                        onClick={() => setAllowWeather(!allowWeather)}
+                        variant='outline'
+                    >
+                        {weather?.icon} {weather?.description}
+                    </Button>
+                )}
+            </div>
 
             {!data?.show && (
                 <div className='fixed z-50 top-0 left-0 right-0 h-2 bg-sky-500 shadow-sm' />

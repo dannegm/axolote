@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { buildQueryParams } from '@/modules/core/helpers/utils';
 
-const HOSTNAME = 'http://api.weatherstack.com';
-const API_KEY = import.meta.env.NEXT_PUBLIC_WEATHERSTACK_KEY;
+const CACHE_TIME = 1000 * 60 * 10;
 
 const RAINING_CODES = [
     176, 293, 296, 299, 302, 305, 308, 311, 314, 353, 356, 359, 386, 389, 185, 263, 266, 281, 284,
@@ -66,23 +65,74 @@ const INTENSITIES = [
     },
 ];
 
-const currentWeatherQuery = async () => {
-    const queryParams = buildQueryParams({
-        access_key: API_KEY,
-        query: 'fetch:ip',
-        units: 'm',
-    });
-
-    const resp = await fetch(`${HOSTNAME}/current${queryParams}`);
+const fetchIP = async () => {
+    const IPINFO_TOKEN = import.meta.env.NEXT_PUBLIC_IPINFO_TOKEN;
+    const resp = await fetch(`https://ipinfo.io/json?token=${IPINFO_TOKEN}`);
 
     if (!resp.ok) {
-        throw new Error('Network error');
+        return [null, { message: 'Error getting IP info.' }];
     }
 
-    return resp.json();
+    const data = await resp.json();
+
+    return [data, null];
 };
 
-export default function useWeather() {
+export const weatherstackStrategy = () => ({
+    weatherQuery: async () => {
+        const HOSTNAME = 'http://api.weatherstack.com';
+        const API_KEY = import.meta.env.NEXT_PUBLIC_WEATHERSTACK_KEY;
+
+        const queryParams = buildQueryParams({
+            access_key: API_KEY,
+            query: 'fetch:ip',
+            units: 'm',
+        });
+
+        const resp = await fetch(`${HOSTNAME}/current${queryParams}`);
+
+        if (!resp.ok) {
+            throw new Error('Network error');
+        }
+
+        return resp.json();
+    },
+    weatherCodeTransform: (data = {}) => Number(data?.current?.weather_code || 0),
+});
+
+export const weatherstackWorldWeatherOnline = () => ({
+    weatherQuery: async () => {
+        const [ipData, ipError] = await fetchIP();
+
+        if (ipError) {
+            throw new Error(ipError?.message);
+        }
+
+        const HOSTNAME = 'https://api.worldweatheronline.com';
+        const API_KEY = import.meta.env.NEXT_PUBLIC_WORLDWEATHERONLINE_KEY;
+
+        const queryParams = buildQueryParams({
+            key: API_KEY,
+            q: ipData?.ip,
+            format: 'json',
+            num_of_days: 1,
+        });
+
+        const resp = await fetch(`${HOSTNAME}/premium/v1/weather.ashx${queryParams}`);
+
+        if (!resp.ok) {
+            throw new Error('Network error');
+        }
+
+        return resp.json();
+    },
+    weatherCodeTransform: (data = {}) =>
+        Number(data?.data?.current_condition?.[0]?.weatherCode || 0),
+});
+
+export default function useWeather(weatherStrategy = weatherstackWorldWeatherOnline) {
+    const { weatherQuery, weatherCodeTransform } = weatherStrategy();
+
     const [raining, setRaining] = useState(false);
     const [snowing, setSnowing] = useState(false);
     const [sleet, setSleet] = useState(false);
@@ -91,12 +141,14 @@ export default function useWeather() {
 
     const query = useQuery({
         queryKey: ['weather'],
-        queryFn: currentWeatherQuery,
+        queryFn: weatherQuery,
+        staleTime: CACHE_TIME,
+        cacheTime: CACHE_TIME,
     });
 
     useEffect(() => {
         if (query?.data) {
-            const weatherCode = query?.data?.current?.weather_code;
+            const weatherCode = weatherCodeTransform(query?.data);
             if (RAINING_CODES.includes(weatherCode)) {
                 setRaining(true);
             }

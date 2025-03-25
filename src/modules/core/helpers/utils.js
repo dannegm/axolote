@@ -31,3 +31,41 @@ export const buildQueryParams = (payload, prefix = '?') => {
 
     return prefix + queryParams.toString();
 };
+
+export function match(action) {
+    let hasMatch = false;
+    let finalHandler = null;
+
+    return {
+        with(pattern, handler) {
+            if (!hasMatch) {
+                const entries = Object.entries(pattern);
+                const isMatching = entries.every(([key, value]) => {
+                    return action[key] === value;
+                });
+
+                if (isMatching) {
+                    hasMatch = true;
+                    finalHandler = handler;
+                }
+            }
+            return this;
+        },
+        when(matcher, handler) {
+            if (!hasMatch && matcher(action)) {
+                hasMatch = true;
+                finalHandler = handler;
+            }
+            return this;
+        },
+        otherwise(handler) {
+            if (!hasMatch) {
+                finalHandler = handler;
+            }
+            return this;
+        },
+        run() {
+            return finalHandler?.(action) || finalHandler;
+        },
+    };
+}

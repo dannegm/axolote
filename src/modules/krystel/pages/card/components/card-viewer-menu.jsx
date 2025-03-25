@@ -81,6 +81,7 @@ export default function CardViewerMenu({ className, item }) {
 
     //* General Settings
     const [actionsDirection, setActionDirection] = useSettings('viewer:actions_direction', 'ltr');
+    const [allowWeather, setAllowWeather] = useSettings('weather:allow', true);
 
     const [skipWomenDay, setSkipWomenDay] = useSettings('specials:skip_women_day', false);
     const [skipFoolsDay, setSkipFoolsDay] = useSettings('specials:skip_fools_day', false);
@@ -150,7 +151,7 @@ export default function CardViewerMenu({ className, item }) {
                     </Button>
                 </DropdownMenuTrigger>
 
-                <DropdownMenuContent className='w-56 z-[70]' align={align}>
+                <DropdownMenuContent className='w-56 z-max' align={align}>
                     <DropdownMenuLabel>General</DropdownMenuLabel>
 
                     <DropdownMenuItem direction='col' onSelect={handleActionDirectionSelect}>
@@ -169,6 +170,17 @@ export default function CardViewerMenu({ className, item }) {
                             Intercambia la dirección de los botones.
                         </DropdownMenuItemDescription>
                     </DropdownMenuItem>
+
+                    <DropdownMenuSeparator />
+                    <DropdownMenuCheckboxItem
+                        checked={allowWeather}
+                        onCheckedChange={setAllowWeather}
+                    >
+                        <span>
+                            <span>{allowWeather ? 'Desactivar' : 'Activar'} </span>
+                            <span>clima</span>
+                        </span>
+                    </DropdownMenuCheckboxItem>
 
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>

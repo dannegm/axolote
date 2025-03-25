@@ -7,7 +7,7 @@ export default function Thunder({ show }) {
     const [playSound, pauseSound] = useAudio({
         src: './sounds/thunder.mp3',
         loop: true,
-        volume: 0.05,
+        volume: 0.015,
     });
 
     useEffect(() => {

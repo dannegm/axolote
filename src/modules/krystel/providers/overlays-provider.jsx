@@ -2,7 +2,13 @@ import { createContext, useContext, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'wouter';
 import { useQueryState, parseAsBoolean } from 'nuqs';
 
+import { CloudDrizzle, CloudLightning, CloudRain, CloudSnow, Sun } from 'lucide-react';
+
+import { cn, match } from '@/modules/core/helpers/utils';
 import useWeather from '@/modules/core/hooks/use-weather';
+import useSettings from '@/modules/core/hooks/use-settings';
+
+import Portal from '@/modules/core/components/common/portal';
 import JsonViewer from '@/modules/core/components/common/json-viewer';
 import { Button } from '@/modules/shadcn/ui/button';
 
@@ -11,7 +17,7 @@ import Snowing from '@/modules/krystel/components/overlays/snowing';
 import Thunder from '@/modules/krystel/components/overlays/thunder';
 import Balloons from '@/modules/krystel/components/overlays/balloons';
 
-const OverlaysContext = createContext();
+const OverlaysContext = createContext({});
 
 export const useOverlays = () => {
     return useContext(OverlaysContext);
@@ -45,15 +51,57 @@ export default function OverlaysProvider({ allowRoutes = [], children }) {
 
     const $balloons = useRef();
 
+    const [allowWeather] = useSettings('weather:allow', true);
+
     const [isRaining, setIsRaining] = useState(false);
     const [isSnowing, setIsSnowing] = useState(false);
     const [isSleet, setIsSleet] = useState(false);
     const [isThunder, setIsThunder] = useState(false);
 
-    useSetter(setIsRaining, raining);
-    useSetter(setIsSnowing, snowing);
-    useSetter(setIsSleet, sleet);
-    useSetter(setIsThunder, thunder);
+    useSetter(setIsRaining, allowWeather && raining);
+    useSetter(setIsSnowing, allowWeather && snowing);
+    useSetter(setIsSleet, allowWeather && sleet);
+    useSetter(setIsThunder, allowWeather && thunder);
+
+    const weatherIcon = match({ raining, snowing, sleet, thunder })
+        .with({ raining: true }, () => <CloudRain />)
+        .with({ snowing: true }, () => <CloudSnow />)
+        .with({ sleet: true }, () => <CloudDrizzle />)
+        .with({ thunder: true }, () => <CloudLightning />)
+        .otherwise(() => <Sun />)
+        .run();
+
+    const weatherIndo = match({ raining, snowing, sleet, thunder })
+        .with({ raining: true, thunder: false }, () => ({
+            id: 'raining',
+            description: 'Lloviendo',
+        }))
+        .with({ snowing: true, thunder: false }, () => ({ id: 'snowing', description: 'Nevando' }))
+        .with({ sleet: true, thunder: false }, () => ({ id: 'sleet', description: 'Granizando' }))
+        .with({ raining: true, thunder: true }, () => ({
+            id: 'raining_thunder',
+            description: 'Lluvia y tormenta',
+        }))
+        .with({ snowing: true, thunder: true }, () => ({
+            id: 'snowing_thunder',
+            description: 'Nieve y tormenta',
+        }))
+        .with({ sleet: true, thunder: true }, () => ({
+            id: 'sleet_thunder',
+            description: 'Granizo y tormenta',
+        }))
+        .with({ thunder: true }, () => ({ id: 'thunder', description: 'Relámpagos' }))
+        .otherwise(() => ({ id: 'clear', description: 'Despejado' }))
+        .run();
+
+    const weather = {
+        ...weatherIndo,
+        raining,
+        snowing,
+        sleet,
+        thunder,
+        icon: weatherIcon,
+    };
 
     const actions = {
         raining: setIsRaining,
@@ -79,7 +127,7 @@ export default function OverlaysProvider({ allowRoutes = [], children }) {
     };
 
     return (
-        <OverlaysContext.Provider value={{ toogle, show, hide, summonBalloons }}>
+        <OverlaysContext.Provider value={{ weather, toogle, show, hide, summonBalloons }}>
             {debug && (
                 <div className='fixed bottom-16 left-4 w-auto z-max flex flex-col gap-2'>
                     <JsonViewer
