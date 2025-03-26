@@ -81,7 +81,7 @@ export default function CardViewerMenu({ className, item }) {
 
     //* General Settings
     const [actionsDirection, setActionDirection] = useSettings('viewer:actions_direction', 'ltr');
-    const [allowWeather, setAllowWeather] = useSettings('weather:allow', true);
+    const [allowWeather, setAllowWeather] = useSettings('weather:allow', false);
 
     const [skipWomenDay, setSkipWomenDay] = useSettings('specials:skip_women_day', false);
     const [skipFoolsDay, setSkipFoolsDay] = useSettings('specials:skip_fools_day', false);
@@ -177,8 +177,8 @@ export default function CardViewerMenu({ className, item }) {
                         onCheckedChange={setAllowWeather}
                     >
                         <span>
-                            <span>{allowWeather ? 'Desactivar' : 'Activar'} </span>
-                            <span>clima</span>
+                            <span>Clima </span>
+                            <span>{allowWeather ? 'activado' : 'desactivado'}</span>
                         </span>
                     </DropdownMenuCheckboxItem>
 

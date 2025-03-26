@@ -48,7 +48,7 @@ const buildQuoteSettings = ({ code, data }) => {
 export default function CardViewer({ code, data }) {
     const [debugMode] = useSettings('settings:debug_mode', false);
     const [actionsDirection] = useSettings('viewer:actions_direction', 'ltr');
-    const [allowWeather, setAllowWeather] = useSettings('weather:allow', true);
+    const [allowWeather, setAllowWeather] = useSettings('weather:allow', false);
 
     const { weather } = useOverlays();
 
@@ -79,17 +79,21 @@ export default function CardViewer({ code, data }) {
                 })}
             >
                 <CardViewerMenu item={data} />
+            </div>
 
-                {weather && weather?.id !== 'clear' && (
+            {weather && weather.id !== 'clear' && (
+                <div className='absolute z-max top-2 left-1/2 transform -translate-x-1/2'>
                     <Button
-                        className={cn('h-8 px-4 gap-2 [&_svg]:size-4 text-sm', { 'opacity-50': !allowWeather })}
+                        className={cn('h-8 px-4 gap-2 [&_svg]:size-4 text-sm', {
+                            'opacity-50': !allowWeather,
+                        })}
                         onClick={() => setAllowWeather(!allowWeather)}
                         variant='outline'
                     >
                         {weather?.icon} {weather?.description}
                     </Button>
-                )}
-            </div>
+                </div>
+            )}
 
             {!data?.show && (
                 <div className='fixed z-50 top-0 left-0 right-0 h-2 bg-sky-500 shadow-sm' />

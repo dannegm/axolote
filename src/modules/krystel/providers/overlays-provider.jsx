@@ -51,7 +51,7 @@ export default function OverlaysProvider({ allowRoutes = [], children }) {
 
     const $balloons = useRef();
 
-    const [allowWeather] = useSettings('weather:allow', true);
+    const [allowWeather] = useSettings('weather:allow', false);
 
     const [isRaining, setIsRaining] = useState(false);
     const [isSnowing, setIsSnowing] = useState(false);
