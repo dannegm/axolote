@@ -82,7 +82,7 @@ export default function CardViewer({ code, data }) {
             </div>
 
             {weather && weather.id !== 'clear' && (
-                <div className='absolute z-max top-2 left-1/2 transform -translate-x-1/2'>
+                <div className='absolute z-max top-1.5 left-1/2 transform -translate-x-1/2 scale-90'>
                     <Button
                         className={cn('h-8 px-4 gap-2 [&_svg]:size-4 text-sm', {
                             'opacity-50': !allowWeather,
