@@ -62,6 +62,7 @@ export default function GiftCard({
     scheme = 'bg-white text-gray-600',
     settings = 'none',
     published_at = undefined,
+    weatherActive,
     show,
 }) {
     const [uwu] = useQueryState('uwu', parseAsBoolean.withDefault(false));
@@ -97,6 +98,7 @@ export default function GiftCard({
         fools_day: foolsDay,
         uwu_mode: uwu,
         long_long_time: monthHasBeenPassed === ElapsedTime.PASSED,
+        weather: weatherActive,
 
         secret_card: id === '128',
         nyancat: id === '127',

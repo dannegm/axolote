@@ -81,11 +81,16 @@ export default function CardViewer({ code, data }) {
                 <CardViewerMenu item={data} />
             </div>
 
-            {weather && weather.id !== 'clear' && (
-                <div className='absolute z-max top-1.5 left-1/2 transform -translate-x-1/2 scale-75'>
+            {weather && weather?.id !== 'clear' && (
+                <div
+                    className={cn(
+                        'animate-in fade-in-0 slide-in-from-top-8 duration-300 ease-in',
+                        'absolute z-max top-1.5 left-1/2 transform -translate-x-1/2 scale-75',
+                    )}
+                >
                     <Button
                         className={cn('h-8 px-4 gap-2 [&_svg]:size-4 text-sm', {
-                            'opacity-50': !allowWeather,
+                            'opacity-50': allowWeather,
                         })}
                         onClick={() => setAllowWeather(!allowWeather)}
                         variant='outline'
@@ -127,7 +132,10 @@ export default function CardViewer({ code, data }) {
                 />
 
                 <PerspectiveCard className='relative z-50'>
-                    <GiftCard {...quote} />
+                    <GiftCard
+                        weatherActive={allowWeather && weather && weather?.id !== 'clear'}
+                        {...quote}
+                    />
                 </PerspectiveCard>
 
                 <div

@@ -34,6 +34,10 @@ const easterEggs = [
         description:
             'Esas ansias tuyas de querer leer todas esas 100 razones de una sola vez haha.',
     },
+    {
+        id: 'weather',
+        description: 'I wanna know, have you ever seen the rain?',
+    },
 ];
 
 export default function useEasterEggs() {
