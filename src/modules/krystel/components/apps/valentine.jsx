@@ -1,15 +1,14 @@
 import { useState } from 'react';
 
 import { randomPickWithMemory } from '@/modules/core/helpers/arrays';
-import useAudio from '@/modules/core/hooks/use-audio';
-import Portal from '@/modules/core/components/common/portal';
 
 import { useQuote } from '@/modules/krystel/providers/quote-provider';
+import { useOverlays } from '@/modules/krystel/providers/overlays-provider';
+
 import usePostAction from '@/modules/krystel/hooks/use-post-action';
 import useEasterEggs from '@/modules/krystel/hooks/use-easter-eggs';
 
 import Frame from './frame';
-import Balloons from '../common/balloons';
 
 const initialSlide = {
     question: '¿Te gustaría ser mi san valentín?',
@@ -91,6 +90,7 @@ export default function Valentine({}) {
     const [slide, setSlide] = useState(initialSlide);
 
     const { discover } = useEasterEggs();
+    const { summonBalloons } = useOverlays();
 
     const quote = useQuote();
     const postSaidYes = usePostAction({ action: 'said_yes', settings: quote?.settings });
@@ -100,6 +100,7 @@ export default function Valentine({}) {
         setSaidYes(true);
         postSaidYes();
         discover('valentin');
+        summonBalloons();
     };
 
     const handleNo = () => {
