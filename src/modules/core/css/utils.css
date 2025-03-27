@@ -35,6 +35,12 @@
     align-items: center;
 }
 
+@utility text-stroke {
+    --text-stroke-color: var(--color-white);
+    text-shadow: -1px -1px 0 var(--text-stroke-color), 1px -1px 0 var(--text-stroke-color),
+        -1px 1px 0 var(--text-stroke-color), 1px 1px 0 var(--text-stroke-color);
+}
+
 @utility z-max {
     z-index: 999999;
 }

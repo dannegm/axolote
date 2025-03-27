@@ -10,8 +10,10 @@ export default function SecretsLayout({ title, children }) {
         <RootLayout title={title}>
             <AuthProvider>
                 <main className='px-4 md:p-0 max-w-[820px] w-full md:w-3/4 lg:w-4/6 xl:w-3/5 2xl:w-1/2 mx-auto border-t-8 border-gray-300'>
-                    <div className='flex flex-col gap-2 my-6'>
-                        <h1 className='font-pacifico text-3xl text-indigo-950'>Secrets.</h1>
+                    <div className='relative z-100 flex flex-col gap-2 my-6'>
+                        <h1 className='font-pacifico text-3xl text-black text-stroke'>
+                            Secrets.
+                        </h1>
                     </div>
 
                     <Navbar />

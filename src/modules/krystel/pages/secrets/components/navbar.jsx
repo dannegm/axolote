@@ -52,7 +52,7 @@ export default function Navbar({ classNames }) {
     return (
         <nav
             className={cn(
-                'sticky top-4 z-100 flex flex-row gap-1 p-2 bg-black text-white rounded-md',
+                'sticky top-4 z-100 flex flex-row gap-1 p-2 bg-black text-white rounded-md ring-1 ring-white',
                 classNames?.container,
             )}
         >

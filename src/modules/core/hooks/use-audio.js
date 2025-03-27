@@ -58,6 +58,11 @@ export default function useAudio({
             let currentStep = 0;
             const steps = fadeOut / 10;
             const fadeInterval = setInterval(() => {
+                if (!$audio?.current) {
+                    clearInterval(fadeInterval);
+                    return;
+                }
+
                 currentStep++;
                 const progress = currentStep / steps;
                 $audio.current.volume = Math.max(volume * (1 - Math.pow(progress, 2)), 0);
