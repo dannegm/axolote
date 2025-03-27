@@ -83,6 +83,7 @@ export default function CardViewer({ code, data }) {
 
             {weather && weather?.id !== 'clear' && (
                 <div
+                    data-layer='weather-activator'
                     className={cn(
                         'animate-in fade-in-0 slide-in-from-top-8 duration-300 ease-in',
                         'absolute z-max top-1.5 left-1/2 transform -translate-x-1/2 scale-75',
@@ -101,32 +102,50 @@ export default function CardViewer({ code, data }) {
             )}
 
             {!data?.show && (
-                <div className='fixed z-50 top-0 left-0 right-0 h-2 bg-sky-500 shadow-sm' />
+                <div
+                    data-layer='ribbon'
+                    data-variat='hidden'
+                    className='fixed z-100 top-0 left-0 right-0 h-2 bg-sky-500 shadow-sm'
+                />
             )}
 
             {deleted && (
-                <div className='fixed z-50 top-0 left-0 right-0 h-2 bg-rose-500 shadow-sm' />
+                <div
+                    data-layer='ribbon'
+                    data-variat='deleted'
+                    className='fixed z-100 top-0 left-0 right-0 h-2 bg-rose-500 shadow-sm'
+                />
             )}
 
             {debugMode && (
-                <div className='max-w-[398px] w-full mt-12 mb-2 md:-mb-12'>
+                <div
+                    data-layer='card-preview'
+                    className='max-w-[398px] w-full mt-12 mb-2 md:-mb-12'
+                >
                     <GiftCardPreview quote={quote.quote} code={quote.settings} preview />
                 </div>
             )}
 
             <SaveContainer
+                data-layer='canvas-container'
                 className='-mt-4 w-fit px-5 py-10 md:px-10 md:py-20 transition-all'
                 quote={quote}
             >
                 <div
+                    data-layer='bg'
+                    data-variant='card'
                     id='card-bg-portal'
                     className='background fixed inset-0 z-10 transition-all duration-300'
                 />
                 <div
+                    data-layer='bg'
+                    data-variant='custom'
                     id='custom-bg-portal'
                     className='background fixed inset-0 z-20 transition-all duration-300'
                 />
                 <div
+                    data-layer='bg'
+                    data-variant='global'
                     id='global-bg-portal'
                     className='fixed inset-0 z-30 transition-all duration-300'
                 />
@@ -139,6 +158,7 @@ export default function CardViewer({ code, data }) {
                 </PerspectiveCard>
 
                 <div
+                    data-layer='actions'
                     className={cn(
                         'relative z-50 flex flex-row justify-center items-center m-4 gap-4',
                         {
@@ -160,7 +180,10 @@ export default function CardViewer({ code, data }) {
             </SaveContainer>
 
             {debugMode && (
-                <div className='min-w-80 max-w-full -mt-14 mb-16 p-2 overflow-hidden z-100 flex flex-col gap-2 items-center'>
+                <div
+                    data-layer='debugger'
+                    className='min-w-80 max-w-full -mt-14 mb-16 p-2 overflow-hidden z-100 flex flex-col gap-2 items-center'
+                >
                     <CopyText content={url}>{quote.settings}</CopyText>
                     <JsonViewer name='payload' data={quote} />
                 </div>

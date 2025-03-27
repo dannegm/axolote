@@ -11,7 +11,7 @@ import Button from './button';
 
 const SaveContext = createContext();
 
-export const SaveContainer = ({ className, children, quote, onPrepare, onSave }) => {
+export const SaveContainer = ({ className, children, quote, onPrepare, onSave, ...props }) => {
     const html2canvasOptions = {
         allowTaint: true,
         backgroundColor: '#fafafa',
@@ -66,7 +66,7 @@ export const SaveContainer = ({ className, children, quote, onPrepare, onSave })
 
     return (
         <SaveContext.Provider value={{ $container, save }}>
-            <div ref={$container} className={className}>
+            <div ref={$container} className={className} {...props}>
                 {children}
             </div>
         </SaveContext.Provider>

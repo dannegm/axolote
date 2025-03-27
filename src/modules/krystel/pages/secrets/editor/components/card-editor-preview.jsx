@@ -23,7 +23,7 @@ export default function CardEditorPreview({ className, showCardViewport, editorK
     return (
         <div
             className={cn(
-                'relative flex flex-col gap-2 pb-52 max-w-[384px] min-w-[358px] w-auto mx-auto',
+                'relative z-50 flex flex-col gap-2 pb-52 max-w-[384px] min-w-[358px] w-auto mx-auto',
                 className,
             )}
         >
@@ -50,7 +50,7 @@ export default function CardEditorPreview({ className, showCardViewport, editorK
                         {showCardViewport && (
                             <div
                                 className={cn(
-                                    'absolute z-30 top-2 left-1/2 transform -translate-x-1/2 flex gap-1 bg-black text-white px-3 py-1 rounded-full shadow-lg text-xs font-bold',
+                                    'absolute z-100 top-2 left-1/2 transform -translate-x-1/2 flex gap-1 bg-black text-white px-3 py-1 rounded-full shadow-lg text-xs font-bold',
                                 )}
                             >
                                 <span className='block'>{breakpoint}</span>

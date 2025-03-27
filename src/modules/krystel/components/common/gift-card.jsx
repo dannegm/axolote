@@ -176,7 +176,7 @@ export default function GiftCard({
         <QuoteProvider quote={{ settings }}>
             <Portal portalId='card-bg-portal'>
                 <div
-                    data-layer='bg'
+                    data-layer='card-bg'
                     className={cn(
                         'animate-in fade-in-0 duration-[1.5s] ease-in opacity-50',
                         'fixed inset-0 pointer-events-none bg-gray-100 bg-center bg-[length:50%] transition-all',
@@ -189,7 +189,7 @@ export default function GiftCard({
             {(configs?.bg || theme?.bg) && (
                 <Portal portalId='custom-bg-portal'>
                     <div
-                        data-layer='bg-custom'
+                        data-layer='card-bg-custom'
                         className={cn(
                             'animate-in fade-in-0 duration-150 ease-in opacity-100',
                             'fixed inset-0 pointer-events-none transition-all',

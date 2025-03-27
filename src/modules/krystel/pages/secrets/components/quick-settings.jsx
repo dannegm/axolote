@@ -48,7 +48,7 @@ export default function QuickSettings({ classNames }) {
     if (!showQuickSettings) return null;
 
     return (
-        <div className='flex flex-col gap-2'>
+        <div className='relative z-100 flex flex-col gap-2'>
             <div className={cn('flex flex-row gap-1 mt-2', classNames?.container)}>
                 {settingsItems.map(({ key, label }) => (
                     <SwitchOption

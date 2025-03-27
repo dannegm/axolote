@@ -109,8 +109,24 @@ export default function CardEditor() {
 
     return (
         <>
-            <div id='global-bg-portal' />
-            <div id='card-bg-portal' />
+            <div
+                data-layer='bg'
+                data-variant='card'
+                id='card-bg-portal'
+                className='background fixed inset-0 z-10 transition-all duration-300'
+            />
+            <div
+                data-layer='bg'
+                data-variant='custom'
+                id='custom-bg-portal'
+                className='background fixed inset-0 z-20 transition-all duration-300'
+            />
+            <div
+                data-layer='bg'
+                data-variant='global'
+                id='global-bg-portal'
+                className='fixed inset-0 z-30 transition-all duration-300'
+            />
 
             <CardEditorDrafts
                 $configs={$configs}
