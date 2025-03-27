@@ -17,7 +17,7 @@ export default function LogsLoader() {
         <DataLoader
             key={key}
             tags={['actions']}
-            url={`${BASE_URL}/krystel/actions`}
+            url={`${BASE_URL}/krystel/actions?limit=250`}
             headers={{ 'x-dnn-tracker': token }}
             loader={<Loader />}
             realtime={logsRealtime}
