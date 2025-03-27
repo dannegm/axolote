@@ -1,5 +1,7 @@
 import { Route, Redirect } from 'wouter';
 
+import Login from '@/modules/krystel/pages/login/page';
+
 import Card from '@/modules/krystel/pages/card/page';
 import Cards from '@/modules/krystel/pages/cards/page';
 import Posts from '@/modules/krystel/pages/posts/page';
@@ -28,6 +30,8 @@ export const Secrets = ({ basePath }) => (
 
 export const KrystelRouter = ({ basePath }) => (
     <>
+        <Route path={`${basePath}/login`} component={Login} />
+
         <Route path={`${basePath}`} component={Card} />
         <Route path={`${basePath}/cards`} component={Cards} />
         <Route path={`${basePath}/posts`} component={Posts} />

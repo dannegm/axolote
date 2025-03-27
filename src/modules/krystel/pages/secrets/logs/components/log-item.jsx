@@ -8,6 +8,7 @@ import {
     SquareDashed,
     FlaskConical,
     Eye,
+    LockKeyhole,
 } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
@@ -17,9 +18,15 @@ import GiftCardPreview from '@/modules/krystel/components/common/gift-card-previ
 
 import { UserAgentInfo } from './user-agent-info';
 import DeleteLogButton from './delete-log-button';
+import { capCase } from '@/modules/core/helpers/strings';
 
 const defaultIcon = <SquareDashed />;
 const pages = {
+    login: {
+        icon: <LockKeyhole />,
+        label: 'Login',
+        link: '/krystel/login',
+    },
     cards: {
         icon: <BookMarked />,
         label: 'Cards',
@@ -90,7 +97,8 @@ export default function LogItem({ item, realtime }) {
                             <div className='flex flex-row gap-2 p-2 items-center justify-start bg-white border-2 rounded-md shadow-2xs'>
                                 {pages[item.metadata?.page]?.icon || defaultIcon}
                                 <span className='font-bold'>
-                                    {pages[item.metadata?.page]?.label || 'Página desconocida'}
+                                    {pages[item.metadata?.page]?.label ||
+                                        capCase(item.metadata?.page)}
                                 </span>
                             </div>
                         </a>

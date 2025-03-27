@@ -3,9 +3,9 @@ import { parseAsString, parseAsBoolean, useQueryState } from 'nuqs';
 
 import { buildQueryParams } from '@/modules/core/helpers/utils';
 
+import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import useSettings from '@/modules/core/hooks/use-settings';
 import DataLoader from '@/modules/core/components/common/data-loader';
-import Loader from '@/modules/core/components/common/loader';
 
 import CardViewer from './card-viewer';
 
@@ -23,6 +23,7 @@ const extractQuoteId = code => {
 const MemoCardViewer = memo(CardViewer);
 
 export default function QuoteLoader() {
+    const [token] = useLocalStorage('app:tracker', null);
     const [code] = useQueryState('code', parseAsString.withDefault(''));
     const quoteId = extractQuoteId(code);
 
@@ -43,6 +44,7 @@ export default function QuoteLoader() {
         <DataLoader
             tags={['quotes']}
             url={`${BASE_URL}/krystel/pick${queryParams}`}
+            headers={{ 'x-dnn-tracker': token }}
             loader={<></>}
             onError={handleError}
             retry={false}

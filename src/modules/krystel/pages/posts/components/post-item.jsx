@@ -245,6 +245,7 @@ const elements = {
 };
 
 export default function PostItem({ item }) {
+    const [showSecrets] = useSettings('settings:show_secrets', false);
     const [includesIndev] = useSettings('settings:posts:includes_indev', false);
 
     const Element = elements[item.type]?.component || elements.post.component;
@@ -263,12 +264,14 @@ export default function PostItem({ item }) {
                     'border-r-4 border-r-red-500 pr-2': item.deleted_at,
                 })}
             >
-                <PostItemMenu
-                    className={cn('absolute z-[60] top-0 right-0', {
-                        'right-2': includesIndev,
-                    })}
-                    item={item}
-                />
+                {showSecrets && (
+                    <PostItemMenu
+                        className={cn('absolute z-[60] top-0 right-0', {
+                            'right-2': includesIndev,
+                        })}
+                        item={item}
+                    />
+                )}
 
                 <div
                     className={cn(

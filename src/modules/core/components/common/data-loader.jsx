@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 export default function DataLoader({
     url,
     params,
+    headers = {},
     tags = [],
     loader = null,
     preventRefetch = false,
@@ -16,7 +17,7 @@ export default function DataLoader({
     const { data, error, isLoading, isFetching } = useQuery({
         queryKey: tags,
         queryFn: async () => {
-            const resp = await fetch(url + new URLSearchParams(params));
+            const resp = await fetch(url + new URLSearchParams(params), { headers });
             if (!resp.ok) {
                 throw new Error('Network error');
             }
