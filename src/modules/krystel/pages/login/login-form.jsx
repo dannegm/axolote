@@ -52,11 +52,13 @@ const hints = [
 ];
 
 const errors = {
-    default: 'Intenta de nuevo con otra contraseña.',
-    401: 'Intenta de nuevo con otra contraseña.',
+    default: 'Hubo un error desconocido.',
+    400: 'Falta información para el login.',
+    401: 'Será imposible iniciar ahora.',
     403: 'Intenta de nuevo con otra contraseña.',
-    418: 'Espera unos minutos antes de intentar de nuevo.',
-    429: 'Espera unos minutos antes de intentar de nuevo.',
+    418: 'Soy una tetera, se me ha acabado el té.',
+    429: 'Demasiados intentos, regresa más tarde.',
+    500: 'El servicio no está disponible.',
 };
 
 export default function LoginForm() {
