@@ -92,7 +92,7 @@ export default function LoginForm() {
     }, [isPending, isError]);
 
     return (
-        <main className='w-full h-screen flex-center flex-col gap-6'>
+        <main className='w-full min-h-[calc(100vh-6rem)] sm:min-h-screen flex-center flex-col gap-6'>
             {isSuccess && <Loader className='z-max bg-white/60 backdrop-blur-xs' />}
 
             <h1 className='font-pacifico text-2xl -mt-32 mb-12 text-center'>Krystel</h1>
