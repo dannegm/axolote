@@ -8,7 +8,6 @@ export default function Page() {
         <Layout title='Posts'>
             <TrackAction />
             <PageViewAction page='posts' />
-            <PostsLoader />
         </Layout>
     );
 }

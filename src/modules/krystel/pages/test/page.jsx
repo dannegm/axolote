@@ -8,7 +8,6 @@ export default function Test() {
         <Layout title='Test'>
             <TrackAction />
             <PageViewAction page='test' />
-            <Fingerprint />
         </Layout>
     );
 }
