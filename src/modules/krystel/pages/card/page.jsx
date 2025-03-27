@@ -7,7 +7,9 @@ export default function Page() {
         <Layout>
             <TrackAction />
             <PageViewAction page='main' />
-            <h1>Tú no eres Krys.</h1>
+            <main className='w-full h-screen flex-center flex-col gap-2'>
+                <h1 className='font-pacifico text-2xl -mt-32 text-center'>Krystel</h1>
+            </main>
         </Layout>
     );
 }
