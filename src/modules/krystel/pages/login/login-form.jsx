@@ -29,7 +29,7 @@ const loginAction = async ({ code }) => {
     });
 
     if (!resp.ok) {
-        throw new Error('Error logging in');
+        throw { code: resp.status };
     }
 
     return resp.json();
@@ -51,6 +51,14 @@ const hints = [
     'Ultimos 4 dígitos de mi teléfono.',
 ];
 
+const errors = {
+    default: 'Intenta de nuevo con otra contraseña.',
+    401: 'Intenta de nuevo con otra contraseña.',
+    403: 'Intenta de nuevo con otra contraseña.',
+    418: 'Espera unos minutos antes de intentar de nuevo.',
+    429: 'Espera unos minutos antes de intentar de nuevo.',
+};
+
 export default function LoginForm() {
     const inputOtpSlotClassname = 'size-16 text-xl';
 
@@ -60,10 +68,13 @@ export default function LoginForm() {
     const [code, setCode] = useState('');
     const [hint, setHint] = useState(randomPick(hints));
 
-    const { mutate, isPending, isError, isSuccess } = useLoginAction({
+    const { mutate, error, isPending, isError, isSuccess } = useLoginAction({
         onSuccess: data => {
             setToken(data?.token);
             navigate('/krystel');
+        },
+        onError: error => {
+            console.log(error);
         },
     });
 
@@ -102,8 +113,10 @@ export default function LoginForm() {
             </div>
 
             {isError && (
-                <Alert className='max-w-72' variant='destructive'>
-                    <AlertDescription>Intenta de nuevo con otra contraseña.</AlertDescription>
+                <Alert className='max-w-72 flex flex-center' variant='destructive'>
+                    <AlertDescription className='flex flex-center text-center'>
+                        {errors[error?.code] || errors.default}
+                    </AlertDescription>
                 </Alert>
             )}
 
