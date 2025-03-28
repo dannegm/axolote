@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { getHours, setHours } from 'date-fns';
 import { useTimescape } from 'timescape/react';
 import { Clock3 } from 'lucide-react';
 
@@ -17,17 +18,34 @@ const INPUT_PLACEHOLDERS = {
     'am/pm': 'AM/PM',
 };
 
+const getMeridian = (date = new Date()) => {
+    const hours = getHours(date);
+    return hours < 12 ? 'AM' : 'PM';
+};
+
+const toggleAmPmDate = (date, meridian) => {
+    const hours = getHours(date);
+
+    if (meridian.toUpperCase() === 'PM' && hours < 12) {
+        return setHours(date, hours + 12);
+    }
+
+    if (meridian.toUpperCase() === 'AM' && hours >= 12) {
+        return setHours(date, hours - 12);
+    }
+
+    return date;
+};
+
 const TimeGrid = ({ ref, ...props }) => {
     const { format, className, timescape, placeholders } = props;
 
-    const [meridiem, setMeridiem] = useState(timescape.getInputProps('am/pm').value || 'AM');
+    const [meridiem, setMeridiem] = useState(getMeridian(timescape?.options?.date) || 'AM');
 
     const handleMeridiemToggle = () => {
         const newMeridiem = meridiem === 'AM' ? 'PM' : 'AM';
         setMeridiem(newMeridiem);
-
-        const event = { target: { value: newMeridiem } };
-        timescape.getInputProps('am/pm')?.onChange?.(event);
+        timescape.update(prev => ({ ...prev, date: toggleAmPmDate(prev.date, newMeridiem) }));
     };
 
     return (
