@@ -49,6 +49,8 @@ const hints = [
     'El año en el que nos conocimos.',
     'Junta las edades que teníamos cuando nos conocimos.',
     'Ultimos 4 dígitos de mi teléfono.',
+    'Fecha en la que te visité por primera vez.',
+    'Mes y año en el que viniste a visitarme.',
 ];
 
 const errors = {
