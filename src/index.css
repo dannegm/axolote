@@ -1,6 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Boogaloo&family=Caveat:wght@400..700&family=Dancing+Script:wght@400..700&family=Delius&family=Dosis:wght@200..800&family=Jersey+10&family=Lora:ital,wght@0,400..700;1,400..700&family=Macondo&family=Micro+5&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Pacifico&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+MX:wght@100..400&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 @import 'tailwindcss';
+
+@import './modules/core/css/fonts.css';
+@import './modules/core/css/utils.css';
+@import './modules/core/css/shadcn.css';
+@import './modules/core/css/animations.css';
+
 @plugin 'tailwindcss-animate';
 
 @layer base {
@@ -28,8 +34,3 @@
         pointer-events: none;
     }
 }
-
-@import './modules/core/css/fonts.css';
-@import './modules/core/css/utils.css';
-@import './modules/core/css/shadcn.css';
-@import './modules/core/css/animations.css';
