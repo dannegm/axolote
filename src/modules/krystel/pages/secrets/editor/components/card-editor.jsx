@@ -142,7 +142,7 @@ export default function CardEditor() {
                         <Button
                             className={cn(
                                 'animate-in fade-in-0 duration-75 ease-in',
-                                'absolute z-51 opacity-100 lg:hidden',
+                                'absolute z-90 opacity-100 lg:hidden',
                             )}
                             style={{ ...translucedButtonPosition }}
                             type='button'
