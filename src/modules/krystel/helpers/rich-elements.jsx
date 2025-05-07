@@ -17,13 +17,14 @@ import QuoteText from '@/modules/krystel/components/common/quote-text';
 import BalloonsText from '@/modules/krystel/components/common/balloons-text';
 import Button from '@/modules/krystel/components/common/button';
 import ButtonActions from '@/modules/krystel/components/common/button-actions';
+import PaperNote from '@/modules/krystel/components/common/paper-note';
+import ChatBubble from '@/modules/krystel/components/common/chat-bubble';
 import { BalloonsTextSimple } from '@/modules/krystel/components/common/balloons-text';
 
 import FrameApps, {
     getAppDescription,
     getAppIcon,
 } from '@/modules/krystel/components/common/frame-apps';
-import PaperNote from '../components/common/paper-note';
 
 export const defaultElements = [
     // Strikethrough
@@ -101,6 +102,13 @@ export const defaultElements = [
             <PaperNote className='mx-auto' color={color}>
                 {text}
             </PaperNote>
+        ),
+    },
+    // Chat Bubble
+    {
+        pattern: /^([+-]):(.*)$/gm,
+        parser: (symbol, message) => (
+            <ChatBubble type={symbol === '+' ? 'sender' : 'receiver'}>{message.trim()}</ChatBubble>
         ),
     },
     // Random word

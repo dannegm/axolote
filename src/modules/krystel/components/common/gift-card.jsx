@@ -311,7 +311,7 @@ export default function GiftCard({
                         'font-delius text-center text-xl font-medium leading-snug',
                         {
                             'text-md': isLongText,
-                            'w-full mt-12 font-noto text-left text-[0.825rem] text-balance hyphens-auto leading-normal':
+                            'w-full mt-12 font-noto text-left text-[0.825rem] text-pretty hyphens-auto leading-normal':
                                 letter,
                             'flex-1 w-full h-full block': configs?.fullscreen,
                             'min-w-[calc(100%+80px)] -mx-10': configs?.fullwidth,
