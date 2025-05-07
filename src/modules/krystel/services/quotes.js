@@ -34,7 +34,7 @@ const colorSchemes = [
     'bg-fuchsia-100 text-fuchsia-800',
     'bg-violet-100 text-violet-800',
     'bg-orange-100 text-orange-800',
-    'bg-neutral-100 text-neutral-800',
+    'bg-slate-100 text-slate-800',
     'bg-zinc-100 text-zinc-800',
     'bg-gray-100 text-gray-800',
     'bg-slate-100 text-slate-800',

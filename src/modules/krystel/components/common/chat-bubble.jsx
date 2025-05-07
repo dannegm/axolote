@@ -14,9 +14,9 @@ export default function ChatBubble({ children, type = 'sender' }) {
                 className={cn(
                     'px-2 py-1.5 w-auto max-w-4/5 wrap-break-word text-pretty rounded-md',
                     {
-                        'bg-slate-900/90 text-slate-100 mix-blend-darken rounded-br-none':
+                        'bg-slate-800 text-white rounded-br-none':
                             type === 'sender',
-                        'bg-slate-200/90 text-slate-900 mix-blend-darken rounded-bl-none':
+                        'bg-slate-200 text-black rounded-bl-none':
                             type === 'receiver',
                     },
                 )}
