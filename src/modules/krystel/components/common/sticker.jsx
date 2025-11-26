@@ -22,6 +22,7 @@ const stickerMap = {
     nyancat: '/stickers/nyancat.gif',
     sushi: '/stickers/sushi.png',
     cat: '/stickers/cat.png',
+    nihon: '/stickers/nihon.webp',
 };
 
 const customStyles = {

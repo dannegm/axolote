@@ -34,10 +34,10 @@ export const buildQueryParams = (payload, prefix = '?') => {
 
 export function match(action) {
     let hasMatch = false;
-    let finalHandler = null;
+    let finalResult = null;
 
     return {
-        with(pattern, handler) {
+        with(pattern, result) {
             if (!hasMatch) {
                 const entries = Object.entries(pattern);
                 const isMatching = entries.every(([key, value]) => {
@@ -46,26 +46,26 @@ export function match(action) {
 
                 if (isMatching) {
                     hasMatch = true;
-                    finalHandler = handler;
+                    finalResult = result;
                 }
             }
             return this;
         },
-        when(matcher, handler) {
-            if (!hasMatch && matcher(action)) {
+        when(evaluator, result) {
+            if (!hasMatch && evaluator(action)) {
                 hasMatch = true;
-                finalHandler = handler;
+                finalResult = result;
             }
             return this;
         },
-        otherwise(handler) {
+        otherwise(result) {
             if (!hasMatch) {
-                finalHandler = handler;
+                finalResult = result;
             }
             return this;
         },
         run() {
-            return finalHandler?.(action) || finalHandler;
+            return finalResult();
         },
     };
 }

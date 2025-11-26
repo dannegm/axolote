@@ -12,6 +12,7 @@ import {
     Split,
     ScrollText,
     ScanHeart,
+    AlarmClock,
 } from 'lucide-react';
 
 import Simple from '../apps/simple';
@@ -26,6 +27,7 @@ import PostDrawing from '../apps/post-drawing';
 import PostImage from '../apps/post-image';
 import AllReasonsLove from '../apps/all-reasons-love';
 import ReasonsLove from '../apps/reasons-love';
+import TimeCounter from '../apps/time-counter';
 
 const appsComponents = {
     default: () => <></>,
@@ -37,6 +39,7 @@ const appsComponents = {
     flappybird: FlappyBird,
     reasons_love_all: AllReasonsLove,
     reasons_love: ReasonsLove,
+    time_counter: TimeCounter,
 
     // Posts
     'post-simple': PostSimple,
@@ -55,6 +58,7 @@ const appsDescriptions = {
     flappybird: 'Flappy Bird',
     reasons_love_all: 'Todas las #100Reasons por las que te quiero tanto.',
     reasons_love: '#100Reasons por las que te quiero tanto.',
+    time_counter: 'Contador de tiempo',
 
     // Posts
     'post-simple': 'Cuéntame qué estás pensando',
@@ -73,6 +77,7 @@ const appsIcons = {
     flappybird: Gamepad2,
     reasons_love_all: ScrollText,
     reasons_love: ScanHeart,
+    time_counter: AlarmClock,
 
     // Posts
     'post-simple': MessageSquareHeart,
