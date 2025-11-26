@@ -30,7 +30,7 @@ const customStyles = {
     nihon: cn(
         'p-0 box-content',
         '[.preview]:bg-white [.preview]:border-white [.preview]:border-x-16 [.preview]:border-y-8 [.preview]:ring-1 [.preview]:ring-black/10 [.preview]:shadow-lg [.preview]:size-6',
-        'not-[.preview]:shadow-none not-[.preview]:size-24 not-[.preview]:my-8',
+        'not-[.preview]:shadow-none not-[.preview]:size-32 not-[.preview]:my-8',
     ),
 };
 
