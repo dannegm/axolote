@@ -27,9 +27,14 @@ const stickerMap = {
 
 const customStyles = {
     nyancat: 'rounded-full shadow-xl',
+    nihon: cn(
+        'p-0 box-content',
+        '[.preview]:bg-white [.preview]:border-white [.preview]:border-x-16 [.preview]:border-y-8 [.preview]:ring-1 [.preview]:ring-black/10 [.preview]:shadow-lg [.preview]:size-6',
+        'not-[.preview]:shadow-none not-[.preview]:size-24 not-[.preview]:my-8',
+    ),
 };
 
-export default function Sticker({ id, type = 'inline' }) {
+export default function Sticker({ className, id, type = 'inline' }) {
     const src = stickerMap[id];
     if (!src) return `[${id}]`;
 
@@ -42,5 +47,11 @@ export default function Sticker({ id, type = 'inline' }) {
         preview: 'block bg-white rounded-md shadow-2xs w-16 h-16 p-2',
     };
 
-    return <img src={src} alt={id} className={cn('object-contain', types[type], stickerStyles)} />;
+    return (
+        <img
+            src={src}
+            alt={id}
+            className={cn('sticker', className, 'object-contain', types[type], stickerStyles)}
+        />
+    );
 }

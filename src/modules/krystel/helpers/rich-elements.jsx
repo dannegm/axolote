@@ -424,17 +424,17 @@ export const buildPreviewElements = ({ preventReveal }) => [
     // Sticker Full
     {
         pattern: /<sticker::(.*?)>/g,
-        parser: id => <Sticker id={id} type='preview' />,
+        parser: id => <Sticker className='preview' id={id} type='preview' />,
     },
     // Sticker Badge
     {
         pattern: /<badge::(.*?)>/g,
-        parser: id => <Sticker id={id} type='preview' />,
+        parser: id => <Sticker className='preview' id={id} type='preview' />,
     },
     // Sticker Inline
     {
         pattern: /\[\[(.*?)\]\]/g,
-        parser: id => <Sticker id={id} />,
+        parser: id => <Sticker className='preview' id={id} />,
     },
     // Button Actions with props
     {

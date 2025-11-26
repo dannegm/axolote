@@ -179,7 +179,7 @@ export default function GiftCard({
                     data-layer='card-bg'
                     className={cn(
                         'animate-in fade-in-0 duration-[1.5s] ease-in opacity-50',
-                        'fixed inset-0 pointer-events-none bg-gray-100 bg-center bg-[length:50%] transition-all',
+                        'fixed inset-0 pointer-events-none bg-gray-100 bg-center bg-size-[50%] transition-all',
                         classNames?.bg,
                     )}
                     style={{ backgroundImage: bg }}
@@ -220,7 +220,7 @@ export default function GiftCard({
                     container: cn(theme?.container, classNames?.container),
                     content: cn(
                         {
-                            'text-white [text-shadow:_1px_1px_8px_rgb(0_0_0_/_30%)]': frame,
+                            'text-white [text-shadow:1px_1px_8px_rgb(0_0_0/30%)]': frame,
                             'text-black': dark,
                         },
                         theme?.content,
@@ -241,7 +241,7 @@ export default function GiftCard({
                         )}
                     >
                         <Asterisk
-                            className={cn('text-white h-[56px] w-[56px]', { 'h-6 w-6': letter })}
+                            className={cn('text-white size-14', { 'size-6': letter })}
                         />
                     </div>
                 )}
@@ -291,9 +291,9 @@ export default function GiftCard({
                             >
                                 <LucideIcon
                                     className={cn(
-                                        'text-current h-[56px] w-[56px]',
+                                        'text-current size-14',
                                         {
-                                            'h-6 w-6': letter,
+                                            'size-6': letter,
                                             'drop-shadow-md': frame,
                                         },
                                         theme?.iconSVG,

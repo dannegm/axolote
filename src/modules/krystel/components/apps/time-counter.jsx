@@ -81,7 +81,7 @@ const maskBuilder = duration => ch =>
 
 const Digit = ({ label, value }) => {
     return (
-        <div className='flex flex-col items-center px-2 py-1 rounded-md bg-gray-900 text-white min-w-[3rem]'>
+        <div className='flex flex-col items-center px-2 py-1 rounded-md bg-gray-900 text-white min-w-12'>
             <span className='text-lg font-mono'>{formatUnit(value ?? 0)}</span>
             <span className='text-[0.6rem] uppercase tracking-wide opacity-80'>{label}</span>
         </div>

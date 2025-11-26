@@ -69,7 +69,7 @@ export default function GiftCardPreview({
         <div
             data-layer='card'
             className={cn(
-                'relative  bg-gray-100 bg-center bg-[length:50%] p-2 rounded-md shadow-xl transition-all duration-150',
+                'relative  bg-gray-100 bg-center bg-size-[50%] p-2 rounded-md shadow-xl transition-all duration-150',
                 {
                     'bg-none': configs?.bg || theme?.bg,
                     'blur-xs select-none': hidden,
@@ -129,7 +129,7 @@ export default function GiftCardPreview({
                         'flex flex-row gap-2 items-start p-3 rounded-md',
                         quoteSettings.scheme,
                         {
-                            'text-white [text-shadow:_1px_1px_8px_rgb(0_0_0_/_30%)] bg-center bg-cover':
+                            'text-white [text-shadow:1px_1px_8px_rgb(0_0_0/30%)] bg-center bg-cover':
                                 frame,
                             'text-black': dark,
                         },
@@ -165,7 +165,7 @@ export default function GiftCardPreview({
                     <div
                         data-layer='text'
                         className={cn(
-                            'mt-[2px] font-delius font-medium pr-4',
+                            'flex flex-col items-start mt-0.5 font-delius font-medium pr-4',
                             theme?.text,
                             classNames?.text,
                         )}
