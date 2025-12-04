@@ -82,7 +82,7 @@ const maskBuilder = duration => ch =>
         }))
         .with({ __value: 'm' }, () => ({
             key: 'm',
-            label: 'min',
+            label: 'mins',
             value: duration.minutes,
         }))
         .with({ __value: 's' }, () => ({
