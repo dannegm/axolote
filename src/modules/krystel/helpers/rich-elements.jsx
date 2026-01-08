@@ -106,9 +106,9 @@ export const defaultElements = [
     },
     // Chat Bubble
     {
-        pattern: /^([+-]):(.*)$/gm,
+        pattern: /^([\<\>])\s(.*)$/gm,
         parser: (symbol, message) => (
-            <ChatBubble type={symbol === '+' ? 'sender' : 'receiver'}>{message.trim()}</ChatBubble>
+            <ChatBubble type={symbol === '<' ? 'sender' : 'receiver'}>{message.trim()}</ChatBubble>
         ),
     },
     // Random word
