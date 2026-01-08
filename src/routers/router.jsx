@@ -6,17 +6,16 @@ export const DEBUG = import.meta.env.NEXT_PUBLIC_DEBUG === 'true';
 export const TARGET = import.meta.env.NEXT_PUBLIC_TARGET || 'https://danielgarcia.me/';
 
 const Root = () => {
-    if (DEBUG) {
-        return <Redirect to='/krystel' replace />;
-    }
+    // if (DEBUG) {
+    //     return <Redirect to='/krys' replace />;
+    // }
     return <ExternalRedirect to={TARGET} replace />;
 };
 
+// <KrystelRouter basePath='/krys' />
+
 export const Router = () => (
     <Switch>
-        <Route path='/' component={Root} />
-        <KrystelRouter basePath='/krystel' />
-
-        <Route>404</Route>
+        <Route component={Root} />
     </Switch>
 );
