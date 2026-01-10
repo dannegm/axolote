@@ -75,7 +75,7 @@ export default function LoginForm() {
     const { mutate, error, isPending, isError, isSuccess } = useLoginAction({
         onSuccess: data => {
             setToken(data?.token);
-            navigate('/krystel');
+            navigate('/krys');
         },
         onError: error => {
             console.log(error);

@@ -53,13 +53,13 @@ const MenuContent = ({ className }) => {
     return (
         <div className={cn('flex flex-col gap-2', className)}>
             <div className='flex flex-row items-center justify-evenly'>
-                <MenuItem href='/krystel/cards' label='Cards' demo={demo === 'cards'}>
+                <MenuItem href='/krys/cards' label='Cards' demo={demo === 'cards'}>
                     <BookMarked />
                 </MenuItem>
-                <MenuItem as='a' href='/krystel' label='Another' demo={demo === 'another'} primary>
+                <MenuItem as='a' href='/krys' label='Another' demo={demo === 'another'} primary>
                     <RefreshCcw />
                 </MenuItem>
-                <MenuItem href='/krystel/posts' label='Posts' demo={demo === 'posts'}>
+                <MenuItem href='/krys/posts' label='Posts' demo={demo === 'posts'}>
                     <MessageSquareQuote />
                 </MenuItem>
             </div>
@@ -68,7 +68,7 @@ const MenuContent = ({ className }) => {
                 <div className='flex justify-center'>
                     <Link
                         className='px-3 py-1 bg-black text-white font-pacifico rounded-lg transition-all duration-150 hover:scale-105 active:scale-95'
-                        href='/krystel/secrets'
+                        href='/krys/secrets'
                     >
                         Secrets.
                     </Link>

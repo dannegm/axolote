@@ -14,7 +14,7 @@ export default function CardItem({ item }) {
     return (
         <div className='flex flex-col gap-4 items-start md:w-full py-4 border-t border-gray-200 text-sm'>
             <a
-                href={`/krystel?code=${code}`}
+                href={`/krys?code=${code}`}
                 className='flex-none w-full transition-all duration-150 lg:hover:scale-105 active:scale-95'
             >
                 <GiftCardPreview quote={item.quote} code={code} hidden={!item.show} preventReveal />

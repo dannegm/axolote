@@ -20,7 +20,7 @@ export default function CardsMain({ data = [] }) {
             >
                 <Link
                     className='flex-center size-16 sm:size-12 bg-black text-white rounded-full shadow-lg transition-all duration-150 ease-in-out hover:scale-105 active:scale-95'
-                    href='/krystel/secrets/editor'
+                    href='/krys/secrets/editor'
                 >
                     <BadgePlus />
                 </Link>

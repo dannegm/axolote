@@ -25,22 +25,27 @@ const pages = {
     login: {
         icon: <LockKeyhole />,
         label: 'Login',
-        link: '/krystel/login',
+        link: '/krys/login',
     },
     cards: {
         icon: <BookMarked />,
         label: 'Cards',
-        link: '/krystel/cards',
+        link: '/krys/cards',
     },
     posts: {
         icon: <MessageSquareQuote />,
         label: 'Posts',
-        link: '/krystel/posts',
+        link: '/krys/posts',
     },
     test: {
         icon: <FlaskConical />,
         label: 'Test',
-        link: '/krystel/test',
+        link: '/krys/test',
+    },
+    unavailable: {
+        icon: <SquareDashed />,
+        label: 'App not Available',
+        link: '/krystel',
     },
 };
 
@@ -70,7 +75,7 @@ export default function LogItem({ item, realtime }) {
                     {item.metadata?.code && (
                         <a
                             className='bg-slate-200 hover:bg-slate-700 text-slate-600 hover:text-white flex gap-2 text-xs items-center px-2 font-bold rounded-md transition-all duration-150'
-                            href={`/krystel?code=${item.metadata?.code}`}
+                            href={`/krys?code=${item.metadata?.code}`}
                             target='_blank'
                         >
                             Open in a new tab <ExternalLink size='0.85rem' />
@@ -82,7 +87,7 @@ export default function LogItem({ item, realtime }) {
                 <div className='flex-none w-full'>
                     {item.type !== 'page_view' && item.quote && (
                         <a
-                            href={`/krystel?code=${item.metadata?.code}`}
+                            href={`/krys?code=${item.metadata?.code}`}
                             className='flex-none w-full transition-all duration-150 lg:hover:scale-105 active:scale-95'
                         >
                             <GiftCardPreview

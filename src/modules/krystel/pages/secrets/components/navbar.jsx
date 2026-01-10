@@ -40,14 +40,14 @@ export default function Navbar({ classNames }) {
 
     const navItems = [];
 
-    navItems.push({ name: 'Cards', href: '/krystel/secrets/cards' });
-    navItems.push({ name: 'Tools', href: '/krystel/secrets/tools' });
+    navItems.push({ name: 'Cards', href: '/krys/secrets/cards' });
+    navItems.push({ name: 'Tools', href: '/krys/secrets/tools' });
 
     if (showLogs) {
-        navItems.push({ name: 'Logs', href: '/krystel/secrets/logs' });
+        navItems.push({ name: 'Logs', href: '/krys/secrets/logs' });
     }
 
-    navItems.push({ name: 'Settings', href: '/krystel/secrets/settings' });
+    navItems.push({ name: 'Settings', href: '/krys/secrets/settings' });
 
     return (
         <nav

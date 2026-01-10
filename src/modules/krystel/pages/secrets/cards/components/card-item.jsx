@@ -28,7 +28,7 @@ export default function CardItem({ item }) {
             <div className='flex flex-row gap-4 items-start justify-center w-full'>
                 <a
                     className='bg-slate-200 hover:bg-slate-700 text-slate-600 hover:text-white flex gap-2 text-xs items-center py-1 px-2 font-bold rounded-md transition-all duration-150'
-                    href={`/krystel?code=${code}`}
+                    href={`/krys?code=${code}`}
                     target='_blank'
                 >
                     Open in a new tab <ExternalLink size='0.85rem' />
@@ -39,7 +39,7 @@ export default function CardItem({ item }) {
             </div>
 
             <a
-                href={`/krystel?code=${code}`}
+                href={`/krys?code=${code}`}
                 className='flex-none w-full transition-all duration-150 lg:hover:scale-105 active:scale-95'
             >
                 <GiftCardPreview

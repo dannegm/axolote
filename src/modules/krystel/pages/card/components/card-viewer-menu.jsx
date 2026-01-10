@@ -184,13 +184,13 @@ export default function CardViewerMenu({ className, item }) {
 
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
-                        <a href='/krystel?code=172:*:*:*:*'>
+                        <a href='/krys?code=172:*:*:*:*'>
                             <Award />
                             Easter Eggs
                         </a>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild>
-                        <a href='/krystel?code=230:*:*:*:*'>
+                        <a href='/krys?code=230:*:*:*:*'>
                             <ScrollText />
                             <span className='font-mono font-bold text-rose-500'>#100Reasons</span>
                         </a>

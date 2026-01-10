@@ -7,7 +7,7 @@ import ToastHost from '@/modules/core/components/common/toast-host';
 
 import Menu from './menu';
 
-export default function Layout({ title, children }) {
+export default function Layout({ title, hideMenu = false, children }) {
     useDocumentClassNames({
         root: 'light',
         body: 'antialiased',
@@ -18,7 +18,7 @@ export default function Layout({ title, children }) {
                 {title && <title>{title}</title>}
             </Helmet>
 
-            <Menu />
+            {!hideMenu && <Menu />}
             <ToastHost />
             <BreakpointIndicator />
 

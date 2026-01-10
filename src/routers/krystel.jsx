@@ -14,7 +14,7 @@ import SecretsLogs from '@/modules/krystel/pages/secrets/logs/page';
 import SecretsSettings from '@/modules/krystel/pages/secrets/settings/page';
 
 const SecretsRoot = () => {
-    return <Redirect to='/krystel/secrets/cards' replace />;
+    return <Redirect to='/krys/secrets/cards' replace />;
 };
 
 export const Secrets = ({ basePath }) => (

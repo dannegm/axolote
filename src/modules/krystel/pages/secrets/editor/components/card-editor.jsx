@@ -59,7 +59,7 @@ export default function CardEditor() {
     const createQuote = useCreateQuoteAction({
         onSuccess: () => {
             handleReset();
-            navigate('/krystel/secrets/cards');
+            navigate('/krys/secrets/cards');
         },
     });
 

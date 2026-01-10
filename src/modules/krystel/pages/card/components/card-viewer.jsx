@@ -55,7 +55,7 @@ export default function CardViewer({ code, data }) {
     const [, setCodeQuery] = useQueryState('code', parseAsString.withDefault(code));
 
     const { configs } = extractConfigsAndContent(data?.quote);
-    const refreshUrl = configs?.target ?? '/krystel';
+    const refreshUrl = configs?.target ?? '/krys';
 
     const quote = buildQuoteSettings({ code, data });
     const url = `${getBaseUrl()}?code=${quote.settings}`;

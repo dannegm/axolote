@@ -14,13 +14,13 @@ const settingsList = {
         key: 'settings:skip_actions',
         label: 'Skip Actions',
         defaultValue: false,
-        path: '/krystel/secrets',
+        path: '/krys/secrets',
     },
     'settings:logs:realtime': {
         key: 'settings:logs:realtime',
         label: 'Realtime Logs',
         defaultValue: false,
-        path: '/krystel/secrets/logs',
+        path: '/krys/secrets/logs',
     },
 };
 
@@ -61,10 +61,10 @@ export default function QuickSettings({ classNames }) {
                 ))}
             </div>
 
-            {location !== '/krystel/secrets/editor' && (
+            {location !== '/krys/secrets/editor' && (
                 <div className='w-full'>
                     <Button className='w-full' size='lg' asChild>
-                        <Link href='/krystel/secrets/editor'>
+                        <Link href='/krys/secrets/editor'>
                             <BadgePlus /> Crear nueva tarjeta
                         </Link>
                     </Button>

@@ -14,7 +14,13 @@ export default function usePageViewAction({ page }) {
     });
 
     return useDebouncedCallback(() => {
+        console.log('usePageViewAction called with page:', page, {
+            skipActions,
+            skipActionsSettings,
+        });
         if (skipActions || skipActionsSettings) return;
+
+        console.log('Sending page view action for page:', page);
         const userAgent = window.navigator.userAgent;
         mutation.mutate({ page, userAgent });
     }, 1000);
