@@ -6,7 +6,7 @@ export default function KrystelProviders({ children }) {
     return (
         <Providers>
             <ToastProvider>
-                <OverlaysProvider allowRoutes={['/krystel']}>{children}</OverlaysProvider>
+                <OverlaysProvider allowRoutes={['/krys']}>{children}</OverlaysProvider>
             </ToastProvider>
         </Providers>
     );

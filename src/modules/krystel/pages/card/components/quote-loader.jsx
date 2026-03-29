@@ -37,7 +37,7 @@ export default function QuoteLoader() {
     });
 
     const handleError = () => {
-        window.location.href = '/krystel';
+        window.location.href = '/krys';
     };
 
     return (

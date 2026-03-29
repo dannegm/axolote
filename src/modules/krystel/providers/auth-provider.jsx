@@ -43,7 +43,7 @@ export default function AuthProvider({ children }) {
     }
 
     if (!token || isError) {
-        return <Redirect to='/krystel/login' replace />;
+        return <Redirect to='/krys/login' replace />;
     }
 
     return children;

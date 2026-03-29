@@ -84,7 +84,7 @@ export default function PostEditorHandler({
                         'flex-center gap-2 mx-auto py-2 w-fit text-sm [&_svg]:size-4',
                         classNames?.button,
                     )}
-                    href='/krystel/posts'
+                    href='/krys/posts'
                 >
                     ✨ Llévame.
                 </Button>
