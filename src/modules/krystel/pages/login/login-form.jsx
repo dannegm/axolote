@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'wouter';
+import { useNavigate } from '@tanstack/react-router';
 import { useMutation } from '@tanstack/react-query';
 import { ArrowRight, Loader2 } from 'lucide-react';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
@@ -66,7 +66,7 @@ const errors = {
 export default function LoginForm() {
     const inputOtpSlotClassname = 'size-16 text-xl';
 
-    const [, navigate] = useLocation();
+    const navigate = useNavigate();
     const [, setToken] = useLocalStorage('app:tracker', null);
 
     const [code, setCode] = useState('');
@@ -75,7 +75,7 @@ export default function LoginForm() {
     const { mutate, error, isPending, isError, isSuccess } = useLoginAction({
         onSuccess: data => {
             setToken(data?.token);
-            navigate('/krys');
+            navigate({ to: '/krys' });
         },
         onError: error => {
             console.log(error);

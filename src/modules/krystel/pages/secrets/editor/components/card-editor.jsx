@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'wouter';
+import { useNavigate } from '@tanstack/react-router';
 
 import { CircleDashed, Circle } from 'lucide-react';
 
@@ -23,7 +23,7 @@ import { buildConfigs } from '@/modules/krystel/helpers/strings';
 
 export default function CardEditor() {
     // Hooks
-    const [, navigate] = useLocation();
+    const navigate = useNavigate();
     const { saveDraft } = useDrafts('editor:drafts');
 
     // Refs
@@ -59,7 +59,7 @@ export default function CardEditor() {
     const createQuote = useCreateQuoteAction({
         onSuccess: () => {
             handleReset();
-            navigate('/krys/secrets/cards');
+            navigate({ to: '/krys/secrets/cards' });
         },
     });
 

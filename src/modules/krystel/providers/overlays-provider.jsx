@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
-import { useLocation } from 'wouter';
+import { useRouterState } from '@tanstack/react-router';
 import { useQueryState, parseAsBoolean } from 'nuqs';
 
 import { CloudDrizzle, CloudLightning, CloudRain, CloudSnow, Sun } from 'lucide-react';
@@ -46,7 +46,7 @@ const defaultIntensity = {
 
 export default function OverlaysProvider({ allowRoutes = [], children }) {
     const [debug] = useQueryState('debug-overlay', parseAsBoolean.withDefault(false));
-    const [location] = useLocation();
+    const location = useRouterState({ select: s => s.location.pathname });
     const { raining, snowing, sleet, thunder, intensity, data } = useWeather();
 
     const $balloons = useRef();

@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
-import { Redirect } from 'wouter';
+import { useNavigate } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
 
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
-import Loader from '@/modules/core/components/common/loader';
 
 const HOSTNAME = 'https://endpoints.hckr.mx/quotes/krystel';
 
@@ -27,6 +26,7 @@ const verifyAuthAction =
 
 export default function AuthProvider({ children }) {
     const [token, setToken] = useLocalStorage('app:tracker', null);
+    const navigate = useNavigate();
 
     const { isLoading, isError } = useQuery({
         queryKey: ['cards', 'posts'],
@@ -38,12 +38,18 @@ export default function AuthProvider({ children }) {
         if (isError) setToken(null);
     }, []);
 
+    useEffect(() => {
+        if (!isLoading && (!token || isError)) {
+            navigate({ to: '/krys/login', replace: true });
+        }
+    }, [isLoading, token, isError]);
+
     if (isLoading) {
         return <></>;
     }
 
     if (!token || isError) {
-        return <Redirect to='/krys/login' replace />;
+        return null;
     }
 
     return children;

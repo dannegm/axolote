@@ -1,4 +1,4 @@
-import { useLocation, Link } from 'wouter';
+import { Link, useRouterState } from '@tanstack/react-router';
 import { BadgePlus } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
@@ -34,7 +34,7 @@ const SwitchOption = ({ id, label, checked, onCheckedChange }) => {
 };
 
 export default function QuickSettings({ classNames }) {
-    const [location] = useLocation();
+    const location = useRouterState({ select: s => s.location.pathname });
     const [showQuickSettings] = useSettings('settings:show_quick_settings', false);
 
     const initialSettings = Object.values(settingsList).reduce((acc, { key, defaultValue }) => {
@@ -64,7 +64,7 @@ export default function QuickSettings({ classNames }) {
             {location !== '/krys/secrets/editor' && (
                 <div className='w-full'>
                     <Button className='w-full' size='lg' asChild>
-                        <Link href='/krys/secrets/editor'>
+                        <Link to='/krys/secrets/editor'>
                             <BadgePlus /> Crear nueva tarjeta
                         </Link>
                     </Button>

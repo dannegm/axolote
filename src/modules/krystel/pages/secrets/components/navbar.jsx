@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link } from 'wouter';
+import { Link } from '@tanstack/react-router';
 
 import { cn } from '@/modules/core/helpers/utils';
 import useSettings from '@/modules/core/hooks/use-settings';
@@ -17,16 +17,14 @@ const useClientEvents = () => {
 const NavLink = ({ className, href, children }) => {
     return (
         <Link
-            className={active =>
-                cn(
-                    'px-3 py-1 rounded-sm font-bold text-sm uppercase transition-all duration-150 cursor-pointer',
-                    'hover:bg-white hover:text-black',
-                    'active:scale-95',
-                    { 'bg-white text-black': active },
-                    className,
-                )
-            }
-            href={href}
+            className={cn(
+                'px-3 py-1 rounded-sm font-bold text-sm uppercase transition-all duration-150 cursor-pointer',
+                'hover:bg-white hover:text-black',
+                'active:scale-95',
+                className,
+            )}
+            activeProps={{ className: 'bg-white text-black' }}
+            to={href}
         >
             {children}
         </Link>

@@ -1,4 +1,4 @@
-import { Link } from 'wouter';
+import { Link } from '@tanstack/react-router';
 import { BadgePlus } from 'lucide-react';
 
 import { cn } from '@/modules/core/helpers/utils';
@@ -20,7 +20,7 @@ export default function CardsMain({ data = [] }) {
             >
                 <Link
                     className='flex-center size-16 sm:size-12 bg-black text-white rounded-full shadow-lg transition-all duration-150 ease-in-out hover:scale-105 active:scale-95'
-                    href='/krys/secrets/editor'
+                    to='/krys/secrets/editor'
                 >
                     <BadgePlus />
                 </Link>

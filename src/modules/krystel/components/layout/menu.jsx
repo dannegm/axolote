@@ -1,4 +1,4 @@
-import { Link } from 'wouter';
+import { Link } from '@tanstack/react-router';
 import { useQueryState, parseAsBoolean } from 'nuqs';
 import { ArrowDown, BookMarked, Ellipsis, MessageSquareQuote, RefreshCcw } from 'lucide-react';
 
@@ -13,14 +13,15 @@ const MenuItem = ({ as = 'link', primary, href, label, demo, children }) => {
     };
 
     const Component = elements[as] || elements['link'];
+    const linkProps = as === 'a' ? { href } : { to: href };
 
     return (
-        <Component className={cn('block w-24')} href={href}>
+        <Component className={cn('block w-24')} {...linkProps}>
             {demo && (
                 <div
                     className={cn(
                         'animate-in fade-in-0 duration-300 ease-in',
-                        'absolute -translate-y-[4rem] flex flex-col items-center gap-2 w-24 text-center',
+                        'absolute -translate-y-16 flex flex-col items-center gap-2 w-24 text-center',
                     )}
                 >
                     <span className='px-2 py-1 bg-black text-white text-sm font-noto rounded-full drop-shadow-xs'>
@@ -68,7 +69,7 @@ const MenuContent = ({ className }) => {
                 <div className='flex justify-center'>
                     <Link
                         className='px-3 py-1 bg-black text-white font-pacifico rounded-lg transition-all duration-150 hover:scale-105 active:scale-95'
-                        href='/krys/secrets'
+                        to='/krys/secrets'
                     >
                         Secrets.
                     </Link>
@@ -107,7 +108,7 @@ export default function Menu() {
                 onClick={closeMenu}
             >
                 <div
-                    className='flex flex-col items-center bg-white rounded-t-lg cursor-default pointer-events-auto shadow-[0px_-3px_16px_4px_rgba(0,_0,_0,_0.1)]'
+                    className='flex flex-col items-center bg-white rounded-t-lg cursor-default pointer-events-auto shadow-[0px_-3px_16px_4px_rgba(0,0,0,0.1)]'
                     onClick={ev => ev.stopPropagation()}
                 >
                     <button

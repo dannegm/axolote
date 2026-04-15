@@ -1,25 +1,32 @@
-import { Route, Switch, Redirect } from 'wouter';
+import { createRouter, createRoute, createRootRoute, Outlet, redirect } from '@tanstack/react-router';
+
 import ExternalRedirect from '@/modules/core/components/common/external-redirect';
-import Unavailable from '@/modules/krystel/pages/unavailable/page';
 
-import { KrystelRouter } from './krystel';
+import { createKrystelRoutes } from './krystel';
+import { createKrysRoutes } from './krys';
 
-export const DEBUG = import.meta.env.NEXT_PUBLIC_DEBUG === 'true';
-export const TARGET = import.meta.env.NEXT_PUBLIC_TARGET || 'https://danielgarcia.me/';
+const DEBUG = import.meta.env.NEXT_PUBLIC_DEBUG === 'true';
+const TARGET = import.meta.env.NEXT_PUBLIC_TARGET || 'https://danielgarcia.me/';
 
-const Root = () => {
-    if (DEBUG) {
-        return <Redirect to='/krys' replace />;
-    }
-    return <ExternalRedirect to={TARGET} replace />;
-};
+const rootRoute = createRootRoute({
+    component: () => <Outlet />,
+});
 
-export const Router = () => (
-    <Switch>
-        <Route path='/' component={Root} />
-        <Route path='/krystel' component={Unavailable} />
-        <KrystelRouter basePath='/krys' />
+const indexRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: '/',
+    beforeLoad: () => {
+        if (DEBUG) {
+            throw redirect({ to: '/krys', replace: true });
+        }
+    },
+    component: () => <ExternalRedirect to={TARGET} />,
+});
 
-        <Route>404</Route>
-    </Switch>
-);
+const routeTree = rootRoute.addChildren([
+    indexRoute,
+    createKrystelRoutes(rootRoute),
+    createKrysRoutes(rootRoute),
+]);
+
+export const router = createRouter({ routeTree });

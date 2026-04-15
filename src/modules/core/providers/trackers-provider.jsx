@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { useLocation, useSearch } from 'wouter';
+import { useRouterState } from '@tanstack/react-router';
 
 import { umami } from '@/modules/core/services/umami';
 
 export const TrackersProvider = ({ children }) => {
-    const [pathname] = useLocation();
-    const searchString = useSearch();
+    const pathname = useRouterState({ select: s => s.location.pathname });
+    const searchString = useRouterState({ select: s => s.location.searchStr });
 
     useEffect(() => {
         umami.track({
