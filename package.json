@@ -88,8 +88,7 @@
         "use-sound": "^5.0.0",
         "vaul": "^1.1.2",
         "vite": "^7.3.2",
-        "wouter": "^3.6.0",
-        "z": "^1.0.9"
+        "wouter": "^3.6.0"
     },
     "resolutions": {
         "@xmldom/xmldom": "^0.9.9",
