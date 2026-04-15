@@ -69,7 +69,7 @@ export default function AllReasonsLove() {
                                     'block flex-none w-4 h-4 bg-indigo-100 box-border border border-indigo-300 rounded-sm text-green-500',
                                 )}
                             >
-                                <Check className='-mt-[6px] -ml-[1px]' strokeWidth={3} />
+                                <Check className='-mt-1.5 -ml-px' strokeWidth={3} />
                             </div>
                             <span className={cn('font-delius text-balance leading-4')}>
                                 <span className='mr-1 font-mono font-bold text-rose-500'>
@@ -98,7 +98,7 @@ export default function AllReasonsLove() {
                                     )}
                                 >
                                     {item.discovered && (
-                                        <Check className='-mt-[6px] -ml-[1px]' strokeWidth={3} />
+                                        <Check className='-mt-1.5 -ml-px' strokeWidth={3} />
                                     )}
                                 </div>
                                 <span
