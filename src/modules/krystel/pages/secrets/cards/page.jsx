@@ -6,7 +6,7 @@ import useSettings from '@/modules/core/hooks/use-settings';
 import SecretsLayout from '@/modules/krystel/components/layout/secrets-layout';
 import Loader from '@/modules/core/components/common/loader';
 import CardsMain from './components/cards-main';
-import { secretCardsQuery } from '@/modules/krystel/queries/krystel-queries';
+import { secretCardsQuery } from '@/modules/krystel/queries/queries';
 
 export default function Page() {
     const [token] = useLocalStorage('app:tracker', null);

@@ -9,7 +9,7 @@ import PageViewAction from '@/modules/krystel/components/common/page-view-action
 import TrackAction from '@/modules/krystel/components/common/track-action';
 import Loader from '@/modules/core/components/common/loader';
 import CardsMain from './components/cards-main';
-import { cardsQuery } from '@/modules/krystel/queries/krystel-queries';
+import { cardsQuery } from '@/modules/krystel/queries/queries';
 
 export default function Page() {
     const [token] = useLocalStorage('app:tracker', null);

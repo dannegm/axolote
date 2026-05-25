@@ -3,7 +3,7 @@ import { useNavigate } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
 
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
-import { verifyAuthQuery } from '@/modules/krystel/queries/krystel-queries';
+import { verifyAuthQuery } from '@/modules/krystel/queries/queries';
 
 export default function AuthProvider({ children }) {
     const [token, setToken] = useLocalStorage('app:tracker', null);

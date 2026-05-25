@@ -7,7 +7,7 @@ import useSettings from '@/modules/core/hooks/use-settings';
 
 import Layout from '@/modules/krystel/components/layout/layout';
 import CardViewer from './components/card-viewer';
-import { pickQuoteQuery } from '@/modules/krystel/queries/krystel-queries';
+import { pickQuoteQuery } from '@/modules/krystel/queries/queries';
 
 const extractQuoteId = code => {
     if (!code) return null;

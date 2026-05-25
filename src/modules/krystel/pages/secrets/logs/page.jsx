@@ -6,7 +6,7 @@ import useSettings from '@/modules/core/hooks/use-settings';
 import SecretsLayout from '@/modules/krystel/components/layout/secrets-layout';
 import Loader from '@/modules/core/components/common/loader';
 import LogsMain from './components/logs-main';
-import { logsQuery } from '@/modules/krystel/queries/krystel-queries';
+import { logsQuery } from '@/modules/krystel/queries/queries';
 
 export default function Logs() {
     const [token] = useLocalStorage('app:tracker', null);

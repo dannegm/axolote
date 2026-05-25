@@ -8,7 +8,7 @@ import PageViewAction from '@/modules/krystel/components/common/page-view-action
 import TrackAction from '@/modules/krystel/components/common/track-action';
 import Loader from '@/modules/core/components/common/loader';
 import PostsMain from './components/posts-main';
-import { postsQuery } from '@/modules/krystel/queries/krystel-queries';
+import { postsQuery } from '@/modules/krystel/queries/queries';
 
 export default function Page() {
     const [token] = useLocalStorage('app:tracker', null);
