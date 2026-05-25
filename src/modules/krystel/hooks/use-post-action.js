@@ -11,10 +11,12 @@ export default function usePostAction({ action, settings = 'none' }) {
 
     const mutation = useMutation({ mutationFn: vars => clientApi().postAction(vars) });
 
-    return useDebouncedCallback(() => {
+    const trigger = useDebouncedCallback(() => {
         if (skipActions || skipActionsSettings) return;
         const [quoteId] = settings.split(':');
         const userAgent = window.navigator.userAgent;
         mutation.mutate({ action, quoteId, settings, userAgent });
     }, 1000);
+
+    return { trigger, ...mutation };
 }

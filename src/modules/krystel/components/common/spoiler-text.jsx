@@ -12,7 +12,7 @@ export default function SpoilerText({ inPreview = false, preventReveal = false, 
     const [hidden, setHidden] = useState(true);
 
     const quote = useQuote();
-    const postReveal = usePostAction({ action: 'reveal', settings: quote?.settings });
+    const { trigger: postReveal } = usePostAction({ action: 'reveal', settings: quote?.settings });
 
     const toggleSpoiler = ev => {
         if (preventReveal) return;

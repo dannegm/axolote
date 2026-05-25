@@ -81,8 +81,8 @@ export default function GiftCard({
     const firstAppearance = useFirstAppearance(id);
 
     useTrackAction();
-    const postView = usePostAction({ action: 'view', settings });
-    const postReadCompleteAction = usePostAction({ action: 'read_complete', settings });
+    const { trigger: postView } = usePostAction({ action: 'view', settings });
+    const { trigger: postReadCompleteAction } = usePostAction({ action: 'read_complete', settings });
 
     const elevenEleven = isElevenEleven();
     const threeInTheMorning = isThreeInTheMorning();

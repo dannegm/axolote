@@ -7,7 +7,7 @@ import { heartsExplosion } from '@/modules/krystel/helpers/particles';
 export const LikeHandler = ({ settings, type = 'single', children }) => {
     const [playPop] = useSound('/sounds/pop.mp3');
 
-    const postLike = usePostAction({ action: 'like', settings });
+    const { trigger: postLike } = usePostAction({ action: 'like', settings });
 
     const handleButtonClick = ev => {
         ev.preventDefault();

@@ -30,7 +30,7 @@ export default function BalloonsText({ children }) {
 
     const quote = useQuote();
 
-    const postBalloons = usePostAction({
+    const { trigger: postBalloons } = usePostAction({
         action: 'balloons',
         settings: quote.settings,
     });

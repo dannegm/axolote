@@ -31,16 +31,16 @@ export default function ReasonsLove() {
     const { showToast } = useToast();
     const quote = useQuote();
 
-    const startedAction = usePostAction({
+    const { trigger: startedAction } = usePostAction({
         action: 'Start Discovering Reasons',
         settings: quote?.settings,
     });
-    const finishedAction = usePostAction({
+    const { trigger: finishedAction } = usePostAction({
         action: 'All Reasons Discovered',
         settings: quote?.settings,
     });
 
-    const discoverAction = usePostAction({
+    const { trigger: discoverAction } = usePostAction({
         action: `Reason ${currentReason + 1}`,
         settings: quote?.settings,
     });

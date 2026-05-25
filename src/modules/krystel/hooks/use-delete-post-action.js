@@ -3,10 +3,8 @@ import { clientApi } from '@/modules/krystel/services/client-api';
 
 export default function useDeletePostAction() {
     const queryClient = useQueryClient();
-    const mutation = useMutation({
+    return useMutation({
         mutationFn: postId => clientApi().deletePost(postId),
         onSettled: () => queryClient.invalidateQueries({ queryKey: ['posts'] }),
     });
-
-    return postId => mutation.mutate(postId);
 }

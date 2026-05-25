@@ -20,11 +20,11 @@ export default function PostItemMenu({ className, item }) {
     const destroyPost = useDestroyPostAction();
 
     const handleDelete = () => {
-        deletePost(item.id);
+        deletePost.mutate(item.id);
     };
 
     const handleDestroy = () => {
-        destroyPost(item.id);
+        destroyPost.mutate(item.id);
     };
 
     return (

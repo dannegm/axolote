@@ -21,11 +21,11 @@ export default function WouldYouRather({ a = 'esto', b = 'esto', _a, _b }) {
     const { discover } = useEasterEggs();
     const quote = useQuote();
 
-    const postSelectA = usePostAction({
+    const { trigger: postSelectA } = usePostAction({
         action: 'wyr_select_a',
         settings: quote.settings,
     });
-    const postSelectB = usePostAction({
+    const { trigger: postSelectB } = usePostAction({
         action: 'wyr_select_b',
         settings: quote.settings,
     });

@@ -93,7 +93,7 @@ export default function Valentine({}) {
     const { summonBalloons } = useOverlays();
 
     const quote = useQuote();
-    const postSaidYes = usePostAction({ action: 'said_yes', settings: quote?.settings });
+    const { trigger: postSaidYes } = usePostAction({ action: 'said_yes', settings: quote?.settings });
 
     const handleYes = () => {
         setSlide(finalSlide);

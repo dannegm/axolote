@@ -11,7 +11,7 @@ export default function usePageViewAction({ page }) {
 
     const mutation = useMutation({ mutationFn: vars => clientApi().postPageView(vars) });
 
-    return useDebouncedCallback(() => {
+    const trigger = useDebouncedCallback(() => {
         console.log('usePageViewAction called with page:', page, { skipActions, skipActionsSettings });
         if (skipActions || skipActionsSettings) return;
 
@@ -19,4 +19,6 @@ export default function usePageViewAction({ page }) {
         const userAgent = window.navigator.userAgent;
         mutation.mutate({ page, userAgent });
     }, 1000);
+
+    return { trigger, ...mutation };
 }

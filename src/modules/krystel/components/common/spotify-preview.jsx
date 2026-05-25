@@ -74,7 +74,7 @@ const useGetTrackInfo = trackId => {
 
 export default function SpotifyPreview({ uri, preview }) {
     const quote = useQuote();
-    const postPlay = usePostAction({ action: 'play', settings: quote?.settings });
+    const { trigger: postPlay } = usePostAction({ action: 'play', settings: quote?.settings });
 
     const { trackId } = parseSpotifyUri(uri);
     const { data } = useGetTrackInfo(trackId);

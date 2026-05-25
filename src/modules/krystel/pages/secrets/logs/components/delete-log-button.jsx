@@ -8,7 +8,7 @@ export default function DeleteLogButton({ id, onDelete }) {
 
     const handleDelete = () => {
         onDelete?.();
-        deleteLog(id);
+        deleteLog.mutate(id);
     };
 
     return (

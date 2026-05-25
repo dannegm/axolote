@@ -18,7 +18,7 @@ export default function SnowText({ children }) {
     const { show } = useOverlays();
 
     const quote = useQuote();
-    const postSnow = usePostAction({ action: 'snow', settings: quote?.settings });
+    const { trigger: postSnow } = usePostAction({ action: 'snow', settings: quote?.settings });
 
     const handleClick = ev => {
         ev.preventDefault();
