@@ -178,6 +178,12 @@ Tailwind CSS 4.1 loaded via `@tailwindcss/vite`. Component variants use `class-v
 - **Tailwind scale**: always use Tailwind's built-in scale values instead of arbitrary bracket values. Tailwind's spacing scale is `1 = 0.25rem = 4px`, so `size-4` = 16px, `size-4.5` = 18px, `size-6` = 24px, etc. Only fall back to `size-[X]` when the value genuinely has no equivalent on the scale.
 - **Dynamic Tailwind values**: Tailwind can't generate classes from runtime values, so pass them as CSS custom properties via `style` and reference them with Tailwind's variable syntax. Example: `<div className="w-(--panel-width)" style={{ '--panel-width': '22.5rem' }} />`. Use kebab-case for the variable name and set it on the element (or a parent) that needs it.
 
+## Mobile-first design
+
+This app is designed primarily for mobile use. Both the card viewer and the admin panel — especially the editor — are built to be fully functional and comfortable on a small screen. The editor in particular is a deliberate UX engineering achievement: a rich card authoring tool with live preview, tabbed config UI, drafts, and publish controls, all ergonomic on mobile. When making UI changes anywhere in this project, mobile layout and touch usability are the primary constraints, not desktop.
+
+---
+
 ## Card viewer
 
 **Entry:** `src/modules/krystel/pages/card/page.jsx`
