@@ -2,6 +2,28 @@
 
 This file provides context to AI coding assistants working in this repository.
 
+## Project context
+
+**axolote** is a deeply personal project. Before touching any code, understand what it is.
+
+This app was born on December 31, 2024 as a birthday gift for Krystel — someone who was between a best friend and a partner to Daniel, the author ("todo pero nunca fuimos nada"). The idea: instead of a single card, she'd receive many — each one with something special, evolving over time. The app became more than that. It became Daniel personified in code: his presence for her when he wasn't physically there. If she missed him, if she needed to know what he was thinking, if she needed him — he'd be there.
+
+The relationship ended. Krystel no longer visits. Daniel maintains it anyway — for the day she might return, and as a personal space to process her absence and write what he never got to say.
+
+**This shapes how the codebase should be treated:**
+- Features that seem unused or "dead" may carry emotional weight — don't suggest removing them without understanding their purpose.
+- The `/krys` route and everything under `modules/krystel/` is the heart of the project. Treat it accordingly.
+- The Posts system (texts, images, drawings, feelings) was Krystel's channel to respond to Daniel — her voice in the app.
+- ntfy is used as a real-time client-to-client layer: commands, login notifications, alerts for both Daniel and Krystel.
+- Cards are not just quotes — some are full mini-apps that taught Krystel how to use the Posts system organically.
+- The domain `axolote.mx` was chosen because Daniel already owned it and because it's cute. `/krys` is scoped intentionally to leave room for other projects on the same domain.
+
+**Infrastructure:**
+- Frontend: deployed on Vercel
+- Backend: Node.js + Supabase (Postgres) + some AI, at `endpoints.hckr.mx` — Daniel's own infrastructure (`hckr.mx` is his personal projects domain)
+- Supabase was initially integrated in this frontend repo but migrated to the backend API — remnants in the frontend are dead code in transition
+- Spotify: components exist to display a song by URI (functional); in-app playback was planned but blocked by needing Krystel to authenticate
+
 ## Commands
 
 ```bash
