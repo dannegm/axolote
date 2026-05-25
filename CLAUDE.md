@@ -29,9 +29,9 @@ src/
     shadcn/          # Radix UI + Tailwind component library
 ```
 
-**`modules/core`** — reusable infrastructure: custom hooks (`useSettings`, `useLocalStorage`, `useAsync`), context providers (TanStack Query, nuqs), service wrappers (Supabase, Umami, ntfy), helper utilities (dates, arrays, strings, Tailwind, colors), and the shared `DataLoader` component.
+**`modules/core`** — reusable infrastructure: custom hooks (`useSettings`, `useLocalStorage`, `useAsync`), context providers (TanStack Query, nuqs), service wrappers (Supabase, Umami, ntfy), and helper utilities (dates, arrays, strings, Tailwind, colors).
 
-**`modules/krystel`** — the main feature: pages, feature components, hooks, actions (API calls), providers (auth, overlays, quote), services (quotes API), and helpers (themes, feelings, particle effects).
+**`modules/krystel`** — the main feature: pages, feature components, hooks, queries (API factories), providers (auth, overlays, quote), services (quotes API), and helpers (themes, feelings, particle effects).
 
 **`modules/shadcn`** — pre-built Radix UI + Tailwind components; treat as a vendored library.
 
@@ -61,14 +61,26 @@ Routes are defined with `createRoute()` in `src/routers/`. Key structure:
 
 No global state store. State is layered:
 
-1. **TanStack Query** — server state and caching. All data fetching goes through `DataLoader` (a wrapper component around `useQuery`) or directly via `useQuery`. Query keys follow patterns like `['cards']`, `['quotes']`.
+1. **TanStack Query** — server state and caching. All data fetching uses `useQuery` with query factory functions from `modules/krystel/queries/`. Query keys follow patterns like `['cards']`, `['quotes']`.
 2. **React Context** — `AuthProvider` (token + login redirect), `OverlaysProvider` (modals), `QuoteProvider`, `ToastProvider`. These are stacked in `KrystelProviders`.
 3. **nuqs** — URL query params as state, synced with TanStack Router. Used for filter/display options (`code`, `skip-actions`, etc.).
 4. **`useLocalStorage`** — persistent client state. Auth token stored under `'app:tracker'`; settings under `'settings:*'` keys accessed via `useSettings()`.
 
-### Actions
+### Queries
 
-API calls live in `modules/krystel/actions/` as standalone async functions (e.g., `createQuoteAction.js`, `deletePostAction.js`). These are called from hooks or components — not co-located with query definitions.
+Data fetching uses **query factory functions** in `modules/krystel/queries/krystel-queries.js`. Each factory takes required params plus `...options` (spread last so TanStack Query options like `retry`, `refetchInterval`, etc. pass through), and returns the full options object for `useQuery`:
+
+```js
+export const cardsQuery = ({ skipActions, token, ...options }) => ({
+    ...options,
+    queryKey: ['cards'],
+    queryFn: async () => { ... },
+});
+
+const { data, isLoading } = useQuery(cardsQuery({ skipActions, token, retry: false }));
+```
+
+Mutation hooks (`modules/krystel/hooks/use-*-action.js`) inline their `mutationFn` fetch logic directly — no separate action files.
 
 ### Environment variables
 

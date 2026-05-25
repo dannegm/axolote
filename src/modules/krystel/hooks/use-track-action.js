@@ -4,7 +4,8 @@ import { useMutation } from '@tanstack/react-query';
 
 import useSettings from '@/modules/core/hooks/use-settings';
 import useFingerprint from '@/modules/core/hooks/use-fingerprint';
-import { trackAction } from '@/modules/krystel/actions/trackAction';
+
+const HOSTNAME = 'https://endpoints.hckr.mx/quotes/krystel';
 
 export default function useTrackAction() {
     if (typeof window === 'undefined') return;
@@ -13,7 +14,14 @@ export default function useTrackAction() {
     const [skipActions] = useQueryState('skip-actions', parseAsBoolean.withDefault(false));
 
     const mutation = useMutation({
-        mutationFn: trackAction,
+        mutationFn: async ({ sid, referrer, userAgent = 'unknown' }) => {
+            const token = JSON.parse(localStorage.getItem('app:tracker'));
+            await fetch(`${HOSTNAME}/track?sid=${sid}&ua=${userAgent}`, {
+                method: 'POST',
+                referrer,
+                headers: { 'x-dnn-tracker': token },
+            });
+        },
     });
 
     const registerSession = () => {

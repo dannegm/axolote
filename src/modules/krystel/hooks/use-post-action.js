@@ -3,14 +3,22 @@ import { useMutation } from '@tanstack/react-query';
 
 import useSettings from '@/modules/core/hooks/use-settings';
 import useDebouncedCallback from '@/modules/core/hooks/use-debounced-callback';
-import { postAction } from '@/modules/krystel/actions/postAction';
+
+const HOSTNAME = 'https://endpoints.hckr.mx/quotes/krystel';
 
 export default function usePostAction({ action, settings = 'none' }) {
     const [skipActionsSettings] = useSettings('settings:skip_actions', false);
     const [skipActions] = useQueryState('skip-actions', parseAsBoolean.withDefault(false));
 
     const mutation = useMutation({
-        mutationFn: postAction,
+        mutationFn: async ({ action: act, quoteId, settings: s, userAgent = 'unknown' }) => {
+            const token = JSON.parse(localStorage.getItem('app:tracker'));
+            const resp = await fetch(`${HOSTNAME}/${quoteId}/action/${act}?code=${s}&ua=${userAgent}`, {
+                method: 'POST',
+                headers: { 'x-dnn-tracker': token },
+            });
+            return resp.json();
+        },
     });
 
     return useDebouncedCallback(() => {

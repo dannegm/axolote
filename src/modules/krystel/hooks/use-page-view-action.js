@@ -3,14 +3,23 @@ import { useMutation } from '@tanstack/react-query';
 
 import useSettings from '@/modules/core/hooks/use-settings';
 import useDebouncedCallback from '@/modules/core/hooks/use-debounced-callback';
-import { postPageViewAction } from '@/modules/krystel/actions/postPageViewAction';
+
+const HOSTNAME = 'https://endpoints.hckr.mx/quotes/krystel';
 
 export default function usePageViewAction({ page }) {
     const [skipActionsSettings] = useSettings('settings:skip_actions', false);
     const [skipActions] = useQueryState('skip-actions', parseAsBoolean.withDefault(false));
 
     const mutation = useMutation({
-        mutationFn: postPageViewAction,
+        mutationFn: async ({ page: p, userAgent = 'unknown' }) => {
+            const token = JSON.parse(localStorage.getItem('app:tracker'));
+            const resp = await fetch(`${HOSTNAME}/none/action/page_view?ua=${userAgent}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'x-dnn-tracker': token },
+                body: JSON.stringify({ page: p }),
+            });
+            return resp.json();
+        },
     });
 
     return useDebouncedCallback(() => {

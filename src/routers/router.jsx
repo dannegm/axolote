@@ -1,4 +1,6 @@
 import { createRouter, createRoute, createRootRoute, Outlet, redirect } from '@tanstack/react-router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { NuqsAdapter } from 'nuqs/adapters/tanstack-router';
 
 import ExternalRedirect from '@/modules/core/components/common/external-redirect';
 
@@ -8,8 +10,16 @@ import { createKrysRoutes } from './krys';
 const DEBUG = import.meta.env.NEXT_PUBLIC_DEBUG === 'true';
 const TARGET = import.meta.env.NEXT_PUBLIC_TARGET || 'https://danielgarcia.me/';
 
+const queryClient = new QueryClient();
+
 const rootRoute = createRootRoute({
-    component: () => <Outlet />,
+    component: () => (
+        <QueryClientProvider client={queryClient}>
+            <NuqsAdapter>
+                <Outlet />
+            </NuqsAdapter>
+        </QueryClientProvider>
+    ),
 });
 
 const indexRoute = createRoute({

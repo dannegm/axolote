@@ -1,10 +1,18 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deletePostAction } from '../actions/deletePostAction';
+
+const HOSTNAME = 'https://endpoints.hckr.mx/quotes';
 
 export default function useDeletePostAction() {
     const queryClient = useQueryClient();
     const mutation = useMutation({
-        mutationFn: deletePostAction,
+        mutationFn: async postId => {
+            const token = JSON.parse(localStorage.getItem('app:tracker'));
+            const resp = await fetch(`${HOSTNAME}/krystel/posts/${postId}`, {
+                method: 'DELETE',
+                headers: { 'x-dnn-tracker': token },
+            });
+            return resp.json();
+        },
         onSettled: () => queryClient.invalidateQueries({ queryKey: ['posts'] }),
     });
 

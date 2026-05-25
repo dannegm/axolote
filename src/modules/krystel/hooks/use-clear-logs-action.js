@@ -1,11 +1,18 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import useLocalStorage from '@/modules/core/hooks/use-local-storage';
-import { clearLogsAction } from '@/modules/krystel/actions/clearLogsAction';
+
+const HOSTNAME = 'https://endpoints.hckr.mx/quotes/krystel';
 
 export default function useClearLogsAction() {
     const queryClient = useQueryClient();
     const mutation = useMutation({
-        mutationFn: clearLogsAction({ token }),
+        mutationFn: async () => {
+            const token = JSON.parse(localStorage.getItem('app:tracker'));
+            const resp = await fetch(`${HOSTNAME}/actions`, {
+                method: 'DELETE',
+                headers: { 'x-dnn-tracker': token },
+            });
+            return resp.json();
+        },
         onSettled: () => queryClient.invalidateQueries({ queryKey: ['actions'] }),
     });
 

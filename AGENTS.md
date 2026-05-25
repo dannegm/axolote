@@ -31,9 +31,9 @@ src/
     shadcn/          # Radix UI + Tailwind component library (treat as vendored)
 ```
 
-**`modules/core`** — reusable across features: custom hooks (`useSettings`, `useLocalStorage`, `useAsync`), context providers (TanStack Query, nuqs), service wrappers (Supabase, Umami, ntfy), utility helpers (dates, arrays, strings, colors), and the shared `DataLoader` component.
+**`modules/core`** — reusable across features: custom hooks (`useSettings`, `useLocalStorage`, `useAsync`), context providers (TanStack Query, nuqs), service wrappers (Supabase, Umami, ntfy), and utility helpers (dates, arrays, strings, colors).
 
-**`modules/krystel`** — the main feature module. Contains pages, components, hooks, actions (API calls), providers (auth, overlays, quote state), services (quotes API layer), and helpers (themes, feelings, particle effects).
+**`modules/krystel`** — the main feature module. Contains pages, components, hooks, queries (API factories), providers (auth, overlays, quote state), services (quotes API layer), and helpers (themes, feelings, particle effects).
 
 **`modules/shadcn`** — pre-built Radix UI + Tailwind components. Do not refactor internals.
 
@@ -70,11 +70,23 @@ No global store. State is layered by concern:
 | URL state | nuqs | Query params as state (`code`, `skip-actions`, etc.) |
 | Persistent state | `useLocalStorage` | Auth token (`'app:tracker'`), settings (`'settings:*'`) |
 
-Data fetching goes through the `DataLoader` component (wraps `useQuery`) or `useQuery` directly.
+Data fetching uses `useQuery` with query factory functions from `modules/krystel/queries/`.
 
-## Actions
+## Queries
 
-API calls live in `modules/krystel/actions/` as standalone async functions (e.g., `createQuoteAction.js`, `deletePostAction.js`). They are imported by hooks or components — not co-located with query definitions.
+Data fetching uses **query factory functions** in `modules/krystel/queries/krystel-queries.js`. Each factory takes required params plus `...options` (spread first so TanStack Query options like `retry`, `refetchInterval`, etc. pass through), and returns the full options object for `useQuery`:
+
+```js
+export const cardsQuery = ({ skipActions, token, ...options }) => ({
+    ...options,
+    queryKey: ['cards'],
+    queryFn: async () => { ... },
+});
+
+const { data, isLoading } = useQuery(cardsQuery({ skipActions, token, retry: false }));
+```
+
+Mutation hooks (`modules/krystel/hooks/use-*-action.js`) inline their `mutationFn` fetch logic directly — no separate action files.
 
 ## Environment variables
 
