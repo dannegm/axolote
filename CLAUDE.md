@@ -66,21 +66,55 @@ No global state store. State is layered:
 3. **nuqs** — URL query params as state, synced with TanStack Router. Used for filter/display options (`code`, `skip-actions`, etc.).
 4. **`useLocalStorage`** — persistent client state. Auth token stored under `'app:tracker'`; settings under `'settings:*'` keys accessed via `useSettings()`.
 
-### Queries
+### API client
 
-Data fetching uses **query factory functions** in `modules/krystel/queries/krystel-queries.js`. Each factory takes required params plus `...options` (spread last so TanStack Query options like `retry`, `refetchInterval`, etc. pass through), and returns the full options object for `useQuery`:
+All HTTP calls go through `clientApi()` (`modules/krystel/services/client-api.js`). It's a factory called at request time — reads the auth token from `localStorage` fresh on every call, builds shared auth/json headers, and exposes every endpoint as a named method:
 
 ```js
-export const cardsQuery = ({ skipActions, token, ...options }) => ({
-    ...options,
-    queryKey: ['cards'],
-    queryFn: async () => { ... },
-});
-
-const { data, isLoading } = useQuery(cardsQuery({ skipActions, token, retry: false }));
+clientApi().getCards({ skipActions })
+clientApi().createQuote({ quote, published_at })
+clientApi().deletePost(postId)
 ```
 
-Mutation hooks (`modules/krystel/hooks/use-*-action.js`) inline their `mutationFn` fetch logic directly — no separate action files.
+Never write raw `fetch` calls in pages, hooks, or queries — always go through `clientApi()`.
+
+### Queries
+
+GET data fetching uses **query factory functions** in `modules/krystel/queries/queries.js`. Each factory spreads `...options` first (so TanStack Query options like `retry`, `refetchInterval`, etc. pass through), then defines `queryKey` and `queryFn` (which always win). The `queryFn` calls `clientApi()` at execution time — no token param needed:
+
+```js
+export const cardsQuery = ({ skipActions, ...options }) => ({
+    ...options,
+    queryKey: ['cards'],
+    queryFn: () => clientApi().getCards({ skipActions }),
+});
+
+const { data, isLoading } = useQuery(cardsQuery({ skipActions, retry: false }));
+```
+
+### Mutation hooks
+
+Mutation hooks (`modules/krystel/hooks/use-*-action.js`) wrap `useMutation` with a `mutationFn` that calls `clientApi()` at mutation time. They always return the mutation object directly — no wrapper functions:
+
+```js
+// Standard — return mutation directly
+export default function useDeleteQuoteAction() {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: vars => clientApi().deleteQuote(vars),
+        onSettled: () => queryClient.invalidateQueries({ queryKey: ['quotes'] }),
+    });
+}
+
+// With custom logic (debounce, guards) — return { trigger, ...mutation }
+export default function usePostAction({ action, settings }) {
+    const mutation = useMutation({ mutationFn: vars => clientApi().postAction(vars) });
+    const trigger = useDebouncedCallback(() => { ... mutation.mutate(...) }, 1000);
+    return { trigger, ...mutation };
+}
+```
+
+Callers use `mutation.mutate(vars)` for standard hooks, and destructure `{ trigger }` for hooks that expose custom logic.
 
 ### Environment variables
 
