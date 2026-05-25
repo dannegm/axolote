@@ -178,6 +178,95 @@ Tailwind CSS 4.1 loaded via `@tailwindcss/vite`. Component variants use `class-v
 - **Tailwind scale**: always use Tailwind's built-in scale values instead of arbitrary bracket values. Tailwind's spacing scale is `1 = 0.25rem = 4px`, so `size-4` = 16px, `size-4.5` = 18px, `size-6` = 24px, etc. Only fall back to `size-[X]` when the value genuinely has no equivalent on the scale.
 - **Dynamic Tailwind values**: Tailwind can't generate classes from runtime values, so pass them as CSS custom properties via `style` and reference them with Tailwind's variable syntax. Example: `<div className="w-(--panel-width)" style={{ '--panel-width': '22.5rem' }} />`. Use kebab-case for the variable name and set it on the element (or a parent) that needs it.
 
+## Card viewer
+
+**Entry:** `src/modules/krystel/pages/card/page.jsx`
+**Main components:** `card-viewer.jsx`, `card-viewer-menu.jsx`
+
+### URL query params
+
+| Param | Format | Description |
+|-------|--------|-------------|
+| `code` | `quoteId:icon:border:bg:scheme` | Pin a specific card + visual style (`*` = random per slot) |
+| `skip-actions` | boolean | Disable card action tracking for this session |
+| `uwu` | flag | Easter egg mode |
+
+### Viewer menu (gear icon, bottom-right)
+
+**General section** — always visible:
+- LTR/RTL toggle for action button layout (`viewer:actions_direction`)
+- Weather overlay toggle
+- Direct links to special cards: **Easter Eggs** (card 172), **#100Reasons** (card 230)
+- Conditional toggles that appear only on their date: Women's Day skip, April Fools skip, Pi Day skip
+
+**Dev section** — visible when `settings:show_quick_settings` is on:
+- Skip actions, debug mode (shows payload JSON + settings code), breakpoint indicator, ignore conditional quotes
+
+**Admin section** — visible when `settings:show_secrets` is on:
+- Delete / restore / hide-show the current card directly from the viewer
+
+### Other viewer features
+- Hidden cards show a blue ribbon; deleted cards show a red bar at the top
+- Share button, save-as-image button, like button below the card
+- Refresh button follows `target` config if set, otherwise `/krys`
+
+---
+
+## Admin panel (`/krys/secrets`)
+
+Protected by 4-digit OTP auth. Five sections:
+
+### Cards (`/krys/secrets/cards`)
+
+Virtualized list of all cards. Each item shows a preview thumbnail, view count, publish date, show/hide toggle, and a menu (soft delete → destroy → restore). Settings control whether future-dated and soft-deleted cards appear in the list. FAB links to the editor.
+
+### Editor (`/krys/secrets/editor`)
+
+Three-tab left panel + live preview on the right. Preview renders both desktop (384px) and mobile (360px) viewports in real time.
+
+**Content tab** — textarea with a toolbar for clipboard operations: paste-and-replace (parses configs + content separately), simple paste, copy-with-configs.
+
+**Configs tab** — full GUI for the card DSL config block: theme picker, icon picker (hidden / random / specific Lucide icon), greetings toggle + custom text, target URL, frame URL, dark scheme flag, letter/fullscreen/fullwidth flags, date visibility, and tag inputs for `bg`/`border`/`scheme` Tailwind class overrides.
+
+**Advanced tab** — optional custom publish date/time (DatePicker + TimePicker), viewport indicator toggle, auto-scroll toggle.
+
+**Drafts** — saved to `localStorage` under `editor:drafts`. Each draft shows a thumbnail + timestamp; clicking loads it back into the editor.
+
+**Actions bar (bottom):** Force refresh preview → Reset → Save Draft → Publish (creates card in DB, redirects to Cards on success).
+
+### Logs (`/krys/secrets/logs`)
+
+Tracks all user interactions. Each entry shows IP + geolocation, user agent, event type badge, linked card preview (or page name for `page_view`), and timestamp. Real-time mode polls every 1000ms with a green pulsing indicator. Individual entries can be deleted.
+
+**Tracked event types:** `page_view`, `view`, `like`, plus any custom events.
+
+### Tools (`/krys/secrets/tools`)
+
+Grid of buttons that push ntfy events to all connected viewers via `NEXT_PUBLIC_EVENTS_TOPIC`. Available commands: `toggle:raining`, `toggle:snowing`, `summon:balloons`, `particles:hearts`, `particles:stars`, `particles:snow`.
+
+### Settings (`/krys/secrets/settings`)
+
+Toggle switches for all `settings:*` localStorage keys, grouped by area:
+
+| Key | Description |
+|-----|-------------|
+| `settings:show_secrets` | Enable admin panel access |
+| `settings:show_quick_settings` | Show dev toggles in viewer menu |
+| `settings:logs:show` | Show Logs in navbar |
+| `settings:logs:realtime` | Auto-refresh logs |
+| `settings:skip_actions` | Disable card action tracking globally |
+| `settings:debug_mode` | Show payload JSON on cards |
+| `settings:show_breakpoint_indicator` | Display breakpoint size |
+| `settings:cards:ignore_conditional_quotes` | Disable date/time-triggered quote variations |
+| `settings:cards:includes_future` | Show future-dated cards in list |
+| `settings:cards:includes_deleted` | Show soft-deleted cards in list |
+| `settings:posts:indev` | Mark new posts as in-dev |
+| `settings:posts:includes_indev` | Show in-dev posts in listing |
+| `settings:posts:includes_deleted` | Show deleted posts in listing |
+| `viewer:actions_direction` | LTR / RTL button layout |
+
+---
+
 ## Card content DSL
 
 Cards store raw strings in the DB. The renderer parses a custom DSL at runtime. Key files:
