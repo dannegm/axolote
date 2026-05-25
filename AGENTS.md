@@ -15,8 +15,8 @@ The relationship ended. Krystel no longer visits. Daniel maintains it anyway —
 - The `/krys` route and everything under `modules/krystel/` is the heart of the project. Treat it accordingly.
 - The Posts system (texts, images, drawings, feelings) was Krystel's channel to respond to Daniel — her voice in the app.
 - ntfy is used as a real-time client-to-client layer: commands, login notifications, alerts for both Daniel and Krystel.
-- Cards are not just quotes — some are full mini-apps that taught Krystel how to use the Posts system organically.
-- The domain `axolote.mx` was chosen because Daniel already owned it and because it's cute. `/krys` is scoped intentionally to leave room for other projects on the same domain.
+- Cards are not just quotes — some embed interactive mini-apps via a custom markup system (e.g. `<app:wyr />` renders a "Would You Rather" component). The DB stores the markup tag; the card renderer expands it into the full interactive component at runtime. This lets cards go beyond text: polls, choice prompts, feeling selectors, etc., without storing the full app in the DB.
+- The domain `axolote.me` was chosen because Daniel already owned it and because it's cute. `/krys` is scoped intentionally to leave room for other projects on the same domain.
 
 **Infrastructure:**
 - Frontend: deployed on Vercel
