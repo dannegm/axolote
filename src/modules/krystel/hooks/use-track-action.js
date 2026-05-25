@@ -4,8 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import useSettings from '@/modules/core/hooks/use-settings';
 import useFingerprint from '@/modules/core/hooks/use-fingerprint';
-
-const HOSTNAME = 'https://endpoints.hckr.mx/quotes/krystel';
+import { clientApi } from '@/modules/krystel/services/client-api';
 
 export default function useTrackAction() {
     if (typeof window === 'undefined') return;
@@ -13,28 +12,14 @@ export default function useTrackAction() {
     const [skipActionsSettings] = useSettings('settings:skip_actions', false);
     const [skipActions] = useQueryState('skip-actions', parseAsBoolean.withDefault(false));
 
-    const mutation = useMutation({
-        mutationFn: async ({ sid, referrer, userAgent = 'unknown' }) => {
-            const token = JSON.parse(localStorage.getItem('app:tracker'));
-            await fetch(`${HOSTNAME}/track?sid=${sid}&ua=${userAgent}`, {
-                method: 'POST',
-                referrer,
-                headers: { 'x-dnn-tracker': token },
-            });
-        },
-    });
+    const mutation = useMutation({ mutationFn: vars => clientApi().track(vars) });
 
-    const registerSession = () => {
+    useEffect(() => {
         if (skipActions || skipActionsSettings) return;
-
         mutation.mutate({
             sid: fingerprint,
             userAgent: window.navigator.userAgent,
             referrer: document.referrer,
         });
-    };
-
-    useEffect(() => {
-        registerSession();
     }, [fingerprint]);
 }

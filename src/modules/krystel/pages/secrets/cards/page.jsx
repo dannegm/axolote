@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 
-import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import useSettings from '@/modules/core/hooks/use-settings';
 
 import SecretsLayout from '@/modules/krystel/components/layout/secrets-layout';
@@ -9,7 +8,6 @@ import CardsMain from './components/cards-main';
 import { secretCardsQuery } from '@/modules/krystel/queries/queries';
 
 export default function Page() {
-    const [token] = useLocalStorage('app:tracker', null);
     const [includesFuture] = useSettings('settings:cards:includes_future', false);
     const [includesDeleted] = useSettings('settings:cards:includes_deleted', false);
 
@@ -17,7 +15,7 @@ export default function Page() {
     if (includesFuture) includes.push('future');
     if (includesDeleted) includes.push('deleted');
 
-    const { data, isLoading } = useQuery(secretCardsQuery({ includes, token }));
+    const { data, isLoading } = useQuery(secretCardsQuery({ includes }));
 
     return (
         <SecretsLayout title='Cards'>

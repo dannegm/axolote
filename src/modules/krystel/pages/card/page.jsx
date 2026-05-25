@@ -2,7 +2,6 @@ import { memo } from 'react';
 import { parseAsString, parseAsBoolean, useQueryState } from 'nuqs';
 import { useQuery } from '@tanstack/react-query';
 
-import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import useSettings from '@/modules/core/hooks/use-settings';
 
 import Layout from '@/modules/krystel/components/layout/layout';
@@ -18,7 +17,6 @@ const extractQuoteId = code => {
 const MemoCardViewer = memo(CardViewer);
 
 export default function Page() {
-    const [token] = useLocalStorage('app:tracker', null);
     const [code] = useQueryState('code', parseAsString.withDefault(''));
     const quoteId = extractQuoteId(code);
 
@@ -30,7 +28,6 @@ export default function Page() {
         pickQuoteQuery({
             quoteId,
             skipActions,
-            token,
             retry: false,
             refetchOnWindowFocus: false,
             refetchOnReconnect: false,

@@ -1,22 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-const HOSTNAME = 'https://endpoints.hckr.mx/quotes';
+import { clientApi } from '@/modules/krystel/services/client-api';
 
 export default function useCreateQuoteAction(args) {
     const queryClient = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: async ({ quote, published_at = new Date() }) => {
-            const token = JSON.parse(localStorage.getItem('app:tracker'));
-            const resp = await fetch(`${HOSTNAME}/krystel`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'x-dnn-tracker': token },
-                body: JSON.stringify({ quote, published_at }),
-            });
-            return resp.json();
-        },
+    return useMutation({
+        mutationFn: vars => clientApi().createQuote(vars),
         onSettled: () => queryClient.invalidateQueries({ queryKey: ['cards'] }),
         ...args,
     });
-
-    return mutation;
 }

@@ -1,7 +1,6 @@
 import { useQueryState, parseAsBoolean } from 'nuqs';
 import { useQuery } from '@tanstack/react-query';
 
-import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import useSettings from '@/modules/core/hooks/use-settings';
 
 import Layout from '@/modules/krystel/components/layout/layout';
@@ -12,12 +11,11 @@ import CardsMain from './components/cards-main';
 import { cardsQuery } from '@/modules/krystel/queries/queries';
 
 export default function Page() {
-    const [token] = useLocalStorage('app:tracker', null);
     const [skipActionsSettings] = useSettings('settings:skip_actions', false);
     const [skipActionsQuery] = useQueryState('skip-actions', parseAsBoolean.withDefault(false));
     const skipActions = skipActionsQuery || skipActionsSettings;
 
-    const { data, isLoading } = useQuery(cardsQuery({ skipActions, token }));
+    const { data, isLoading } = useQuery(cardsQuery({ skipActions }));
 
     return (
         <Layout title='Cards'>

@@ -9,7 +9,7 @@ export default function AuthProvider({ children }) {
     const [token, setToken] = useLocalStorage('app:tracker', null);
     const navigate = useNavigate();
 
-    const { isLoading, isError } = useQuery(verifyAuthQuery({ token, retry: false }));
+    const { isLoading, isError } = useQuery(verifyAuthQuery({ retry: false }));
 
     useEffect(() => {
         if (isError) setToken(null);

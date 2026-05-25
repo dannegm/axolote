@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 
-import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import useSettings from '@/modules/core/hooks/use-settings';
 
 import Layout from '@/modules/krystel/components/layout/layout';
@@ -11,7 +10,6 @@ import PostsMain from './components/posts-main';
 import { postsQuery } from '@/modules/krystel/queries/queries';
 
 export default function Page() {
-    const [token] = useLocalStorage('app:tracker', null);
     const [includesIndev] = useSettings('settings:posts:includes_indev', false);
     const [includesDeleted] = useSettings('settings:posts:includes_deleted', false);
 
@@ -19,7 +17,7 @@ export default function Page() {
     if (includesIndev) includes.push('indev');
     if (includesDeleted) includes.push('deleted');
 
-    const { data, isLoading } = useQuery(postsQuery({ includes, token }));
+    const { data, isLoading } = useQuery(postsQuery({ includes }));
 
     return (
         <Layout title='Posts'>

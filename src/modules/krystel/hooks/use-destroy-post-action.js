@@ -1,22 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-const HOSTNAME = 'https://endpoints.hckr.mx/quotes';
+import { clientApi } from '@/modules/krystel/services/client-api';
 
 export default function useDestroyPostAction() {
     const queryClient = useQueryClient();
     const mutation = useMutation({
-        mutationFn: async postId => {
-            const token = JSON.parse(localStorage.getItem('app:tracker'));
-            const resp = await fetch(`${HOSTNAME}/krystel/posts/${postId}/destroy`, {
-                method: 'DELETE',
-                headers: { 'x-dnn-tracker': token },
-            });
-            return resp.json();
-        },
+        mutationFn: postId => clientApi().destroyPost(postId),
         onSettled: () => queryClient.invalidateQueries({ queryKey: ['posts'] }),
     });
 
-    return postId => {
-        mutation.mutate(postId);
-    };
+    return postId => mutation.mutate(postId);
 }

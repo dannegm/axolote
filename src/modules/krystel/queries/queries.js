@@ -1,78 +1,37 @@
-import { buildQueryParams } from '@/modules/core/helpers/utils';
+import { clientApi } from '@/modules/krystel/services/client-api';
 
-const BASE_URL = 'https://endpoints.hckr.mx/quotes';
-
-export const pickQuoteQuery = ({ quoteId, skipActions, token, ...options }) => ({
+export const pickQuoteQuery = ({ quoteId, skipActions, ...options }) => ({
     ...options,
     queryKey: ['quotes', quoteId, skipActions],
-    queryFn: async () => {
-        const params = buildQueryParams({ 'quote.id': quoteId, 'skip-actions': skipActions });
-        const resp = await fetch(`${BASE_URL}/krystel/pick${params}`, {
-            headers: { 'x-dnn-tracker': token },
-        });
-        if (!resp.ok) throw new Error('Network error');
-        return resp.json();
-    },
+    queryFn: () => clientApi().pickQuote({ quoteId, skipActions }),
 });
 
-export const cardsQuery = ({ skipActions, token, ...options }) => ({
+export const cardsQuery = ({ skipActions, ...options }) => ({
     ...options,
     queryKey: ['cards'],
-    queryFn: async () => {
-        const params = buildQueryParams({ 'skip-actions': skipActions });
-        const resp = await fetch(`${BASE_URL}/krystel${params}`, {
-            headers: { 'x-dnn-tracker': token },
-        });
-        if (!resp.ok) throw new Error('Network error');
-        return resp.json();
-    },
+    queryFn: () => clientApi().getCards({ skipActions }),
 });
 
-export const secretCardsQuery = ({ includes, token, ...options }) => ({
+export const secretCardsQuery = ({ includes, ...options }) => ({
     ...options,
     queryKey: ['cards'],
-    queryFn: async () => {
-        const resp = await fetch(`${BASE_URL}/krystel?includes=${includes.join(',')}`, {
-            headers: { 'x-dnn-tracker': token },
-        });
-        if (!resp.ok) throw new Error('Network error');
-        return resp.json();
-    },
+    queryFn: () => clientApi().getSecretCards({ includes }),
 });
 
-export const postsQuery = ({ includes, token, ...options }) => ({
+export const postsQuery = ({ includes, ...options }) => ({
     ...options,
     queryKey: ['posts'],
-    queryFn: async () => {
-        const params = buildQueryParams({ includes });
-        const resp = await fetch(`${BASE_URL}/krystel/posts${params}`, {
-            headers: { 'x-dnn-tracker': token },
-        });
-        if (!resp.ok) throw new Error('Network error');
-        return resp.json();
-    },
+    queryFn: () => clientApi().getPosts({ includes }),
 });
 
-export const logsQuery = ({ token, ...options }) => ({
+export const logsQuery = ({ ...options } = {}) => ({
     ...options,
     queryKey: ['actions'],
-    queryFn: async () => {
-        const resp = await fetch(`${BASE_URL}/krystel/actions?limit=250`, {
-            headers: { 'x-dnn-tracker': token },
-        });
-        if (!resp.ok) throw new Error('Network error');
-        return resp.json();
-    },
+    queryFn: () => clientApi().getLogs(),
 });
 
-export const verifyAuthQuery = ({ token, ...options }) => ({
+export const verifyAuthQuery = ({ ...options } = {}) => ({
     ...options,
     queryKey: ['cards', 'posts'],
-    queryFn: async () => {
-        const resp = await fetch(`${BASE_URL}/krystel/auth/validate`, {
-            headers: { 'Content-Type': 'application/json', 'x-dnn-tracker': token },
-        });
-        if (!resp.ok) throw new Error('Error logging in');
-        return resp.json();
-    },
+    queryFn: () => clientApi().verifyAuth(),
 });
