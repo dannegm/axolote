@@ -177,3 +177,129 @@ Tailwind CSS 4.1 loaded via `@tailwindcss/vite`. Component variants use `class-v
 - **Units**: prefer `rem` over `px` wherever possible — in inline styles, CSS custom properties, and any raw CSS. Use `px` only for values that must not scale (e.g. 1px borders).
 - **Tailwind scale**: always use Tailwind's built-in scale values instead of arbitrary bracket values. Tailwind's spacing scale is `1 = 0.25rem = 4px`, so `size-4` = 16px, `size-4.5` = 18px, `size-6` = 24px, etc. Only fall back to `size-[X]` when the value genuinely has no equivalent on the scale.
 - **Dynamic Tailwind values**: Tailwind can't generate classes from runtime values, so pass them as CSS custom properties via `style` and reference them with Tailwind's variable syntax. Example: `<div className="w-(--panel-width)" style={{ '--panel-width': '22.5rem' }} />`. Use kebab-case for the variable name and set it on the element (or a parent) that needs it.
+
+## Card content DSL
+
+Cards store raw strings in the DB. The renderer parses a custom DSL at runtime. Key files:
+
+- Parser: `src/modules/krystel/helpers/strings.js`
+- Inline elements & text formatting: `src/modules/krystel/helpers/rich-elements.jsx`
+- Themes: `src/modules/krystel/helpers/themes.js`
+- Rendering: `src/modules/krystel/components/common/gift-card.jsx`, `rich-text.jsx`
+
+### Config block — `({key:value|key:value})`
+
+Optional, must appear at the start of the content string. Parsed by `extractConfigsAndContent()`.
+
+| Key | Values | Description |
+|-----|--------|-------------|
+| `theme` | `default` `white` `dark` `deepPurple` `fools` `rounded` | Visual theme preset |
+| `icon` | Lucide icon name (PascalCase), `random`, `hidden` | Card header icon |
+| `date` | `default` `hidden` | Show/hide timestamp |
+| `greetings` | Any text, `random`, `hidden` | Bottom greeting override |
+| `target` | URL | Redirect on next-card button |
+| `frame` | Image URL | Background image |
+| `bg` | Tailwind classes | Background override |
+| `border` | Tailwind classes or CSS transforms (`rotate-180`) | Border override |
+| `scheme` | Tailwind classes | Color scheme override |
+| `dark` | flag | Dark text mode |
+| `letter` | flag | Letter/note writing layout |
+| `fullscreen` | flag | Hide header and footer |
+| `fullwidth` | flag | Expand text width |
+| `badge` | `hidden` | Hide first-appearance badge |
+| `name` | `hidden` | Hide "Krystel," header |
+
+Examples:
+```
+({icon:CakeSlice})Texto de la carta
+({theme:dark|date:hidden})Texto
+({theme:white|icon:hidden|greetings:日本|border:bg-white|scheme:shadow-none})<sticker::nihon>
+({target:/krys?code=179:*:*:*:*})**¿Sabías que...?**
+```
+
+### URL `code` param — `quoteId:icon:border:bg:scheme`
+
+Used to pin a specific card and visual style. `*` in any slot = random.
+
+```
+code = "172:5:12:8:3"
+        │   │  │  │  └─ scheme index (0–20)
+        │   │  │  └──── bg pattern index (0–26)
+        │   │  └─────── border pattern index (0–32)
+        │   └────────── icon index (0–12)
+        └────────────── quote DB id
+```
+
+Icons (index): `Candy Cake Gift PartyPopper Snowflake Clover Cat Flower Gem Lollipop MoonStar Origami Sparkles`
+
+### Inline elements
+
+Parsed and rendered by `rich-elements.jsx`:
+
+**Stickers & media**
+```
+<sticker::ID>               full-size sticker
+<badge::ID>                 badge-size sticker
+[[ID]]                      inline sticker
+<polaroid::URL>             polaroid image (optional caption as content)
+<spotify::URI>              Spotify player
+<spotify-inline::URI>       Spotify preview strip
+<icon::LucideIconName>      inline Lucide icon
+```
+
+Sticker IDs: `axolote hi hello lets_dance movie_time need_a_break sun ufo pray silence flowers gift rocket snowflakes snowy_house stars constellation secret nyancat sushi cat nihon`
+
+**Interactive apps**
+```
+<app::NAME>
+<app::NAME(input)>
+<app::NAME({prop:value|prop:value})>
+```
+
+App names: `valentine wyr simple easter_eggs breakpoint flappybird reasons_love reasons_love_all time_counter post-simple post-mood post-drawing post-image`
+
+**Links & buttons**
+```
+<link::URL>text</link>          external link
+<ilink::URL>text</ilink>        internal link
+<blink::URL>text</blink>        external button
+<iblink::URL>text</iblink>      internal button
+<button::ACTION>label</button>  action button
+<quote>text</quote>             quote box
+<quote::Author>text</quote>     quote with attribution
+<paper>text</paper>             paper note style
+<paper::COLOR>text</paper>      colored paper note
+<mark>text</mark>               highlighted text
+<words::a|b|c>                  random word from list
+```
+
+### Text formatting
+
+| Syntax | Result |
+|--------|--------|
+| `**text**` | bold |
+| `//text//` | italic |
+| `__text__` | underline |
+| `~~text~~` | strikethrough |
+| `*/text/*` | bold + italic |
+| `-:text:-` | small (0.75em) |
+| `+:text:+` | large (1.25em) |
+| `$$text$$` | shiny/glitter animation |
+| `~:text:~` | spoiler (hidden until revealed) |
+| `%%text%%` | love text (red) |
+| `$@text@$` | snow-falling text |
+| `ºº text ºº` | floating balloons text |
+| `` `text` `` | inline code |
+| `---` | horizontal separator |
+| `--- IconName ---` | separator with icon |
+| `\|\|` | line break |
+
+### Auto-applied configs (easter eggs / special dates)
+
+Handled in `gift-card.jsx` — merges automatically into the card config:
+
+- **11:11 PM** → `({icon:hidden}) <badge::pray>$$11:11$$ pide un deseo.`
+- **3:00 AM** → `({icon:hidden}) <sticker::ufo>`
+- **Women's Day** → merges `({theme:deepPurple})`
+- **April Fools** → merges `({theme:fools|border:rotate-180})`
+- **Rounded date** → merges `({theme:rounded})`
