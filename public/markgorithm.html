@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>::: MARCOS CID DE LA PAZ ::: SUPER MEGA FULLSTACK DEVELOPER :::</title>
+  <style>
+    * {
+      font-family: "Comic Sans MS", "Comic Sans", cursive !important;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-color: #000033;
+      background-image:
+        radial-gradient(white 1px, transparent 1px),
+        radial-gradient(white 1px, transparent 1px);
+      background-size: 50px 50px, 30px 30px;
+      background-position: 0 0, 25px 25px;
+      color: #FFFF00;
+      overflow-x: hidden;
+    }
+
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    .blink { animation: blink 0.8s step-end infinite; }
+
+    @keyframes rainbow {
+      0%   { color: #FF0000; text-shadow: 0 0 10px #FF0000; }
+      14%  { color: #FF7700; text-shadow: 0 0 10px #FF7700; }
+      28%  { color: #FFFF00; text-shadow: 0 0 10px #FFFF00; }
+      42%  { color: #00FF00; text-shadow: 0 0 10px #00FF00; }
+      57%  { color: #00FFFF; text-shadow: 0 0 10px #00FFFF; }
+      71%  { color: #FF00FF; text-shadow: 0 0 10px #FF00FF; }
+      85%  { color: #FF69B4; text-shadow: 0 0 10px #FF69B4; }
+      100% { color: #FF0000; text-shadow: 0 0 10px #FF0000; }
+    }
+    .rainbow { animation: rainbow 1.5s linear infinite; }
+
+    .main-table {
+      width: 100%;
+      border: 5px ridge #FF00FF;
+      background-color: #000066;
+      padding: 0;
+      table-layout: fixed;
+    }
+
+    .site-header {
+      background: linear-gradient(180deg, #000000, #330066, #000000);
+      border-bottom: 4px solid #FF00FF;
+      text-align: center;
+      padding: 10px 5px;
+    }
+
+    .site-title {
+      font-size: 36px;
+      font-weight: bold;
+      color: #FF00FF;
+      text-shadow:
+        3px 3px 0px #FF0000,
+        -1px -1px 0px #FFFF00,
+        0 0 20px #FF00FF,
+        0 0 40px #FF00FF;
+      letter-spacing: 3px;
+      line-height: 1.2;
+      margin: 10px 0;
+      display: block;
+    }
+
+    .site-subtitle {
+      font-size: 18px;
+      color: #00FF00;
+      text-shadow: 0 0 10px #00FF00;
+      letter-spacing: 2px;
+    }
+
+    .nav-bar {
+      background-color: #660000;
+      border-top: 3px solid #FF0000;
+      border-bottom: 3px solid #FF0000;
+      text-align: center;
+      padding: 5px;
+    }
+
+    .nav-bar a {
+      display: inline-block;
+      margin: 3px 5px;
+      padding: 4px 10px;
+      background: linear-gradient(to bottom, #FF6600, #FF0000);
+      color: #FFFFFF !important;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+      border: 2px outset #FFAA00;
+      text-shadow: 1px 1px 0 #000;
+      letter-spacing: 1px;
+    }
+
+    .nav-bar a:hover {
+      background: linear-gradient(to bottom, #FFFF00, #FF6600);
+      color: #000000 !important;
+      border-style: inset;
+    }
+
+    .marquee-bar {
+      background-color: #003300;
+      border-top: 2px solid #00FF00;
+      border-bottom: 2px solid #00FF00;
+      padding: 4px 0;
+      color: #00FF00;
+      font-size: 14px;
+      font-weight: bold;
+      overflow: hidden;
+    }
+
+    .marquee-inner {
+      display: inline-block;
+      white-space: nowrap;
+      animation: marquee-scroll 18s linear infinite;
+    }
+
+    @keyframes marquee-scroll {
+      0%   { transform: translateX(100vw); }
+      100% { transform: translateX(-100%); }
+    }
+
+    .section {
+      padding: 15px 20px;
+      border-bottom: 3px dashed #FF00FF;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #FF6600;
+      text-shadow: 2px 2px 0 #990000, 0 0 15px #FF6600;
+      text-align: center;
+      border: 3px double #FF6600;
+      padding: 5px;
+      margin-bottom: 15px;
+      background-color: #1a0000;
+      letter-spacing: 2px;
+    }
+
+    .about-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 5px;
+    }
+
+    .about-img-cell {
+      width: 200px;
+      text-align: center;
+      vertical-align: top;
+      border: 3px ridge #FF00FF;
+      background: #110033;
+      padding: 10px;
+    }
+
+    .about-text-cell {
+      vertical-align: top;
+      padding: 10px;
+      color: #AAFFAA;
+      font-size: 14px;
+      line-height: 1.8;
+      border: 2px solid #00FF00;
+      background: #001100;
+    }
+
+    .about-text-cell p {
+      margin: 8px 0;
+    }
+
+    .skills-grid {
+      display: table;
+      width: 100%;
+    }
+
+    .skill-row {
+      display: table-row;
+    }
+
+    .skill-name {
+      display: table-cell;
+      padding: 5px 10px;
+      color: #00FFFF;
+      font-weight: bold;
+      font-size: 14px;
+      width: 120px;
+      text-shadow: 0 0 8px #00FFFF;
+      white-space: nowrap;
+    }
+
+    .skill-bar-cell {
+      display: table-cell;
+      padding: 5px;
+      vertical-align: middle;
+    }
+
+    .skill-bar-outer {
+      background-color: #001100;
+      border: 2px inset #006600;
+      height: 20px;
+      position: relative;
+    }
+
+    .skill-bar-inner {
+      height: 100%;
+      background: repeating-linear-gradient(
+        90deg,
+        #00FF00, #00FF00 8px,
+        #006600 8px, #006600 10px
+      );
+      position: relative;
+    }
+
+    .skill-bar-inner::after {
+      content: attr(data-label);
+      position: absolute;
+      right: 5px;
+      top: 0;
+      color: #FFFF00;
+      font-size: 11px;
+      font-weight: bold;
+      line-height: 20px;
+      text-shadow: 1px 1px 0 #000;
+    }
+
+    .skill-level {
+      display: table-cell;
+      padding: 5px 10px;
+      color: #FFFF00;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .projects-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 8px;
+    }
+
+    .project-card {
+      border: 3px ridge #FF6600;
+      background: #110022;
+      padding: 10px;
+      vertical-align: top;
+    }
+
+    .project-title {
+      color: #FF6600;
+      font-size: 16px;
+      font-weight: bold;
+      text-shadow: 1px 1px 0 #660000;
+      margin-bottom: 5px;
+    }
+
+    .project-desc {
+      color: #CCCCFF;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .project-tags {
+      margin-top: 8px;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: #003366;
+      color: #00CCFF;
+      border: 1px solid #0066CC;
+      padding: 1px 6px;
+      font-size: 11px;
+      margin: 2px 1px;
+    }
+
+    .contact-section {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .contact-box {
+      display: inline-block;
+      border: 4px groove #FF00FF;
+      background: #1a0033;
+      padding: 15px 30px;
+      text-align: center;
+    }
+
+    .contact-box a {
+      color: #FF00FF;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      text-shadow: 0 0 10px #FF00FF;
+      display: block;
+      margin: 8px 0;
+    }
+
+    .contact-box a:hover {
+      color: #FFFF00;
+      text-shadow: 0 0 15px #FFFF00;
+    }
+
+    .counter-box {
+      text-align: center;
+      background: #000000;
+      border: 2px inset #666666;
+      display: inline-block;
+      padding: 3px 10px;
+      margin: 5px;
+      font-family: "Courier New", monospace !important;
+      color: #FF0000;
+      font-size: 20px;
+      letter-spacing: 4px;
+      font-weight: bold;
+    }
+
+    .site-footer {
+      background: #110000;
+      border-top: 4px ridge #FF00FF;
+      text-align: center;
+      padding: 15px;
+      color: #888888;
+      font-size: 11px;
+    }
+
+    .gif-divider {
+      text-align: center;
+      margin: 5px 0;
+      line-height: 0;
+    }
+
+    .gif-divider img {
+      width: 100%;
+      max-height: 20px;
+      object-fit: fill;
+    }
+
+    .under-construction {
+      background: repeating-linear-gradient(
+        -45deg,
+        #FFFF00 0px, #FFFF00 20px,
+        #000000 20px, #000000 40px
+      );
+      border: 4px solid #FF0000;
+      padding: 10px;
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .under-construction span {
+      background: #FF0000;
+      color: #FFFF00;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 4px 12px;
+      border: 2px solid #FFFF00;
+      display: inline-block;
+      text-shadow: 1px 1px 0 #000;
+    }
+
+    .visitor-box {
+      display: inline-block;
+      border: 3px groove #FF6600;
+      background: #110000;
+      padding: 8px 20px;
+      text-align: center;
+      margin: 5px;
+    }
+
+    .visitor-label {
+      color: #FF6600;
+      font-size: 12px;
+      font-weight: bold;
+      text-shadow: 0 0 5px #FF6600;
+      display: block;
+    }
+
+    .badges-row {
+      text-align: center;
+      padding: 8px 0;
+      background: #000022;
+      border-top: 1px solid #000066;
+    }
+
+    @keyframes neon-pulse {
+      0%, 100% { box-shadow: 0 0 5px #FF00FF, 0 0 10px #FF00FF, 0 0 20px #FF00FF; }
+      50%       { box-shadow: 0 0 10px #FF00FF, 0 0 25px #FF00FF, 0 0 50px #FF00FF; }
+    }
+    .neon-border {
+      animation: neon-pulse 2s ease-in-out infinite;
+      border: 2px solid #FF00FF !important;
+    }
+
+    .rainbow-hr {
+      height: 4px;
+      border: none;
+      background: linear-gradient(90deg,
+        #FF0000, #FF7700, #FFFF00, #00FF00, #00FFFF, #0000FF, #FF00FF, #FF0000
+      );
+      margin: 0;
+    }
+
+    ::-webkit-scrollbar { width: 12px; background: #000033; }
+    ::-webkit-scrollbar-thumb { background: #FF00FF; border: 2px solid #FFFF00; }
+
+    @media (max-width: 768px) {
+      .site-title { font-size: 22px; letter-spacing: 1px; }
+      .site-subtitle { font-size: 13px; letter-spacing: 1px; }
+      .section-title { font-size: 16px; letter-spacing: 0; }
+      .section { padding: 12px 10px; }
+
+      /* About: apilar foto + texto */
+      .about-table, .about-table tbody,
+      .about-table tr, .about-table td {
+        display: block !important;
+        width: 100% !important;
+      }
+      .about-img-cell { width: 100% !important; box-sizing: border-box; }
+
+      /* Skills: apilar frontend y backend */
+      .skills-outer-table, .skills-outer-table tbody,
+      .skills-outer-table tr, .skills-outer-table td {
+        display: block !important;
+        width: 100% !important;
+      }
+      .skills-outer-table td { margin-bottom: 10px; }
+
+      /* Proyectos: una columna */
+      .projects-table, .projects-table tbody,
+      .projects-table tr, .projects-table td {
+        display: block !important;
+        width: 100% !important;
+      }
+      .project-card { margin-bottom: 10px; }
+
+      /* Contacto */
+      .contact-box { width: 90%; padding: 12px 10px; }
+      .contact-box a { font-size: 13px; }
+
+      /* Nav */
+      .nav-bar a { font-size: 11px; padding: 4px 6px; margin: 2px 3px; }
+
+      /* Visitor box */
+      .visitor-box { padding: 6px 10px; }
+      .counter-box { font-size: 16px; }
+    }
+
+    .main-wrapper {
+      max-width: 1024px;
+      width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+<table class="main-table" cellpadding="0" cellspacing="0">
+<tbody>
+
+<!-- HEADER -->
+<tr><td>
+<div class="site-header">
+  <img src="https://www.animatedimages.org/data/media/707/animated-welcome-image-0074.gif"
+       alt="Welcome!" style="max-height:60px;" onerror="this.style.display='none'">
+  &nbsp;&nbsp;
+  <img src="https://www.animatedimages.org/data/media/280/animated-star-image-0020.gif"
+       alt="*" style="height:40px;" onerror="this.style.display='none'">
+  &nbsp;&nbsp;
+  <img src="https://www.animatedimages.org/data/media/707/animated-welcome-image-0074.gif"
+       alt="Welcome!" style="max-height:60px; transform:scaleX(-1);" onerror="this.style.display='none'">
+
+  <div style="margin: 8px 0;">
+    <span class="site-title rainbow">✨ MARCOS CID DE LA PAZ ✨</span>
+    <div class="site-subtitle blink">~~~ SUPER MEGA FULLSTACK DEVELOPER ~~~</div>
+    <div style="color:#00FFFF; font-size:13px; margin-top:6px; text-shadow: 0 0 8px #00FFFF;">
+      ★ HTML ★ CSS ★ JavaScript ★ Node.js ★ React ★ SQL ★ Y MUCHO MAS ★
+    </div>
+  </div>
+
+  <div>
+    <img src="https://www.animatedimages.org/data/media/56/animated-computer-image-0019.gif"
+         alt="Computer" style="height:50px;" onerror="this.style.display='none'">
+    &nbsp;
+    <img src="https://www.animatedimages.org/data/media/56/animated-computer-image-0004.gif"
+         alt="Computer" style="height:50px;" onerror="this.style.display='none'">
+    &nbsp;
+    <img src="https://www.animatedimages.org/data/media/56/animated-computer-image-0019.gif"
+         alt="Computer" style="height:50px; transform:scaleX(-1);" onerror="this.style.display='none'">
+  </div>
+
+  <div style="margin-top: 10px;">
+    <div class="visitor-box">
+      <span class="visitor-label">👁️ VISITAS AL SITIO 👁️</span>
+      <div class="counter-box" id="visitor-counter">0000000</div>
+    </div>
+  </div>
+</div>
+</td></tr>
+
+<!-- NAV BAR -->
+<tr><td>
+<div class="nav-bar">
+  <a href="#inicio">🏠 INICIO</a>
+  <a href="#sobre-mi">👤 SOBRE MI</a>
+  <a href="#skills">💻 MIS SKILLS</a>
+  <a href="#proyectos">🚀 PROYECTOS</a>
+  <a href="#contacto">📧 CONTACTO</a>
+</div>
+</td></tr>
+
+<!-- MARQUEE -->
+<tr><td>
+<div class="marquee-bar">
+  <div class="marquee-inner">
+    ★ BIENVENIDO A MI PAGINA WEB PERSONAL ★ &nbsp;&nbsp; | &nbsp;&nbsp;
+    ★ MARCOS CID DE LA PAZ - FULLSTACK DEVELOPER ★ &nbsp;&nbsp; | &nbsp;&nbsp;
+    ★ DISPONIBLE PARA PROYECTOS FREELANCE ★ &nbsp;&nbsp; | &nbsp;&nbsp;
+    ★ +5 AÑOS DE EXPERIENCIA EN PROGRAMACION ★ &nbsp;&nbsp; | &nbsp;&nbsp;
+    ★ "CODE IS POETRY" ★ &nbsp;&nbsp; | &nbsp;&nbsp;
+    ★ HECHO CON AMOR Y MUCHO CAFE ☕ ★ &nbsp;&nbsp; | &nbsp;&nbsp;
+  </div>
+</div>
+</td></tr>
+
+<tr><td><hr class="rainbow-hr"></td></tr>
+
+<!-- UNDER CONSTRUCTION -->
+<tr><td id="inicio">
+<div style="padding: 10px 20px;">
+  <div class="under-construction">
+    <img src="https://www.animatedimages.org/data/media/695/animated-under-construction-image-0035.gif"
+         alt="Under Construction" style="height:50px; vertical-align:middle;" onerror="this.style.display='none'">
+    &nbsp;
+    <span>⚠️ PAGINA EN CONSTRUCCION - VOLVER PRONTO ⚠️</span>
+    &nbsp;
+    <img src="https://www.animatedimages.org/data/media/695/animated-under-construction-image-0035.gif"
+         alt="Under Construction" style="height:50px; vertical-align:middle; transform:scaleX(-1);" onerror="this.style.display='none'">
+  </div>
+</div>
+</td></tr>
+
+<!-- DIVIDER -->
+<tr><td>
+<div class="gif-divider">
+  <img src="https://www.animatedimages.org/data/media/134/animated-dividing-line-image-0043.gif"
+       alt="---" onerror="this.style.display='none'">
+</div>
+</td></tr>
+
+<!-- SOBRE MI -->
+<tr><td>
+<div class="section" id="sobre-mi">
+  <div class="section-title">
+    <img src="https://www.animatedimages.org/data/media/280/animated-star-image-0046.gif"
+         alt="*" style="height:20px; vertical-align:middle;" onerror="this.style.display='none'">
+    &nbsp; 👤 SOBRE MÍ 👤 &nbsp;
+    <img src="https://www.animatedimages.org/data/media/280/animated-star-image-0046.gif"
+         alt="*" style="height:20px; vertical-align:middle;" onerror="this.style.display='none'">
+  </div>
+
+  <table class="about-table">
+    <tr>
+      <td class="about-img-cell">
+        <div style="width:130px; height:130px; border:3px ridge #FF00FF; margin:0 auto;
+                    background: linear-gradient(135deg, #330066, #660033);
+                    display:flex; align-items:center; justify-content:center;
+                    font-size:60px; text-align:center; line-height:130px;">
+          👨‍💻
+        </div>
+        <div style="margin-top:8px; text-align:center;">
+          <img src="https://www.animatedimages.org/data/media/507/animated-glitter-image-0012.gif"
+               alt="✨" style="height:25px;" onerror="this.style.display='none'">
+        </div>
+        <div style="color:#FF00FF; font-size:11px; margin-top:5px; font-weight:bold; text-shadow:0 0 5px #FF00FF;">
+          &lt;&lt; MARCOS &gt;&gt;
+        </div>
+        <div style="color:#FFFF00; font-size:10px; margin-top:3px;">
+          ★ Developer ★
+        </div>
+        <hr style="border:1px solid #FF00FF; margin:8px 0;">
+        <div style="color:#00FFFF; font-size:10px; line-height:1.8;">
+          📍 Mexico<br>
+          ☕ Fan del cafe<br>
+          🌙 Night coder<br>
+          🎮 Gamer pro
+        </div>
+      </td>
+
+      <td class="about-text-cell">
+        <img src="https://www.animatedimages.org/data/media/583/animated-new-image-0022.gif"
+             alt="NEW" style="height:25px; float:right;" onerror="this.style.display='none'">
+
+        <p>
+          <span style="color:#FFFF00; font-weight:bold; font-size:16px;">¡HOLA!!! 👋</span>
+          Soy <span style="color:#FF6600; font-weight:bold;">Marcos Cid de la Paz</span>,
+          un <span class="rainbow" style="font-weight:bold;">SUPER FULLSTACK DEVELOPER</span>
+          con pasión por crear cosas increíbles en el internet!!!
+        </p>
+
+        <p>
+          Llevo <span style="color:#FFFF00; font-weight:bold;">+5 AÑOS</span> haciendo magia
+          con el teclado ⌨️ y construyendo aplicaciones web desde el
+          <span style="color:#00FF00;">frontend</span> hasta el
+          <span style="color:#FF6600;">backend</span> y todo lo que hay en medio!!!
+        </p>
+
+        <p>
+          Me especializo en crear sitios web <span class="blink" style="color:#FF0000; font-weight:bold;">RAPIDOS</span>,
+          <span class="blink" style="color:#00FF00; font-weight:bold; animation-delay:0.3s;">BONITOS</span>
+          y <span class="blink" style="color:#FF00FF; font-weight:bold; animation-delay:0.6s;">FUNCIONALES</span>.
+          Aunque este portafolio no lo parezca... 😜
+        </p>
+
+        <p>
+          Cuando no estoy programando, puedes encontrarme bebiendo mi
+          <span style="color:#FF6600;">café favorito ☕</span>,
+          jugando videojuegos retro 🕹️ o viendo series de ciencia ficción 🚀
+        </p>
+
+        <p>
+          <span style="color:#FF00FF; font-weight:bold; font-size:13px;">
+            📜 FORMACION ACADEMICA:
+          </span><br>
+          <span style="color:#AAFFAA;">
+            🎓 Ingeniería en Sistemas Computacionales<br>
+            📚 Cursos Online: Coursera, Platzi, YouTube University™
+          </span>
+        </p>
+
+        <div style="margin-top:12px; padding:8px; border:2px dashed #FF00FF; background:#1a0033; text-align:center;">
+          <span style="color:#FF00FF; font-weight:bold; font-size:13px;">
+            🌟 DATO CURIOSO 🌟
+          </span><br>
+          <span style="color:#FFFF00; font-size:12px;">
+            He escrito mas de <strong>1,000,000</strong> de lineas de codigo en mi vida.<br>
+            <small style="color:#AAAAAA;">(la mayoria eran console.log() y comentarios)</small>
+          </span>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+</td></tr>
+
+<!-- DIVIDER -->
+<tr><td>
+<div class="gif-divider">
+  <img src="https://www.animatedimages.org/data/media/134/animated-dividing-line-image-0099.gif"
+       alt="---" onerror="this.style.display='none'">
+</div>
+</td></tr>
+
+<!-- SKILLS -->
+<tr><td>
+<div class="section" id="skills">
+  <div class="section-title">
+    <img src="https://www.animatedimages.org/data/media/583/animated-new-image-0009.gif"
+         alt="NEW!" style="height:20px; vertical-align:middle;" onerror="this.style.display='none'">
+    &nbsp; 💻 MIS SUPER SKILLS 💻 &nbsp;
+    <img src="https://www.animatedimages.org/data/media/583/animated-new-image-0009.gif"
+         alt="NEW!" style="height:20px; vertical-align:middle;" onerror="this.style.display='none'">
+  </div>
+
+  <table class="skills-outer-table" style="width:100%; border-collapse:separate; border-spacing:10px;">
+    <tr>
+      <td style="width:50%; vertical-align:top; border:2px ridge #00FF00; background:#001100; padding:10px;">
+        <div style="color:#00FF00; font-size:14px; font-weight:bold; text-align:center; text-shadow:0 0 8px #00FF00; margin-bottom:10px; border-bottom:1px solid #00FF00; padding-bottom:5px;">
+          🌐 FRONTEND
+        </div>
+        <div class="skills-grid">
+          <div class="skill-row">
+            <div class="skill-name">HTML5</div>
+            <div class="skill-bar-cell">
+              <div class="skill-bar-outer"><div class="skill-bar-inner" data-label="100%" style="width:100%"></div></div>
+            </div>
+            <div class="skill-level">DIOS 🔥</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name">CSS3</div>
+            <div class="skill-bar-cell">
+              <div class="skill-bar-outer"><div class="skill-bar-inner" data-label="95%" style="width:95%"></div></div>
+            </div>
+            <div class="skill-level">PRO ⚡</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name">JavaScript</div>
+            <div class="skill-bar-cell">
+              <div class="skill-bar-outer"><div class="skill-bar-inner" data-label="92%" style="width:92%"></div></div>
+            </div>
+            <div class="skill-level">PRO ⚡</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name">React</div>
+            <div class="skill-bar-cell">
+              <div class="skill-bar-outer"><div class="skill-bar-inner" data-label="88%" style="width:88%"></div></div>
+            </div>
+            <div class="skill-level">CRACK 💪</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name">TypeScript</div>
+            <div class="skill-bar-cell">
+              <div class="skill-bar-outer"><div class="skill-bar-inner" data-label="80%" style="width:80%"></div></div>
+            </div>
+            <div class="skill-level">BUENO ✅</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name">Tailwind</div>
+            <div class="skill-bar-cell">
+              <div class="skill-bar-outer"><div class="skill-bar-inner" data-label="85%" style="width:85%"></div></div>
+            </div>
+            <div class="skill-level">CRACK 💪</div>
+          </div>
+        </div>
+      </td>
+
+      <td style="width:50%; vertical-align:top; border:2px ridge #FF6600; background:#1a0000; padding:10px;">
+        <div style="color:#FF6600; font-size:14px; font-weight:bold; text-align:center; text-shadow:0 0 8px #FF6600; margin-bottom:10px; border-bottom:1px solid #FF6600; padding-bottom:5px;">
+          ⚙️ BACKEND
+        </div>
+        <div class="skills-grid">
+          <div class="skill-row">
+            <div class="skill-name" style="color:#FF6600;">Node.js</div>
+            <div class="skill-bar-cell">
+              <div class="skill-bar-outer" style="border-color:#663300;">
+                <div class="skill-bar-inner" data-label="90%" style="width:90%; background: repeating-linear-gradient(90deg, #FF6600, #FF6600 8px, #663300 8px, #663300 10px);"></div>
+              </div>
+            </div>
+            <div class="skill-level" style="color:#FF6600;">CRACK 💪</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name" style="color:#FF6600;">Express</div>
+            <div class="skill-bar-cell">
+              <div class="skill-bar-outer" style="border-color:#663300;">
+                <div class="skill-bar-inner" data-label="88%" style="width:88%; background: repeating-linear-gradient(90deg, #FF6600, #FF6600 8px, #663300 8px, #663300 10px);"></div>
+              </div>
+            </div>
+            <div class="skill-level" style="color:#FF6600;">CRACK 💪</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name" style="color:#FF6600;">PostgreSQL</div>
+            <div class="skill-bar-cell">
+              <div class="skill-bar-outer" style="border-color:#663300;">
+                <div class="skill-bar-inner" data-label="82%" style="width:82%; background: repeating-linear-gradient(90deg, #FF6600, #FF6600 8px, #663300 8px, #663300 10px);"></div>
+              </div>
+            </div>
+            <div class="skill-level" style="color:#FF6600;">BUENO ✅</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name" style="color:#FF6600;">MongoDB</div>
+            <div class="skill-bar-cell">
+              <div class="skill-bar-outer" style="border-color:#663300;">
+                <div class="skill-bar-inner" data-label="78%" style="width:78%; background: repeating-linear-gradient(90deg, #FF6600, #FF6600 8px, #663300 8px, #663300 10px);"></div>
+              </div>
+            </div>
+            <div class="skill-level" style="color:#FF6600;">BUENO ✅</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name" style="color:#FF6600;">Docker</div>
+            <div class="skill-bar-cell">
+              <div class="skill-bar-outer" style="border-color:#663300;">
+                <div class="skill-bar-inner" data-label="70%" style="width:70%; background: repeating-linear-gradient(90deg, #FF6600, #FF6600 8px, #663300 8px, #663300 10px);"></div>
+              </div>
+            </div>
+            <div class="skill-level" style="color:#FF6600;">OK 👍</div>
+          </div>
+          <div class="skill-row">
+            <div class="skill-name" style="color:#FF6600;">Python</div>
+            <div class="skill-bar-cell">
+              <div class="skill-bar-outer" style="border-color:#663300;">
+                <div class="skill-bar-inner" data-label="65%" style="width:65%; background: repeating-linear-gradient(90deg, #FF6600, #FF6600 8px, #663300 8px, #663300 10px);"></div>
+              </div>
+            </div>
+            <div class="skill-level" style="color:#FF6600;">OK 👍</div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div style="text-align:center; margin-top:10px; padding:10px; border:2px dashed #FFFF00; background:#111100;">
+    <div style="color:#FFFF00; font-weight:bold; font-size:13px; margin-bottom:8px; text-shadow:0 0 5px #FFFF00;">
+      🏷️ OTRAS COSAS QUE SE HACER:
+    </div>
+    <span style="display:inline-block; background:#000033; border:2px ridge #0066FF; color:#00AAFF; padding:3px 10px; margin:3px; font-size:12px;">Git/GitHub</span>
+    <span style="display:inline-block; background:#003300; border:2px ridge #00FF00; color:#00FF00; padding:3px 10px; margin:3px; font-size:12px;">REST APIs</span>
+    <span style="display:inline-block; background:#330033; border:2px ridge #FF00FF; color:#FF00FF; padding:3px 10px; margin:3px; font-size:12px;">GraphQL</span>
+    <span style="display:inline-block; background:#330000; border:2px ridge #FF6600; color:#FF6600; padding:3px 10px; margin:3px; font-size:12px;">AWS/GCP</span>
+    <span style="display:inline-block; background:#001133; border:2px ridge #00CCFF; color:#00CCFF; padding:3px 10px; margin:3px; font-size:12px;">CI/CD</span>
+    <span style="display:inline-block; background:#222200; border:2px ridge #FFFF00; color:#FFFF00; padding:3px 10px; margin:3px; font-size:12px;">Linux/Bash</span>
+    <span style="display:inline-block; background:#003333; border:2px ridge #00FFCC; color:#00FFCC; padding:3px 10px; margin:3px; font-size:12px;">Next.js</span>
+    <span style="display:inline-block; background:#330022; border:2px ridge #FF3399; color:#FF3399; padding:3px 10px; margin:3px; font-size:12px;">Prisma ORM</span>
+  </div>
+</div>
+</td></tr>
+
+<!-- DIVIDER -->
+<tr><td>
+<div class="gif-divider">
+  <img src="https://www.animatedimages.org/data/media/134/animated-dividing-line-image-0021.gif"
+       alt="---" onerror="this.style.display='none'">
+</div>
+</td></tr>
+
+<!-- PROYECTOS -->
+<tr><td>
+<div class="section" id="proyectos">
+  <div class="section-title">
+    <img src="https://www.animatedimages.org/data/media/583/animated-new-image-0001.gif"
+         alt="NEW!" style="height:20px; vertical-align:middle;" onerror="this.style.display='none'">
+    &nbsp; 🚀 MIS PROYECTOS MEGA CHINGONES 🚀 &nbsp;
+    <img src="https://www.animatedimages.org/data/media/583/animated-new-image-0001.gif"
+         alt="NEW!" style="height:20px; vertical-align:middle;" onerror="this.style.display='none'">
+  </div>
+
+  <table class="projects-table">
+    <tr>
+      <td class="project-card neon-border" style="width:50%;">
+        <div style="text-align:right;">
+          <img src="https://www.animatedimages.org/data/media/583/animated-new-image-0047.gif"
+               alt="NEW!" style="height:20px;" onerror="this.style.display='none'">
+        </div>
+        <div class="project-title">🛒 MegaTienda Online</div>
+        <div class="project-desc">
+          E-commerce con sistema de pagos integrado, carrito de compras con persistencia,
+          panel de admin MEGA COMPLETO y notificaciones en tiempo real.
+          ¡Mas de 500 productos y 1000 usuarios registrados!!!
+        </div>
+        <div class="project-tags">
+          <span class="tag">React</span>
+          <span class="tag">Node.js</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">Stripe</span>
+          <span class="tag">Redis</span>
+        </div>
+        <div style="margin-top:10px; text-align:center;">
+          <a href="#" style="color:#00FFFF; font-size:12px; font-weight:bold; text-decoration:none; border:1px solid #00FFFF; padding:3px 10px; background:#001133;">
+            🔗 VER PROYECTO
+          </a>
+        </div>
+      </td>
+
+      <td class="project-card" style="width:50%; border:3px ridge #00FF00; background:#001100;">
+        <div style="text-align:right;">
+          <img src="https://www.animatedimages.org/data/media/583/animated-new-image-0012.gif"
+               alt="NEW!" style="height:20px;" onerror="this.style.display='none'">
+        </div>
+        <div class="project-title" style="color:#00FF00;">💬 ChatApp Realtime</div>
+        <div class="project-desc">
+          Aplicacion de chat en tiempo real con salas privadas, emojis,
+          compartir archivos y cifrado end-to-end.
+          ¡Como WhatsApp pero MEJOR y hecho por mi!!! 😎
+        </div>
+        <div class="project-tags">
+          <span class="tag" style="border-color:#00FF00; color:#00FF00;">Socket.io</span>
+          <span class="tag" style="border-color:#00FF00; color:#00FF00;">Express</span>
+          <span class="tag" style="border-color:#00FF00; color:#00FF00;">MongoDB</span>
+          <span class="tag" style="border-color:#00FF00; color:#00FF00;">JWT</span>
+        </div>
+        <div style="margin-top:10px; text-align:center;">
+          <a href="#" style="color:#00FF00; font-size:12px; font-weight:bold; text-decoration:none; border:1px solid #00FF00; padding:3px 10px; background:#002200;">
+            🔗 VER PROYECTO
+          </a>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="project-card" style="border:3px ridge #FFFF00; background:#111100;">
+        <div class="project-title" style="color:#FFFF00;">📊 Dashboard Analytics</div>
+        <div class="project-desc">
+          Dashboard empresarial con graficas interactivas, reportes en PDF,
+          filtros avanzados y exportacion a Excel. El CEO de la empresa lloro
+          de emocion cuando lo vio 🥲
+        </div>
+        <div class="project-tags">
+          <span class="tag" style="border-color:#FFFF00; color:#FFFF00;">Next.js</span>
+          <span class="tag" style="border-color:#FFFF00; color:#FFFF00;">Chart.js</span>
+          <span class="tag" style="border-color:#FFFF00; color:#FFFF00;">Prisma</span>
+          <span class="tag" style="border-color:#FFFF00; color:#FFFF00;">TypeScript</span>
+        </div>
+        <div style="margin-top:10px; text-align:center;">
+          <a href="#" style="color:#FFFF00; font-size:12px; font-weight:bold; text-decoration:none; border:1px solid #FFFF00; padding:3px 10px; background:#222200;">
+            🔗 VER PROYECTO
+          </a>
+        </div>
+      </td>
+
+      <td class="project-card" style="border:3px ridge #FF00FF; background:#110022;">
+        <div class="project-title" style="color:#FF00FF; text-shadow: 0 0 10px #FF00FF;">🤖 Bot de Telegram</div>
+        <div class="project-desc">
+          Bot de Telegram para gestionar tareas, recordatorios y hasta
+          consultar el clima!!! Con integracion de GPT para que sea
+          inteligente como yo 🧠 (casi)
+        </div>
+        <div class="project-tags">
+          <span class="tag" style="border-color:#FF00FF; color:#FF00FF;">Python</span>
+          <span class="tag" style="border-color:#FF00FF; color:#FF00FF;">Telegram API</span>
+          <span class="tag" style="border-color:#FF00FF; color:#FF00FF;">OpenAI</span>
+        </div>
+        <div style="margin-top:10px; text-align:center;">
+          <a href="#" style="color:#FF00FF; font-size:12px; font-weight:bold; text-decoration:none; border:1px solid #FF00FF; padding:3px 10px; background:#220033;">
+            🔗 VER PROYECTO
+          </a>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div style="text-align:center; margin-top:12px; color:#AAAAAA; font-size:12px; font-style:italic;">
+    * Y muchos otros proyectos secretos que no puedo mostrar porque firmé un NDA 🤫 *
+  </div>
+</div>
+</td></tr>
+
+<!-- DIVIDER -->
+<tr><td>
+<div class="gif-divider">
+  <img src="https://www.animatedimages.org/data/media/134/animated-dividing-line-image-0274.gif"
+       alt="---" onerror="this.style.display='none'">
+</div>
+</td></tr>
+
+<!-- CONTACTO -->
+<tr><td>
+<div class="section" id="contacto">
+  <div class="section-title">
+    📧 CONTÁCTAME (NO SPAM POR FAVOR) 📧
+  </div>
+
+  <div class="contact-section">
+    <img src="https://www.animatedimages.org/data/media/235/animated-email-image-0009.gif"
+         alt="Email!" style="height:60px; margin: 0 auto; display:block;"
+         onerror="this.style.display='none'">
+
+    <br>
+
+    <div class="contact-box neon-border" style="animation-delay:1s;">
+      <div style="color:#FF00FF; font-size:20px; font-weight:bold; text-shadow:0 0 10px #FF00FF; margin-bottom:10px;">
+        ✉️ marcos@markgorithm.dev
+      </div>
+
+      <div style="margin: 10px 0; color:#AAAAAA; font-size:12px;">— O encuentrame en: —</div>
+
+      <a href="https://github.com/markgorithm" target="_blank">
+        <span style="font-size:18px;">🐙</span> GitHub: @markgorithm
+      </a>
+      <a href="https://linkedin.com" target="_blank">
+        <span style="font-size:18px;">💼</span> LinkedIn: Marcos Cid de la Paz
+      </a>
+      <a href="https://twitter.com" target="_blank">
+        <span style="font-size:18px;">🐦</span> Twitter/X: @markgorithm
+      </a>
+    </div>
+
+    <br>
+
+    <div style="border:3px double #FFFF00; background:#111100; padding:12px; display:inline-block; text-align:left; max-width:400px;">
+      <div style="color:#FFFF00; font-weight:bold; font-size:13px; text-align:center; margin-bottom:8px; text-shadow:0 0 5px #FFFF00;">
+        📋 FORMULARIO DE CONTACTO (BETA)
+      </div>
+      <div style="color:#888888; font-size:11px; text-align:center; font-style:italic; margin-bottom:8px;">
+        ⚠️ Esta funcion esta en construccion ⚠️
+        <br><small>(Mejor mandame un email directamente)</small>
+      </div>
+      <div style="text-align:center;">
+        <input type="text" placeholder="Tu nombre..."
+               style="background:#000022; border:2px inset #0066CC; color:#FFFFFF; padding:4px 8px; font-family:'Comic Sans MS',cursive; font-size:12px; margin:3px; width:200px;">
+        <br>
+        <input type="email" placeholder="Tu email..."
+               style="background:#000022; border:2px inset #0066CC; color:#FFFFFF; padding:4px 8px; font-family:'Comic Sans MS',cursive; font-size:12px; margin:3px; width:200px;">
+        <br>
+        <textarea placeholder="Tu mensaje aqui..." rows="3"
+                  style="background:#000022; border:2px inset #0066CC; color:#FFFFFF; padding:4px 8px; font-family:'Comic Sans MS',cursive; font-size:12px; margin:3px; width:200px; resize:none;"></textarea>
+        <br>
+        <button onclick="alert('ERROR: Funcion no implementada.\nManda un email mejor!!! 😅')"
+                style="background: linear-gradient(to bottom, #FF6600, #CC3300); color:#FFFFFF; border:2px outset #FF9900; padding:5px 20px; font-family:'Comic Sans MS',cursive; font-size:13px; font-weight:bold; cursor:pointer; margin:3px;">
+          📨 ENVIAR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</td></tr>
+
+<tr><td><hr class="rainbow-hr"></td></tr>
+
+<!-- BADGES -->
+<tr><td>
+<div class="badges-row">
+  <div style="color:#888888; font-size:11px; margin-bottom:5px;">
+    :: Este sitio es compatible con ::
+  </div>
+  <div>
+    <span style="display:inline-block; background:#003399; border:2px outset #6699FF; color:#FFFFFF; padding:2px 8px; font-size:10px; margin:2px; font-weight:bold;">IE 6.0</span>
+    <span style="display:inline-block; background:#FF6600; border:2px outset #FFAA66; color:#FFFFFF; padding:2px 8px; font-size:10px; margin:2px; font-weight:bold;">Netscape 4</span>
+    <span style="display:inline-block; background:#006600; border:2px outset #00CC00; color:#FFFFFF; padding:2px 8px; font-size:10px; margin:2px; font-weight:bold;">JavaScript ON</span>
+    <span style="display:inline-block; background:#660000; border:2px outset #FF0000; color:#FFFFFF; padding:2px 8px; font-size:10px; margin:2px; font-weight:bold;">800x600</span>
+    <span style="display:inline-block; background:#330066; border:2px outset #9900FF; color:#FFFFFF; padding:2px 8px; font-size:10px; margin:2px; font-weight:bold;">Flash Player 9</span>
+  </div>
+</div>
+</td></tr>
+
+<!-- FOOTER -->
+<tr><td>
+<div class="site-footer">
+  <img src="https://www.animatedimages.org/data/media/507/animated-glitter-image-0003.gif"
+       alt="✨" style="height:20px;" onerror="this.style.display='none'">
+  &nbsp;
+  <img src="https://www.animatedimages.org/data/media/507/animated-glitter-image-0019.gif"
+       alt="✨" style="height:20px;" onerror="this.style.display='none'">
+  &nbsp;
+  <img src="https://www.animatedimages.org/data/media/507/animated-glitter-image-0003.gif"
+       alt="✨" style="height:20px;" onerror="this.style.display='none'">
+
+  <div style="margin: 8px 0; color:#666666;">
+    © 1996-2024 Marcos Cid de la Paz — Todos los derechos reservados.
+    <span class="blink" style="color:#FF0000;">NO COPIAR SIN PERMISO!!!</span>
+  </div>
+
+  <div style="color:#555555; font-size:10px; margin: 5px 0;">
+    Visitantes totales:
+    <span class="counter-box" id="visitor-counter-footer">0000000</span>
+    desde el 01/01/2024
+  </div>
+
+  <div style="color:#444444; font-size:10px; margin-top:8px; font-style:italic;">
+    ★ Optimizado para Internet Explorer 6 a 800x600 px ★<br>
+    ★ Mejor con conexion de 56kbps o superior ★<br>
+    <span style="color:#333333;">Hecho con ❤️ y mucho ☕ en Notepad.exe</span>
+  </div>
+
+  <div style="margin-top: 10px; color: #333333; font-size: 10px;">
+    <span style="border: 1px solid #333; padding: 1px 6px; margin: 2px; display: inline-block;">HTML 4.01</span>
+    <span style="border: 1px solid #333; padding: 1px 6px; margin: 2px; display: inline-block;">CSS 2.1</span>
+    <span style="border: 1px solid #333; padding: 1px 6px; margin: 2px; display: inline-block;">No W3C validated</span>
+  </div>
+</div>
+</td></tr>
+
+</tbody>
+</table>
+</div>
+
+<script>
+  // 90s title bar carousel
+  (function() {
+    var title = '  ✨ MARCOS CID DE LA PAZ ✨  :::  🚀 SUPER MEGA FULLSTACK DEVELOPER 🚀  :::  🌐 HTML  :::  🎨 CSS  :::  ⚡ JS  :::  🟢 NODE  :::  ⚛️ REACT  :::  ';
+    var pos = 0;
+    setInterval(function() {
+      document.title = title.substring(pos) + title.substring(0, pos);
+      pos = (pos + 1) % title.length;
+    }, 120);
+  })();
+
+  // Fake visitor counter
+  (function() {
+    var base = 847293;
+    var stored = localStorage.getItem('visits_mcp');
+    if (!stored) {
+      stored = base + Math.floor(Math.random() * 50000);
+      localStorage.setItem('visits_mcp', stored);
+    }
+    var count = parseInt(stored) + 1;
+    localStorage.setItem('visits_mcp', count);
+    var display = String(count).padStart(7, '0');
+    var el1 = document.getElementById('visitor-counter');
+    var el2 = document.getElementById('visitor-counter-footer');
+    if (el1) el1.textContent = display;
+    if (el2) el2.textContent = display;
+  })();
+
+  // Rainbow cursor trail
+  var trail = [];
+  var TRAIL_LENGTH = 15;
+  var colors = ['#FF00FF','#FF0000','#FFFF00','#00FF00','#00FFFF'];
+  for (var i = 0; i < TRAIL_LENGTH; i++) {
+    var dot = document.createElement('div');
+    dot.style.cssText = 'position:fixed;pointer-events:none;z-index:9999;width:6px;height:6px;border-radius:50%;background:' + colors[i % 5] + ';opacity:' + ((TRAIL_LENGTH - i) / TRAIL_LENGTH) + ';display:none;';
+    document.body.appendChild(dot);
+    trail.push({ el: dot, x: 0, y: 0 });
+  }
+
+  var mouseX = 0, mouseY = 0;
+  document.addEventListener('mousemove', function(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  setInterval(function() {
+    trail[0].x = mouseX;
+    trail[0].y = mouseY;
+    for (var i = TRAIL_LENGTH - 1; i > 0; i--) {
+      trail[i].x += (trail[i-1].x - trail[i].x) * 0.4;
+      trail[i].y += (trail[i-1].y - trail[i].y) * 0.4;
+    }
+    for (var j = 0; j < TRAIL_LENGTH; j++) {
+      var d = trail[j].el;
+      d.style.display = 'block';
+      d.style.left = (trail[j].x - 3) + 'px';
+      d.style.top  = (trail[j].y - 3) + 'px';
+    }
+  }, 20);
+
+</script>
+
+</body>
+</html>

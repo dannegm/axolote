@@ -6,6 +6,7 @@ import ExternalRedirect from '@/modules/core/components/common/external-redirect
 
 import { createKrystelRoutes } from './krystel';
 import { createKrysRoutes } from './krys';
+import { MarkgorithmPage } from '@/modules/markgorithm/page';
 
 const DEBUG = import.meta.env.NEXT_PUBLIC_DEBUG === 'true';
 const TARGET = import.meta.env.NEXT_PUBLIC_TARGET || 'https://danielgarcia.me/';
@@ -33,8 +34,15 @@ const indexRoute = createRoute({
     component: () => <ExternalRedirect to={TARGET} />,
 });
 
+const markgorithmRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: '/markgorithm',
+    component: MarkgorithmPage,
+});
+
 const routeTree = rootRoute.addChildren([
     indexRoute,
+    markgorithmRoute,
     createKrystelRoutes(rootRoute),
     createKrysRoutes(rootRoute),
 ]);
