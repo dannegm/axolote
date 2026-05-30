@@ -411,6 +411,100 @@
     ::-webkit-scrollbar { width: 12px; background: #000033; }
     ::-webkit-scrollbar-thumb { background: #FF00FF; border: 2px solid #FFFF00; }
 
+    #music-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9998;
+      background: linear-gradient(to bottom, #330066, #110033);
+      border: 3px ridge #FF00FF;
+      color: #FF00FF;
+      font-size: 20px;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      text-shadow: 0 0 8px #FF00FF;
+      box-shadow: 0 0 10px #FF00FF;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #music-btn:hover {
+      background: linear-gradient(to bottom, #660099, #330066);
+      box-shadow: 0 0 20px #FF00FF;
+    }
+
+    /* EASTER EGG - 1 MILLON */
+    #millon-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(0,0,0,0.85);
+      align-items: center;
+      justify-content: center;
+    }
+    #millon-overlay.show { display: flex; }
+
+    #millon-banner {
+      background: repeating-linear-gradient(
+        45deg,
+        #FF0000 0px, #FF0000 20px,
+        #FFFF00 20px, #FFFF00 40px
+      );
+      border: 8px ridge #FF00FF;
+      padding: 30px 40px;
+      text-align: center;
+      max-width: 500px;
+      position: relative;
+      animation: millon-pulse 0.4s step-end infinite;
+    }
+
+    @keyframes millon-pulse {
+      0%, 50% { border-color: #FF00FF; box-shadow: 0 0 40px #FF00FF; }
+      51%, 100% { border-color: #FFFF00; box-shadow: 0 0 40px #FFFF00; }
+    }
+
+    #millon-banner h1 {
+      font-size: 32px;
+      color: #000000;
+      background: #FFFFFF;
+      padding: 8px 16px;
+      margin: 0 0 10px 0;
+      text-shadow: 2px 2px 0 #FF0000;
+      animation: blink 0.5s step-end infinite;
+    }
+
+    #millon-banner p {
+      font-size: 18px;
+      color: #FFFFFF;
+      text-shadow: 2px 2px 0 #000;
+      margin: 8px 0;
+      font-weight: bold;
+    }
+
+    #millon-banner .prize {
+      font-size: 14px;
+      color: #FFFF00;
+      background: #000000;
+      border: 2px dashed #FFFF00;
+      padding: 8px;
+      margin: 12px 0;
+    }
+
+    #millon-close {
+      margin-top: 15px;
+      background: linear-gradient(to bottom, #00CC00, #006600);
+      color: #FFFFFF;
+      border: 3px outset #00FF00;
+      padding: 8px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: "Comic Sans MS", cursive;
+    }
+
     @media (max-width: 768px) {
       .site-title { font-size: 22px; letter-spacing: 1px; }
       .site-subtitle { font-size: 13px; letter-spacing: 1px; }
@@ -1023,7 +1117,7 @@
        alt="✨" style="height:20px;" onerror="this.style.display='none'">
 
   <div style="margin: 8px 0; color:#666666;">
-    © 1996-2024 Marcos Cid de la Paz — Todos los derechos reservados.
+    © 1994-<span id="current-year">2024</span> Marcos Cid de la Paz — Todos los derechos reservados.
     <span class="blink" style="color:#FF0000;">NO COPIAR SIN PERMISO!!!</span>
   </div>
 
@@ -1051,7 +1145,68 @@
 </table>
 </div>
 
+<button id="music-btn" title="Música">🎵</button>
+
+<audio id="bg-music" loop preload="none">
+  <source src="https://aupgwfjnbicuibciotig.supabase.co/storage/v1/object/public/shared/didown-chiptune.mp3" type="audio/mpeg">
+</audio>
+
+<!-- EASTER EGG 1 MILLON -->
+<div id="millon-overlay">
+  <div id="millon-banner">
+    <img src="https://www.animatedimages.org/data/media/280/animated-star-image-0020.gif"
+         alt="*" style="height:40px;" onerror="this.style.display='none'">
+    <h1>🎉 ¡FELICIDADES! 🎉</h1>
+    <p>¡¡¡ERES EL VISITANTE</p>
+    <p style="font-size:48px; color:#FFFF00; text-shadow: 3px 3px 0 #000, 0 0 20px #FF0000; margin:5px 0;">
+      1.000.000
+    </p>
+    <p>DE ESTA PAGINA WEB!!!</p>
+    <div class="prize">
+      🏆 PREMIO: Una cena con Marcos Cid de la Paz<br>
+      <small>(oferta no válida, no canjeable, Marcos no sabe que existe este premio)</small>
+    </div>
+    <img src="https://www.animatedimages.org/data/media/507/animated-glitter-image-0012.gif"
+         alt="✨" style="height:30px;" onerror="this.style.display='none'">
+    <br>
+    <button id="millon-close" onclick="document.getElementById('millon-overlay').classList.remove('show')">
+      ✅ RECLAMAR PREMIO
+    </button>
+  </div>
+</div>
+
 <script>
+  // Música de fondo al primer mouseenter
+  (function() {
+    var music = document.getElementById('bg-music');
+    var played = false;
+    var btn = document.getElementById('music-btn');
+
+    function tryPlay() {
+      if (!played) {
+        played = true;
+        music.volume = 0.4;
+        music.play().catch(function() {});
+      }
+    }
+    document.addEventListener('mouseenter', tryPlay, { once: true });
+    document.addEventListener('touchstart', tryPlay, { once: true });
+
+    btn.addEventListener('click', function() {
+      if (music.paused) {
+        music.volume = 0.4;
+        music.play().catch(function() {});
+        btn.textContent = '🎵';
+      } else {
+        music.pause();
+        btn.textContent = '🔇';
+      }
+    });
+  })();
+
+  // Año en curso
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+
   // 90s title bar carousel
   (function() {
     var title = '  ✨ MARCOS CID DE LA PAZ ✨  :::  🚀 SUPER MEGA FULLSTACK DEVELOPER 🚀  :::  🌐 HTML  :::  🎨 CSS  :::  ⚡ JS  :::  🟢 NODE  :::  ⚛️ REACT  :::  ';
@@ -1077,6 +1232,10 @@
     var el2 = document.getElementById('visitor-counter-footer');
     if (el1) el1.textContent = display;
     if (el2) el2.textContent = display;
+
+    if (count === 1000000) {
+      document.getElementById('millon-overlay').classList.add('show');
+    }
   })();
 
   // Rainbow cursor trail
