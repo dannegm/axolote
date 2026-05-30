@@ -1200,14 +1200,15 @@
     document.addEventListener('mouseenter', tryPlay, { once: true });
     document.addEventListener('touchstart', tryPlay, { once: true });
 
+    music.addEventListener('play',  function() { btn.textContent = '🎵'; });
+    music.addEventListener('pause', function() { btn.textContent = '🔇'; });
+
     btn.addEventListener('click', function() {
       if (music.paused) {
         music.volume = 0.4;
         music.play().catch(function() {});
-        btn.textContent = '🎵';
       } else {
         music.pause();
-        btn.textContent = '🔇';
       }
     });
   })();
