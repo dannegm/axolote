@@ -1153,7 +1153,7 @@
 </table>
 </div>
 
-<button id="music-btn" title="Música">🎵</button>
+<button id="music-btn" title="Música">♩</button>
 
 <audio id="bg-music" loop preload="none">
   <source src="https://aupgwfjnbicuibciotig.supabase.co/storage/v1/object/public/shared/didown-chiptune.mp3" type="audio/mpeg">
@@ -1197,7 +1197,7 @@
         music.play().catch(function() {});
       }
     }
-    document.addEventListener('mouseenter', tryPlay, { once: true });
+    document.addEventListener('mousemove', tryPlay, { once: true });
     document.addEventListener('touchstart', tryPlay, { once: true });
 
     music.addEventListener('play',  function() { btn.textContent = '🎵'; });
