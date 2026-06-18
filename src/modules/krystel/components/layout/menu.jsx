@@ -105,11 +105,19 @@ export default function Menu() {
             )}
 
             <div
-                className='fixed inset-x-0 bottom-0 z-max flex justify-center pointer-events-none'
+                className='fixed inset-x-0 bottom-0 z-max pointer-events-none'
                 onClick={closeMenu}
             >
                 <div
-                    className='flex flex-col items-center mb-2 bg-white rounded-lg cursor-default pointer-events-auto shadow-[0px_-3px_16px_4px_rgba(0,0,0,0.1)]'
+                    className={cn(
+                        'absolute left-1/2 -translate-x-1/2 bottom-2',
+                        'flex flex-col items-center overflow-hidden',
+                        'bg-white rounded-lg cursor-default pointer-events-auto',
+                        'shadow-[0px_-3px_16px_4px_rgba(0,0,0,0.1)]',
+                        'transition-all duration-150 interpolate-size',
+                        'w-24',
+                        { 'w-80': open },
+                    )}
                     onClick={ev => ev.stopPropagation()}
                 >
                     <button
@@ -126,9 +134,9 @@ export default function Menu() {
 
                     <MenuContent
                         className={cn(
-                            'w-24 h-0 p-0 transition-all duration-150 interpolate-size opacity-0',
+                            'h-0 p-0 transition-all duration-150 interpolate-size opacity-0',
                             {
-                                'w-80 h-auto pb-2 opacity-100': open,
+                                'h-auto pb-2 opacity-100': open,
                             },
                         )}
                     />
