@@ -4,8 +4,6 @@ import { useMutation } from '@tanstack/react-query';
 import { ArrowRight, Loader2 } from 'lucide-react';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
 
-import { randomPick } from '@/modules/core/helpers/arrays';
-
 import useLocalStorage from '@/modules/core/hooks/use-local-storage';
 import Loader from '@/modules/core/components/common/loader';
 
@@ -44,15 +42,6 @@ const useLoginAction = options => {
     return mutation;
 };
 
-const hints = [
-    'Constraseña de la caja fuerte en Mazatlán.',
-    'El año en el que nos conocimos.',
-    'Junta las edades que teníamos cuando nos conocimos.',
-    'Ultimos 4 dígitos de mi teléfono.',
-    'Fecha en la que te visité por primera vez.',
-    'Mes y año en el que viniste a visitarme.',
-];
-
 const errors = {
     default: 'Hubo un error desconocido.',
     400: 'Falta información para el login.',
@@ -70,12 +59,11 @@ export default function LoginForm() {
     const [, setToken] = useLocalStorage('app:tracker', null);
 
     const [code, setCode] = useState('');
-    const [hint, setHint] = useState(randomPick(hints));
 
     const { mutate, error, isPending, isError, isSuccess } = useLoginAction({
         onSuccess: data => {
             setToken(data?.token);
-            navigate({ to: '/krys' });
+            navigate({ to: '/krys/secrets' });
         },
         onError: error => {
             console.log(error);
@@ -89,7 +77,6 @@ export default function LoginForm() {
     useEffect(() => {
         if (!isPending && isError) {
             setCode('');
-            setHint(randomPick(hints));
         }
     }, [isPending, isError]);
 
@@ -123,8 +110,6 @@ export default function LoginForm() {
                     </AlertDescription>
                 </Alert>
             )}
-
-            <p className='max-w-56 py-0.5 px-1 font-mono text-sm text-center rounded-md'>{hint}</p>
 
             {isPending && (
                 <Button size='lg' disabled>

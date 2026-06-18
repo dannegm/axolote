@@ -9,6 +9,7 @@
         "dev": "NODE_ENV=development vite --host",
         "build": "NODE_ENV=production vite build",
         "lint": "eslint .",
+        "format": "prettier . --write --log-level=warn",
         "preview": "vite preview"
     },
     "dependencies": {
@@ -99,5 +100,8 @@
         "minimatch": "^3.1.5",
         "picomatch": "4.0.4",
         "rollup": "^4.60.1"
+    },
+    "devDependencies": {
+        "prettier": "^3.8.4"
     }
 }

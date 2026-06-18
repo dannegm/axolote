@@ -15,10 +15,15 @@ export const clientApi = () => {
 
     return {
         pickQuote: ({ quoteId, skipActions }) =>
-            request(`/krystel/pick${buildQueryParams({ 'quote.id': quoteId, 'skip-actions': skipActions })}`, { headers: auth }),
+            request(
+                `/krystel/pick${buildQueryParams({ 'quote.id': quoteId, 'skip-actions': skipActions })}`,
+                { headers: auth },
+            ),
 
         getCards: ({ skipActions } = {}) =>
-            request(`/krystel${buildQueryParams({ 'skip-actions': skipActions })}`, { headers: auth }),
+            request(`/krystel${buildQueryParams({ 'skip-actions': skipActions })}`, {
+                headers: auth,
+            }),
 
         getSecretCards: ({ includes } = {}) =>
             request(`/krystel?includes=${includes.join(',')}`, { headers: auth }),
@@ -26,11 +31,9 @@ export const clientApi = () => {
         getPosts: ({ includes } = {}) =>
             request(`/krystel/posts${buildQueryParams({ includes })}`, { headers: auth }),
 
-        getLogs: () =>
-            request('/krystel/actions?limit=250', { headers: auth }),
+        getLogs: () => request('/krystel/actions?limit=250', { headers: auth }),
 
-        verifyAuth: () =>
-            request('/krystel/auth/validate', { headers: json }),
+        verifyAuth: () => request('/krystel/auth/validate', { headers: json }),
 
         createQuote: ({ quote, published_at = new Date() }) =>
             request('/krystel', {
@@ -72,11 +75,9 @@ export const clientApi = () => {
         destroyPost: postId =>
             request(`/krystel/posts/${postId}/destroy`, { method: 'DELETE', headers: auth }),
 
-        clearLogs: () =>
-            request('/krystel/actions', { method: 'DELETE', headers: auth }),
+        clearLogs: () => request('/krystel/actions', { method: 'DELETE', headers: auth }),
 
-        deleteLog: actionId =>
-            request(`/actions/${actionId}`, { method: 'DELETE', headers: auth }),
+        deleteLog: actionId => request(`/actions/${actionId}`, { method: 'DELETE', headers: auth }),
 
         postAction: ({ action, quoteId, settings, userAgent = 'unknown' }) =>
             request(`/krystel/${quoteId}/action/${action}?code=${settings}&ua=${userAgent}`, {

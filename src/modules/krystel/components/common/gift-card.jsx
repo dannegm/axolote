@@ -82,7 +82,10 @@ export default function GiftCard({
 
     useTrackAction();
     const { trigger: postView } = usePostAction({ action: 'view', settings });
-    const { trigger: postReadCompleteAction } = usePostAction({ action: 'read_complete', settings });
+    const { trigger: postReadCompleteAction } = usePostAction({
+        action: 'read_complete',
+        settings,
+    });
 
     const elevenEleven = isElevenEleven();
     const threeInTheMorning = isThreeInTheMorning();
@@ -240,9 +243,7 @@ export default function GiftCard({
                             classNames?.badge,
                         )}
                     >
-                        <Asterisk
-                            className={cn('text-white size-14', { 'size-6': letter })}
-                        />
+                        <Asterisk className={cn('text-white size-14', { 'size-6': letter })} />
                     </div>
                 )}
 

@@ -76,7 +76,8 @@ const StyledBalloon = styled.div`
     background-color: ${props => rgba(props.color, 0.75)};
     backdrop-filter: blur(5px) saturate(5%);
     border-radius: 100% 100% 15% 100%;
-    box-shadow: 8px 2px 40px 2px rgb(0 0 0 / 40%),
+    box-shadow:
+        8px 2px 40px 2px rgb(0 0 0 / 40%),
         16px 3px 40px 40px ${props => rgba(props.color, 0.15)};
 
     // Modifiers

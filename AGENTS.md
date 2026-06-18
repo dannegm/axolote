@@ -11,6 +11,7 @@ This app was born on December 31, 2024 as a birthday gift for Krystel — someon
 The relationship ended. Krystel no longer visits. Daniel maintains it anyway — for the day she might return, and as a personal space to process her absence and write what he never got to say.
 
 **This shapes how the codebase should be treated:**
+
 - Features that seem unused or "dead" may carry emotional weight — don't suggest removing them without understanding their purpose.
 - The `/krys` route and everything under `modules/krystel/` is the heart of the project. Treat it accordingly.
 - The Posts system (texts, images, drawings, feelings) was Krystel's channel to respond to Daniel — her voice in the app.
@@ -19,6 +20,7 @@ The relationship ended. Krystel no longer visits. Daniel maintains it anyway —
 - The domain `axolote.me` was chosen because Daniel already owned it and because it's cute. `/krys` is scoped intentionally to leave room for other projects on the same domain.
 
 **Infrastructure:**
+
 - Frontend: deployed on Vercel
 - Backend: Node.js + Supabase (Postgres) + some AI, at `endpoints.hckr.mx` — Daniel's own infrastructure (`hckr.mx` is his personal projects domain)
 - Supabase was initially integrated in this frontend repo but migrated to the backend API — remnants in the frontend are dead code in transition
@@ -85,12 +87,12 @@ Auth redirects use `beforeLoad()` hooks. URL query state is managed with `nuqs`,
 
 No global store. State is layered by concern:
 
-| Layer | Tool | Purpose |
-|---|---|---|
-| Server state | TanStack Query | Fetching, caching, refetching. Keys: `['cards']`, `['quotes']` |
-| UI/feature state | React Context | Auth, overlays, toast, quote state — stacked in `KrystelProviders` |
-| URL state | nuqs | Query params as state (`code`, `skip-actions`, etc.) |
-| Persistent state | `useLocalStorage` | Auth token (`'app:tracker'`), settings (`'settings:*'`) |
+| Layer            | Tool              | Purpose                                                            |
+| ---------------- | ----------------- | ------------------------------------------------------------------ |
+| Server state     | TanStack Query    | Fetching, caching, refetching. Keys: `['cards']`, `['quotes']`     |
+| UI/feature state | React Context     | Auth, overlays, toast, quote state — stacked in `KrystelProviders` |
+| URL state        | nuqs              | Query params as state (`code`, `skip-actions`, etc.)               |
+| Persistent state | `useLocalStorage` | Auth token (`'app:tracker'`), settings (`'settings:*'`)            |
 
 Data fetching uses `useQuery` with query factory functions from `modules/krystel/queries/`.
 
@@ -99,9 +101,9 @@ Data fetching uses `useQuery` with query factory functions from `modules/krystel
 All HTTP calls go through `clientApi()` (`modules/krystel/services/client-api.js`). It's a factory called at request time — reads the auth token from `localStorage` fresh on every call, builds shared auth/json headers, and exposes every endpoint as a named method:
 
 ```js
-clientApi().getCards({ skipActions })
-clientApi().createQuote({ quote, published_at })
-clientApi().deletePost(postId)
+clientApi().getCards({ skipActions });
+clientApi().createQuote({ quote, published_at });
+clientApi().deletePost(postId);
 ```
 
 Never write raw `fetch` calls in pages, hooks, or queries — always go through `clientApi()`.
@@ -191,27 +193,31 @@ This app is designed primarily for mobile use. Both the card viewer and the admi
 
 ### URL query params
 
-| Param | Format | Description |
-|-------|--------|-------------|
-| `code` | `quoteId:icon:border:bg:scheme` | Pin a specific card + visual style (`*` = random per slot) |
-| `skip-actions` | boolean | Disable card action tracking for this session |
-| `uwu` | flag | Easter egg mode |
+| Param          | Format                          | Description                                                |
+| -------------- | ------------------------------- | ---------------------------------------------------------- |
+| `code`         | `quoteId:icon:border:bg:scheme` | Pin a specific card + visual style (`*` = random per slot) |
+| `skip-actions` | boolean                         | Disable card action tracking for this session              |
+| `uwu`          | flag                            | Easter egg mode                                            |
 
 ### Viewer menu (gear icon, bottom-right)
 
 **General section** — always visible:
+
 - LTR/RTL toggle for action button layout (`viewer:actions_direction`)
 - Weather overlay toggle
 - Direct links to special cards: **Easter Eggs** (card 172), **#100Reasons** (card 230)
 - Conditional toggles that appear only on their date: Women's Day skip, April Fools skip, Pi Day skip
 
 **Dev section** — visible when `settings:show_quick_settings` is on:
+
 - Skip actions, debug mode (shows payload JSON + settings code), breakpoint indicator, ignore conditional quotes
 
 **Admin section** — visible when `settings:show_secrets` is on:
+
 - Delete / restore / hide-show the current card directly from the viewer
 
 ### Other viewer features
+
 - Hidden cards show a blue ribbon; deleted cards show a red bar at the top
 - Share button, save-as-image button, like button below the card
 - Refresh button follows `target` config if set, otherwise `/krys`
@@ -254,22 +260,22 @@ Grid of buttons that push ntfy events to all connected viewers via `NEXT_PUBLIC_
 
 Toggle switches for all `settings:*` localStorage keys, grouped by area:
 
-| Key | Description |
-|-----|-------------|
-| `settings:show_secrets` | Enable admin panel access |
-| `settings:show_quick_settings` | Show dev toggles in viewer menu |
-| `settings:logs:show` | Show Logs in navbar |
-| `settings:logs:realtime` | Auto-refresh logs |
-| `settings:skip_actions` | Disable card action tracking globally |
-| `settings:debug_mode` | Show payload JSON on cards |
-| `settings:show_breakpoint_indicator` | Display breakpoint size |
+| Key                                        | Description                                  |
+| ------------------------------------------ | -------------------------------------------- |
+| `settings:show_secrets`                    | Enable admin panel access                    |
+| `settings:show_quick_settings`             | Show dev toggles in viewer menu              |
+| `settings:logs:show`                       | Show Logs in navbar                          |
+| `settings:logs:realtime`                   | Auto-refresh logs                            |
+| `settings:skip_actions`                    | Disable card action tracking globally        |
+| `settings:debug_mode`                      | Show payload JSON on cards                   |
+| `settings:show_breakpoint_indicator`       | Display breakpoint size                      |
 | `settings:cards:ignore_conditional_quotes` | Disable date/time-triggered quote variations |
-| `settings:cards:includes_future` | Show future-dated cards in list |
-| `settings:cards:includes_deleted` | Show soft-deleted cards in list |
-| `settings:posts:indev` | Mark new posts as in-dev |
-| `settings:posts:includes_indev` | Show in-dev posts in listing |
-| `settings:posts:includes_deleted` | Show deleted posts in listing |
-| `viewer:actions_direction` | LTR / RTL button layout |
+| `settings:cards:includes_future`           | Show future-dated cards in list              |
+| `settings:cards:includes_deleted`          | Show soft-deleted cards in list              |
+| `settings:posts:indev`                     | Mark new posts as in-dev                     |
+| `settings:posts:includes_indev`            | Show in-dev posts in listing                 |
+| `settings:posts:includes_deleted`          | Show deleted posts in listing                |
+| `viewer:actions_direction`                 | LTR / RTL button layout                      |
 
 ---
 
@@ -286,25 +292,26 @@ Cards store raw strings in the DB. The renderer parses a custom DSL at runtime. 
 
 Optional, must appear at the start of the content string. Parsed by `extractConfigsAndContent()`.
 
-| Key | Values | Description |
-|-----|--------|-------------|
-| `theme` | `default` `white` `dark` `deepPurple` `fools` `rounded` | Visual theme preset |
-| `icon` | Lucide icon name (PascalCase), `random`, `hidden` | Card header icon |
-| `date` | `default` `hidden` | Show/hide timestamp |
-| `greetings` | Any text, `random`, `hidden` | Bottom greeting override |
-| `target` | URL | Redirect on next-card button |
-| `frame` | Image URL | Background image |
-| `bg` | Tailwind classes | Background override |
-| `border` | Tailwind classes or CSS transforms (`rotate-180`) | Border override |
-| `scheme` | Tailwind classes | Color scheme override |
-| `dark` | flag | Dark text mode |
-| `letter` | flag | Letter/note writing layout |
-| `fullscreen` | flag | Hide header and footer |
-| `fullwidth` | flag | Expand text width |
-| `badge` | `hidden` | Hide first-appearance badge |
-| `name` | `hidden` | Hide "Krystel," header |
+| Key          | Values                                                  | Description                  |
+| ------------ | ------------------------------------------------------- | ---------------------------- |
+| `theme`      | `default` `white` `dark` `deepPurple` `fools` `rounded` | Visual theme preset          |
+| `icon`       | Lucide icon name (PascalCase), `random`, `hidden`       | Card header icon             |
+| `date`       | `default` `hidden`                                      | Show/hide timestamp          |
+| `greetings`  | Any text, `random`, `hidden`                            | Bottom greeting override     |
+| `target`     | URL                                                     | Redirect on next-card button |
+| `frame`      | Image URL                                               | Background image             |
+| `bg`         | Tailwind classes                                        | Background override          |
+| `border`     | Tailwind classes or CSS transforms (`rotate-180`)       | Border override              |
+| `scheme`     | Tailwind classes                                        | Color scheme override        |
+| `dark`       | flag                                                    | Dark text mode               |
+| `letter`     | flag                                                    | Letter/note writing layout   |
+| `fullscreen` | flag                                                    | Hide header and footer       |
+| `fullwidth`  | flag                                                    | Expand text width            |
+| `badge`      | `hidden`                                                | Hide first-appearance badge  |
+| `name`       | `hidden`                                                | Hide "Krystel," header       |
 
 Examples:
+
 ```
 ({icon:CakeSlice})Texto de la carta
 ({theme:dark|date:hidden})Texto
@@ -332,6 +339,7 @@ Icons (index): `Candy Cake Gift PartyPopper Snowflake Clover Cat Flower Gem Loll
 Parsed and rendered by `rich-elements.jsx`:
 
 **Stickers & media**
+
 ```
 <sticker::ID>               full-size sticker
 <badge::ID>                 badge-size sticker
@@ -345,6 +353,7 @@ Parsed and rendered by `rich-elements.jsx`:
 Sticker IDs: `axolote hi hello lets_dance movie_time need_a_break sun ufo pray silence flowers gift rocket snowflakes snowy_house stars constellation secret nyancat sushi cat nihon`
 
 **Interactive apps**
+
 ```
 <app::NAME>
 <app::NAME(input)>
@@ -354,6 +363,7 @@ Sticker IDs: `axolote hi hello lets_dance movie_time need_a_break sun ufo pray s
 App names: `valentine wyr simple easter_eggs breakpoint flappybird reasons_love reasons_love_all time_counter post-simple post-mood post-drawing post-image`
 
 **Links & buttons**
+
 ```
 <link::URL>text</link>          external link
 <ilink::URL>text</ilink>        internal link
@@ -370,24 +380,24 @@ App names: `valentine wyr simple easter_eggs breakpoint flappybird reasons_love 
 
 ### Text formatting
 
-| Syntax | Result |
-|--------|--------|
-| `**text**` | bold |
-| `//text//` | italic |
-| `__text__` | underline |
-| `~~text~~` | strikethrough |
-| `*/text/*` | bold + italic |
-| `-:text:-` | small (0.75em) |
-| `+:text:+` | large (1.25em) |
-| `$$text$$` | shiny/glitter animation |
-| `~:text:~` | spoiler (hidden until revealed) |
-| `%%text%%` | love text (red) |
-| `$@text@$` | snow-falling text |
-| `ºº text ºº` | floating balloons text |
-| `` `text` `` | inline code |
-| `---` | horizontal separator |
-| `--- IconName ---` | separator with icon |
-| `\|\|` | line break |
+| Syntax             | Result                          |
+| ------------------ | ------------------------------- |
+| `**text**`         | bold                            |
+| `//text//`         | italic                          |
+| `__text__`         | underline                       |
+| `~~text~~`         | strikethrough                   |
+| `*/text/*`         | bold + italic                   |
+| `-:text:-`         | small (0.75em)                  |
+| `+:text:+`         | large (1.25em)                  |
+| `$$text$$`         | shiny/glitter animation         |
+| `~:text:~`         | spoiler (hidden until revealed) |
+| `%%text%%`         | love text (red)                 |
+| `$@text@$`         | snow-falling text               |
+| `ºº text ºº`       | floating balloons text          |
+| `` `text` ``       | inline code                     |
+| `---`              | horizontal separator            |
+| `--- IconName ---` | separator with icon             |
+| `\|\|`             | line break                      |
 
 ### Auto-applied configs (easter eggs / special dates)
 

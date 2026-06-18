@@ -12,7 +12,10 @@ export default function usePageViewAction({ page }) {
     const mutation = useMutation({ mutationFn: vars => clientApi().postPageView(vars) });
 
     const trigger = useDebouncedCallback(() => {
-        console.log('usePageViewAction called with page:', page, { skipActions, skipActionsSettings });
+        console.log('usePageViewAction called with page:', page, {
+            skipActions,
+            skipActionsSettings,
+        });
         if (skipActions || skipActionsSettings) return;
 
         console.log('Sending page view action for page:', page);

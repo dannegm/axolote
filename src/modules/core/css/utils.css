@@ -1,5 +1,6 @@
 :root {
-    --shadow-upsidedown: 0 -20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)),
+    --shadow-upsidedown:
+        0 -20px 25px -5px var(--tw-shadow-color, rgb(0 0 0 / 0.1)),
         0 -8px 10px -6px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
 }
 
@@ -37,8 +38,11 @@
 
 @utility text-stroke {
     --text-stroke-color: var(--color-white);
-    text-shadow: -1px -1px 0 var(--text-stroke-color), 1px -1px 0 var(--text-stroke-color),
-        -1px 1px 0 var(--text-stroke-color), 1px 1px 0 var(--text-stroke-color);
+    text-shadow:
+        -1px -1px 0 var(--text-stroke-color),
+        1px -1px 0 var(--text-stroke-color),
+        -1px 1px 0 var(--text-stroke-color),
+        1px 1px 0 var(--text-stroke-color);
 }
 
 @utility z-max {
@@ -97,11 +101,8 @@
     }
 
     .bg-wave-purple {
-        background-image: repeating-radial-gradient(
-                circle at 0 0,
-                transparent 0,
-                var(--color-purple-500) 30px
-            ),
+        background-image:
+            repeating-radial-gradient(circle at 0 0, transparent 0, var(--color-purple-500) 30px),
             repeating-linear-gradient(var(--color-purple-600), var(--color-purple-500));
     }
 

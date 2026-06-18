@@ -1,12 +1,12 @@
-import { createRoute } from '@tanstack/react-router';
-
-import Unavailable from '@/modules/krystel/pages/unavailable/page';
+import { createRoute, redirect } from '@tanstack/react-router';
 
 export const createKrystelRoutes = parentRoute => {
     const krystelRoute = createRoute({
         getParentRoute: () => parentRoute,
         path: '/krystel',
-        component: Unavailable,
+        beforeLoad: () => {
+            throw redirect({ to: '/krys', replace: true });
+        },
     });
 
     return krystelRoute;

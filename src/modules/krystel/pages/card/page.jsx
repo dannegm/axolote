@@ -40,7 +40,5 @@ export default function Page() {
         return null;
     }
 
-    return (
-        <Layout>{isLoading ? <></> : <MemoCardViewer code={code} data={data} />}</Layout>
-    );
+    return <Layout>{isLoading ? <></> : <MemoCardViewer code={code} data={data} />}</Layout>;
 }

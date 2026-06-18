@@ -1,4 +1,10 @@
-import { createRouter, createRoute, createRootRoute, Outlet, redirect } from '@tanstack/react-router';
+import {
+    createRouter,
+    createRoute,
+    createRootRoute,
+    Outlet,
+    redirect,
+} from '@tanstack/react-router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NuqsAdapter } from 'nuqs/adapters/tanstack-router';
 
