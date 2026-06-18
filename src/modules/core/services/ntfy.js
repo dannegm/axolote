@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const APP_TOPIC = import.meta.env.NEXT_PUBLIC_APP_TOPIC;
 
 export class Ntfy {
@@ -13,7 +11,7 @@ export class Ntfy {
     async pushSimple({ message }) {
         console.info(`Sending simple: ${message}`);
         try {
-            await axios.post(this.ntfyUrl, message);
+            await fetch(this.ntfyUrl, { method: 'POST', body: message });
             console.info(`Sent simple: ${message}`);
         } catch (err) {
             console.error('Error sending notification', err);
@@ -24,20 +22,18 @@ export class Ntfy {
         console.info(`Sending rich: ${title}`);
 
         const fallbackTitle = title || 'Axolote';
-        const payload = {
+        const headers = {
             Title: fallbackTitle,
             Tags: tags || 'white_circle',
             Markdown: 'yes',
         };
 
         if (click) {
-            payload.Click = click;
+            headers.Click = click;
         }
 
         try {
-            await axios.post(this.ntfyUrl, message, {
-                headers: payload,
-            });
+            await fetch(this.ntfyUrl, { method: 'POST', body: message, headers });
             console.info(`Sent rinch: ${fallbackTitle} | ${message}`);
         } catch (err) {
             console.error('Error sending notification', err);

@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
     envPrefix: 'NEXT_PUBLIC_',
-    plugins: [react(), tailwindcss()],
+    plugins: [react({ babel: { inputSourceMap: false } }), tailwindcss()],
     resolve: {
         alias: {
             '@': fileURLToPath(new URL('./src', import.meta.url)),
