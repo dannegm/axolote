@@ -70,10 +70,10 @@ export default function CardViewer({ code, data }) {
     useRemoteEventHandler();
 
     return (
-        <main className='relative z-0 min-h-[calc(100vh-6rem)] sm:min-h-screen flex flex-col flex-center p-4 bg-gray-100 bg-center overflow-hidden'>
+        <main className='relative z-0 min-h-[calc(100dvh-6rem)] sm:min-h-screen flex flex-col flex-center p-4 bg-gray-100 bg-center overflow-hidden'>
             <div
                 data-layer='options'
-                className={cn('fixed bottom-4 z-999 flex flex-center flex-row gap-2', {
+                className={cn('fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] z-999 flex flex-center flex-row gap-2', {
                     'right-4 flex-row-reverse': actionsDirection === 'ltr',
                     'left-4': actionsDirection === 'rtl',
                 })}
