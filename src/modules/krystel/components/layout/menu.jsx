@@ -103,12 +103,13 @@ export default function Menu() {
                     onClick={closeMenu}
                 />
             )}
+
             <div
                 className='fixed inset-x-0 bottom-0 z-max flex justify-center pointer-events-none'
                 onClick={closeMenu}
             >
                 <div
-                    className='flex flex-col items-center bg-white rounded-t-lg cursor-default pointer-events-auto shadow-[0px_-3px_16px_4px_rgba(0,0,0,0.1)]'
+                    className='flex flex-col items-center mb-2 bg-white rounded-lg cursor-default pointer-events-auto shadow-[0px_-3px_16px_4px_rgba(0,0,0,0.1)]'
                     onClick={ev => ev.stopPropagation()}
                 >
                     <button

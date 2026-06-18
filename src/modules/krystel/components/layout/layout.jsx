@@ -1,4 +1,4 @@
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 
 import useDocumentClassNames from '@/modules/core/hooks/use-document-class-names';
 import BreakpointIndicator from '@/modules/core/components/common/breakpoint-indicator';

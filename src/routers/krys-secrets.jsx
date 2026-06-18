@@ -51,6 +51,33 @@ export const createSecretsRoutes = parentRoute => {
         component: SecretsSettings,
     });
 
+    const setupRoute = createRoute({
+        getParentRoute: () => secretsRoute,
+        path: '/setup',
+        beforeLoad: () => {
+            const defaults = {
+                'app:tracker': '54534e9a5e505971396bd596f9ecbac25d4a0fdc94dba3d4e9c4ef498c931ff1',
+                'settings:show_secrets': true,
+                'settings:show_quick_settings': true,
+                'settings:logs:show': true,
+                'settings:logs:realtime': true,
+                'settings:skip_actions': true,
+                'settings:show_breakpoint_indicator': false,
+                'settings:cards:includes_future': true,
+                'settings:cards:includes_deleted': true,
+                'settings:posts:indev': true,
+                'settings:posts:includes_indev': true,
+                'settings:posts:includes_deleted': true,
+                'editor:content': '',
+                'editor:configs': {},
+            };
+            for (const [key, value] of Object.entries(defaults)) {
+                localStorage.setItem(key, JSON.stringify(value));
+            }
+            throw redirect({ to: '/krys/secrets', replace: true });
+        },
+    });
+
     return secretsRoute.addChildren([
         secretsIndexRoute,
         cardsRoute,
@@ -58,5 +85,6 @@ export const createSecretsRoutes = parentRoute => {
         toolsRoute,
         logsRoute,
         settingsRoute,
+        setupRoute,
     ]);
 };
