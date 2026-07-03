@@ -4,7 +4,7 @@ export const CarouiuxPage = () => {
     return (
         <>
             <Helmet>
-                <title>Carouiux</title>
+                <title>Carolina Guzman · Lead Product Designer</title>
             </Helmet>
             <iframe
                 src='https://pub-baf4593c07314de0915628b467cc75c5.r2.dev/carouiux.html'
