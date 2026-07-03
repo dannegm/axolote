@@ -13,6 +13,7 @@ import ExternalRedirect from '@/modules/core/components/common/external-redirect
 import { createKrystelRoutes } from './krystel';
 import { createKrysRoutes } from './krys';
 import { MarkgorithmPage } from '@/modules/markgorithm/page';
+import { CarouiuxPage } from '@/modules/carouiux/page';
 
 const DEBUG = import.meta.env.NEXT_PUBLIC_DEBUG === 'true';
 const TARGET = import.meta.env.NEXT_PUBLIC_TARGET || 'https://danielgarcia.me/';
@@ -46,9 +47,16 @@ const markgorithmRoute = createRoute({
     component: MarkgorithmPage,
 });
 
+const carouiuxRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: '/carouiux',
+    component: CarouiuxPage,
+});
+
 const routeTree = rootRoute.addChildren([
     indexRoute,
     markgorithmRoute,
+    carouiuxRoute,
     createKrystelRoutes(rootRoute),
     createKrysRoutes(rootRoute),
 ]);
