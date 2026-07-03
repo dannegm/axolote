@@ -7,7 +7,7 @@ export const CarouiuxPage = () => {
                 <title>Carouiux</title>
             </Helmet>
             <iframe
-                src='https://pub-baf4593c07314de0915628b467cc75c5.r2.dev/pages/carouiux.html'
+                src='https://pub-baf4593c07314de0915628b467cc75c5.r2.dev/carouiux.html'
                 className='fixed inset-0 size-full border-none'
             />
         </>
